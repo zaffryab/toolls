@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Image Compressor | Reduce Image File Size</title>
+    <meta name="description" content="Compress JPG, PNG, or WebP images online. Reduce image file size without noticeable quality loss. Perfect for optimizing website images.">
+    <meta name="keywords" content="image compressor, online image compression, reduce image size, optimize website images, compress PNG, compress JPG">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0; padding: 0;
+            background: #f2f2f2;
+            color: #333;
+        }
+        header, footer {
+            text-align: center;
+            padding: 20px;
+            background: #222;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; }
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+        select, button {
+            margin: 10px auto;
+            display: block;
+            padding: 10px;
+            font-size: 16px;
+        }
+        img {
+            max-width: 100%;
+            margin: 10px 0;
+        }
+        .ads {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .download-link {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .download-link a {
+            text-decoration: none;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Image Compression Tool</h1>
+        <p>Reduce Image File Size Without Losing Quality</p>
+    </header>
+
+    <div class="container">
+        <input type="file" id="imageInput" accept="image/*">
+        
+        <label for="quality">Select Compression Level:</label>
+        <select id="quality">
+            <option value="0.9">Low (Best Quality)</option>
+            <option value="0.7" selected>Medium</option>
+            <option value="0.4">High (Smaller Size)</option>
+        </select>
+
+        <button onclick="compressImage()">Compress Image</button>
+
+        <div id="preview"></div>
+        <div class="download-link" id="downloadLink">
+            <a id="downloadAnchor" href="#" download="compressed-image.jpg">Download Compressed Image</a>
+        </div>
+
+        <!-- Ad Placeholder -->
+        <div class="ads">
+            <!-- Google AdSense Code -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-XXXXXXXXXXXX"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 IQMartLLC.com - All rights reserved.</p>
+    </footer>
+
+    <script>
+        let originalImage = null;
+
+        function compressImage() {
+            const fileInput = document.getElementById('imageInput');
+            const quality = parseFloat(document.getElementById('quality').value);
+            const preview = document.getElementById('preview');
+            const downloadLink = document.getElementById('downloadLink');
+            const downloadAnchor = document.getElementById('downloadAnchor');
+
+            if (!fileInput.files.length) {
+                alert("Please upload an image.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const img = new Image();
+                img.src = event.target.result;
+
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+
+                    canvas.toBlob(function (blob) {
+                        const url = URL.createObjectURL(blob);
+                        preview.innerHTML = `<img src="${url}" alt="Compressed Image">`;
+                        downloadAnchor.href = url;
+                        downloadLink.style.display = "block";
+                    }, 'image/jpeg', quality);
+                }
+            }
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+
+    <!-- Load Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</body>
+</html>
