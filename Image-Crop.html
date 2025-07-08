@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Image Crop Tool | Crop & Resize Images</title>
+  <meta name="description" content="Crop and resize your images to the perfect dimensions. Supports custom aspect ratios and presets.">
+  <meta name="keywords" content="image cropper, crop images, online crop tool, resize images, image resizer">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f4f4f4;
+      margin: 0; padding: 0;
+    }
+    header, footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .crop-area {
+      margin: 20px 0;
+      text-align: center;
+    }
+    canvas {
+      max-width: 100%;
+      border: 1px solid #ddd;
+    }
+    select, input, button {
+      padding: 10px;
+      margin: 10px 5px;
+      font-size: 16px;
+    }
+    .ads {
+      margin: 30px 0;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 22px; }
+      button, select, input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Image Crop Tool</h1>
+    <p>Crop and resize your images to the perfect dimensions</p>
+  </header>
+
+  <div class="container">
+    <input type="file" id="upload" accept="image/*" />
+    <select id="aspectRatio">
+      <option value="free">Free Crop</option>
+      <option value="1">1:1 (Square)</option>
+      <option value="4/3">4:3</option>
+      <option value="16/9">16:9</option>
+    </select>
+    <button onclick="cropImage()">Crop & Download</button>
+
+    <div class="crop-area">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <!-- Ad Placeholder -->
+    <div class="ads">
+      <!-- Google AdSense Code -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXX"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 IQMartLLC.com - All rights reserved.</p>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let img = new Image();
+    let startX = 0, startY = 0, isDragging = false;
+    let cropX = 0, cropY = 0, cropW = 0, cropH = 0;
+    let originalImage = null;
+
+    document.getElementById('upload').addEventListener('change', function(e) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        img.onload = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          originalImage = evt.target.result;
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    });
+
+    canvas.addEventListener('mousedown', e => {
+      const rect = canvas.getBoundingClientRect();
+      startX = e.clientX - rect.left;
+      startY = e.clientY - rect.top;
+      isDragging = true;
+    });
+
+    canvas.addEventListener('mouseup', e => {
+      isDragging = false;
+    });
+
+    canvas.addEventListener('mousemove', e => {
+      if (isDragging) {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        cropX = startX;
+        cropY = startY;
+        cropW = mouseX - startX;
+        cropH = mouseY - startY;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        ctx.strokeStyle = 'red';
+        ctx.strokeRect(cropX, cropY, cropW, cropH);
+      }
+    });
+
+    function cropImage() {
+      const aspect = document.getElementById('aspectRatio').value;
+      let tempCanvas = document.createElement('canvas');
+      let tempCtx = tempCanvas.getContext('2d');
+
+      let finalW = Math.abs(cropW);
+      let finalH = Math.abs(cropH);
+
+      // Apply aspect ratio if needed
+      if (aspect !== 'free') {
+        const ratio = eval(aspect);
+        finalH = finalW / ratio;
+      }
+
+      tempCanvas.width = finalW;
+      tempCanvas.height = finalH;
+
+      tempCtx.drawImage(
+        img,
+        cropX, cropY,
+        finalW, finalH,
+        0, 0,
+        finalW, finalH
+      );
+
+      const croppedData = tempCanvas.toDataURL('image/png');
+
+      const link = document.createElement('a');
+      link.href = croppedData;
+      link.download = 'cropped-image.png';
+      link.click();
+    }
+  </script>
+
+  <!-- Load Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</body>
+</html>
