@@ -3,71 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Convert videos between MP4, AVI, MOV, MKV, and other popular formats with adjustable quality. Fast, simple, and browser-based video converter." />
+  <meta name="keywords" content="Video Converter, MP4 to AVI, Convert MOV to MKV, Free Video Converter Online" />
+  <meta name="author" content="IQMARTLLC" />
   <title>Online Video Converter | Convert MP4, AVI, MOV, MKV</title>
-  <meta name="description" content="Convert videos between MP4, AVI, MOV, MKV, and other popular formats with adjustable quality. Fast, simple, and browser-based.">
-  <meta name="keywords" content="video converter, convert mp4 to avi, online video conversion, mov to mp4, mkv to mp4, reduce video size">
-  <meta name="robots" content="index, follow">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- AdSense Placeholder -->
+  <!-- Replace "ca-pub-XXXXXXXXXX" and "ad-slot-YYYYYYYYY" with your AdSense ID -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
+    crossorigin="anonymous"></script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: #f9f9f9;
-      color: #333;
+      padding: 0;
+      background: #f4f4f4;
     }
-
-    header, footer {
-      background: #222;
-      color: #fff;
+    header {
+      background-color: #2c3e50;
+      padding: 20px;
       text-align: center;
-      padding: 20px;
+      color: white;
     }
-
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
+    main {
+      max-width: 800px;
+      margin: 30px auto;
       background: #fff;
+      padding: 25px;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    h1 {
+    h1, h2 {
       text-align: center;
-      font-size: 28px;
+      color: #2c3e50;
     }
-
-    .controls {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    input[type="file"], select, button {
-      margin: 10px 5px;
-      padding: 10px;
-      font-size: 16px;
-    }
-
-    video {
+    label {
       display: block;
-      margin: 20px auto;
-      max-width: 100%;
+      margin: 15px 0 5px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border-radius: 5px;
       border: 1px solid #ccc;
     }
-
-    .ads {
+    button {
+      background-color: #3498db;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .ad-slot {
+      text-align: center;
       margin: 30px 0;
+    }
+    .download-link {
+      display: none;
+      margin-top: 20px;
       text-align: center;
     }
-
-    @media screen and (max-width: 600px) {
-      h1 {
-        font-size: 22px;
-      }
-
-      input, select, button {
-        width: 100%;
-        margin-bottom: 10px;
+    .download-link a {
+      background-color: #27ae60;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    @media (max-width: 600px) {
+      main {
+        margin: 20px;
+        padding: 15px;
       }
     }
   </style>
@@ -75,70 +97,69 @@
 <body>
 
   <header>
-    <h1>Video Converter Tool</h1>
-    <p>Convert videos between MP4, AVI, MOV, MKV and more formats</p>
+    <h1>Online Video Converter</h1>
+    <p>Convert MP4, AVI, MOV, MKV and more - Free & Fast</p>
   </header>
 
-  <div class="container">
-    <div class="controls">
-      <input type="file" id="videoInput" accept="video/*" />
+  <main>
+    <h2>Convert Your Video</h2>
+    <form id="videoForm">
+      <label for="videoFile">Upload Video</label>
+      <input type="file" id="videoFile" accept="video/*" required />
+
+      <label for="format">Convert to Format</label>
       <select id="format">
         <option value="mp4">MP4</option>
         <option value="avi">AVI</option>
         <option value="mov">MOV</option>
         <option value="mkv">MKV</option>
       </select>
+
+      <label for="quality">Select Quality</label>
       <select id="quality">
-        <option value="high">High Quality</option>
-        <option value="medium" selected>Medium Quality</option>
-        <option value="low">Low Quality</option>
+        <option value="high">High</option>
+        <option value="medium" selected>Medium</option>
+        <option value="low">Low</option>
       </select>
-      <button onclick="convertVideo()">Convert Video</button>
+
+      <button type="submit">Convert Video</button>
+    </form>
+
+    <div class="download-link" id="downloadSection">
+      <h3>Conversion Complete!</h3>
+      <a href="#" id="downloadBtn" download>Download Video</a>
     </div>
 
-    <video id="videoPreview" controls></video>
-
-    <!-- Google AdSense Placeholder -->
-    <div class="ads">
+    <!-- Ad Slot -->
+    <div class="ad-slot">
+      <!-- Google AdSense Ad Slot -->
       <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-XXXXXXXXXXXX"
-           data-ad-slot="1234567890"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
+        style="display:block"
+        data-ad-client="ca-pub-XXXXXXXXXX"
+        data-ad-slot="YYYYYYYYYY"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
       <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
-  </div>
+  </main>
 
   <footer>
-    <p>&copy; 2025 IQMartLLC.com - All Rights Reserved</p>
+    &copy; 2025 IQMARTLLC.COM - All Rights Reserved.
   </footer>
 
   <script>
-    const videoInput = document.getElementById('videoInput');
-    const videoPreview = document.getElementById('videoPreview');
-
-    videoInput.addEventListener('change', function () {
-      const file = this.files[0];
-      if (!file) return;
-      const url = URL.createObjectURL(file);
-      videoPreview.src = url;
+    // Placeholder script for demo
+    document.getElementById('videoForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      // In real scenario: Send video to backend for conversion and return a downloadable link
+      setTimeout(() => {
+        document.getElementById('downloadSection').style.display = 'block';
+        document.getElementById('downloadBtn').href = '#'; // Replace with converted file path
+      }, 3000); // Simulated delay
     });
-
-    function convertVideo() {
-      const format = document.getElementById('format').value;
-      const quality = document.getElementById('quality').value;
-
-      alert(`This is a front-end template.\nTo perform actual video conversion (e.g., MP4 to AVI), integrate FFmpeg.js or handle server-side with a backend like Node.js + FFmpeg.`);
-
-      // Actual conversion requires backend or FFmpeg.wasm
-    }
   </script>
-
-  <!-- Load Google AdSense Script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 </body>
 </html>
