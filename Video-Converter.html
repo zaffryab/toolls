@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Video Converter | Convert MP4, AVI, MOV, MKV</title>
+  <meta name="description" content="Convert videos between MP4, AVI, MOV, MKV, and other popular formats with adjustable quality. Fast, simple, and browser-based.">
+  <meta name="keywords" content="video converter, convert mp4 to avi, online video conversion, mov to mp4, mkv to mp4, reduce video size">
+  <meta name="robots" content="index, follow">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header, footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .controls {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    input[type="file"], select, button {
+      margin: 10px 5px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    video {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      border: 1px solid #ccc;
+    }
+
+    .ads {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 22px;
+      }
+
+      input, select, button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Video Converter Tool</h1>
+    <p>Convert videos between MP4, AVI, MOV, MKV and more formats</p>
+  </header>
+
+  <div class="container">
+    <div class="controls">
+      <input type="file" id="videoInput" accept="video/*" />
+      <select id="format">
+        <option value="mp4">MP4</option>
+        <option value="avi">AVI</option>
+        <option value="mov">MOV</option>
+        <option value="mkv">MKV</option>
+      </select>
+      <select id="quality">
+        <option value="high">High Quality</option>
+        <option value="medium" selected>Medium Quality</option>
+        <option value="low">Low Quality</option>
+      </select>
+      <button onclick="convertVideo()">Convert Video</button>
+    </div>
+
+    <video id="videoPreview" controls></video>
+
+    <!-- Google AdSense Placeholder -->
+    <div class="ads">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXX"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 IQMartLLC.com - All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const videoInput = document.getElementById('videoInput');
+    const videoPreview = document.getElementById('videoPreview');
+
+    videoInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      videoPreview.src = url;
+    });
+
+    function convertVideo() {
+      const format = document.getElementById('format').value;
+      const quality = document.getElementById('quality').value;
+
+      alert(`This is a front-end template.\nTo perform actual video conversion (e.g., MP4 to AVI), integrate FFmpeg.js or handle server-side with a backend like Node.js + FFmpeg.`);
+
+      // Actual conversion requires backend or FFmpeg.wasm
+    }
+  </script>
+
+  <!-- Load Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</body>
+</html>
