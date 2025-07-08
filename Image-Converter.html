@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Convert images between JPG, PNG, WEBP, and GIF formats with high-quality output using our free online Image Converter." />
+  <meta name="keywords" content="image converter, jpg to png, png to webp, gif converter, online image conversion, convert images" />
+  <meta name="author" content="IQMARTLLC" />
+  <title>Online Image Converter | JPG, PNG, WEBP, GIF</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background: #004d7a;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+    .tool-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .input-group, .output-group {
+      margin-bottom: 20px;
+    }
+    input[type="file"], select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    img.preview {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+    .ads {
+      margin: 20px 0;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+
+  <!-- Google AdSense (replace YOUR-ADSENSE-ID) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR-ADSENSE-ID"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <h1>Image Converter Tool</h1>
+  <p>Convert JPG, PNG, GIF, and WEBP images online for free</p>
+</header>
+
+<div class="container">
+  <div class="tool-box">
+    <div class="input-group">
+      <label for="imageInput">Upload Image</label>
+      <input type="file" id="imageInput" accept="image/*">
+      <img id="imagePreview" class="preview" style="display:none;" />
+    </div>
+
+    <div class="output-group">
+      <label for="format">Convert To:</label>
+      <select id="format">
+        <option value="image/png">PNG</option>
+        <option value="image/jpeg">JPG</option>
+        <option value="image/webp">WEBP</option>
+        <option value="image/gif">GIF</option>
+      </select>
+    </div>
+
+    <button onclick="convertImage()">Convert and Download</button>
+  </div>
+
+  <!-- Ad Placeholder -->
+  <div class="ads">
+    <!-- AdSense Ad Unit -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="YOUR-ADSENSE-ID"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+<script>
+  const imageInput = document.getElementById('imageInput');
+  const imagePreview = document.getElementById('imagePreview');
+  let originalImage = new Image();
+
+  imageInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        originalImage.src = e.target.result;
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  function convertImage() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = originalImage.width;
+    canvas.height = originalImage.height;
+    ctx.drawImage(originalImage, 0, 0);
+    const format = document.getElementById('format').value;
+
+    canvas.toBlob(function(blob) {
+      const link = document.createElement('a');
+      link.download = `converted-image.${format.split('/')[1]}`;
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    }, format, 1);
+  }
+</script>
+
+</body>
+</html>
