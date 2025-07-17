@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator | Calculate Your Exact Age in Years, Months, Days</title>
+    <meta name="description" content="Free online age calculator tool. Calculate your exact age in years, months, and days. Perfect for birthdays and special events.">
+    <meta name="keywords" content="age calculator, birthday calculator, how old am I, age in years months days, date calculator">
+    <meta name="author" content="ToolHubCenter">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4285f4;
+            --secondary: #f1f3f4;
+            --text: #202124;
+            --border: #dadce0;
+            --card-bg: #ffffff;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .ad-container {
+            padding: 15px;
+            text-align: center;
+            background: var(--secondary);
+            margin: 10px 0;
+        }
+        
+        .calculator-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .input-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, select {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background-color: #3367d6;
+        }
+        
+        .result-section {
+            background-color: var(--secondary);
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        
+        .result-section h2 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .age-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .age-box {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            min-width: 120px;
+            box-shadow: var(--shadow);
+        }
+        
+        .age-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .age-label {
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+        
+        .how-it-works {
+            padding: 20px;
+            background: var(--card-bg);
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        
+        .how-it-works h2 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .how-it-works ol {
+            padding-left: 20px;
+        }
+        
+        .how-it-works li {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .input-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .age-display {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Age Calculator</h1>
+            <p>Calculate your exact age in years, months, and days</p>
+        </header>
+        
+        <!-- Top Ad Placement -->
+        <div class="ad-container">
+            <!-- Google AdSense Code (Replace with your own) -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+            <!-- AgeCalculator_Top -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                data-ad-slot="YOUR_AD_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="calculator-container">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="day">Day</label>
+                    <input type="number" id="day" min="1" max="31" placeholder="DD">
+                </div>
+                
+                <div class="input-group">
+                    <label for="month">Month</label>
+                    <select id="month">
+                        <option value="">Select Month</option>
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="year">Year</label>
+                    <input type="number" id="year" min="1900" max="2100" placeholder="YYYY">
+                </div>
+            </div>
+            
+            <button id="calculate-btn">Calculate Age</button>
+            
+            <div class="result-section" id="result-section">
+                <h2>Your Age Is</h2>
+                <div class="age-display">
+                    <div class="age-box">
+                        <div class="age-value" id="years">0</div>
+                        <div class="age-label">Years</div>
+                    </div>
+                    <div class="age-box">
+                        <div class="age-value" id="months">0</div>
+                        <div class="age-label">Months</div>
+                    </div>
+                    <div class="age-box">
+                        <div class="age-value" id="days">0</div>
+                        <div class="age-label">Days</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Middle Ad Placement -->
+        <div class="ad-container">
+            <!-- Google AdSense Code (Replace with your own) -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+            <!-- AgeCalculator_Middle -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                data-ad-slot="YOUR_AD_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="how-it-works">
+            <h2>How This Age Calculator Works</h2>
+            <ol>
+                <li><strong>Enter your birth date</strong> - Select your day, month, and year of birth</li>
+                <li><strong>Click "Calculate Age"</strong> - Our tool will process your information</li>
+                <li><strong>Get accurate results</strong> - See your exact age in years, months, and days</li>
+                <li><strong>Special features</strong> - Automatically accounts for leap years and month lengths</li>
+                <li><strong>Mobile-friendly</strong> - Works perfectly on all devices</li>
+            </ol>
+            
+            <p style="margin-top: 15px;"><strong>Why use our age calculator?</strong> Unlike simple year subtraction, our tool gives you precise calculations including months and days since your last birthday. Perfect for planning events, checking eligibility, or just satisfying your curiosity!</p>
+        </div>
+        
+        <!-- Bottom Ad Placement -->
+        <div class="ad-container">
+            <!-- Google AdSense Code (Replace with your own) -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+            <!-- AgeCalculator_Bottom -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                data-ad-slot="YOUR_AD_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <footer>
+            <p>© <span id="current-year"></span> ToolHubCenter - Free Online Age Calculator</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Calculate age function
+            document.getElementById('calculate-btn').addEventListener('click', function() {
+                const day = parseInt(document.getElementById('day').value);
+                const month = parseInt(document.getElementById('month').value);
+                const year = parseInt(document.getElementById('year').value);
+                
+                // Validate inputs
+                if (isNaN(day) || isNaN(month) || isNaN(year)) {
+                    alert('Please enter a valid date');
+                    return;
+                }
+                
+                // Check if month is selected
+                if (document.getElementById('month').value === '') {
+                    alert('Please select a month');
+                    return;
+                }
+                
+                // Check if date is valid
+                const birthDate = new Date(year, month, day);
+                if (birthDate.getDate() !== day || birthDate.getMonth() !== month || birthDate.getFullYear() !== year) {
+                    alert('Please enter a valid date');
+                    return;
+                }
+                
+                // Calculate age
+                const today = new Date();
+                let ageYears = today.getFullYear() - birthDate.getFullYear();
+                let ageMonths = today.getMonth() - birthDate.getMonth();
+                let ageDays = today.getDate() - birthDate.getDate();
+                
+                // Adjust for negative months/days
+                if (ageDays < 0) {
+                    ageMonths--;
+                    // Get last day of previous month
+                    const lastDay = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+                    ageDays += lastDay;
+                }
+                
+                if (ageMonths < 0) {
+                    ageYears--;
+                    ageMonths += 12;
+                }
+                
+                // Display results
+                document.getElementById('years').textContent = ageYears;
+                document.getElementById('months').textContent = ageMonths;
+                document.getElementById('days').textContent = ageDays;
+                
+                // Show result section with animation
+                const resultSection = document.getElementById('result-section');
+                resultSection.style.display = 'block';
+                resultSection.classList.add('fade-in');
+            });
+        });
+    </script>
+    
+    <!-- Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Age Calculator",
+        "url": "https://www.toolhubcenter.com/age-calculator",
+        "description": "Calculate your exact age in years, months, and days. Perfect for birthdays and special events.",
+        "applicationCategory": "CalculatorApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "ToolHubCenter"
+        }
+    }
+    </script>
+</body>
+</html>
