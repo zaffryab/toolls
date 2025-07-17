@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online audio trimmer tool to cut and edit MP3, WAV, and other audio files. No installation needed - works directly in your browser.">
+    <meta name="keywords" content="audio trimmer, mp3 cutter, wav editor, online audio editor, sound cutter, audio tool">
+    <meta name="author" content="Audio Trimmer Tool">
+    <meta name="robots" content="index, follow">
+    <title>Audio Trimmer | Cut and Edit MP3/WAV Files Online</title>
+    <link rel="canonical" href="https://www.yourwebsite.com/audio-trimmer" />
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Audio Trimmer | Cut MP3/WAV Files Online">
+    <meta property="og:description" content="Free online tool to trim and edit audio files. Supports MP3, WAV, and other common formats.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.yourwebsite.com/audio-trimmer">
+    <meta property="og:image" content="https://www.yourwebsite.com/images/audio-trimmer-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Audio Trimmer",
+      "url": "https://www.yourwebsite.com/audio-trimmer",
+      "description": "Free online tool to trim and edit audio files in MP3, WAV and other formats.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #f8f9fa;
+            --accent-color: #fd1d1d;
+            --text-color: #333;
+            --light-text: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+        
+        .tagline {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+        
+        .tool-container {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+        }
+        
+        .upload-section {
+            text-align: center;
+            padding: 40px 20px;
+            border: 2px dashed #ddd;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+        
+        .upload-section:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .upload-section.dragover {
+            background-color: rgba(106, 17, 203, 0.05);
+            border-color: var(--primary-color);
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .upload-btn:hover {
+            background-color: #5a0db3;
+        }
+        
+        .file-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        
+        .editor-section {
+            display: none;
+        }
+        
+        .waveform-container {
+            width: 100%;
+            height: 150px;
+            background: #f5f5f5;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .time-inputs {
+            display: flex;
+            gap: 15px;
+            flex-grow: 1;
+        }
+        
+        .time-input {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        input[type="number"], input[type="range"] {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+        
+        .action-btns {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #5a0db3;
+        }
+        
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: var(--text-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .player-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .player-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .ad-container {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .how-it-works {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+        }
+        
+        .how-it-works h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .how-it-works h3 {
+            margin: 20px 0 10px;
+        }
+        
+        .how-it-works p, .how-it-works ol {
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .time-inputs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Audio Trimmer</h1>
+            <p class="tagline">Cut and trim your audio files online. Supports MP3, WAV, and other common audio formats.</p>
+        </header>
+        
+        <!-- Top Ad Banner -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Replace with your Google AdSense code -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_UNIT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="tool-container">
+            <div class="upload-section" id="upload-area">
+                <input type="file" id="audio-upload" class="file-input" accept="audio/*">
+                <button class="upload-btn" id="upload-btn">Choose Audio File</button>
+                <p>or drag and drop file here</p>
+                <p class="file-info">Supports: MP3, WAV, OGG, AAC (Max 50MB)</p>
+            </div>
+            
+            <div class="editor-section" id="editor-section">
+                <h2>Edit Audio</h2>
+                <div class="waveform-container" id="waveform"></div>
+                
+                <div class="controls">
+                    <div class="time-inputs">
+                        <div class="time-input">
+                            <label for="start-time">Start Time (seconds)</label>
+                            <input type="number" id="start-time" min="0" value="0" step="0.1">
+                        </div>
+                        <div class="time-input">
+                            <label for="end-time">End Time (seconds)</label>
+                            <input type="number" id="end-time" min="0.1" value="0" step="0.1">
+                        </div>
+                    </div>
+                    
+                    <div class="action-btns">
+                        <button class="btn btn-primary" id="trim-btn">Trim Audio</button>
+                        <button class="btn btn-secondary" id="reset-btn">Reset</button>
+                    </div>
+                </div>
+                
+                <div class="player-controls">
+                    <button class="player-btn" id="play-btn">▶</button>
+                    <button class="player-btn" id="pause-btn">❚❚</button>
+                </div>
+                
+                <div class="download-section" style="margin-top: 30px;">
+                    <button class="btn btn-primary" id="download-btn">Download Trimmed Audio</button>
+                    <p id="download-info" style="margin-top: 10px; font-size: 0.9rem; color: var(--light-text);"></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Middle Ad Banner -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Replace with your Google AdSense code -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_UNIT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="how-it-works">
+            <h2>How to Use the Audio Trimmer</h2>
+            <p>Our online audio trimmer allows you to cut and edit audio files directly in your browser without any software installation.</p>
+            
+            <h3>Step-by-Step Guide</h3>
+            <ol>
+                <li><strong>Upload your audio file</strong> by clicking the button or dragging and dropping</li>
+                <li><strong>Set start and end points</strong> using the time inputs or by clicking on the waveform</li>
+                <li><strong>Preview your selection</strong> using the play/pause buttons</li>
+                <li><strong>Trim the audio</strong> when you're satisfied with your selection</li>
+                <li><strong>Download the trimmed version</strong> in the original format</li>
+            </ol>
+            
+            <h3>Supported Audio Formats</h3>
+            <p>The tool supports most common audio formats including:</p>
+            <ul>
+                <li>MP3 (most common compressed format)</li>
+                <li>WAV (uncompressed high quality)</li>
+                <li>OGG (open source format)</li>
+                <li>AAC (used by Apple devices)</li>
+            </ul>
+            
+            <h3>Technical Information</h3>
+            <p>The audio processing happens entirely in your browser using the Web Audio API. No files are uploaded to our servers, ensuring complete privacy for your audio files.</p>
+        </div>
+        
+        <!-- Bottom Ad Banner -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Replace with your Google AdSense code -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_UNIT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <footer>
+            <p>&copy; <span id="current-year"></span> Audio Trimmer Tool. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Load Waveform Library -->
+    <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.js"></script>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // DOM Elements
+        const uploadBtn = document.getElementById('upload-btn');
+        const audioUpload = document.getElementById('audio-upload');
+        const uploadArea = document.getElementById('upload-area');
+        const editorSection = document.getElementById('editor-section');
+        const waveformContainer = document.getElementById('waveform');
+        const startTimeInput = document.getElementById('start-time');
+        const endTimeInput = document.getElementById('end-time');
+        const trimBtn = document.getElementById('trim-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const downloadInfo = document.getElementById('download-info');
+        
+        // Audio variables
+        let wavesurfer;
+        let audioFile;
+        let audioContext;
+        let audioBuffer;
+        let trimmedBlob;
+        
+        // Initialize WaveSurfer
+        function initWaveSurfer() {
+            wavesurfer = WaveSurfer.create({
+                container: '#waveform',
+                waveColor: '#6a11cb',
+                progressColor: '#9a36ff',
+                cursorColor: '#333',
+                cursorWidth: 2,
+                barWidth: 2,
+                barGap: 1,
+                barRadius: 2,
+                height: 150,
+                responsive: true
+            });
+            
+            wavesurfer.on('ready', function() {
+                // Set end time to full duration by default
+                endTimeInput.value = wavesurfer.getDuration().toFixed(1);
+                endTimeInput.max = wavesurfer.getDuration().toFixed(1);
+                
+                // Enable controls
+                trimBtn.disabled = false;
+                playBtn.disabled = false;
+                downloadBtn.disabled = false;
+            });
+            
+            wavesurfer.on('audioprocess', function() {
+                startTimeInput.value = wavesurfer.getCurrentTime().toFixed(1);
+            });
+            
+            wavesurfer.on('seek', function() {
+                startTimeInput.value = wavesurfer.getCurrentTime().toFixed(1);
+            });
+        }
+        
+        // Handle file upload
+        function handleFileUpload(file) {
+            if (!file.type.match('audio.*')) {
+                alert('Please upload an audio file (MP3, WAV, etc.)');
+                return;
+            }
+            
+            if (file.size > 50 * 1024 * 1024) { // 50MB limit
+                alert('File size exceeds 50MB limit');
+                return;
+            }
+            
+            audioFile = file;
+            
+            // Show editor section
+            uploadArea.style.display = 'none';
+            editorSection.style.display = 'block';
+            
+            // Initialize WaveSurfer if not already done
+            if (!wavesurfer) {
+                initWaveSurfer();
+            }
+            
+            // Load the audio file
+            const audioURL = URL.createObjectURL(file);
+            wavesurfer.load(audioURL);
+            
+            // Set filename in download info
+            const fileName = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
+            downloadInfo.textContent = `Will save as: ${fileName}_trimmed${getFileExtension(file.name)}`;
+        }
+        
+        // Get file extension
+        function getFileExtension(filename) {
+            return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+        }
+        
+        // Event Listeners
+        uploadBtn.addEventListener('click', () => audioUpload.click());
+        
+        audioUpload.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
+        
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length) {
+                handleFileUpload(e.dataTransfer.files[0]);
+            }
+        });
+        
+        // Play/pause controls
+        playBtn.addEventListener('click', () => {
+            wavesurfer.play();
+        });
+        
+        pauseBtn.addEventListener('click', () => {
+            wavesurfer.pause();
+        });
+        
+        // Trim audio
+        trimBtn.addEventListener('click', async () => {
+            const startTime = parseFloat(startTimeInput.value);
+            const endTime = parseFloat(endTimeInput.value);
+            
+            if (startTime >= endTime) {
+                alert('End time must be after start time');
+                return;
+            }
+            
+            // Show loading state
+            trimBtn.disabled = true;
+            trimBtn.textContent = 'Processing...';
+            
+            try {
+                // Create offline audio context
+                const sampleRate = wavesurfer.backend.ac.sampleRate;
+                const offlineCtx = new OfflineAudioContext(
+                    1, // channels
+                    (endTime - startTime) * sampleRate, // length
+                    sampleRate // sampleRate
+                );
+                
+                // Decode audio data
+                const arrayBuffer = await audioFile.arrayBuffer();
+                audioBuffer = await offlineCtx.decodeAudioData(arrayBuffer);
+                
+                // Create buffer source
+                const source = offlineCtx.createBufferSource();
+                source.buffer = audioBuffer;
+                
+                // Create buffer for trimmed audio
+                const trimmedLength = (endTime - startTime) * sampleRate;
+                const trimmedBuffer = offlineCtx.createBuffer(
+                    audioBuffer.numberOfChannels,
+                    trimmedLength,
+                    sampleRate
+                );
+                
+                // Copy the selected portion to new buffer
+                for (let channel = 0; channel < audioBuffer.numberOfChannels; channel++) {
+                    const channelData = audioBuffer.getChannelData(channel);
+                    const trimmedData = trimmedBuffer.getChannelData(channel);
+                    const startOffset = startTime * sampleRate;
+                    
+                    for (let i = 0; i < trimmedLength; i++) {
+                        trimmedData[i] = channelData[startOffset + i];
+                    }
+                }
+                
+                // Create blob from trimmed audio
+                const audioBlob = await bufferToWave(trimmedBuffer, trimmedBuffer.length);
+                trimmedBlob = new Blob([audioBlob], { type: audioFile.type });
+                
+                // Update download info
+                const fileName = audioFile.name.replace(/\.[^/.]+$/, "");
+                downloadInfo.textContent = `Ready to download: ${fileName}_trimmed${getFileExtension(audioFile.name)} (${(trimmedBlob.size / 1024 / 1024).toFixed(2)}MB)`;
+                
+                // Reload waveform with trimmed audio
+                wavesurfer.load(URL.createObjectURL(trimmedBlob));
+                
+                alert('Audio trimmed successfully! You can now play the trimmed version or download it.');
+            } catch (error) {
+                console.error('Error trimming audio:', error);
+                alert('Error trimming audio. Please try again.');
+            } finally {
+                trimBtn.disabled = false;
+                trimBtn.textContent = 'Trim Audio';
+            }
+        });
+        
+        // Convert audio buffer to WAV blob
+        function bufferToWave(buffer, len) {
+            const numOfChan = buffer.numberOfChannels;
+            const length = len * numOfChan * 2 + 44;
+            const bufferOut = new ArrayBuffer(length);
+            const view = new DataView(bufferOut);
+            const channels = [];
+            let i;
+            let sample;
+            let offset = 0;
+            let pos = 0;
+            
+            // Write WAVE header
+            setUint32(0x46464952); // "RIFF"
+            setUint32(length - 8); // file length - 8
+            setUint32(0x45564157); // "WAVE"
+            
+            setUint32(0x20746d66); // "fmt " chunk
+            setUint32(16); // length = 16
+            setUint16(1); // PCM (uncompressed)
+            setUint16(numOfChan);
+            setUint32(buffer.sampleRate);
+            setUint32(buffer.sampleRate * 2 * numOfChan); // avg. bytes/sec
+            setUint16(numOfChan * 2); // block-align
+            setUint16(16); // 16-bit (hardcoded)
+            
+            setUint32(0x61746164); // "data" chunk
+            setUint32(length - pos - 4); // chunk length
+            
+            // Write interleaved data
+            for (i = 0; i < numOfChan; i++) {
+                channels.push(buffer.getChannelData(i));
+            }
+            
+            while (pos < length) {
+                for (i = 0; i < numOfChan; i++) {
+                    sample = Math.max(-1, Math.min(1, channels[i][offset])); // clamp
+                    sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767)|0; // scale to 16-bit
+                    view.setInt16(pos, sample, true);
+                    pos += 2;
+                }
+                offset++;
+            }
+            
+            return new Blob([bufferOut], { type: 'audio/wav' });
+            
+            function setUint16(data) {
+                view.setUint16(pos, data, true);
+                pos += 2;
+            }
+            
+            function setUint32(data) {
+                view.setUint32(pos, data, true);
+                pos += 4;
+            }
+        }
+        
+        // Download trimmed audio
+        downloadBtn.addEventListener('click', () => {
+            if (!trimmedBlob) {
+                alert('Please trim the audio first');
+                return;
+            }
+            
+            const url = URL.createObjectURL(trimmedBlob);
+            const fileName = audioFile.name.replace(/\.[^/.]+$/, "") + '_trimmed' + getFileExtension(audioFile.name);
+            
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            
+            setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 100);
+        });
+        
+        // Reset tool
+        resetBtn.addEventListener('click', () => {
+            if (wavesurfer) {
+                wavesurfer.destroy();
+                wavesurfer = null;
+            }
+            
+            uploadArea.style.display = 'block';
+            editorSection.style.display = 'none';
+            audioUpload.value = '';
+            startTimeInput.value = '0';
+            endTimeInput.value = '0';
+            downloadInfo.textContent = '';
+            trimmedBlob = null;
+        });
+    </script>
+</body>
+</html>
