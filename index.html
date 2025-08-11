@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="favicon-16x16.png" type="image/x-icon"
+    <link rel="icon" href="favicon-16x16.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToolHubCenter - 100+ All-in-One Online Tools</title>
@@ -1036,6 +1036,14 @@
             const loginForm = document.getElementById('login-form');
             const signupForm = document.getElementById('signup-form');
 
+            // Function to generate tool filename
+            function generateToolFilename(toolName) {
+                // Convert to lowercase, replace spaces with hyphens, remove special characters
+                return toolName.toLowerCase()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^a-z0-9-]/g, '') + '.html';
+            }
+
             // Initialize the page
             function initPage() {
                 renderTools(tools);
@@ -1050,20 +1058,25 @@
                     const toolCard = document.createElement('div');
                     toolCard.className = 'tool-card';
                     toolCard.style.setProperty('--tool-color', tool.color);
+                    
+                    // Generate filename for the tool
+                    const toolFilename = generateToolFilename(tool.name);
+                    
                     toolCard.innerHTML = `
                         <div class="tool-badge">${tool.category.charAt(0).toUpperCase() + tool.category.slice(1)}</div>
                         <h3><i class="${tool.icon}"></i> ${tool.name}</h3>
                         <p>${tool.desc}</p>
-                        <button class="btn use-tool-btn" data-tool="${tool.name}">
+                        <a href="${toolFilename}" class="btn use-tool-btn" data-tool="${tool.name}">
                             <i class="fas fa-wrench"></i> Use Tool
-                        </button>
+                        </a>
                     `;
                     toolsGrid.appendChild(toolCard);
                 });
                 
-                // Add event listeners to tool buttons
-                document.querySelectorAll('.use-tool-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                // Add event listeners to tool links
+                document.querySelectorAll('.use-tool-btn').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
                         const toolName = this.getAttribute('data-tool');
                         alert(`The "${toolName}" tool would open in a real implementation. Thanks for checking out ToolHubCenter!`);
                     });
