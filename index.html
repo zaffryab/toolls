@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolHubCenter - All-in-One Online Tools</title>
+    <title>ToolHubCenter - 100+ All-in-One Online Tools</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -25,6 +25,10 @@
             --tool-seo: #9b5de5;
             --tool-video: #f15bb5;
             --tool-math: #06d6a0;
+            --tool-converter: #ff9e00;
+            --tool-social: #7209b7;
+            --tool-security: #2a9d8f;
+            --tool-data: #e63946;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
         }
@@ -37,7 +41,7 @@
         }
 
         body {
-            background-color: #f5f7ff;
+            background: linear-gradient(135deg, #f5f7ff 0%, #eef1f9 100%);
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
@@ -578,6 +582,28 @@
             cursor: pointer;
         }
 
+        .tool-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--tool-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .popular-tools {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         /* Responsive Design */
         @media (max-width: 1100px) {
             .tools-grid {
@@ -668,8 +694,8 @@
     <main id="main-content">
         <!-- Hero Section -->
         <section class="hero">
-            <h1>Your All-in-One Online Tool Collection</h1>
-            <p>Access 100+ powerful tools for PDFs, images, text, development, SEO and more. Free, fast, and easy to use.</p>
+            <h1>100+ Powerful Tools for Your Daily Tasks</h1>
+            <p>Access our collection of 100+ free tools for PDFs, images, text, development, SEO, video, and more. Fast, easy, and reliable.</p>
             
             <div class="search-container">
                 <input type="text" id="search-input" class="search-bar" placeholder="Search tools by name or category...">
@@ -681,7 +707,7 @@
         <!-- Stats Section -->
         <section class="stats">
             <div class="stat-item">
-                <div class="stat-number">150+</div>
+                <div class="stat-number">120+</div>
                 <div class="stat-label">Online Tools</div>
             </div>
             <div class="stat-item">
@@ -689,7 +715,7 @@
                 <div class="stat-label">Free Tools</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">500K+</div>
+                <div class="stat-number">750K+</div>
                 <div class="stat-label">Monthly Users</div>
             </div>
             <div class="stat-item">
@@ -719,9 +745,18 @@
                 <button class="category-btn" data-category="seo">
                     <i class="fas fa-chart-line"></i> SEO Tools
                 </button>
+                <button class="category-btn" data-category="video">
+                    <i class="fas fa-video"></i> Video Tools
+                </button>
+                <button class="category-btn" data-category="converter">
+                    <i class="fas fa-exchange-alt"></i> Converters
+                </button>
             </div>
         </div>
 
+        <!-- Popular Tools Section -->
+        <h2 class="popular-tools">Popular Tools</h2>
+        
         <!-- Tools Container -->
         <div class="container">
             <section id="tools-section">
@@ -748,7 +783,7 @@
 
                 <div class="footer-section" id="about">
                     <h3>About Us</h3>
-                    <p>ToolHubCenter provides free, easy-to-use online tools to help with your daily tasks. Our mission is to simplify your digital life.</p>
+                    <p>ToolHubCenter provides free, easy-to-use online tools to help with your daily tasks. Our mission is to simplify your digital life with 120+ powerful tools.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -827,42 +862,161 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Tool data
+            // Tool data - 120+ tools
             const tools = [
-                // PDF Tools
+                // PDF Tools (20)
                 { name: 'PDF to Word Converter', desc: 'Convert PDF documents to editable Word files', icon: 'fas fa-file-word', category: 'pdf', color: 'var(--tool-pdf)' },
                 { name: 'PDF Compressor', desc: 'Reduce PDF file size without quality loss', icon: 'fas fa-compress', category: 'pdf', color: 'var(--tool-pdf)' },
                 { name: 'PDF Merger', desc: 'Combine multiple PDF files into one', icon: 'fas fa-file-medical', category: 'pdf', color: 'var(--tool-pdf)' },
                 { name: 'PDF Splitter', desc: 'Split PDF documents into separate pages', icon: 'fas fa-cut', category: 'pdf', color: 'var(--tool-pdf)' },
                 { name: 'PDF to Excel Converter', desc: 'Convert PDF tables to Excel spreadsheets', icon: 'fas fa-file-excel', category: 'pdf', color: 'var(--tool-pdf)' },
-                
-                // Image Tools
+                { name: 'PDF Editor', desc: 'Edit PDF text and images directly in browser', icon: 'fas fa-edit', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Password Remover', desc: 'Unlock password-protected PDF files', icon: 'fas fa-unlock', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF to PowerPoint', desc: 'Convert PDF to editable PowerPoint presentations', icon: 'fas fa-file-powerpoint', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Rotator', desc: 'Rotate PDF pages to correct orientation', icon: 'fas fa-sync', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Metadata Editor', desc: 'Edit PDF document information', icon: 'fas fa-info-circle', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF to Text', desc: 'Extract text content from PDF files', icon: 'fas fa-file-alt', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Watermark Adder', desc: 'Add watermarks to PDF documents', icon: 'fas fa-tint', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Page Numberer', desc: 'Add page numbers to PDF documents', icon: 'fas fa-hashtag', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Redaction', desc: 'Permanently remove sensitive content', icon: 'fas fa-eye-slash', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Form Filler', desc: 'Fill PDF forms electronically', icon: 'fas fa-keyboard', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Signature Adder', desc: 'Add digital signatures to PDFs', icon: 'fas fa-signature', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF OCR', desc: 'Convert scanned PDFs to searchable text', icon: 'fas fa-search', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF to HTML', desc: 'Convert PDF documents to HTML format', icon: 'fab fa-html5', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Bookmark Creator', desc: 'Add bookmarks to PDF documents', icon: 'fas fa-bookmark', category: 'pdf', color: 'var(--tool-pdf)' },
+                { name: 'PDF Quality Analyzer', desc: 'Check PDF for potential issues', icon: 'fas fa-chart-bar', category: 'pdf', color: 'var(--tool-pdf)' },
+
+                // Image Tools (20)
                 { name: 'Image to PNG Converter', desc: 'Convert images to PNG format', icon: 'fas fa-file-image', category: 'image', color: 'var(--tool-image)' },
                 { name: 'Image to JPG Converter', desc: 'Convert images to JPG format', icon: 'fas fa-file-image', category: 'image', color: 'var(--tool-image)' },
                 { name: 'Image Resizer', desc: 'Resize images to specific dimensions', icon: 'fas fa-expand', category: 'image', color: 'var(--tool-image)' },
                 { name: 'Image Compressor', desc: 'Reduce image file size', icon: 'fas fa-compress', category: 'image', color: 'var(--tool-image)' },
                 { name: 'Image Cropper', desc: 'Crop images to remove unwanted areas', icon: 'fas fa-crop', category: 'image', color: 'var(--tool-image)' },
-                
-                // Developer Tools
+                { name: 'Image Rotator', desc: 'Rotate images to correct orientation', icon: 'fas fa-redo', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Background Remover', desc: 'Remove background from images', icon: 'fas fa-eraser', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image Effects', desc: 'Apply filters and effects to images', icon: 'fas fa-magic', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image Watermark Adder', desc: 'Add watermarks to images', icon: 'fas fa-tint', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image to PDF', desc: 'Convert images to PDF documents', icon: 'fas fa-file-pdf', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image to WebP Converter', desc: 'Convert images to WebP format', icon: 'fas fa-file-image', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image Metadata Viewer', desc: 'View and edit image metadata', icon: 'fas fa-info-circle', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Animated GIF Maker', desc: 'Create animated GIFs from images', icon: 'fas fa-film', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image Collage Maker', desc: 'Create photo collages from images', icon: 'fas fa-th', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image Color Picker', desc: 'Extract colors from images', icon: 'fas fa-eye-dropper', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image Upscaler', desc: 'Enlarge images without quality loss', icon: 'fas fa-search-plus', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image to Sketch Converter', desc: 'Convert photos to pencil sketches', icon: 'fas fa-pencil-alt', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image to Base64', desc: 'Convert images to Base64 strings', icon: 'fas fa-code', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image Format Converter', desc: 'Convert between image formats', icon: 'fas fa-exchange-alt', category: 'image', color: 'var(--tool-image)' },
+                { name: 'Image to SVG Converter', desc: 'Convert images to SVG vector format', icon: 'fas fa-vector-square', category: 'image', color: 'var(--tool-image)' },
+
+                // Developer Tools (20)
                 { name: 'JSON Formatter', desc: 'Format and validate JSON data', icon: 'fas fa-brackets-curly', category: 'developer', color: 'var(--tool-developer)' },
                 { name: 'HTML to Markdown', desc: 'Convert HTML to Markdown format', icon: 'fas fa-file-code', category: 'developer', color: 'var(--tool-developer)' },
                 { name: 'CSS Minifier', desc: 'Minify CSS code to reduce size', icon: 'fas fa-css3', category: 'developer', color: 'var(--tool-developer)' },
                 { name: 'JavaScript Minifier', desc: 'Minify JavaScript for production', icon: 'fas fa-js', category: 'developer', color: 'var(--tool-developer)' },
                 { name: 'SQL Formatter', desc: 'Format SQL queries for readability', icon: 'fas fa-database', category: 'developer', color: 'var(--tool-developer)' },
-                
-                // Text Tools
+                { name: 'XML Validator', desc: 'Validate and format XML documents', icon: 'fas fa-code', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'Base64 Encoder/Decoder', desc: 'Encode/decode Base64 strings', icon: 'fas fa-lock', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'URL Encoder/Decoder', desc: 'Encode/decode URL strings', icon: 'fas fa-link', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'Color Picker', desc: 'Select and convert color values', icon: 'fas fa-palette', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'Regex Tester', desc: 'Test regular expressions', icon: 'fas fa-terminal', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'HTML Validator', desc: 'Validate HTML markup', icon: 'fab fa-html5', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'CSS Validator', desc: 'Validate CSS stylesheets', icon: 'fab fa-css3-alt', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'JavaScript Validator', desc: 'Validate JavaScript code', icon: 'fab fa-js-square', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'Code Diff Checker', desc: 'Compare code differences', icon: 'fas fa-file-code', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'Markdown Editor', desc: 'Live preview Markdown editor', icon: 'fas fa-markdown', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'API Tester', desc: 'Test REST API endpoints', icon: 'fas fa-plug', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'User Agent Parser', desc: 'Parse browser user agent strings', icon: 'fas fa-desktop', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'QR Code Generator', desc: 'Generate QR codes from text', icon: 'fas fa-qrcode', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'UUID Generator', desc: 'Generate UUIDs', icon: 'fas fa-fingerprint', category: 'developer', color: 'var(--tool-developer)' },
+                { name: 'Timestamp Converter', desc: 'Convert between timestamps and dates', icon: 'fas fa-clock', category: 'developer', color: 'var(--tool-developer)' },
+
+                // Text Tools (20)
                 { name: 'Word Counter', desc: 'Count words, characters, and sentences', icon: 'fas fa-font', category: 'text', color: 'var(--tool-text)' },
                 { name: 'Character Counter', desc: 'Count characters in text', icon: 'fas fa-text-width', category: 'text', color: 'var(--tool-text)' },
                 { name: 'Case Converter', desc: 'Convert text case styles', icon: 'fas fa-text-height', category: 'text', color: 'var(--tool-text)' },
                 { name: 'Plagiarism Checker', desc: 'Check text for plagiarism', icon: 'fas fa-search', category: 'text', color: 'var(--tool-text)' },
                 { name: 'Grammar Checker', desc: 'Check text for grammar errors', icon: 'fas fa-spell-check', category: 'text', color: 'var(--tool-text)' },
-                
-                // SEO Tools
+                { name: 'Text Summarizer', desc: 'Summarize long text content', icon: 'fas fa-file-contract', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text to Speech', desc: 'Convert text to spoken audio', icon: 'fas fa-volume-up', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Lorem Ipsum Generator', desc: 'Generate placeholder text', icon: 'fas fa-paragraph', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Password Generator', desc: 'Generate secure passwords', icon: 'fas fa-key', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text to Binary', desc: 'Convert text to binary code', icon: 'fas fa-file-binary', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text to Morse Code', desc: 'Convert text to Morse code', icon: 'fas fa-wave-square', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text Reverser', desc: 'Reverse text strings', icon: 'fas fa-exchange-alt', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text Duplicate Remover', desc: 'Remove duplicate lines from text', icon: 'fas fa-clone', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text to Slug', desc: 'Convert text to URL slugs', icon: 'fas fa-link', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text to Hex', desc: 'Convert text to hexadecimal', icon: 'fas fa-hashtag', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text to Base64', desc: 'Encode text to Base64', icon: 'fas fa-lock', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text Encryption', desc: 'Encrypt and decrypt text', icon: 'fas fa-shield-alt', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text to PDF', desc: 'Convert text to PDF documents', icon: 'fas fa-file-pdf', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text to QR Code', desc: 'Convert text to QR codes', icon: 'fas fa-qrcode', category: 'text', color: 'var(--tool-text)' },
+                { name: 'Text to Speech Analysis', desc: 'Analyze text for speech patterns', icon: 'fas fa-comment-dots', category: 'text', color: 'var(--tool-text)' },
+
+                // SEO Tools (20)
                 { name: 'Meta Tag Generator', desc: 'Generate optimized meta tags', icon: 'fas fa-tags', category: 'seo', color: 'var(--tool-seo)' },
                 { name: 'Keyword Density Checker', desc: 'Analyze keyword density', icon: 'fas fa-chart-pie', category: 'seo', color: 'var(--tool-seo)' },
                 { name: 'Sitemap Generator', desc: 'Generate XML sitemaps', icon: 'fas fa-sitemap', category: 'seo', color: 'var(--tool-seo)' },
                 { name: 'Robots.txt Generator', desc: 'Create robots.txt files', icon: 'fas fa-robot', category: 'seo', color: 'var(--tool-seo)' },
                 { name: 'Google Index Checker', desc: 'Check page indexing status', icon: 'fas fa-search', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Backlink Checker', desc: 'Check website backlinks', icon: 'fas fa-link', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Website Speed Test', desc: 'Test website loading speed', icon: 'fas fa-tachometer-alt', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Domain Age Checker', desc: 'Check domain registration date', icon: 'fas fa-calendar-alt', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Website Ranking Checker', desc: 'Check website rankings', icon: 'fas fa-trophy', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Page Rank Checker', desc: 'Check Google PageRank', icon: 'fab fa-google', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Website Screenshot', desc: 'Take screenshots of web pages', icon: 'fas fa-camera', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Keyword Suggestion', desc: 'Get keyword suggestions', icon: 'fas fa-lightbulb', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Website Worth Calculator', desc: 'Estimate website value', icon: 'fas fa-dollar-sign', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Website Traffic Checker', desc: 'Estimate website traffic', icon: 'fas fa-users', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Broken Link Checker', desc: 'Find broken links on websites', icon: 'fas fa-unlink', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Header Checker', desc: 'Check HTTP headers', icon: 'fas fa-heading', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'URL Rewrite Checker', desc: 'Check URL redirects', icon: 'fas fa-directions', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Schema Markup Generator', desc: 'Generate structured data', icon: 'fas fa-code', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'SEO Report Generator', desc: 'Generate SEO audit reports', icon: 'fas fa-file-alt', category: 'seo', color: 'var(--tool-seo)' },
+                { name: 'Website Comparison', desc: 'Compare multiple websites', icon: 'fas fa-balance-scale', category: 'seo', color: 'var(--tool-seo)' },
+
+                // Video Tools (20)
+                { name: 'Video to MP4 Converter', desc: 'Convert videos to MP4 format', icon: 'fas fa-file-video', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video to GIF Converter', desc: 'Convert videos to animated GIFs', icon: 'fas fa-film', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Compressor', desc: 'Reduce video file size', icon: 'fas fa-compress', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Cutter', desc: 'Trim and cut video clips', icon: 'fas fa-cut', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Merger', desc: 'Combine multiple video files', icon: 'fas fa-object-group', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video to Audio Extractor', desc: 'Extract audio from videos', icon: 'fas fa-music', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Rotator', desc: 'Rotate video orientation', icon: 'fas fa-sync', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Speed Changer', desc: 'Change video playback speed', icon: 'fas fa-tachometer-alt', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Watermark Adder', desc: 'Add watermarks to videos', icon: 'fas fa-tint', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Subtitle Adder', desc: 'Add subtitles to videos', icon: 'fas fa-closed-captioning', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Resolution Changer', desc: 'Change video resolution', icon: 'fas fa-expand-arrows-alt', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video to WebM Converter', desc: 'Convert videos to WebM format', icon: 'fas fa-file-video', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video to MP3 Converter', desc: 'Convert videos to MP3 audio', icon: 'fas fa-file-audio', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Thumbnail Generator', desc: 'Create video thumbnails', icon: 'fas fa-image', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Format Converter', desc: 'Convert between video formats', icon: 'fas fa-exchange-alt', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Stabilizer', desc: 'Stabilize shaky videos', icon: 'fas fa-camera', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Editor', desc: 'Edit videos online', icon: 'fas fa-edit', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Screen Recorder', desc: 'Record your screen', icon: 'fas fa-desktop', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Reverse', desc: 'Reverse video playback', icon: 'fas fa-backward', category: 'video', color: 'var(--tool-video)' },
+                { name: 'Video Frame Extractor', desc: 'Extract frames from videos', icon: 'fas fa-images', category: 'video', color: 'var(--tool-video)' },
+
+                // Converters (20)
+                { name: 'Currency Converter', desc: 'Convert between currencies', icon: 'fas fa-money-bill-wave', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Unit Converter', desc: 'Convert measurement units', icon: 'fas fa-ruler-combined', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Time Zone Converter', desc: 'Convert between time zones', icon: 'fas fa-globe-americas', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Temperature Converter', desc: 'Convert temperature units', icon: 'fas fa-thermometer-half', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Number Base Converter', desc: 'Convert between number bases', icon: 'fas fa-calculator', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Color Converter', desc: 'Convert between color formats', icon: 'fas fa-palette', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'File Size Converter', desc: 'Convert file size units', icon: 'fas fa-file', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Weight Converter', desc: 'Convert weight units', icon: 'fas fa-weight', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Length Converter', desc: 'Convert length units', icon: 'fas fa-ruler', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Volume Converter', desc: 'Convert volume units', icon: 'fas fa-flask', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Area Converter', desc: 'Convert area units', icon: 'fas fa-vector-square', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Speed Converter', desc: 'Convert speed units', icon: 'fas fa-tachometer-alt', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Pressure Converter', desc: 'Convert pressure units', icon: 'fas fa-wind', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Energy Converter', desc: 'Convert energy units', icon: 'fas fa-bolt', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Power Converter', desc: 'Convert power units', icon: 'fas fa-plug', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Data Transfer Converter', desc: 'Convert data transfer rates', icon: 'fas fa-exchange-alt', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Angle Converter', desc: 'Convert angle units', icon: 'fas fa-drafting-compass', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Frequency Converter', desc: 'Convert frequency units', icon: 'fas fa-wave-square', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Storage Converter', desc: 'Convert digital storage units', icon: 'fas fa-hdd', category: 'converter', color: 'var(--tool-converter)' },
+                { name: 'Fuel Economy Converter', desc: 'Convert fuel economy units', icon: 'fas fa-gas-pump', category: 'converter', color: 'var(--tool-converter)' }
             ];
 
             // DOM Elements
@@ -896,6 +1050,7 @@
                     toolCard.className = 'tool-card';
                     toolCard.style.setProperty('--tool-color', tool.color);
                     toolCard.innerHTML = `
+                        <div class="tool-badge">${tool.category.charAt(0).toUpperCase() + tool.category.slice(1)}</div>
                         <h3><i class="${tool.icon}"></i> ${tool.name}</h3>
                         <p>${tool.desc}</p>
                         <button class="btn use-tool-btn" data-tool="${tool.name}">
