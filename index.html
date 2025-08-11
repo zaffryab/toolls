@@ -1,187 +1,1205 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ToolHub — All-in-One Online Tools (TinyWow style)</title>
-  <meta name="description" content="Free, fast online tools for images, PDF, video, text, SEO, and developer utilities. Mobile-first, SEO friendly, and high-performance." />
-  <meta name="keywords" content="online tools, image converter, pdf tools, seo tools, developer tools, text tools, free tools" />
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
-  <!-- Basic CSS (small, responsive, mobile-first) -->
-  <style>
-    :root{--bg:#0f1724;--card:#0b1220;--muted:#94a3b8;--accent:#06b6d4;--glass:rgba(255,255,255,0.03)}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,#071024 0%,#0b1320 100%);color:#e6eef6;line-height:1.4}
-    header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:16px;max-width:1200px;margin:0 auto}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,#06b6d4,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700}
-    h1{font-size:18px;margin:0}
-    nav{display:flex;gap:8px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px}
-    nav a.cta{background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#041025;font-weight:600}
-    .search-wrap{max-width:1200px;margin:10px auto;padding:12px}
-    .search{display:flex;gap:8px;background:var(--glass);padding:12px;border-radius:10px;align-items:center}
-    .search input{flex:1;padding:10px;border:0;background:transparent;color:inherit;font-size:15px}
-    .grid{max-width:1200px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;min-height:90px;display:flex;flex-direction:column;gap:8px}
-    .card h3{margin:0;font-size:15px}
-    .card p{margin:0;color:var(--muted);font-size:13px}
-    .tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .tool-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:6px 8px;border-radius:8px;color:var(--muted);font-size:13px;text-decoration:none}
-    footer{max-width:1200px;margin:30px auto;padding:12px;color:var(--muted);font-size:13px}
-    /* Responsive */
-    @media (max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
-    @media (max-width:760px){header{padding:12px} .grid{grid-template-columns:repeat(2,1fr)} .logo{width:36px;height:36px} .card{min-height:72px}}
-    @media (max-width:420px){.grid{grid-template-columns:1fr} nav{display:none} .search input{font-size:14px}}
-    /* lightweight skeleton / lazy load placeholder */
-    .skeleton{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.04), rgba(255,255,255,0.02));height:12px;border-radius:6px}
-    .category{font-size:12px;padding:4px 6px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted)}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolHubCenter - All-in-One Online Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #1E1E2F;
+            --text-color: #EAEAEA;
+            --header-bg: #2B2D42;
+            --accent: #FFD700;
+            --card-bg: #3A3D5B;
+            --hover-accent: #E6C200;
+            --dark-text: #1E1E2F;
+            --category-bg: #27293D;
+            
+            /* Multi-color palette */
+            --color-pdf: #FF6B6B;
+            --color-image: #4ECDC4;
+            --color-developer: #45B7D1;
+            --color-text: #FFD166;
+            --color-seo: #9B5DE5;
+            --color-video: #F15BB5;
+            --color-math: #06D6A0;
+            --color-unit: #FF9E6D;
+            --color-security: #118AB2;
+            --color-social: #EF476F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at top left, #2a2a4a, #1a1a2e);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--header-bg);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--hover-accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-text);
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent), #FFAA00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+            font-size: 1.1rem;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--hover-accent));
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-left: 1rem;
+        }
+
+        .auth-btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-btn {
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .login-btn:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .signup-btn {
+            background: linear-gradient(135deg, var(--accent), var(--hover-accent));
+            color: var(--dark-text);
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 1rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 1rem 3rem;
+            background: linear-gradient(135deg, #2B2D42 0%, #1E1E2F 100%);
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent), #FFAA00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+        }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            margin: 1rem auto 3rem;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+        }
+
+        .search-bar {
+            flex: 1;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            color: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.4);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .search-bar::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            padding: 0 1.8rem;
+            background: linear-gradient(135deg, var(--accent), var(--hover-accent));
+            color: var(--dark-text);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .search-btn:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 3rem auto;
+            max-width: 1400px;
+        }
+
+        .category-btn {
+            padding: 0.9rem 1.8rem;
+            background-color: var(--category-bg);
+            color: var(--text-color);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--category-color);
+            transition: width 0.5s ease;
+            z-index: -1;
+        }
+
+        .category-btn:hover::before, .category-btn.active::before {
+            width: 100%;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Category Sections */
+        .category-section {
+            margin: 4rem 0;
+            display: none;
+        }
+
+        .category-section.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .category-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .category-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            padding-bottom: 15px;
+            background: linear-gradient(45deg, var(--category-color), var(--category-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .category-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--category-color), var(--category-light));
+            border-radius: 4px;
+        }
+
+        .category-title i {
+            font-size: 2.5rem;
+            color: var(--category-color);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 50%;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.8rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--tool-color);
+            transition: height 0.4s ease;
+            z-index: -1;
+        }
+
+        .tool-card:hover::before {
+            height: 100%;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: transparent;
+        }
+
+        .tool-card:hover h3,
+        .tool-card:hover p {
+            color: white;
+        }
+
+        .tool-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--tool-color);
+            transition: color 0.4s;
+        }
+
+        .tool-card h3 i {
+            font-size: 1.6rem;
+        }
+
+        .tool-card p {
+            margin-bottom: 1.8rem;
+            flex-grow: 1;
+            font-size: 1.05rem;
+            color: #ccc;
+            transition: color 0.4s;
+            line-height: 1.7;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--tool-color);
+            padding: 0.9rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.4s;
+            border: 2px solid var(--tool-border);
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.05rem;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            background: var(--tool-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            border-color: transparent;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin: 5rem 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            min-width: 230px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent), #FFAA00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--header-bg);
+            padding: 4rem 1rem 2rem;
+            text-align: center;
+            margin-top: 5rem;
+            position: relative;
+            border-top: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            text-align: left;
+            max-width: 1300px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.8rem;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 12px;
+            background: linear-gradient(45deg, var(--accent), #FFAA00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--hover-accent));
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-color);
+            transition: all 0.3s;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--text-color);
+            font-size: 1.3rem;
+            transition: all 0.4s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--dark-text);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .category-nav {
+                gap: 1rem;
+            }
+
+            .category-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .stat-item {
+                min-width: 180px;
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .category-title h2 {
+                font-size: 2rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-item {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <div class="logo">TH</div>
-      <div>
-        <h1>ToolHub — All-in-One Online Tools</h1>
-        <div style="font-size:12px;color:var(--muted)">Free · Fast · Mobile-friendly</div>
-      </div>
-    </div>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/all-tools">All Tools</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <!-- Backend-linked Login / Signup (change these to your real backend endpoints) -->
-      <a class="cta" href="/api/auth/login">Login</a>
-      <a class="cta" href="/api/auth/signup">Sign Up</a>
-    </nav>
-  </header>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo floating">TH</div>
+            <div class="logo-text">toolhubcenter.com</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" data-page="home">Home</a></li>
+                <li><a href="#tools">All Tools</a></li>
+                <li><a href="#" data-page="contact">Contact</a></li>
+                <li><a href="#" data-page="terms">Terms</a></li>
+                <div class="auth-buttons">
+                    <button class="auth-btn login-btn" id="login-btn">Login</button>
+                    <button class="auth-btn signup-btn" id="signup-btn">Sign Up</button>
+                </div>
+            </ul>
+        </nav>
+    </header>
 
-  <section class="search-wrap">
-    <div class="search" role="search">
-      <input id="search" placeholder="Search tools... e.g. 'image', 'pdf', 'seo'" aria-label="Search tools" />
-      <button id="clear" title="Clear" style="background:transparent;border:0;color:var(--muted)">✖</button>
-    </div>
-  </section>
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Your Ultimate Multi-Color Tool Collection</h1>
+                <p>Access 150+ powerful tools across multiple categories with vibrant color coding. Free, fast, and easy to use.</p>
+                
+                <div class="search-container">
+                    <input type="text" id="search-input" class="search-bar" placeholder="Search tools by name or category...">
+                    <button id="search-btn" class="search-btn"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <div id="search-results"></div>
+            </div>
+        </section>
 
-  <main>
-    <div style="max-width:1200px;margin:0 auto;padding:0 12px;color:var(--muted);font-size:13px">Categories: <span class="category">PDF</span> <span class="category">Image</span> <span class="category">Text</span> <span class="category">Developer</span> <span class="category">SEO</span> <span class="category">Misc</span></div>
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="stat-item floating">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Online Tools</div>
+            </div>
+            <div class="stat-item floating" style="animation-delay: 0.2s">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free Tools</div>
+            </div>
+            <div class="stat-item floating" style="animation-delay: 0.4s">
+                <div class="stat-number">750K+</div>
+                <div class="stat-label">Monthly Users</div>
+            </div>
+            <div class="stat-item floating" style="animation-delay: 0.6s">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Available</div>
+            </div>
+        </section>
 
-    <section class="grid" id="cards"></section>
+        <!-- Category Navigation -->
+        <div class="container">
+            <div class="category-nav">
+                <button class="category-btn active" data-category="all" style="--category-color: #FFD700;">
+                    <i class="fas fa-th"></i> All Tools
+                </button>
+                <button class="category-btn" data-category="pdf" style="--category-color: var(--color-pdf);">
+                    <i class="fas fa-file-pdf"></i> PDF Tools
+                </button>
+                <button class="category-btn" data-category="image" style="--category-color: var(--color-image);">
+                    <i class="fas fa-image"></i> Image Tools
+                </button>
+                <button class="category-btn" data-category="developer" style="--category-color: var(--color-developer);">
+                    <i class="fas fa-code"></i> Developer Tools
+                </button>
+                <button class="category-btn" data-category="text" style="--category-color: var(--color-text);">
+                    <i class="fas fa-font"></i> Text Tools
+                </button>
+                <button class="category-btn" data-category="seo" style="--category-color: var(--color-seo);">
+                    <i class="fas fa-chart-line"></i> SEO Tools
+                </button>
+                <button class="category-btn" data-category="video" style="--category-color: var(--color-video);">
+                    <i class="fas fa-video"></i> Video Tools
+                </button>
+                <button class="category-btn" data-category="math" style="--category-color: var(--color-math);">
+                    <i class="fas fa-calculator"></i> Math Tools
+                </button>
+            </div>
+        </div>
 
-  </main>
+        <!-- Tools Container -->
+        <div class="container">
+            <!-- All Tools Section -->
+            <section id="all-tools" class="category-section active">
+                <div class="category-title">
+                    <i class="fas fa-th"></i>
+                    <h2>All Tools</h2>
+                </div>
+                <div class="tools-grid" id="all-tools-grid">
+                    <!-- Tools will be dynamically loaded here -->
+                </div>
+            </section>
 
-  <footer>
-    © <span id="year"></span> toolhubcenter.com · <a href="/privacy" style="color:var(--muted)">Privacy</a> · <a href="/terms" style="color:var(--muted)">Terms</a>
-  </footer>
+            <!-- Category Sections (initially hidden) -->
+            <section id="pdf-tools" class="category-section">
+                <div class="category-title">
+                    <i class="fas fa-file-pdf"></i>
+                    <h2 style="--category-color: var(--color-pdf); --category-light: #FF8E8E;">PDF Tools</h2>
+                </div>
+                <div class="tools-grid" id="pdf-tools-grid">
+                    <!-- PDF Tools will be dynamically loaded here -->
+                </div>
+            </section>
 
-  <script>
-    //----- Tool dataset (you can expand/change urls) -----
-    const tools = [
-      // Image tools
-      {name:'Image to PNG',cat:'Image',slug:'Image-to-PNG-Converter',desc:'Convert images to PNG',url:'/api/html/Image-to-PNG-Converter.html'},
-      {name:'Image to JPG',cat:'Image',slug:'Image-to-JPG-Converter',desc:'Convert images to JPG',url:'/api/html/Image-to-JPG-Converter.html'},
-      {name:'Image Resizer',cat:'Image',slug:'Image-Resizer',desc:'Resize images quickly',url:'/api/html/Image-Resizer.html'},
-      {name:'Image Compressor',cat:'Image',slug:'Image-Compressor',desc:'Optimize images for web',url:'http://127.0.0.1:30030/_api/html/Image-Compressor.html'},
-      {name:'Image Cropper',cat:'Image',slug:'Image-Crop',desc:'Crop & resize images',url:'http://127.0.0.1:30030/_api/html/Image-Crop.html'},
-      {name:'Convert WebP to PNG',cat:'Image',slug:'WebP-to-PNG',desc:'Convert WebP images',url:'/api/html/WebP-to-PNG.html'},
-      {name:'GIF Maker',cat:'Image',slug:'GIF-Maker',desc:'Create GIFs from images',url:'/api/html/GIF-Maker.html'},
-      {name:'Image to Base64',cat:'Image',slug:'Image-to-Base64',desc:'Encode images to Base64',url:'/api/html/Image-to-Base64.html'},
-      // PDF tools
-      {name:'PDF to JPG',cat:'PDF',slug:'PDF-to-JPG',desc:'Extract images from PDF',url:'/api/html/PDF-to-JPG.html'},
-      {name:'PDF to Word',cat:'PDF',slug:'PDF-to-Word',desc:'Convert PDF to editable Word',url:'/api/html/PDF-to-Word.html'},
-      {name:'Merge PDF',cat:'PDF',slug:'Merge-PDF',desc:'Combine multiple PDFs',url:'/api/html/Merge-PDF.html'},
-      {name:'Split PDF',cat:'PDF',slug:'Split-PDF',desc:'Split PDFs into pages',url:'/api/html/Split-PDF.html'},
-      {name:'Compress PDF',cat:'PDF',slug:'Compress-PDF',desc:'Reduce PDF size',url:'/api/html/Compress-PDF.html'},
-      {name:'PDF to PNG',cat:'PDF',slug:'PDF-to-PNG',desc:'Convert PDF pages to PNGs',url:'/api/html/PDF-to-PNG.html'},
-      // Text tools
-      {name:'Word Counter',cat:'Text',slug:'Word-Counter',desc:'Count words & characters',url:'/api/html/Word-Counter.html'},
-      {name:'Character Counter',cat:'Text',slug:'Character-Counter',desc:'Count characters',url:'/api/html/Character-Counter.html'},
-      {name:'Case Converter',cat:'Text',slug:'Case-Converter',desc:'UPPER / lower / Title Case',url:'/api/html/Case-Converter.html'},
-      {name:'Plagiarism Checker',cat:'Text',slug:'Plagiarism-Checker',desc:'Check for duplicate text',url:'/api/html/Plagiarism-Checker.html'},
-      {name:'Grammar Checker',cat:'Text',slug:'Grammar-Checker',desc:'Grammar & spelling suggestions',url:'/api/html/Grammar-Checker.html'},
-      {name:'Text-to-Speech',cat:'Text',slug:'Text-to-Speech',desc:'Generate audio from text',url:'/api/html/Text-to-Speech.html'},
-      {name:'Speech-to-Text',cat:'Text',slug:'Speech-to-Text',desc:'Transcribe audio',url:'/api/html/Speech-to-Text.html'},
-      // Developer tools
-      {name:'JSON Formatter',cat:'Developer',slug:'JSON-Formatter',desc:'Pretty-print JSON',url:'/api/html/JSON-Formatter.html'},
-      {name:'HTML to Markdown',cat:'Developer',slug:'HTML-to-Markdown',desc:'Convert HTML to MD',url:'/api/html/HTML-to-Markdown.html'},
-      {name:'CSS Minifier',cat:'Developer',slug:'CSS-Minifier',desc:'Minify CSS',url:'/api/html/CSS-Minifier.html'},
-      {name:'JS Minifier',cat:'Developer',slug:'JavaScript-Minifier',desc:'Minify JavaScript',url:'/api/html/JavaScript-Minifier.html'},
-      {name:'SQL Formatter',cat:'Developer',slug:'SQL-Formatter',desc:'Format SQL queries',url:'/api/html/SQL-Formatter.html'},
-      {name:'Color Picker',cat:'Developer',slug:'Color-Picker',desc:'Pick & convert color codes',url:'/api/html/Color-Picker.html'},
-      // SEO tools
-      {name:'Meta Tag Generator',cat:'SEO',slug:'Meta-Tag-Generator',desc:'Generate meta tags for pages',url:'/api/html/Meta-Tag-Generator.html'},
-      {name:'Sitemap Generator',cat:'SEO',slug:'Sitemap-Generator',desc:'Create XML sitemaps',url:'/api/html/Sitemap-Generator.html'},
-      {name:'Robots.txt Generator',cat:'SEO',slug:'Robots-txt-Generator',desc:'Create robots.txt',url:'/api/html/Robots-txt-Generator.html'},
-      {name:'Page Speed Checker',cat:'SEO',slug:'Page-Speed-Checker',desc:'Test page speed',url:'/api/html/Page-Speed-Checker.html'},
-      {name:'Mobile-Friendly Test',cat:'SEO',slug:'Mobile-Friendly-Test',desc:'Check mobile usability',url:'/api/html/Mobile-Friendly-Test.html'},
-      {name:'Backlink Checker',cat:'SEO',slug:'Backlink-Checker',desc:'Analyze backlinks',url:'/api/html/Backlink-Checker.html'},
-      // Social / Misc
-      {name:'QR Code Generator',cat:'Misc',slug:'QR-Code-Generator',desc:'Create QR codes',url:'/api/html/QR-Code-Generator.html'},
-      {name:'Meme Generator',cat:'Misc',slug:'Meme-Generator',desc:'Create shareable memes',url:'/api/html/Meme-Generator.html'},
-      {name:'Resume Builder',cat:'Misc',slug:'Resume-Builder',desc:'Create professional resumes',url:'/api/html/Resume-Builder.html'},
-      {name:'Invoice Generator',cat:'Misc',slug:'Invoice-Generator',desc:'Generate invoices',url:'/api/html/Invoice-Generator.html'},
-      // The list below programmatically expands many more tools based on common names
-    ];
+            <section id="image-tools" class="category-section">
+                <div class="category-title">
+                    <i class="fas fa-image"></i>
+                    <h2 style="--category-color: var(--color-image); --category-light: #7AE0D9;">Image Tools</h2>
+                </div>
+                <div class="tools-grid" id="image-tools-grid">
+                    <!-- Image Tools will be dynamically loaded here -->
+                </div>
+            </section>
 
-    // programmatically add many more tools to reach a large catalogue (you can edit this array server-side)
-    const extraNames = [
-      /* Image */ 'Convert Image to WebP','PNG to JPG','JPG to PNG','Image Rotate','Image Flip','Remove Background','Picture to SVG','Batch Image Rename',
-      /* PDF */ 'Protect PDF','Unlock PDF','PDF Watermark','OCR PDF','PDF Metadata Editor','PDF Repair','HTML to PDF','URL to PDF',
-      /* Text */ 'Fancy Text Generator','URL Encoder','URL Decoder','Random Text Generator','Text Diff Checker','Sentence Splitter','Token Counter',
-      /* Dev */ 'Base64 Encode','Base64 Decode','MD5 Generator','SHA256 Generator','Password Generator','HTACCESS Generator','XML Formatter','CSV to JSON',
-      /* SEO */ 'Keyword Density Checker','Domain Authority Checker','Google Index Checker','XML Sitemap Validator','Rich Snippet Tester',
-      /* Misc */ 'Flip a Coin','Random Number Generator','Dice Roller','Wedding Invitation Creator','E-book Creator','Name to Numerology','Leap Year Checker'
-    ];
+            <section id="developer-tools" class="category-section">
+                <div class="category-title">
+                    <i class="fas fa-code"></i>
+                    <h2 style="--category-color: var(--color-developer); --category-light: #6AC9E2;">Developer Tools</h2>
+                </div>
+                <div class="tools-grid" id="developer-tools-grid">
+                    <!-- Developer Tools will be dynamically loaded here -->
+                </div>
+            </section>
 
-    extraNames.forEach((n,i)=>{
-      const cat = /PDF|PDF/i.test(n)?'PDF':/Image|PNG|JPG|WebP|Picture|SVG|Remove Background/i.test(n)?'Image':/Keyword|SEO|Domain Authority|Google|XML/i.test(n)?'SEO':/JSON|Base64|MD5|SHA|Password|CSV|XML|HTACCESS/i.test(n)?'Developer':'Misc';
-      tools.push({name:n,cat:cat,slug:n.replace(/[^a-z0-9]+/ig,'-'),desc:n+' tool',url:'/api/html/'+n.replace(/[^a-z0-9]+/ig,'-')+'.html'});
-    });
+            <section id="text-tools" class="category-section">
+                <div class="category-title">
+                    <i class="fas fa-font"></i>
+                    <h2 style="--category-color: var(--color-text); --category-light: #FFE08F;">Text Tools</h2>
+                </div>
+                <div class="tools-grid" id="text-tools-grid">
+                    <!-- Text Tools will be dynamically loaded here -->
+                </div>
+            </section>
 
-    // Render cards grouped by category
-    const cards = document.getElementById('cards');
-    function render(filter=''){
-      cards.innerHTML='';
-      const grouped = {};
-      tools.forEach(t=>{ if(!filter || (t.name.toLowerCase().includes(filter)||t.cat.toLowerCase().includes(filter))) {
-        grouped[t.cat] = grouped[t.cat] || []; grouped[t.cat].push(t);
-      }});
-      Object.keys(grouped).sort().forEach(cat=>{
-        const col = document.createElement('div'); col.className='card';
-        const h = document.createElement('h3'); h.textContent = cat+' Tools';
-        const p = document.createElement('p'); p.textContent = grouped[cat].length+' tools';
-        const wrap = document.createElement('div'); wrap.className='tools';
-        grouped[cat].slice(0,12).forEach(tool=>{
-          const a = document.createElement('a'); a.className='tool-btn'; a.href = tool.url; a.textContent = tool.name; a.setAttribute('title',tool.desc);
-          // open in new tab for external/backends
-          if(/^https?:\/\//.test(tool.url)) a.target='_blank';
-          wrap.appendChild(a);
+            <section id="seo-tools" class="category-section">
+                <div class="category-title">
+                    <i class="fas fa-chart-line"></i>
+                    <h2 style="--category-color: var(--color-seo); --category-light: #B68AEE;">SEO Tools</h2>
+                </div>
+                <div class="tools-grid" id="seo-tools-grid">
+                    <!-- SEO Tools will be dynamically loaded here -->
+                </div>
+            </section>
+
+            <section id="video-tools" class="category-section">
+                <div class="category-title">
+                    <i class="fas fa-video"></i>
+                    <h2 style="--category-color: var(--color-video); --category-light: #F48DC6;">Video Tools</h2>
+                </div>
+                <div class="tools-grid" id="video-tools-grid">
+                    <!-- Video Tools will be dynamically loaded here -->
+                </div>
+            </section>
+
+            <section id="math-tools" class="category-section">
+                <div class="category-title">
+                    <i class="fas fa-calculator"></i>
+                    <h2 style="--category-color: var(--color-math); --category-light: #3DF0C9;">Math Tools</h2>
+                </div>
+                <div class="tools-grid" id="math-tools-grid">
+                    <!-- Math Tools will be dynamically loaded here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#tools"><i class="fas fa-tools"></i> All Tools</a></li>
+                        <li><a href="#" data-page="privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                        <li><a href="#" data-page="terms"><i class="fas fa-file-contract"></i> Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>toolhubcenter.com provides free, easy-to-use online tools to help with your daily tasks. Our mission is to simplify your digital life with our multi-color categorized tools.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="mailto:contact@toolhubcenter.com"><i class="fas fa-envelope"></i> contact@toolhubcenter.com</a></li>
+                        <li><a href="tel:+15551234567"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Tech Street, San Francisco</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 toolhubcenter.com. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tool data organized by categories with color assignments
+            const toolsByCategory = {
+                pdf: [
+                    { name: 'PDF to Word Converter', desc: 'Convert PDF documents to editable Word files', icon: 'fas fa-file-word', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' },
+                    { name: 'PDF Compressor', desc: 'Reduce PDF file size without quality loss', icon: 'fas fa-compress', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' },
+                    { name: 'PDF Merger', desc: 'Combine multiple PDF files into one', icon: 'fas fa-file-medical', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' },
+                    { name: 'PDF Splitter', desc: 'Split PDF documents into separate pages', icon: 'fas fa-cut', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' },
+                    { name: 'PDF to Excel Converter', desc: 'Convert PDF tables to Excel spreadsheets', icon: 'fas fa-file-excel', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' },
+                    { name: 'PDF Editor', desc: 'Edit PDF text, images, and pages online', icon: 'fas fa-edit', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' },
+                    { name: 'PDF Password Remover', desc: 'Unlock password-protected PDF files', icon: 'fas fa-unlock', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' },
+                    { name: 'PDF Watermark', desc: 'Add watermarks to PDF documents', icon: 'fas fa-water', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' },
+                    { name: 'PDF to PPT Converter', desc: 'Convert PDF files to PowerPoint', icon: 'fas fa-file-powerpoint', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' },
+                    { name: 'PDF OCR', desc: 'Extract text from scanned PDFs', icon: 'fas fa-text-height', color: 'var(--color-pdf)', border: 'rgba(255, 107, 107, 0.3)' }
+                ],
+                image: [
+                    { name: 'Image to PNG Converter', desc: 'Convert images to PNG format', icon: 'fas fa-file-image', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' },
+                    { name: 'Image to JPG Converter', desc: 'Convert images to JPG format', icon: 'fas fa-file-image', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' },
+                    { name: 'Image Resizer', desc: 'Resize images to specific dimensions', icon: 'fas fa-expand', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' },
+                    { name: 'Image Compressor', desc: 'Reduce image file size', icon: 'fas fa-compress', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' },
+                    { name: 'Image Cropper', desc: 'Crop images to remove unwanted areas', icon: 'fas fa-crop', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' },
+                    { name: 'Image to Base64', desc: 'Convert images to Base64 strings', icon: 'fas fa-code', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' },
+                    { name: 'WebP to PNG', desc: 'Convert WebP images to PNG', icon: 'fas fa-exchange-alt', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' },
+                    { name: 'GIF Maker', desc: 'Create animated GIFs from images', icon: 'fas fa-film', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' },
+                    { name: 'QR Code Generator', desc: 'Generate QR codes from text or URLs', icon: 'fas fa-qrcode', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' },
+                    { name: 'Image Color Picker', desc: 'Extract color values from images', icon: 'fas fa-eye-dropper', color: 'var(--color-image)', border: 'rgba(78, 205, 196, 0.3)' }
+                ],
+                developer: [
+                    { name: 'JSON Formatter', desc: 'Format and validate JSON data', icon: 'fas fa-brackets-curly', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' },
+                    { name: 'HTML to Markdown', desc: 'Convert HTML to Markdown format', icon: 'fas fa-file-code', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' },
+                    { name: 'CSS Minifier', desc: 'Minify CSS code to reduce size', icon: 'fas fa-css3', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' },
+                    { name: 'JavaScript Minifier', desc: 'Minify JavaScript for production', icon: 'fas fa-js', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' },
+                    { name: 'SQL Formatter', desc: 'Format SQL queries for readability', icon: 'fas fa-database', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' },
+                    { name: 'HTACCESS Generator', desc: 'Generate redirect rules for Apache', icon: 'fas fa-directions', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' },
+                    { name: 'Markdown to HTML', desc: 'Convert Markdown text to HTML', icon: 'fas fa-file-code', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' },
+                    { name: 'Color Code Picker', desc: 'Pick and convert color values', icon: 'fas fa-palette', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' },
+                    { name: 'Base64 Encoder', desc: 'Encode and decode Base64 strings', icon: 'fas fa-lock', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' },
+                    { name: 'IP Address Lookup', desc: 'Get information about IP addresses', icon: 'fas fa-map-marker-alt', color: 'var(--color-developer)', border: 'rgba(69, 183, 209, 0.3)' }
+                ],
+                text: [
+                    { name: 'Word Counter', desc: 'Count words, characters, and sentences', icon: 'fas fa-font', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' },
+                    { name: 'Character Counter', desc: 'Count characters in text', icon: 'fas fa-text-width', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' },
+                    { name: 'Case Converter', desc: 'Convert text case styles', icon: 'fas fa-text-height', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' },
+                    { name: 'Plagiarism Checker', desc: 'Check text for plagiarism', icon: 'fas fa-search', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' },
+                    { name: 'Grammar Checker', desc: 'Check text for grammar errors', icon: 'fas fa-spell-check', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' },
+                    { name: 'Text-to-Speech', desc: 'Convert text to natural speech', icon: 'fas fa-volume-up', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' },
+                    { name: 'URL Encoder', desc: 'Encode and decode URLs', icon: 'fas fa-percent', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' },
+                    { name: 'Fancy Text Generator', desc: 'Create stylish text', icon: 'fas fa-paint-brush', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' },
+                    { name: 'Random Text Generator', desc: 'Generate placeholder text', icon: 'fas fa-random', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' },
+                    { name: 'Text Summarizer', desc: 'Summarize long texts', icon: 'fas fa-file-contract', color: 'var(--color-text)', border: 'rgba(255, 209, 102, 0.3)' }
+                ],
+                seo: [
+                    { name: 'Meta Tag Generator', desc: 'Generate optimized meta tags', icon: 'fas fa-tags', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' },
+                    { name: 'Keyword Density Checker', desc: 'Analyze keyword density', icon: 'fas fa-chart-pie', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' },
+                    { name: 'Sitemap Generator', desc: 'Generate XML sitemaps', icon: 'fas fa-sitemap', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' },
+                    { name: 'Robots.txt Generator', desc: 'Create robots.txt files', icon: 'fas fa-robot', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' },
+                    { name: 'Google Index Checker', desc: 'Check page indexing status', icon: 'fas fa-search', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' },
+                    { name: 'Domain Authority Checker', desc: 'Check domain authority metrics', icon: 'fas fa-chart-line', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' },
+                    { name: 'Backlink Checker', desc: 'Analyze website backlinks', icon: 'fas fa-link', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' },
+                    { name: 'Page Speed Checker', desc: 'Test website loading speed', icon: 'fas fa-tachometer-alt', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' },
+                    { name: 'Mobile-Friendly Test', desc: 'Check mobile compatibility', icon: 'fas fa-mobile-alt', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' },
+                    { name: 'Broken Link Checker', desc: 'Find broken links', icon: 'fas fa-unlink', color: 'var(--color-seo)', border: 'rgba(155, 93, 229, 0.3)' }
+                ],
+                video: [
+                    { name: 'Video Converter', desc: 'Convert between video formats', icon: 'fas fa-file-video', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' },
+                    { name: 'Video Compressor', desc: 'Reduce video file size', icon: 'fas fa-compress', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' },
+                    { name: 'Video Trimmer', desc: 'Trim and cut videos', icon: 'fas fa-cut', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' },
+                    { name: 'Video Merger', desc: 'Combine multiple video clips', icon: 'fas fa-film', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' },
+                    { name: 'YouTube Thumbnail Downloader', desc: 'Download YouTube thumbnails', icon: 'fab fa-youtube', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' },
+                    { name: 'Video to GIF Converter', desc: 'Convert videos to animated GIFs', icon: 'fas fa-photo-video', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' },
+                    { name: 'Video Rotator', desc: 'Rotate videos to correct orientation', icon: 'fas fa-sync', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' },
+                    { name: 'Video Watermark', desc: 'Add watermarks to videos', icon: 'fas fa-water', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' },
+                    { name: 'Video Speed Changer', desc: 'Change video playback speed', icon: 'fas fa-tachometer-alt', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' },
+                    { name: 'Video Resolution Changer', desc: 'Change video resolution', icon: 'fas fa-expand', color: 'var(--color-video)', border: 'rgba(241, 91, 181, 0.3)' }
+                ],
+                math: [
+                    { name: 'Age Calculator', desc: 'Calculate exact age in years/months/days', icon: 'fas fa-birthday-cake', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' },
+                    { name: 'EMI Calculator', desc: 'Calculate monthly loan installments', icon: 'fas fa-calculator', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' },
+                    { name: 'SIP Calculator', desc: 'Plan investment returns', icon: 'fas fa-chart-line', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' },
+                    { name: 'Percentage Calculator', desc: 'Calculate percentages', icon: 'fas fa-percentage', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' },
+                    { name: 'BMI Calculator', desc: 'Calculate body mass index', icon: 'fas fa-weight', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' },
+                    { name: 'Currency Converter', desc: 'Convert between currencies', icon: 'fas fa-money-bill-wave', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' },
+                    { name: 'Tip Calculator', desc: 'Calculate tips and splits', icon: 'fas fa-utensils', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' },
+                    { name: 'Discount Calculator', desc: 'Calculate discounts and savings', icon: 'fas fa-tag', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' },
+                    { name: 'Unit Converters', desc: 'Convert various units of measurement', icon: 'fas fa-ruler-combined', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' },
+                    { name: 'Scientific Calculator', desc: 'Advanced math calculations', icon: 'fas fa-square-root-alt', color: 'var(--color-math)', border: 'rgba(6, 214, 160, 0.3)' }
+                ]
+            };
+
+            // Initialize the page
+            initPage();
+
+            // Function to initialize the page
+            function initPage() {
+                // Load all tools
+                renderTools();
+                
+                // Set up category buttons
+                document.querySelectorAll('.category-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Remove active class from all buttons
+                        document.querySelectorAll('.category-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        
+                        // Add active class to clicked button
+                        this.classList.add('active');
+                        
+                        const category = this.getAttribute('data-category');
+                        
+                        // Hide all category sections
+                        document.querySelectorAll('.category-section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        
+                        // Show selected category section
+                        if (category === 'all') {
+                            document.getElementById('all-tools').classList.add('active');
+                        } else {
+                            document.getElementById(`${category}-tools`).classList.add('active');
+                        }
+                    });
+                });
+                
+                // Initialize search functionality
+                initSearch();
+                
+                // Initialize tool buttons
+                document.querySelectorAll('.use-tool-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const toolName = this.getAttribute('data-tool');
+                        alert(`The "${toolName}" tool would open in a real implementation. Thanks for checking out toolhubcenter.com!`);
+                    });
+                });
+            }
+
+            // Function to render all tools in their respective categories
+            function renderTools() {
+                // Render all tools in the main grid
+                const allToolsGrid = document.getElementById('all-tools-grid');
+                allToolsGrid.innerHTML = '';
+                
+                // Create an array of all tools
+                let allTools = [];
+                for (const category in toolsByCategory) {
+                    allTools = [...allTools, ...toolsByCategory[category]];
+                }
+                
+                // Render all tools
+                allTools.forEach(tool => {
+                    const toolCard = createToolCard(tool);
+                    allToolsGrid.appendChild(toolCard);
+                });
+                
+                // Render category-specific tools
+                for (const category in toolsByCategory) {
+                    const categoryGrid = document.getElementById(`${category}-tools-grid`);
+                    if (categoryGrid) {
+                        categoryGrid.innerHTML = '';
+                        toolsByCategory[category].forEach(tool => {
+                            const toolCard = createToolCard(tool);
+                            categoryGrid.appendChild(toolCard);
+                        });
+                    }
+                }
+            }
+
+            // Function to create a tool card
+            function createToolCard(tool) {
+                const card = document.createElement('div');
+                card.className = 'tool-card';
+                card.style.setProperty('--tool-color', tool.color);
+                card.style.setProperty('--tool-border', tool.border);
+                card.innerHTML = `
+                    <h3><i class="${tool.icon}"></i> ${tool.name}</h3>
+                    <p>${tool.desc}</p>
+                    <button class="btn use-tool-btn" data-tool="${tool.name}">
+                        <i class="fas fa-wrench"></i> Use Tool
+                    </button>
+                `;
+                return card;
+            }
+
+            // Initialize search functionality
+            function initSearch() {
+                const searchInput = document.getElementById('search-input');
+                const searchBtn = document.getElementById('search-btn');
+                const searchResults = document.getElementById('search-results');
+                
+                if (searchInput && searchBtn && searchResults) {
+                    // Perform search on button click or Enter key
+                    const performSearch = () => {
+                        const query = searchInput.value.toLowerCase().trim();
+                        searchResults.innerHTML = '';
+                        
+                        if (query === '') {
+                            searchResults.style.display = 'none';
+                            return;
+                        }
+                        
+                        // Create an array of all tools
+                        let allTools = [];
+                        for (const category in toolsByCategory) {
+                            allTools = [...allTools, ...toolsByCategory[category]];
+                        }
+                        
+                        const matches = allTools.filter(tool => {
+                            return tool.name.toLowerCase().includes(query) || 
+                                   tool.desc.toLowerCase().includes(query) ||
+                                   tool.icon.toLowerCase().includes(query);
+                        });
+                        
+                        if (matches.length === 0) {
+                            searchResults.innerHTML = '<p class="tool-card" style="text-align:center;padding:2rem;">No tools found matching your search. Try different keywords.</p>';
+                            searchResults.style.display = 'block';
+                        } else {
+                            matches.forEach(tool => {
+                                const card = document.createElement('div');
+                                card.className = 'tool-card';
+                                card.style.setProperty('--tool-color', tool.color);
+                                card.style.setProperty('--tool-border', tool.border);
+                                card.innerHTML = `
+                                    <h3><i class="${tool.icon}"></i> ${tool.name}</h3>
+                                    <p>${tool.desc}</p>
+                                    <button class="btn use-tool-btn" data-tool="${tool.name}">
+                                        <i class="fas fa-wrench"></i> Use Tool
+                                    </button>
+                                `;
+                                searchResults.appendChild(card);
+                            });
+                            
+                            searchResults.style.display = 'grid';
+                            searchResults.classList.add('tools-grid');
+                            
+                            // Attach event listeners to the new tool buttons
+                            document.querySelectorAll('.use-tool-btn').forEach(btn => {
+                                btn.addEventListener('click', function() {
+                                    const toolName = this.getAttribute('data-tool');
+                                    alert(`The "${toolName}" tool would open in a real implementation. Thanks for checking out toolhubcenter.com!`);
+                                });
+                            });
+                        }
+                    };
+                    
+                    searchBtn.addEventListener('click', performSearch);
+                    searchInput.addEventListener('keyup', function(e) {
+                        if (e.key === 'Enter') {
+                            performSearch();
+                        }
+                    });
+                }
+            }
+
+            // Handle navigation
+            document.querySelectorAll('[data-page]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    loadPage(page);
+                });
+            });
+
+            // Login/Signup functionality
+            document.getElementById('login-btn').addEventListener('click', showLoginModal);
+            document.getElementById('signup-btn').addEventListener('click', showSignupModal);
         });
-        const more = document.createElement('div'); more.style.marginTop='6px'; more.style.fontSize='12px'; more.style.color='var(--muted)'; more.textContent = 'Showing '+Math.min(grouped[cat].length,12)+' of '+grouped[cat].length;
-        col.appendChild(h); col.appendChild(p); col.appendChild(wrap); col.appendChild(more);
-        cards.appendChild(col);
-      });
-    }
 
-    // initial render
-    render();
+        // Show login modal
+        function showLoginModal() {
+            alert('Login modal would appear in a real implementation. Thanks for checking out toolhubcenter.com!');
+        }
 
-    // search
-    const input = document.getElementById('search');
-    input.addEventListener('input', e=> render(e.target.value.trim().toLowerCase()));
-    document.getElementById('clear').addEventListener('click', ()=>{input.value=''; render();});
-
-    // small SEO-friendly bits
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Accessibility: keyboard focus styles
-    document.addEventListener('keyup', e=>{ if(e.key==='/' && document.activeElement !== input){ e.preventDefault(); input.focus(); }});
-
-    // Performance tips: defer non-critical scripts, use server-side pagination for large tool lists
-  </script>
-
+        // Show signup modal
+        function showSignupModal() {
+            alert('Signup modal would appear in a real implementation. Thanks for checking out toolhubcenter.com!');
+        }
+    </script>
 </body>
 </html>
 
