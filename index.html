@@ -865,27 +865,28 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Tool data - 120+ tools
             const tools = [
-                // PDF Tools (20)
-                { name: 'PDF to Word Converter', desc: 'Convert PDF documents to editable Word files', icon: 'fas fa-file-word', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Compressor', desc: 'Reduce PDF file size without quality loss', icon: 'fas fa-compress', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Merger', desc: 'Combine multiple PDF files into one', icon: 'fas fa-file-medical', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Splitter', desc: 'Split PDF documents into separate pages', icon: 'fas fa-cut', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF to Excel Converter', desc: 'Convert PDF tables to Excel spreadsheets', icon: 'fas fa-file-excel', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Editor', desc: 'Edit PDF text and images directly in browser', icon: 'fas fa-edit', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Password Remover', desc: 'Unlock password-protected PDF files', icon: 'fas fa-unlock', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF to PowerPoint', desc: 'Convert PDF to editable PowerPoint presentations', icon: 'fas fa-file-powerpoint', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Rotator', desc: 'Rotate PDF pages to correct orientation', icon: 'fas fa-sync', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Metadata Editor', desc: 'Edit PDF document information', icon: 'fas fa-info-circle', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF to Text', desc: 'Extract text content from PDF files', icon: 'fas fa-file-alt', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Watermark Adder', desc: 'Add watermarks to PDF documents', icon: 'fas fa-tint', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Page Numberer', desc: 'Add page numbers to PDF documents', icon: 'fas fa-hashtag', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Redaction', desc: 'Permanently remove sensitive content', icon: 'fas fa-eye-slash', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Form Filler', desc: 'Fill PDF forms electronically', icon: 'fas fa-keyboard', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Signature Adder', desc: 'Add digital signatures to PDFs', icon: 'fas fa-signature', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF OCR', desc: 'Convert scanned PDFs to searchable text', icon: 'fas fa-search', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF to HTML', desc: 'Convert PDF documents to HTML format', icon: 'fab fa-html5', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Bookmark Creator', desc: 'Add bookmarks to PDF documents', icon: 'fas fa-bookmark', category: 'pdf', color: 'var(--tool-pdf)' },
-                { name: 'PDF Quality Analyzer', desc: 'Check PDF for potential issues', icon: 'fas fa-chart-bar', category: 'pdf', color: 'var(--tool-pdf)' },
+                // PDF Tools (20)[
+               { name: 'PDF to Word Converter', desc: 'Convert PDF documents to editable Word files', icon: 'fas fa-file-word', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-to-word' },
+               { name: 'PDF Compressor', desc: 'Reduce PDF file size without quality loss', icon: 'fas fa-compress', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-compressor' },
+               { name: 'PDF Merger', desc: 'Combine multiple PDF files into one', icon: 'fas fa-file-medical', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-merger' },
+               { name: 'PDF Splitter', desc: 'Split PDF documents into separate pages', icon: 'fas fa-cut', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-splitter' },
+               { name: 'PDF to Excel Converter', desc: 'Convert PDF tables to Excel spreadsheets', icon: 'fas fa-file-excel', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-to-excel' },
+               { name: 'PDF Editor', desc: 'Edit PDF text and images directly in browser', icon: 'fas fa-edit', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-editor' },
+               { name: 'PDF Password Remover', desc: 'Unlock password-protected PDF files', icon: 'fas fa-unlock', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-password-remover' },
+               { name: 'PDF to PowerPoint', desc: 'Convert PDF to editable PowerPoint presentations', icon: 'fas fa-file-powerpoint', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-to-powerpoint' },
+               { name: 'PDF Rotator', desc: 'Rotate PDF pages to correct orientation', icon: 'fas fa-sync', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-rotator' },
+               { name: 'PDF Metadata Editor', desc: 'Edit PDF document information', icon: 'fas fa-info-circle', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-metadata-editor' },
+               { name: 'PDF to Text', desc: 'Extract text content from PDF files', icon: 'fas fa-file-alt', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-to-text' },
+               { name: 'PDF Watermark Adder', desc: 'Add watermarks to PDF documents', icon: 'fas fa-tint', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-watermark-adder' },
+               { name: 'PDF Page Numberer', desc: 'Add page numbers to PDF documents', icon: 'fas fa-hashtag', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-page-numberer' },
+               { name: 'PDF Redaction', desc: 'Permanently remove sensitive content', icon: 'fas fa-eye-slash', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-redaction' },
+               { name: 'PDF Form Filler', desc: 'Fill PDF forms electronically', icon: 'fas fa-keyboard', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-form-filler' },
+               { name: 'PDF Signature Adder', desc: 'Add digital signatures to PDFs', icon: 'fas fa-signature', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-signature-adder' },
+               { name: 'PDF OCR', desc: 'Convert scanned PDFs to searchable text', icon: 'fas fa-search', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-ocr' },
+               { name: 'PDF to HTML', desc: 'Convert PDF documents to HTML format', icon: 'fab fa-html5', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-to-html' },
+               { name: 'PDF Bookmark Creator', desc: 'Add bookmarks to PDF documents', icon: 'fas fa-bookmark', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-bookmark-creator' },
+               { name: 'PDF Quality Analyzer', desc: 'Check PDF for potential issues', icon: 'fas fa-chart-bar', category: 'pdf', color: 'var(--tool-pdf)', link: '/tools/pdf-quality-analyzer' }
+]
 
                 // Image Tools (20)
                 { name: 'Image to PNG Converter', desc: 'Convert images to PNG format', icon: 'fas fa-file-image', category: 'image', color: 'var(--tool-image)' },
