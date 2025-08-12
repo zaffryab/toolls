@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Photo Collage Maker tool. Create beautiful collages with multiple templates and effects.">
+    <meta name="keywords" content="photo collage, collage maker, photo editor, online tool, image collage">
+    <meta name="author" content="ToolHubCenter">
+    <title>Photo Collage Maker | Free Online Tool | ToolHubCenter</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a56d7;
+            --secondary: #6c757d;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --card-bg: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        header {
+            background: linear-gradient(120deg, var(--primary), #6a11cb);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 20px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            background: rgba(74, 108, 247, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .tool-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .upload-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .drop-area {
+            border: 2px dashed #d1d5db;
+            border-radius: var(--border-radius);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: #fafafa;
+            margin-bottom: 1.5rem;
+        }
+        
+        .drop-area:hover, .drop-area.drag-over {
+            border-color: var(--primary);
+            background-color: rgba(74, 108, 247, 0.05);
+        }
+        
+        .drop-area i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(74, 108, 247, 0.3);
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 108, 247, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-generate {
+            background: var(--success);
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+            width: 100%;
+            margin-top: 1rem;
+            padding: 14px;
+            font-size: 1.1rem;
+        }
+        
+        .btn-generate:hover {
+            background: #218838;
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
+        }
+        
+        .btn:disabled {
+            background: var(--secondary);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .collage-preview {
+            width: 100%;
+            min-height: 400px;
+            border-radius: var(--border-radius);
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .preview-placeholder {
+            color: var(--secondary);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .preview-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+        
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .image-item {
+            position: relative;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        
+        .image-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(220, 53, 69, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .option-group {
+            background: rgba(74, 108, 247, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .option-group h3 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .input-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .download-section {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(40, 167, 69, 0.1);
+            border-radius: var(--border-radius);
+            margin-top: 1.5rem;
+        }
+        
+        .templates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .template {
+            aspect-ratio: 1/1;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8f9fa;
+            display: grid;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .template:hover, .template.active {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .template-1 { grid-template-columns: 1fr; }
+        .template-2 { grid-template-columns: 1fr 1fr; }
+        .template-3 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+        .template-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 2fr 1fr; }
+        .template-5 { grid-template-columns: 1fr 1fr 1fr; }
+        
+        .template-cell {
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .collage {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            gap: 5px;
+            padding: 5px;
+        }
+        
+        .collage-cell {
+            position: relative;
+            overflow: hidden;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .collage-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .collage-cell img:hover {
+            transform: scale(1.05);
+        }
+        
+        .collage-cell .placeholder {
+            color: var(--secondary);
+            font-size: 1.5rem;
+        }
+        
+        .how-to-use {
+            margin-top: 2rem;
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 1.5rem;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(74, 108, 247, 0.05);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: bold;
+        }
+        
+        .ad-container {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: center;
+            margin: 2rem 0;
+            border: 1px solid #e9ecef;
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-container {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .drop-area {
+                padding: 1.5rem 1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">THC</div>
+                <h1>Photo Collage Maker</h1>
+            </div>
+            <p class="subtitle">Create beautiful photo collages with multiple templates. Perfect for social media, memories, and more.</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Ad Unit -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <!-- Tool Card -->
+        <div class="card">
+            <h2 class="card-title"><i>🖼️</i> Create Your Collage</h2>
+            <div class="tool-container">
+                <div class="upload-section">
+                    <div class="drop-area" id="dropArea">
+                        <i>📁</i>
+                        <h3>Upload Your Photos</h3>
+                        <p>Drag & drop your files here or click to browse</p>
+                        <p class="small">Supports JPG, JPEG, PNG, WEBP</p>
+                        <input type="file" id="fileInput" class="file-input" accept="image/*" multiple>
+                        <button class="btn" id="browseBtn">Browse Files</button>
+                    </div>
+                    
+                    <div class="templates">
+                        <div class="template template-1 active" data-template="1">
+                            <div class="template-cell"></div>
+                        </div>
+                        <div class="template template-2" data-template="2">
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                        </div>
+                        <div class="template template-3" data-template="3">
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                        </div>
+                        <div class="template template-4" data-template="4">
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                        </div>
+                        <div class="template template-5" data-template="5">
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                            <div class="template-cell"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option-group">
+                            <h3>Background Color</h3>
+                            <input type="color" id="bgColor" value="#ffffff">
+                        </div>
+                        
+                        <div class="option-group">
+                            <h3>Spacing</h3>
+                            <input type="range" id="spacingRange" min="0" max="20" value="5">
+                            <div id="spacingValue">5px</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <h3>Border Style</h3>
+                        <select id="borderStyle" class="input-control">
+                            <option value="none">None</option>
+                            <option value="solid">Solid</option>
+                            <option value="dashed">Dashed</option>
+                            <option value="dotted">Dotted</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-generate" id="generateBtn" disabled>Generate Collage</button>
+                </div>
+                
+                <div class="preview-section">
+                    <h3>Collage Preview</h3>
+                    <div class="collage-preview">
+                        <div class="preview-placeholder" id="previewPlaceholder">
+                            <i>🖼️</i>
+                            <p>Your collage will appear here</p>
+                        </div>
+                        <div class="collage" id="collagePreview"></div>
+                    </div>
+                    
+                    <div class="image-container" id="imageContainer"></div>
+                    
+                    <div class="download-section" id="downloadSection">
+                        <h3>Your Collage is Ready!</h3>
+                        <p>Click below to download your photo collage</p>
+                        <a id="downloadLink" class="btn">Download Collage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- How to Use Section -->
+        <div class="card how-to-use">
+            <h2 class="card-title"><i>❓</i> How to Use This Tool</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Upload Photos</h3>
+                    <p>Upload multiple images to use in your collage</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Choose Template</h3>
+                    <p>Select a layout template for your collage</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Customize</h3>
+                    <p>Adjust spacing, background color, and border</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Generate & Download</h3>
+                    <p>Create your collage and download the final image</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Ad Unit -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2023 ToolHubCenter - All Rights Reserved</p>
+            <p>Free Online Tools for Creative Projects</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropArea = document.getElementById('dropArea');
+            const fileInput = document.getElementById('fileInput');
+            const browseBtn = document.getElementById('browseBtn');
+            const generateBtn = document.getElementById('generateBtn');
+            const downloadSection = document.getElementById('downloadSection');
+            const downloadLink = document.getElementById('downloadLink');
+            const previewPlaceholder = document.getElementById('previewPlaceholder');
+            const imageContainer = document.getElementById('imageContainer');
+            const collagePreview = document.getElementById('collagePreview');
+            const spacingRange = document.getElementById('spacingRange');
+            const spacingValue = document.getElementById('spacingValue');
+            const bgColor = document.getElementById('bgColor');
+            const borderStyle = document.getElementById('borderStyle');
+            const templates = document.querySelectorAll('.template');
+            
+            let uploadedImages = [];
+            let selectedTemplate = '1';
+            
+            // Update spacing value display
+            spacingRange.addEventListener('input', function() {
+                spacingValue.textContent = this.value + 'px';
+            });
+            
+            // Template selection
+            templates.forEach(template => {
+                template.addEventListener('click', function() {
+                    templates.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedTemplate = this.dataset.template;
+                    generateCollagePreview();
+                });
+            });
+            
+            // Browse button click event
+            browseBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // File input change event
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            // Drag and drop events
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                dropArea.classList.add('drag-over');
+            }
+            
+            function unhighlight() {
+                dropArea.classList.remove('drag-over');
+            }
+            
+            // Handle file drop
+            dropArea.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                handleFiles(files);
+            }
+            
+            // Handle file selection
+            function handleFileSelect(e) {
+                const files = e.target.files;
+                handleFiles(files);
+            }
+            
+            function handleFiles(files) {
+                if (files.length === 0) return;
+                
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    if (!file.type.match('image.*')) {
+                        alert('Please select image files only');
+                        continue;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imageData = {
+                            name: file.name,
+                            data: e.target.result
+                        };
+                        uploadedImages.push(imageData);
+                        displayImagePreview(imageData);
+                        generateBtn.disabled = false;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            }
+            
+            function displayImagePreview(imageData) {
+                const imageItem = document.createElement('div');
+                imageItem.className = 'image-item';
+                
+                const img = document.createElement('img');
+                img.src = imageData.data;
+                img.alt = imageData.name;
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-btn';
+                removeBtn.innerHTML = '×';
+                removeBtn.addEventListener('click', function() {
+                    const index = uploadedImages.findIndex(img => img.data === imageData.data);
+                    if (index !== -1) {
+                        uploadedImages.splice(index, 1);
+                    }
+                    imageItem.remove();
+                    
+                    if (uploadedImages.length === 0) {
+                        generateBtn.disabled = true;
+                    }
+                });
+                
+                imageItem.appendChild(img);
+                imageItem.appendChild(removeBtn);
+                imageContainer.appendChild(imageItem);
+            }
+            
+            function generateCollagePreview() {
+                if (uploadedImages.length === 0) {
+                    previewPlaceholder.style.display = 'block';
+                    collagePreview.innerHTML = '';
+                    return;
+                }
+                
+                previewPlaceholder.style.display = 'none';
+                
+                // Clear previous preview
+                collagePreview.innerHTML = '';
+                
+                // Set grid based on template
+                switch(selectedTemplate) {
+                    case '1':
+                        collagePreview.style.gridTemplateColumns = '1fr';
+                        collagePreview.style.gridTemplateRows = '1fr';
+                        break;
+                    case '2':
+                        collagePreview.style.gridTemplateColumns = '1fr 1fr';
+                        collagePreview.style.gridTemplateRows = '1fr';
+                        break;
+                    case '3':
+                        collagePreview.style.gridTemplateColumns = '1fr 1fr';
+                        collagePreview.style.gridTemplateRows = '1fr 1fr';
+                        break;
+                    case '4':
+                        collagePreview.style.gridTemplateColumns = '1fr 1fr';
+                        collagePreview.style.gridTemplateRows = '2fr 1fr';
+                        break;
+                    case '5':
+                        collagePreview.style.gridTemplateColumns = '1fr 1fr 1fr';
+                        collagePreview.style.gridTemplateRows = '1fr 1fr';
+                        break;
+                }
+                
+                // Set spacing
+                collagePreview.style.gap = spacingRange.value + 'px';
+                
+                // Create cells
+                const cellCount = getCellCount(selectedTemplate);
+                for (let i = 0; i < cellCount; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'collage-cell';
+                    cell.style.backgroundColor = bgColor.value;
+                    
+                    if (borderStyle.value !== 'none') {
+                        cell.style.border = `2px ${borderStyle.value} rgba(0,0,0,0.1)`;
+                    }
+                    
+                    if (i < uploadedImages.length) {
+                        const img = document.createElement('img');
+                        img.src = uploadedImages[i].data;
+                        img.draggable = false;
+                        cell.appendChild(img);
+                    } else {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'placeholder';
+                        placeholder.innerHTML = '+';
+                        cell.appendChild(placeholder);
+                    }
+                    
+                    collagePreview.appendChild(cell);
+                }
+            }
+            
+            function getCellCount(template) {
+                switch(template) {
+                    case '1': return 1;
+                    case '2': return 2;
+                    case '3': return 4;
+                    case '4': return 4;
+                    case '5': return 6;
+                    default: return 4;
+                }
+            }
+            
+            // Generate button click event
+            generateBtn.addEventListener('click', function() {
+                if (uploadedImages.length === 0) {
+                    alert('Please upload at least one image');
+                    return;
+                }
+                
+                // Generate collage preview if not already generated
+                if (collagePreview.children.length === 0) {
+                    generateCollagePreview();
+                }
+                
+                // Use html2canvas to capture the collage
+                html2canvas(collagePreview, {
+                    backgroundColor: bgColor.value,
+                    useCORS: true
+                }).then(canvas => {
+                    // Convert canvas to data URL
+                    const dataUrl = canvas.toDataURL('image/png');
+                    
+                    // Create download link
+                    downloadLink.href = dataUrl;
+                    downloadLink.download = 'photo_collage.png';
+                    
+                    // Show download section
+                    downloadSection.style.display = 'block';
+                    
+                    // Scroll to download section
+                    downloadSection.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Update collage when settings change
+            spacingRange.addEventListener('input', generateCollagePreview);
+            bgColor.addEventListener('input', generateCollagePreview);
+            borderStyle.addEventListener('change', generateCollagePreview);
+        });
+    </script>
+</body>
+</html>
