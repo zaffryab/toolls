@@ -1876,41 +1876,466 @@
         </div>
     </div>
 
-    <!-- Signup Modal -->
-    <div class="modal " id="signupModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create an Account</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="signupForm">
-                        <div class="mb-3">
-                            <label for="signupName" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="signupName" required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Signup Modal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4ade80;
+            --gold: #ffd700;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border: none;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 30px;
+            border-bottom: none;
+        }
+        
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-close {
+            filter: invert(1);
+            opacity: 0.8;
+        }
+        
+        .modal-body {
+            padding: 30px;
+            background-color: var(--light);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-control {
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 0.25rem rgba(76, 201, 240, 0.25);
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group .form-control {
+            padding-left: 40px;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            z-index: 10;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .btn-signup {
+            background: linear-gradient(135deg, var(--gold), #ffb700);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+            margin-top: 10px;
+        }
+        
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .divider::before {
+            margin-right: 15px;
+        }
+        
+        .divider::after {
+            margin-left: 15px;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-btn.facebook:hover {
+            background: #3b5998;
+            color: white;
+        }
+        
+        .social-btn.google:hover {
+            background: #dd4b39;
+            color: white;
+        }
+        
+        .social-btn.twitter:hover {
+            background: #1da1f2;
+            color: white;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .login-link a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .login-link a:hover {
+            color: var(--secondary);
+        }
+        
+        .login-link a:hover::after {
+            width: 100%;
+        }
+        
+        .terms {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+        
+        .terms a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .password-strength {
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .strength-meter {
+            height: 100%;
+            width: 0;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .password-feedback {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <!-- Signup Modal -->
+                <div class="modal show d-block position-static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <i class="fas fa-user-plus"></i> Create an Account
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="signupForm">
+                                    <div class="mb-4">
+                                        <label for="signupName" class="form-label">
+                                            <i class="fas fa-user"></i> Full Name
+                                        </label>
+                                        <div class="input-group">
+                                            <i class="fas fa-user input-icon"></i>
+                                            <input type="text" class="form-control" id="signupName" placeholder="Enter your full name" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="signupEmail" class="form-label">
+                                            <i class="fas fa-envelope"></i> Email Address
+                                        </label>
+                                        <div class="input-group">
+                                            <i class="fas fa-envelope input-icon"></i>
+                                            <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="signupPassword" class="form-label">
+                                            <i class="fas fa-lock"></i> Password
+                                        </label>
+                                        <div class="input-group">
+                                            <i class="fas fa-lock input-icon"></i>
+                                            <input type="password" class="form-control" id="signupPassword" placeholder="Create a password" required>
+                                            <button type="button" class="password-toggle" id="togglePassword">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="password-strength mt-2">
+                                            <div class="strength-meter" id="passwordStrength"></div>
+                                        </div>
+                                        <div class="password-feedback" id="passwordFeedback"></div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="signupConfirmPassword" class="form-label">
+                                            <i class="fas fa-lock"></i> Confirm Password
+                                        </label>
+                                        <div class="input-group">
+                                            <i class="fas fa-lock input-icon"></i>
+                                            <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                                            <button type="button" class="password-toggle" id="toggleConfirmPassword">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback" id="passwordMatchFeedback">Passwords do not match</div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-signup w-100">
+                                        <i class="fas fa-user-plus me-2"></i> Sign Up
+                                    </button>
+                                    
+                                    <div class="divider">Or continue with</div>
+                                    
+                                    <div class="social-login">
+                                        <button type="button" class="social-btn facebook">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </button>
+                                        <button type="button" class="social-btn google">
+                                            <i class="fab fa-google"></i>
+                                        </button>
+                                        <button type="button" class="social-btn twitter">
+                                            <i class="fab fa-twitter"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="login-link">
+                                        <p>Already have an account? <a href="#" id="loginLink">Login</a></p>
+                                    </div>
+                                    
+                                    <div class="terms">
+                                        <p>By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="signupEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="signupEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signupPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="signupPassword" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="signupConfirmPassword" required>
-                        </div>
-                        <button type="submit" class="btn btn-gold w-100">Sign Up</button>
-                    </form>
-                    <div class="mt-3 text-center">
-                        <p>Already have an account? <a href="#" onclick="showLoginModal()">Login</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Password strength indicator
+        const passwordInput = document.getElementById('signupPassword');
+        const strengthMeter = document.getElementById('passwordStrength');
+        const passwordFeedback = document.getElementById('passwordFeedback');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+            let strength = 0;
+            let feedback = '';
+            
+            // Check password length
+            if (password.length >= 8) strength += 25;
+            
+            // Check for lowercase letters
+            if (/[a-z]/.test(password)) strength += 25;
+            
+            // Check for uppercase letters
+            if (/[A-Z]/.test(password)) strength += 25;
+            
+            // Check for numbers and special characters
+            if (/[0-9]/.test(password)) strength += 12.5;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 12.5;
+            
+            // Update strength meter
+            strengthMeter.style.width = strength + '%';
+            
+            // Update feedback text and color
+            if (strength < 30) {
+                strengthMeter.style.backgroundColor = '#ef4444';
+                feedback = 'Weak password';
+            } else if (strength < 70) {
+                strengthMeter.style.backgroundColor = '#f59e0b';
+                feedback = 'Medium password';
+            } else {
+                strengthMeter.style.backgroundColor = '#10b981';
+                feedback = 'Strong password';
+            }
+            
+            passwordFeedback.textContent = feedback;
+        });
+        
+        // Password match validation
+        const confirmPasswordInput = document.getElementById('signupConfirmPassword');
+        const passwordMatchFeedback = document.getElementById('passwordMatchFeedback');
+        
+        confirmPasswordInput.addEventListener('input', function() {
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                confirmPasswordInput.classList.add('is-invalid');
+                passwordMatchFeedback.style.display = 'block';
+            } else {
+                confirmPasswordInput.classList.remove('is-invalid');
+                passwordMatchFeedback.style.display = 'none';
+            }
+        });
+        
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+        
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+            const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+        
+        // Form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                confirmPasswordInput.classList.add('is-invalid');
+                passwordMatchFeedback.style.display = 'block';
+                return;
+            }
+            
+            // If validation passes, show success message
+            alert('Account created successfully!');
+            this.reset();
+            strengthMeter.style.width = '0';
+            passwordFeedback.textContent = '';
+        });
+        
+        // Login link
+        document.getElementById('loginLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Login modal would open here');
+        });
+    </script>
+</body>
+</html>
 
     <!-- Privacy Policy Modal -->
     <div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
@@ -2072,9 +2497,6 @@
             privacyModal.show();
         }
     </script>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXN4S33C"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+    
 </body>
 </html>
