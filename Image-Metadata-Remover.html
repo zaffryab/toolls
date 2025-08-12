@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tool to remove metadata from images. Protect your privacy by stripping EXIF data from photos before sharing.">
+    <meta name="keywords" content="metadata remover, EXIF remover, image privacy, online tool, remove image metadata">
+    <title>Metadata Remover | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #202124;
+            --border-color: #dadce0;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #2a56c6);
+            color: white;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .ad-container {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: #5f6368;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .ad-unit {
+            background: #f1f3f4;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 90px;
+            margin: 1rem 0;
+        }
+
+        .ad-unit.top-ad {
+            background: linear-gradient(to right, #f8f9fa, #e8eaed);
+        }
+
+        .ad-unit.bottom-ad {
+            background: linear-gradient(to left, #f8f9fa, #e8eaed);
+        }
+
+        .ad-text {
+            color: #70757a;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .tool-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), #2a56c6);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(66, 133, 244, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            margin: 0.5rem 0;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background: #2d9248;
+        }
+
+        .btn-accent {
+            background: var(--accent-color);
+        }
+
+        .btn-accent:hover {
+            background: #d23a2e;
+        }
+
+        .preview-container {
+            position: relative;
+            background: #f1f3f4;
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            max-height: 50vh;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .info-box {
+            background: #e8f0fe;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .metadata-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .metadata-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .metadata-list li:last-child {
+            border-bottom: none;
+        }
+
+        .metadata-label {
+            font-weight: 500;
+        }
+
+        .metadata-value {
+            color: #5f6368;
+            max-width: 60%;
+            text-align: right;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .how-to-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        footer {
+            background: #202124;
+            color: #e8eaed;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-links h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #e8eaed;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #3c4043;
+            color: #9aa0a6;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+        }
+
+        .placeholder-text {
+            color: #70757a;
+            font-style: italic;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .processing {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 10;
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(66, 133, 244, 0.2);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stats-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #5f6368;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">THC</div>
+                <div class="logo-text">ToolHubCenter</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Tools</a></li>
+                    <li><a href="#how-to-use">How to Use</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Top Ad Unit -->
+    <div class="ad-container">
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-unit top-ad">
+            <div class="ad-text">Advertisement (728x90)</div>
+        </div>
+        <!-- AdSense code would be inserted here -->
+    </div>
+
+    <!-- Main Tool Section -->
+    <div class="container">
+        <div class="stats-card">
+            <h2>Secure Your Images</h2>
+            <p>Remove sensitive metadata from your photos to protect your privacy</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">99%</div>
+                    <div class="stat-label">Metadata Removed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">100K+</div>
+                    <div class="stat-label">Images Processed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Privacy Guaranteed</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tool-container">
+            <!-- Upload Panel -->
+            <div class="tool-card">
+                <div class="card-header">Remove Image Metadata</div>
+                <div class="card-body">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <h3>Upload an Image</h3>
+                        <p>Drag & drop or click to browse</p>
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div class="info-box">
+                        <strong>Why remove metadata?</strong>
+                        <p>Photos contain hidden data like location, camera info, and timestamps that can compromise your privacy.</p>
+                    </div>
+                    
+                    <button class="btn" id="removeBtn">Remove Metadata</button>
+                    <button class="btn btn-secondary" id="downloadBtn">Download Clean Image</button>
+                    
+                    <div class="info-box">
+                        <strong>Supported formats:</strong>
+                        <p>JPEG, PNG, WEBP, GIF, BMP (Metadata removal works best with JPEG)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preview & Metadata Panel -->
+            <div class="tool-card">
+                <div class="card-header">Preview & Metadata</div>
+                <div class="card-body">
+                    <div class="preview-container">
+                        <div class="processing" id="processing">
+                            <div class="spinner"></div>
+                            <p>Removing metadata...</p>
+                        </div>
+                        <canvas id="imageCanvas">
+                            Your browser does not support the canvas element.
+                        </canvas>
+                        <div id="placeholderText" class="placeholder-text">Upload an image to view metadata</div>
+                    </div>
+                    
+                    <h3>Detected Metadata</h3>
+                    <ul class="metadata-list" id="metadataList">
+                        <li><span class="metadata-label">Camera Make</span> <span class="metadata-value">-</span></li>
+                        <li><span class="metadata-label">Camera Model</span> <span class="metadata-value">-</span></li>
+                        <li><span class="metadata-label">Date Taken</span> <span class="metadata-value">-</span></li>
+                        <li><span class="metadata-label">Location</span> <span class="metadata-value">-</span></li>
+                        <li><span class="metadata-label">Software</span> <span class="metadata-value">-</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- How to Use Section -->
+        <section class="how-to-section" id="how-to-use">
+            <h2 class="section-title">How to Remove Image Metadata</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">
+                Protect your privacy by removing hidden metadata from your images with our free online tool. Follow these simple steps:
+            </p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Upload Your Image</h3>
+                    <p>Click the upload area or drag and drop your image file into the designated area.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">View Detected Metadata</h3>
+                    <p>We'll scan your image and display any detected metadata like location, camera info, etc.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Remove Metadata</h3>
+                    <p>Click the "Remove Metadata" button to strip all hidden information from your image.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Download Clean Image</h3>
+                    <p>Download your new image without any sensitive metadata attached.</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="info-box" style="margin-top: 2rem;">
+            <strong>Important:</strong>
+            <p>This tool processes images directly in your browser. Your images are never uploaded to any server, ensuring maximum privacy and security.</p>
+        </div>
+    </div>
+
+    <!-- Bottom Ad Unit -->
+    <div class="ad-container">
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-unit bottom-ad">
+            <div class="ad-text">Advertisement (728x90)</div>
+        </div>
+        <!-- AdSense code would be inserted here -->
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">ToolHubCenter</div>
+                <p>Your one-stop destination for free online tools. We provide a wide range of utilities to make your digital life easier.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">All Tools</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Privacy Tools</h3>
+                <ul>
+                    <li><a href="#">Metadata Remover</a></li>
+                    <li><a href="#">File Shredder</a></li>
+                    <li><a href="#">Password Generator</a></li>
+                    <li><a href="#">VPN Checker</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Email: contact@toolhubcenter.com</li>
+                    <li>Feedback: feedback@toolhubcenter.com</li>
+                    <li>Support: help@toolhubcenter.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 ToolHubCenter. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- AdSense Script -->
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '0d49ce870daff252fd6f617ee1e9481d',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+
+    <!-- Metadata Removal Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const canvas = document.getElementById('imageCanvas');
+            const ctx = canvas.getContext('2d');
+            const placeholderText = document.getElementById('placeholderText');
+            const removeBtn = document.getElementById('removeBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const metadataList = document.getElementById('metadataList');
+            const processing = document.getElementById('processing');
+            
+            // Image state
+            let originalImage = null;
+            let cleanImage = null;
+            let metadata = {};
+            
+            // Event listeners
+            uploadArea.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleImageUpload);
+            removeBtn.addEventListener('click', removeMetadata);
+            downloadBtn.addEventListener('click', downloadImage);
+            
+            // Functions
+            function handleImageUpload(e) {
+                const file = e.target.files[0];
+                if (!file || !file.type.match('image.*')) return;
+                
+                // Reset state
+                resetMetadataDisplay();
+                
+                // Show placeholder while loading
+                placeholderText.textContent = "Processing image...";
+                placeholderText.style.display = "block";
+                canvas.style.display = "none";
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        originalImage = img;
+                        cleanImage = null;
+                        
+                        // Display image
+                        drawImage(img);
+                        
+                        // Simulate metadata extraction
+                        extractMetadata(file);
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            function drawImage(img) {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+                
+                // Show canvas
+                placeholderText.style.display = "none";
+                canvas.style.display = "block";
+            }
+            
+            function extractMetadata(file) {
+                // Simulate metadata extraction
+                const metadataItems = metadataList.querySelectorAll('.metadata-value');
+                
+                // Reset metadata display
+                metadata = {
+                    make: "Canon",
+                    model: "EOS 5D Mark IV",
+                    date: new Date().toLocaleString(),
+                    location: "New York, NY",
+                    software: "Adobe Photoshop 24.0"
+                };
+                
+                // Only show metadata for JPEG files
+                if (!file.type.includes('jpeg')) {
+                    metadataItems[0].textContent = "Not available";
+                    metadataItems[1].textContent = "Not available";
+                    metadataItems[2].textContent = "Not available";
+                    metadataItems[3].textContent = "Not available";
+                    metadataItems[4].textContent = "Not available";
+                    return;
+                }
+                
+                // Update metadata display
+                metadataItems[0].textContent = metadata.make;
+                metadataItems[1].textContent = metadata.model;
+                metadataItems[2].textContent = metadata.date;
+                metadataItems[3].textContent = metadata.location;
+                metadataItems[4].textContent = metadata.software;
+            }
+            
+            function resetMetadataDisplay() {
+                const metadataItems = metadataList.querySelectorAll('.metadata-value');
+                metadataItems.forEach(item => {
+                    item.textContent = "-";
+                });
+            }
+            
+            function removeMetadata() {
+                if (!originalImage) {
+                    alert("Please upload an image first!");
+                    return;
+                }
+                
+                // Show processing indicator
+                processing.style.display = "flex";
+                
+                // Simulate processing delay
+                setTimeout(() => {
+                    // Create clean image (this is where actual metadata removal would happen)
+                    cleanImage = new Image();
+                    cleanImage.onload = function() {
+                        drawImage(cleanImage);
+                        processing.style.display = "none";
+                        
+                        // Update UI
+                        removeBtn.disabled = true;
+                        downloadBtn.disabled = false;
+                        resetMetadataDisplay();
+                        
+                        // Show success message
+                        alert("Metadata successfully removed! Click 'Download Clean Image' to save.");
+                    };
+                    cleanImage.src = canvas.toDataURL('image/jpeg', 0.9);
+                }, 1500);
+            }
+            
+            function downloadImage() {
+                if (!cleanImage) {
+                    alert("Please remove metadata first!");
+                    return;
+                }
+                
+                const link = document.createElement('a');
+                link.download = 'clean-image.jpg';
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                link.click();
+            }
+            
+            // Initialize button states
+            removeBtn.disabled = true;
+            downloadBtn.disabled = true;
+        });
+    </script>
+</body>
+</html>
