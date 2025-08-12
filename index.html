@@ -17,7 +17,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <title>ToolHubCenter - 100+ Free Online Tools</title>
     <meta name="description" content="100+ free online tools for image conversion, text utilities, SEO tools, calculators, and developer resources. No registration required." />
     <meta name="keywords" content="free online tools, image converter, word counter, SEO tools, developer tools, PDF converter, JSON formatter" />
-    <link rel="canonical" href="https://www.tools4.fun" />
+    <link rel="canonical" href="https://www.toolhub.center" />
    
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>��</text></svg>">
@@ -26,14 +26,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta property="og:title" content="ToolHubCenter - 100+ Free Online Tools">
     <meta property="og:description" content="Free online tools for image conversion, text utilities, SEO tools, and developer resources">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.tools4.fun">
-    <meta property="og:image" content="https://www.tools4.fun/og-image.jpg">
+    <meta property="og:url" content="https://www.toolhub.center">
+    <meta property="og:image" content="https://www.toolhub.center/og-image.jpg">
    
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ToolHubCenter - Free Online Tools">
     <meta name="twitter:description" content="100+ free tools for developers, designers, and content creators">
-    <meta name="twitter:image" content="https://www.tools4.fun/twitter-card.jpg">
+    <meta name="twitter:image" content="https://www.toolhub.center/twitter-card.jpg">
 
     <!-- Preconnect for CDNs -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -44,10 +44,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "ToolHubCenter",
-      "url": "https://www.tools4.fun",
+      "url": "https://www.toolhub.center",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://www.tools4.fun/?q={search_term}",
+        "target": "https://www.toolhub.center/?q={search_term}",
         "query-input": "required name=search_term"
       }
     }
@@ -151,6 +151,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             color: var(--bg-dark-navy);
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Enhanced search bar */
+        .search-box {
+            background-color: rgba(255,255,255,0.1);
+            border: 2px solid var(--accent-gold);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            background-color: rgba(255,255,255,0.2);
+            border-color: var(--hover-gold);
+            box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+            outline: none;
+        }
+
+        .search-box::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Enhanced login/signup buttons */
+        .btn-login {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 2px solid var(--accent-gold);
+            font-weight: 600;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-dark-navy);
+            transform: translateY(-2px);
+        }
+
+        .btn-signup {
+            background-color: var(--accent-gold);
+            color: var(--bg-dark-navy);
+            font-weight: 600;
+            padding: 8px 20px;
+            border: 2px solid var(--accent-gold);
+            transition: all 0.3s ease;
+        }
+
+        .btn-signup:hover {
+            background-color: var(--hover-gold);
+            border-color: var(--hover-gold);
+            transform: translateY(-2px);
         }
        
         .tool-card {
@@ -316,6 +368,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .navbar-collapse .nav-link::after {
                 display: none;
             }
+
+            /* Mobile search bar */
+            .search-box {
+                padding: 10px 15px;
+            }
         }
     </style>
    
@@ -358,8 +415,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <a href="#" class="nav-link" onclick="showCategory('developer-tools')">Developer</a>
                         <a href="#" class="nav-link" onclick="showContactPage()">Contact Us</a>
                     </nav>
-                    <button class="btn btn-gold ms-3" onclick="showLoginModal()">Login</button>
-                    <button class="btn btn-outline-light ms-2" onclick="showSignupModal()">Sign Up</button>
+                    <button class="btn btn-login ms-3" onclick="showLoginModal()">Login</button>
+                    <button class="btn btn-signup ms-2" onclick="showSignupModal()">Sign Up</button>
                 </div>
             </div>
         </div>
@@ -371,7 +428,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div id="home-page">
             <div class="hero-section">
                 <h1 class="hero-title">100+ Free Online Tools</h1>
-                <p class="hero-subtitle">Your central hub for image conversion, text utilities, SEO tools, calculators, and developer resources - completely free.</p>
+                <p class="hero-subtitle">All-in-one solution for image conversion, text utilities, SEO tools, calculators, and developer resources - completely free.</p>
                 <button class="btn btn-gold btn-lg px-5 py-3" onclick="showCategory('popular-tools')">Explore Tools</button>
             </div>
            
@@ -1653,16 +1710,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             </div>
                             <div>
                                 <h5>Email</h5>
-                                <p>support@toolhubcenter.com</p>
+                                <p>support@toolhub.center</p>
                             </div>
                         </div>
                        
                         <h5 class="mt-4 mb-3" style="color: var(--accent-gold);">Follow Us</h5>
                         <div class="d-flex justify-content-start">
-                            <a href="https://youtube.com" target="_blank" class="social-icon floating" aria-label="YouTube" style="animation-delay: 0.2s;"><i class="fab fa-youtube"></i></a>
-                            <a href="https://www.instagram.com" target="_blank" class="social-icon floating" aria-label="Instagram" style="animation-delay: 0.4s;"><i class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com/@tools4fun-y5z?si=IxsDnVogeaY4pQLF" target="_blank" class="social-icon floating" aria-label="YouTube" style="animation-delay: 0.2s;"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.instagram.com/jattadnan643/" target="_blank" class="social-icon floating" aria-label="Instagram" style="animation-delay: 0.4s;"><i class="fab fa-instagram"></i></a>
                             <a href="https://facebook.com" target="_blank" class="social-icon floating" aria-label="Facebook" style="animation-delay: 0.6s;"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://twitter.com" target="_blank" class="social-icon floating" aria-label="Twitter" style="animation-delay: 0.8s;"><i class="fab fa-twitter"></i></a>
+                            <a href="https://x.com/adnan28766" target="_blank" class="social-icon floating" aria-label="Twitter" style="animation-delay: 0.8s;"><i class="fab fa-twitter"></i></a>
                         </div>
                     </div>
                 </div>
@@ -2008,6 +2065,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             event.preventDefault();
             signupModal.hide();
             showHomePage();
+        }
+
+        // Show login modal
+        function showLoginModal() {
+            loginModal.show();
+        }
+
+        // Show signup modal
+        function showSignupModal() {
+            signupModal.show();
+        }
+
+        // Show privacy policy
+        function showPrivacyPolicy() {
+            privacyModal.show();
         }
     </script>
     <!-- Google Tag Manager (noscript) -->
