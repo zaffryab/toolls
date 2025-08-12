@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create and preview Markdown documents in real-time with our free online Markdown Editor. Perfect for documentation, notes, and content creation.">
+    <meta name="keywords" content="markdown editor, markdown tool, online markdown, markdown preview, markdown converter">
+    <title>Markdown Editor | Create & Preview Markdown Online</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA8ElEQVQ4y62TMU7DQBBF3y4KqJBQoEAiR4BDcBEkKk5AQUuDkLgBFRcgcQKQqLkDFQ0SBSkKQqJgP3Z2x7trr8EJFbLSaD2z8//M7KzYtQ0bGgCvQJfZ1wJmQNfM9s3sFmgBZ8ACaIFv4BGYmNl7vJhV8AZ0ZvYQNf4D5sB5BZ8Dc+CyQk+Be6DfCzCzN+AGuAIG4Bm4BdZmtjKz+7D9F1gCj8Bd0LzE+U/AaQh0wI+ZfQJfZnZfqPwE1sBp4L3XwJvQmNlB4P0c+AJG4CjYbwAAAABJRU5ErkJggg==" type="image/png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-attachment: fixed;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .ad-container {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 25px 0;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ad-label {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .tool-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .editor-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+        
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .section-header h2 {
+            color: #1e3c72;
+            font-size: 1.5rem;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn:hover {
+            background: #2a5298;
+            transform: translateY(-2px);
+        }
+        
+        #markdown-input {
+            flex: 1;
+            width: 100%;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+            resize: none;
+            line-height: 1.6;
+        }
+        
+        #preview-output {
+            flex: 1;
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+        
+        #preview-output h1, 
+        #preview-output h2, 
+        #preview-output h3 {
+            color: #1e3c72;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        #preview-output p {
+            margin-bottom: 15px;
+        }
+        
+        #preview-output code {
+            background: #e9ecef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        #preview-output pre {
+            background: #2a5298;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        #preview-output blockquote {
+            border-left: 4px solid #1e3c72;
+            padding-left: 15px;
+            margin: 15px 0;
+            color: #555;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .action-btn.secondary {
+            background: linear-gradient(135deg, #6c757d, #495057);
+        }
+        
+        .how-to-use {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+        }
+        
+        .how-to-use h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e3c72;
+            font-size: 2rem;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #1e3c72;
+            transition: transform 0.3s;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #1e3c72;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #1e3c72;
+        }
+        
+        .thc-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            max-width: 350px;
+            margin: 30px auto;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .thc-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .thc-card-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .thc-card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .thc-card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .thc-card-body {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .thc-card-description {
+            margin-bottom: 25px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        .thc-card-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+        }
+        
+        .thc-card-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.4);
+        }
+        
+        .watermark {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .tool-container {
+                padding: 20px;
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .editor-section, .preview-section {
+                height: 400px;
+            }
+            
+            .how-to-use {
+                padding: 20px;
+            }
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2ecc71;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .markdown-cheatsheet {
+            margin-top: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .cheatsheet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .cheatsheet-header h3 {
+            color: #1e3c72;
+        }
+        
+        .cheatsheet-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .cheatsheet-item {
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #1e3c72;
+        }
+        
+        .cheatsheet-item h4 {
+            margin-bottom: 5px;
+            color: #1e3c72;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Ad -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            <div id="container-0d49ce870daff252fd6f617ee1e9481d"></div>
+        </div>
+        
+        <!-- Header -->
+        <div class="header">
+            <h1>Markdown Editor</h1>
+            <p>Write and preview Markdown in real-time with our powerful online editor. Perfect for documentation, notes, and content creation.</p>
+        </div>
+        
+        <!-- Markdown Editor Tool -->
+        <div class="tool-container">
+            <div class="editor-section">
+                <div class="section-header">
+                    <h2>Markdown Editor</h2>
+                    <button class="btn" id="clear-btn">
+                        <span>🗑️</span> Clear
+                    </button>
+                </div>
+                <textarea id="markdown-input" placeholder="Enter your Markdown here..."># Welcome to Markdown Editor
+
+## Create formatted documents easily
+
+This is a **powerful** Markdown editor with *real-time* preview. 
+
+### Features:
+- Real-time preview
+- Export to HTML
+- Clean, modern interface
+- Responsive design
+
+### Code Block:
+```javascript
+function helloWorld() {
+  console.log("Hello, Markdown!");
+}
