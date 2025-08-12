@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online image editor with filters, adjustments, and effects. Perfect for quick photo editing without installation.">
+    <meta name="keywords" content="online image editor, photo editor, image tools, photo enhancement, free editor">
+    <title>Image Editor | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #202124;
+            --border-color: #dadce0;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #2a56c6);
+            color: white;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .ad-container {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: #5f6368;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .ad-unit {
+            background: #f1f3f4;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 90px;
+            margin: 1rem 0;
+        }
+
+        .ad-unit.top-ad {
+            background: linear-gradient(to right, #f8f9fa, #e8eaed);
+        }
+
+        .ad-unit.bottom-ad {
+            background: linear-gradient(to left, #f8f9fa, #e8eaed);
+        }
+
+        .ad-text {
+            color: #70757a;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .editor-container {
+                grid-template-columns: 300px 1fr;
+            }
+        }
+
+        .editor-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), #2a56c6);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(66, 133, 244, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            margin: 0.5rem 0;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background: #2d9248;
+        }
+
+        .btn-accent {
+            background: var(--accent-color);
+        }
+
+        .btn-accent:hover {
+            background: #d23a2e;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 576px) {
+            .controls {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e8eaed;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .slider-value {
+            min-width: 40px;
+            text-align: center;
+            background: #f1f3f4;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .preview-container {
+            position: relative;
+            background: #f1f3f4;
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        canvas {
+            max-width: 100%;
+            max-height: 70vh;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tool {
+            background: #f1f3f4;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tool:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+
+        .tool-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .how-to-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        footer {
+            background: #202124;
+            color: #e8eaed;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-links h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #e8eaed;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #3c4043;
+            color: #9aa0a6;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">THC</div>
+                <div class="logo-text">ToolHubCenter</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Tools</a></li>
+                    <li><a href="#how-to-use">How to Use</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Top Ad Unit -->
+    <div class="ad-container">
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-unit top-ad">
+            <div class="ad-text">Advertisement (728x90)</div>
+        </div>
+        <!-- AdSense code would be inserted here -->
+    </div>
+
+    <!-- Main Editor Section -->
+    <div class="container">
+        <div class="editor-container">
+            <!-- Controls Panel -->
+            <div class="editor-card">
+                <div class="card-header">Edit Controls</div>
+                <div class="card-body">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <h3>Upload an Image</h3>
+                        <p>Drag & drop or click to browse</p>
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn" id="resetBtn">Reset Image</button>
+                        <button class="btn btn-secondary" id="downloadBtn">Download Image</button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Brightness</label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="200" value="100" class="slider" id="brightness">
+                            <span class="slider-value" id="brightnessValue">100%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Contrast</label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="200" value="100" class="slider" id="contrast">
+                            <span class="slider-value" id="contrastValue">100%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Saturation</label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="200" value="100" class="slider" id="saturation">
+                            <span class="slider-value" id="saturationValue">100%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Tools</label>
+                        <div class="tools-grid">
+                            <div class="tool" data-filter="grayscale">
+                                <div class="tool-icon">◑</div>
+                                <div>Grayscale</div>
+                            </div>
+                            <div class="tool" data-filter="sepia">
+                                <div class="tool-icon">◍</div>
+                                <div>Sepia</div>
+                            </div>
+                            <div class="tool" data-filter="invert">
+                                <div class="tool-icon">◐</div>
+                                <div>Invert</div>
+                            </div>
+                            <div class="tool" data-filter="blur">
+                                <div class="tool-icon">◒</div>
+                                <div>Blur</div>
+                            </div>
+                            <div class="tool" id="rotateLeft">
+                                <div class="tool-icon">↺</div>
+                                <div>Rotate Left</div>
+                            </div>
+                            <div class="tool" id="rotateRight">
+                                <div class="tool-icon">↻</div>
+                                <div>Rotate Right</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-accent" id="applyFilters">Apply Filters</button>
+                </div>
+            </div>
+            
+            <!-- Preview Panel -->
+            <div class="editor-card">
+                <div class="card-header">Image Preview</div>
+                <div class="card-body">
+                    <div class="preview-container">
+                        <canvas id="imageCanvas">
+                            Your browser does not support the canvas element.
+                        </canvas>
+                        <div id="placeholderText">Upload an image to start editing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- How to Use Section -->
+        <section class="how-to-section" id="how-to-use">
+            <h2 class="section-title">How to Use the Image Editor</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">
+                Our online image editor is simple and intuitive. Follow these easy steps to enhance your images without any software installation.
+            </p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Upload Your Image</h3>
+                    <p>Click the upload area or drag and drop your image file into the designated area.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Adjust Settings</h3>
+                    <p>Use the sliders to adjust brightness, contrast, and saturation to your preference.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Apply Filters</h3>
+                    <p>Select from various filters like grayscale, sepia, or blur to enhance your image.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Download Result</h3>
+                    <p>Once satisfied with your edits, click the download button to save your image.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bottom Ad Unit -->
+    <div class="ad-container">
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-unit bottom-ad">
+            <div class="ad-text">Advertisement (728x90)</div>
+        </div>
+        <!-- AdSense code would be inserted here -->
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">ToolHubCenter</div>
+                <p>Your one-stop destination for free online tools. We provide a wide range of utilities to make your digital life easier.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">All Tools</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Popular Tools</h3>
+                <ul>
+                    <li><a href="#">Image Compressor</a></li>
+                    <li><a href="#">PDF Converter</a></li>
+                    <li><a href="#">QR Code Generator</a></li>
+                    <li><a href="#">Password Generator</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Email: contact@toolhubcenter.com</li>
+                    <li>Feedback: feedback@toolhubcenter.com</li>
+                    <li>Support: help@toolhubcenter.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 ToolHubCenter. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- AdSense Script -->
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '0d49ce870daff252fd6f617ee1e9481d',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+
+    <!-- Image Editor Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const canvas = document.getElementById('imageCanvas');
+            const ctx = canvas.getContext('2d');
+            const placeholderText = document.getElementById('placeholderText');
+            const resetBtn = document.getElementById('resetBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const brightnessSlider = document.getElementById('brightness');
+            const contrastSlider = document.getElementById('contrast');
+            const saturationSlider = document.getElementById('saturation');
+            const brightnessValue = document.getElementById('brightnessValue');
+            const contrastValue = document.getElementById('contrastValue');
+            const saturationValue = document.getElementById('saturationValue');
+            const applyFiltersBtn = document.getElementById('applyFilters');
+            const rotateLeftBtn = document.getElementById('rotateLeft');
+            const rotateRightBtn = document.getElementById('rotateRight');
+            
+            // Image state
+            let originalImage = null;
+            let currentImage = null;
+            let rotation = 0;
+            let filters = {
+                brightness: 100,
+                contrast: 100,
+                saturation: 100,
+                grayscale: false,
+                sepia: false,
+                invert: false,
+                blur: false
+            };
+            
+            // Event listeners
+            uploadArea.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleImageUpload);
+            resetBtn.addEventListener('click', resetImage);
+            downloadBtn.addEventListener('click', downloadImage);
+            applyFiltersBtn.addEventListener('click', applyFilters);
+            rotateLeftBtn.addEventListener('click', () => rotateImage(-90));
+            rotateRightBtn.addEventListener('click', () => rotateImage(90));
+            
+            // Slider events
+            brightnessSlider.addEventListener('input', updateSliderValue);
+            contrastSlider.addEventListener('input', updateSliderValue);
+            saturationSlider.addEventListener('input', updateSliderValue);
+            
+            // Tool events
+            document.querySelectorAll('.tool').forEach(tool => {
+                tool.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+                    if (filter) {
+                        this.classList.toggle('active');
+                        filters[filter] = !filters[filter];
+                    }
+                });
+            });
+            
+            // Functions
+            function handleImageUpload(e) {
+                const file = e.target.files[0];
+                if (!file || !file.type.match('image.*')) return;
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        originalImage = img;
+                        currentImage = img;
+                        placeholderText.style.display = 'none';
+                        drawImage();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            function drawImage() {
+                if (!currentImage) return;
+                
+                // Clear canvas
+                canvas.width = currentImage.width;
+                canvas.height = currentImage.height;
+                
+                // Apply transformations
+                ctx.save();
+                
+                // Apply rotation
+                if (rotation !== 0) {
+                    ctx.translate(canvas.width / 2, canvas.height / 2);
+                    ctx.rotate(rotation * Math.PI / 180);
+                    ctx.translate(-canvas.width / 2, -canvas.height / 2);
+                }
+                
+                // Draw image
+                ctx.drawImage(currentImage, 0, 0);
+                
+                // Apply filters
+                let filterString = '';
+                filterString += `brightness(${filters.brightness}%) `;
+                filterString += `contrast(${filters.contrast}%) `;
+                filterString += `saturate(${filters.saturation}%) `;
+                
+                if (filters.grayscale) filterString += 'grayscale(100%) ';
+                if (filters.sepia) filterString += 'sepia(100%) ';
+                if (filters.invert) filterString += 'invert(100%) ';
+                if (filters.blur) filterString += 'blur(4px) ';
+                
+                ctx.filter = filterString;
+                
+                ctx.restore();
+            }
+            
+            function resetImage() {
+                if (!originalImage) return;
+                
+                currentImage = originalImage;
+                rotation = 0;
+                
+                // Reset filters
+                filters = {
+                    brightness: 100,
+                    contrast: 100,
+                    saturation: 100,
+                    grayscale: false,
+                    sepia: false,
+                    invert: false,
+                    blur: false
+                };
+                
+                // Reset sliders
+                brightnessSlider.value = 100;
+                contrastSlider.value = 100;
+                saturationSlider.value = 100;
+                brightnessValue.textContent = '100%';
+                contrastValue.textContent = '100%';
+                saturationValue.textContent = '100%';
+                
+                // Reset tool states
+                document.querySelectorAll('.tool').forEach(tool => {
+                    tool.classList.remove('active');
+                });
+                
+                drawImage();
+            }
+            
+            function applyFilters() {
+                if (!originalImage) return;
+                drawImage();
+            }
+            
+            function rotateImage(degrees) {
+                rotation += degrees;
+                rotation = rotation % 360;
+                drawImage();
+            }
+            
+            function downloadImage() {
+                if (!currentImage) return;
+                
+                const link = document.createElement('a');
+                link.download = 'edited-image.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }
+            
+            function updateSliderValue(e) {
+                const slider = e.target;
+                const valueDisplay = document.getElementById(`${slider.id}Value`);
+                valueDisplay.textContent = `${slider.value}%`;
+                filters[slider.id] = parseInt(slider.value);
+            }
+            
+            // Initialize
+            resetImage();
+        });
+    </script>
+</body>
+</html>
