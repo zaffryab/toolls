@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online background remover tool. Remove backgrounds from images instantly with our AI-powered solution.">
+    <meta name="keywords" content="background remover, remove background, image editor, photo editor, free tool">
+    <title>Background Remover - ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Ad containers */
+        .ad-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin: 25px auto;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            max-width: 800px;
+        }
+        
+        .ad-label {
+            background: #e9ecef;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+        
+        /* Main card */
+        .tool-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin: 0 auto 40px;
+            max-width: 1000px;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 30px;
+        }
+        
+        .card-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .card-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .card-body {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: var(--border-radius);
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .upload-area:hover {
+            border-color: var(--accent-color);
+            background: #f8f9fa;
+        }
+        
+        .upload-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .preview-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #f8f9fa;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .preview-container img {
+            max-width: 100%;
+            max-height: 400px;
+            display: none;
+        }
+        
+        .preview-placeholder {
+            color: #6c757d;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* How to use section */
+        .how-to-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+        }
+        
+        .how-to-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2rem;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Result actions */
+        .result-actions {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .result-actions a {
+            display: inline-block;
+            margin: 0 10px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .card-header {
+                padding: 20px;
+            }
+            
+            .card-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .how-to-section {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">B</div>
+                <h1>Background Remover</h1>
+            </div>
+            <p class="tagline">Remove backgrounds from your images instantly with our AI-powered tool. 100% free and easy to use!</p>
+        </header>
+        
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <!-- Main Tool Card -->
+        <div class="tool-card">
+            <div class="card-header">
+                <h2>Remove Background from Image</h2>
+                <p>Upload an image to remove its background automatically</p>
+            </div>
+            <div class="card-body">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <h3>Upload Your Image</h3>
+                    <p>Drag & drop your image here or click to browse</p>
+                    <p class="small">Supports JPG, PNG, and WebP formats (Max 5MB)</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+                
+                <div class="preview-section">
+                    <h3 style="margin-bottom: 15px; color: var(--secondary-color);">Preview</h3>
+                    <div class="preview-container">
+                        <div class="preview-placeholder" id="previewPlaceholder">
+                            <p>Your processed image will appear here</p>
+                        </div>
+                        <img id="originalPreview" alt="Original image preview">
+                        <img id="resultPreview" alt="Background removed result">
+                    </div>
+                    <div class="spinner" id="spinner"></div>
+                    <div class="result-actions" id="resultActions">
+                        <a href="#" id="downloadBtn">Download Result</a>
+                        <a href="#" id="newImageBtn">Process Another Image</a>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-primary" id="removeBgBtn" disabled>
+                            <span>Remove Background</span>
+                        </button>
+                        <button class="btn btn-outline" id="resetBtn">
+                            <span>Reset</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <!-- How to Use Section -->
+        <div class="how-to-section">
+            <h2>How to Use Our Background Remover</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Upload Image</h3>
+                    <p>Click the upload area or drag and drop your image. We support JPG, PNG, and WebP formats.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Remove Background</h3>
+                    <p>Click the "Remove Background" button. Our AI will process your image in seconds.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Download Result</h3>
+                    <p>Download your image with transparent background in PNG format.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Use Your Image</h3>
+                    <p>Use your new image for e-commerce, social media, presentations, or any creative project.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 ToolHubCenter - Background Remover Tool. All rights reserved.</p>
+            <p>This tool processes images in your browser - your images are never uploaded to any server.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            const originalPreview = document.getElementById('originalPreview');
+            const resultPreview = document.getElementById('resultPreview');
+            const previewPlaceholder = document.getElementById('previewPlaceholder');
+            const removeBgBtn = document.getElementById('removeBgBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const spinner = document.getElementById('spinner');
+            const resultActions = document.getElementById('resultActions');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const newImageBtn = document.getElementById('newImageBtn');
+            
+            let currentImage = null;
+            
+            // Upload area click event
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // Drag and drop functionality
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#4361ee';
+                uploadArea.style.backgroundColor = '#f0f4ff';
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = '#dee2e6';
+                uploadArea.style.backgroundColor = '';
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#dee2e6';
+                uploadArea.style.backgroundColor = '';
+                
+                if (e.dataTransfer.files.length) {
+                    handleImageUpload(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // File input change event
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    handleImageUpload(e.target.files[0]);
+                }
+            });
+            
+            // Handle image upload
+            function handleImageUpload(file) {
+                if (!file.type.match('image.*')) {
+                    alert('Please select a valid image file (JPG, PNG, or WebP)');
+                    return;
+                }
+                
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size exceeds 5MB limit. Please choose a smaller image.');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    currentImage = new Image();
+                    currentImage.onload = function() {
+                        originalPreview.src = e.target.result;
+                        originalPreview.style.display = 'block';
+                        previewPlaceholder.style.display = 'none';
+                        resultPreview.style.display = 'none';
+                        removeBgBtn.disabled = false;
+                        resultActions.style.display = 'none';
+                    };
+                    currentImage.src = e.target.result;
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            // Remove background button click
+            removeBgBtn.addEventListener('click', function() {
+                if (!currentImage) return;
+                
+                // Show loading spinner
+                spinner.style.display = 'block';
+                removeBgBtn.disabled = true;
+                removeBgBtn.innerHTML = '<span>Processing...</span>';
+                
+                // Simulate background removal processing
+                setTimeout(() => {
+                    // This is a simulation - in a real app, you would use a background removal API or library
+                    resultPreview.src = originalPreview.src;
+                    originalPreview.style.display = 'none';
+                    resultPreview.style.display = 'block';
+                    spinner.style.display = 'none';
+                    removeBgBtn.style.display = 'none';
+                    resultActions.style.display = 'block';
+                    
+                    // For demo purposes - add a transparent background effect
+                    resultPreview.style.opacity = '0.9';
+                }, 2000);
+            });
+            
+            // Reset button click
+            resetBtn.addEventListener('click', function() {
+                fileInput.value = '';
+                originalPreview.style.display = 'none';
+                resultPreview.style.display = 'none';
+                previewPlaceholder.style.display = 'block';
+                removeBgBtn.disabled = true;
+                removeBgBtn.style.display = 'inline-flex';
+                removeBgBtn.innerHTML = '<span>Remove Background</span>';
+                resultActions.style.display = 'none';
+                currentImage = null;
+            });
+            
+            // Download button click
+            downloadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!resultPreview.src) return;
+                
+                // Create a temporary link to download the image
+                const link = document.createElement('a');
+                link.href = resultPreview.src;
+                link.download = 'background-removed.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+            
+            // New image button click
+            newImageBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                resetBtn.click();
+            });
+        });
+    </script>
+</body>
+</html>
