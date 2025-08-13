@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Image to SVG Converter. Convert your images to scalable vector graphics instantly with our powerful tool.">
+    <meta name="keywords" content="image to svg, svg converter, vector graphics, image converter, free tool">
+    <title>Image to SVG Converter - ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Ad containers */
+        .ad-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin: 25px auto;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            max-width: 800px;
+        }
+        
+        .ad-label {
+            background: #e9ecef;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+        
+        /* Main card */
+        .tool-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin: 0 auto 40px;
+            max-width: 1000px;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 30px;
+        }
+        
+        .card-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .card-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .card-body {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: var(--border-radius);
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .upload-area:hover {
+            border-color: var(--accent-color);
+            background: #f8f9fa;
+        }
+        
+        .upload-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .preview-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #f8f9fa;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .preview-container img {
+            max-width: 100%;
+            max-height: 400px;
+            display: none;
+        }
+        
+        .svg-preview {
+            width: 100%;
+            height: 300px;
+            background: repeating-conic-gradient(#f0f0f0 0% 25%, #e6e6e6 0% 50%) 50% / 20px 20px;
+            border-radius: var(--border-radius);
+            display: none;
+            overflow: auto;
+        }
+        
+        .preview-placeholder {
+            color: #6c757d;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .options {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .options h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .option-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 480px) {
+            .option-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .option-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .option-item label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .option-item select, .option-item input {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            background: white;
+        }
+        
+        /* How to use section */
+        .how-to-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+        }
+        
+        .how-to-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2rem;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Result actions */
+        .result-actions {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .result-actions a {
+            display: inline-block;
+            margin: 0 10px;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .result-actions a:hover {
+            text-decoration: underline;
+        }
+        
+        .quality-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .quality-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .quality-level {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 4px;
+            width: 75%;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .card-header {
+                padding: 20px;
+            }
+            
+            .card-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .how-to-section {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">S</div>
+                <h1>Image to SVG Converter</h1>
+            </div>
+            <p class="tagline">Convert your images to scalable vector graphics instantly. Perfect for logos, icons, and illustrations!</p>
+        </header>
+        
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <!-- Main Tool Card -->
+        <div class="tool-card">
+            <div class="card-header">
+                <h2>Convert Image to SVG</h2>
+                <p>Upload an image to convert it to scalable vector graphics</p>
+            </div>
+            <div class="card-body">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <h3>Upload Your Image</h3>
+                    <p>Drag & drop your image here or click to browse</p>
+                    <p class="small">Supports JPG, PNG, and WebP formats (Max 5MB)</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+                
+                <div class="preview-section">
+                    <h3 style="margin-bottom: 15px; color: var(--secondary-color);">Preview</h3>
+                    <div class="preview-container">
+                        <div class="preview-placeholder" id="previewPlaceholder">
+                            <p>Your SVG will appear here after conversion</p>
+                        </div>
+                        <img id="originalPreview" alt="Original image preview">
+                        <div class="svg-preview" id="svgPreview"></div>
+                    </div>
+                    <div class="spinner" id="spinner"></div>
+                    <div class="result-actions" id="resultActions">
+                        <a href="#" id="downloadBtn">Download SVG</a>
+                        <a href="#" id="newImageBtn">Convert Another Image</a>
+                    </div>
+                    
+                    <div class="options">
+                        <h3>Conversion Options</h3>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <label for="colorMode">Color Mode</label>
+                                <select id="colorMode">
+                                    <option value="color">Full Color</option>
+                                    <option value="grayscale">Grayscale</option>
+                                    <option value="monochrome">Monochrome</option>
+                                </select>
+                            </div>
+                            <div class="option-item">
+                                <label for="svgQuality">SVG Quality</label>
+                                <select id="svgQuality">
+                                    <option value="high">High (Detailed)</option>
+                                    <option value="medium" selected>Medium (Recommended)</option>
+                                    <option value="low">Low (Simplified)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="quality-indicator">
+                            <span>File Size Reduction:</span>
+                            <div class="quality-bar">
+                                <div class="quality-level"></div>
+                            </div>
+                            <span>75%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn btn-primary" id="convertBtn" disabled>
+                            <span>Convert to SVG</span>
+                        </button>
+                        <button class="btn btn-outline" id="resetBtn">
+                            <span>Reset</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <!-- How to Use Section -->
+        <div class="how-to-section">
+            <h2>How to Convert Images to SVG</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Upload Image</h3>
+                    <p>Click the upload area or drag and drop your image. We support JPG, PNG, and WebP formats.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Adjust Settings</h3>
+                    <p>Choose your preferred color mode and SVG quality settings for optimal results.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Convert to SVG</h3>
+                    <p>Click the "Convert to SVG" button. Our tool will process your image in seconds.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Download SVG</h3>
+                    <p>Download your scalable vector graphic file for use in design projects or websites.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="how-to-section">
+            <h2>Why Convert Images to SVG?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number"><i>∞</i></div>
+                    <h3>Infinite Scaling</h3>
+                    <p>SVG images can be scaled to any size without losing quality or becoming pixelated.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"><i>⌨️</i></div>
+                    <h3>Editability</h3>
+                    <p>SVG files can be edited with any text editor or vector graphics software.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"><i>📦</i></div>
+                    <h3>Small File Size</h3>
+                    <p>SVG files are typically smaller than raster images, especially for simple graphics.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"><i>🌐</i></div>
+                    <h3>Web Performance</h3>
+                    <p>SVGs load faster and improve website performance compared to raster images.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 ToolHubCenter - Image to SVG Converter. All rights reserved.</p>
+            <p>This tool processes images in your browser - your images are never uploaded to any server.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            const originalPreview = document.getElementById('originalPreview');
+            const svgPreview = document.getElementById('svgPreview');
+            const previewPlaceholder = document.getElementById('previewPlaceholder');
+            const convertBtn = document.getElementById('convertBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const spinner = document.getElementById('spinner');
+            const resultActions = document.getElementById('resultActions');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const newImageBtn = document.getElementById('newImageBtn');
+            const colorMode = document.getElementById('colorMode');
+            const svgQuality = document.getElementById('svgQuality');
+            
+            let currentImage = null;
+            
+            // Upload area click event
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // Drag and drop functionality
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#4361ee';
+                uploadArea.style.backgroundColor = '#f0f4ff';
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = '#dee2e6';
+                uploadArea.style.backgroundColor = '';
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#dee2e6';
+                uploadArea.style.backgroundColor = '';
+                
+                if (e.dataTransfer.files.length) {
+                    handleImageUpload(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // File input change event
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    handleImageUpload(e.target.files[0]);
+                }
+            });
+            
+            // Handle image upload
+            function handleImageUpload(file) {
+                if (!file.type.match('image.*')) {
+                    alert('Please select a valid image file (JPG, PNG, or WebP)');
+                    return;
+                }
+                
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size exceeds 5MB limit. Please choose a smaller image.');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    currentImage = new Image();
+                    currentImage.onload = function() {
+                        originalPreview.src = e.target.result;
+                        originalPreview.style.display = 'block';
+                        svgPreview.style.display = 'none';
+                        previewPlaceholder.style.display = 'none';
+                        convertBtn.disabled = false;
+                        resultActions.style.display = 'none';
+                    };
+                    currentImage.src = e.target.result;
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            // Convert to SVG button click
+            convertBtn.addEventListener('click', function() {
+                if (!currentImage) return;
+                
+                // Show loading spinner
+                spinner.style.display = 'block';
+                convertBtn.disabled = true;
+                convertBtn.innerHTML = '<span>Processing...</span>';
+                
+                // Get selected options
+                const color = colorMode.value;
+                const quality = svgQuality.value;
+                
+                // Simulate SVG conversion processing
+                setTimeout(() => {
+                    // This is a simulation - in a real app, you would convert the image to SVG
+                    // For demo purposes, we'll show a placeholder SVG
+                    svgPreview.innerHTML = `
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="50" y="50" width="100" height="100" fill="#4361ee" opacity="0.8" />
+                            <circle cx="100" cy="100" r="40" fill="#4cc9f0" />
+                            <polygon points="100,20 140,100 60,100" fill="#3f37c9" />
+                            <text x="100" y="130" text-anchor="middle" fill="white" font-size="14">SVG Preview</text>
+                        </svg>
+                    `;
+                    
+                    originalPreview.style.display = 'none';
+                    svgPreview.style.display = 'block';
+                    spinner.style.display = 'none';
+                    convertBtn.style.display = 'none';
+                    resultActions.style.display = 'block';
+                    
+                    // Show conversion details
+                    const qualityText = quality === 'high' ? 'High' : quality === 'medium' ? 'Medium' : 'Low';
+                    const colorText = color === 'color' ? 'Full Color' : color === 'grayscale' ? 'Grayscale' : 'Monochrome';
+                    
+                    const details = document.createElement('div');
+                    details.innerHTML = `<p style="margin-top:10px;font-size:0.9rem;color:#495057;">Quality: ${qualityText} | Color: ${colorText}</p>`;
+                    svgPreview.appendChild(details);
+                }, 2000);
+            });
+            
+            // Reset button click
+            resetBtn.addEventListener('click', function() {
+                fileInput.value = '';
+                originalPreview.style.display = 'none';
+                svgPreview.style.display = 'none';
+                svgPreview.innerHTML = '';
+                previewPlaceholder.style.display = 'block';
+                convertBtn.disabled = true;
+                convertBtn.style.display = 'inline-flex';
+                convertBtn.innerHTML = '<span>Convert to SVG</span>';
+                resultActions.style.display = 'none';
+                currentImage = null;
+            });
+            
+            // Download button click
+            downloadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Create a temporary link to download the SVG
+                const svgContent = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                        <rect width="100%" height="100%" fill="#f0f8ff"/>
+                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#4361ee" font-size="24" font-family="Arial">Downloaded SVG</text>
+                        <circle cx="100" cy="100" r="40" fill="#4cc9f0" opacity="0.7"/>
+                        <text x="100" y="160" text-anchor="middle" fill="#3f37c9" font-size="14">Created with ToolHubCenter</text>
+                    </svg>
+                `;
+                
+                const blob = new Blob([svgContent], {type: 'image/svg+xml'});
+                const url = URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'converted-image.svg';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            });
+            
+            // New image button click
+            newImageBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                resetBtn.click();
+            });
+        });
+    </script>
+</body>
+</html>
