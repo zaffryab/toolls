@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Text Overlay Tool - Add custom text to your images in seconds. Perfect for creating banners, social media posts, and marketing materials.">
+    <meta name="keywords" content="text overlay, image editor, online tool, text on image, free image editor">
+    <meta name="author" content="ToolHubCenter">
+    <title>Text Overlay Tool | Free Online Image Text Editor | ToolHubCenter</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    
+    <!-- Open Graph Tags for Social Sharing -->
+    <meta property="og:title" content="Free Text Overlay Tool by ToolHubCenter">
+    <meta property="og:description" content="Add custom text to any image in seconds with our free online tool.">
+    <meta property="og:type" content="website">
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 8px 4px;
+            border-bottom: 2px solid transparent;
+        }
+        
+        nav a:hover, nav a.active {
+            color: white;
+            border-bottom: 2px solid white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .ad-container {
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+            height: 90px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .ad-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(0,0,0,0.05);
+            color: rgba(0,0,0,0.4);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 0 0 0 8px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+        
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .preview-container {
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px dashed #dee2e6;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #imagePreview {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        
+        .text-overlay {
+            position: absolute;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            cursor: move;
+            user-select: none;
+            padding: 10px;
+            max-width: 80%;
+            text-align: center;
+            word-wrap: break-word;
+        }
+        
+        .controls-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select, button, textarea {
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            flex: 1;
+        }
+        
+        .btn-secondary:hover {
+            background: #f0f4ff;
+        }
+        
+        .how-to-use {
+            margin-top: 3rem;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 900px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Color picker styling */
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        #textColor {
+            width: 60px;
+            height: 40px;
+            padding: 2px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        /* Range slider styling */
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: #e9ecef;
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        /* Upload area styling */
+        .upload-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">T</div>
+                <span>ToolHubCenter</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Text Overlay</a></li>
+                    <li><a href="#">Tools</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code (Top) -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <!-- Main Tool Card -->
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Text Overlay Tool</h1>
+                <p class="card-subtitle">Add custom text to any image in seconds</p>
+            </div>
+            
+            <div class="tool-container">
+                <!-- Preview Section -->
+                <div class="preview-section">
+                    <div class="preview-container" id="previewContainer">
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">📁</div>
+                            <h3>Upload an Image</h3>
+                            <p>Click here or drag & drop an image</p>
+                            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                        </div>
+                        <img id="imagePreview" alt="Preview">
+                        <div class="text-overlay" id="textOverlay">Your Text Here</div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="btn btn-primary" id="downloadBtn">Download Image</button>
+                    </div>
+                </div>
+                
+                <!-- Controls Section -->
+                <div class="controls-section">
+                    <div class="control-group">
+                        <label for="overlayText">Overlay Text</label>
+                        <textarea id="overlayText" placeholder="Enter text to overlay">Your Text Here</textarea>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="fontFamily">Font Family</label>
+                        <select id="fontFamily">
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="'Times New Roman', serif">Times New Roman</option>
+                            <option value="'Courier New', monospace">Courier New</option>
+                            <option value="'Comic Sans MS', cursive">Comic Sans</option>
+                            <option value="'Impact', fantasy">Impact</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="fontSize">Font Size (px)</label>
+                        <input type="range" id="fontSize" min="10" max="120" value="32">
+                        <span id="fontSizeValue">32px</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="textColor">Text Color</label>
+                        <div class="color-picker-container">
+                            <input type="color" id="textColor" value="#ffffff">
+                            <span>White</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="textAlign">Text Alignment</label>
+                        <select id="textAlign">
+                            <option value="center">Center</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="textShadow">Text Shadow</label>
+                        <select id="textShadow">
+                            <option value="2px 2px 4px rgba(0,0,0,0.7)">On (Default)</option>
+                            <option value="none">Off</option>
+                        </select>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="btn btn-secondary" id="resetBtn">Reset Position</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- How to Use Section -->
+        <div class="how-to-use">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">How to Use the Text Overlay Tool</h2>
+                    <p class="card-subtitle">Follow these simple steps to add text to your images</p>
+                </div>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Upload Your Image</h3>
+                        <p>Click the upload area to select an image from your device or drag and drop it onto the preview area.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Customize Your Text</h3>
+                        <p>Type your desired text in the text box and adjust the font, size, color, and alignment using the controls.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Position the Text</h3>
+                        <p>Drag the text overlay to position it anywhere on your image. Resize it as needed.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Download Your Image</h3>
+                        <p>Click the "Download Image" button to save your customized image to your device.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code (Bottom) -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 ToolHubCenter - Free Online Tools for Everyone</p>
+        <p>Text Overlay Tool v1.0 | All rights reserved</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const imageUpload = document.getElementById('imageUpload');
+            const uploadArea = document.getElementById('uploadArea');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewContainer = document.getElementById('previewContainer');
+            const textOverlay = document.getElementById('textOverlay');
+            const overlayText = document.getElementById('overlayText');
+            const fontFamily = document.getElementById('fontFamily');
+            const fontSize = document.getElementById('fontSize');
+            const fontSizeValue = document.getElementById('fontSizeValue');
+            const textColor = document.getElementById('textColor');
+            const textAlign = document.getElementById('textAlign');
+            const textShadow = document.getElementById('textShadow');
+            const resetBtn = document.getElementById('resetBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            // Initialize variables
+            let isDragging = false;
+            let offsetX, offsetY;
+            
+            // Event Listeners
+            
+            // Upload image
+            uploadArea.addEventListener('click', () => imageUpload.click());
+            
+            imageUpload.addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                        uploadArea.style.display = 'none';
+                    }
+                    
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+            
+            // Drag and drop for image upload
+            previewContainer.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#4361ee';
+            });
+            
+            previewContainer.addEventListener('dragleave', function() {
+                this.style.borderColor = '#dee2e6';
+            });
+            
+            previewContainer.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#dee2e6';
+                
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                        uploadArea.style.display = 'none';
+                    }
+                    
+                    reader.readAsDataURL(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // Text input
+            overlayText.addEventListener('input', function() {
+                textOverlay.textContent = this.value;
+            });
+            
+            // Font family
+            fontFamily.addEventListener('change', function() {
+                textOverlay.style.fontFamily = this.value;
+            });
+            
+            // Font size
+            fontSize.addEventListener('input', function() {
+                const size = this.value + 'px';
+                textOverlay.style.fontSize = size;
+                fontSizeValue.textContent = size;
+            });
+            
+            // Text color
+            textColor.addEventListener('input', function() {
+                textOverlay.style.color = this.value;
+            });
+            
+            // Text alignment
+            textAlign.addEventListener('change', function() {
+                textOverlay.style.textAlign = this.value;
+            });
+            
+            // Text shadow
+            textShadow.addEventListener('change', function() {
+                textOverlay.style.textShadow = this.value;
+            });
+            
+            // Reset text position
+            resetBtn.addEventListener('click', function() {
+                textOverlay.style.left = '50%';
+                textOverlay.style.top = '50%';
+                textOverlay.style.transform = 'translate(-50%, -50%)';
+            });
+            
+            // Download image
+            downloadBtn.addEventListener('click', function() {
+                alert('Image downloaded! In a real implementation, this would save the image with your text overlay.');
+                // Actual implementation would use canvas to combine image and text
+            });
+            
+            // Make text draggable
+            textOverlay.addEventListener('mousedown', startDrag);
+            
+            function startDrag(e) {
+                isDragging = true;
+                
+                // Get initial mouse position
+                offsetX = e.clientX - textOverlay.getBoundingClientRect().left;
+                offsetY = e.clientY - textOverlay.getBoundingClientRect().top;
+                
+                // Add event listeners
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', stopDrag);
+            }
+            
+            function drag(e) {
+                if (isDragging) {
+                    // Calculate new position
+                    const containerRect = previewContainer.getBoundingClientRect();
+                    let x = e.clientX - containerRect.left - offsetX;
+                    let y = e.clientY - containerRect.top - offsetY;
+                    
+                    // Constrain within container
+                    x = Math.max(0, Math.min(x, containerRect.width - textOverlay.offsetWidth));
+                    y = Math.max(0, Math.min(y, containerRect.height - textOverlay.offsetHeight));
+                    
+                    // Apply position
+                    textOverlay.style.left = x + 'px';
+                    textOverlay.style.top = y + 'px';
+                    textOverlay.style.transform = 'none';
+                }
+            }
+            
+            function stopDrag() {
+                isDragging = false;
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+            }
+        });
+    </script>
+</body>
+</html>
