@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Domain Authority Checker - check the authority score of any website instantly. Analyze SEO metrics and improve your website performance.">
+    <meta name="keywords" content="domain authority checker, SEO tool, website authority, moz domain authority, website ranking">
+    <title>Domain Authority Checker - SEO Analysis Tool | ToolHubCenter</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #1a2a6c;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #b21f1f;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, #1a2a6c, #2a3a8c);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .ad-container {
+            background: #f8f9fa;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-label {
+            background: #e9ecef;
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        @media (min-width: 992px) {
+            .tool-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .input-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .result-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .result-container {
+            border: 2px dashed #1a2a6c;
+            border-radius: 8px;
+            min-height: 350px;
+            padding: 20px;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .placeholder-text {
+            color: #6c757d;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #1a2a6c, #2a3a8c);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #2a3a8c, #3a4a9c);
+            transform: translateY(-2px);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1a2a6c;
+            color: #1a2a6c;
+        }
+        
+        .btn-outline:hover {
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #1a2a6c;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26, 42, 108, 0.2);
+        }
+        
+        .instructions {
+            background: #e9f7fe;
+            border-left: 4px solid #1a2a6c;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+        }
+        
+        .instructions h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .result-content {
+            width: 100%;
+            display: none;
+        }
+        
+        .domain-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1a2a6c;
+            word-break: break-all;
+        }
+        
+        .authority-score {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+        }
+        
+        .score-text {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 25px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a2a6c;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #1a2a6c, #2a3a8c);
+            border-radius: 10px;
+            width: 0;
+            transition: width 1s ease;
+        }
+        
+        .quality-indicator {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        
+        .quality-indicator span {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .quality-indicator span:first-child {
+            text-align: left;
+        }
+        
+        .quality-indicator span:last-child {
+            text-align: right;
+        }
+        
+        .comparison-chart {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            margin: 30px 0;
+            padding: 0 10px;
+        }
+        
+        .bar {
+            width: 40px;
+            background: linear-gradient(to top, #1a2a6c, #2a3a8c);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: height 1s ease;
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #6c757d;
+            white-space: nowrap;
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 700;
+            color: #1a2a6c;
+        }
+        
+        .recent-checks {
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .recent-checks h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            text-align: left;
+            width: 100;
+        }
+        
+        .recent-list {
+            width: 100%;
+            text-align: left;
+        }
+        
+        .recent-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .recent-domain {
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        .recent-score {
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .authority-score {
+                font-size: 3rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .comparison-chart {
+                height: 150px;
+            }
+            
+            .bar {
+                width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Domain Authority Checker</h1>
+            <p class="subtitle">Check the authority score of any website instantly. Analyze SEO metrics and improve your website performance.</p>
+        </header>
+        
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <!-- Google AdSense Ad Unit Code -->
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            </div>
+        </div>
+        
+        <div class="tool-container">
+            <div class="card">
+                <div class="card-header">Check Domain Authority</div>
+                <div class="card-body">
+                    <div class="input-section">
+                        <div class="form-group">
+                            <label for="domainInput">Enter Domain Name</label>
+                            <input type="text" id="domainInput" placeholder="example.com">
+                        </div>
+                        
+                        <button id="checkBtn" class="btn"><i class="fas fa-search"></i> Check Authority</button>
+                        
+                        <div class="instructions">
+                            <h3>How to Use This Tool</h3>
+                            <ol>
+                                <li>Enter the domain name you want to check in the input field</li>
+                                <li>Click "Check Authority" to analyze the domain</li>
+                                <li>View the Domain Authority score and detailed metrics</li>
+                                <li>Compare with other popular websites</li>
+                                <li>Use the results to improve your SEO strategy</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="recent-checks">
+                            <h3>Recently Checked Domains</h3>
+                            <div class="recent-list" id="recentList">
+                                <div class="recent-item">
+                                    <span class="recent-domain">google.com</span>
+                                    <span class="recent-score">96/100</span>
+                                </div>
+                                <div class="recent-item">
+                                    <span class="recent-domain">youtube.com</span>
+                                    <span class="recent-score">94/100</span>
+                                </div>
+                                <div class="recent-item">
+                                    <span class="recent-domain">wikipedia.org</span>
+                                    <span class="recent-score">93/100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">Domain Authority Results</div>
+                <div class="card-body">
+                    <div class="result-section">
+                        <div class="result-container">
+                            <div class="placeholder-text" id="resultPlaceholder">
+                                <i class="fas fa-globe-americas" style="font-size: 4rem; margin-bottom: 20px; color: #1a2a6c;"></i>
+                                <h2>Check Domain Authority</h2>
+                                <p>Enter a domain name to see its authority score and SEO metrics</p>
+                            </div>
+                            
+                            <div class="result-content" id="resultContent">
+                                <div class="domain-name" id="resultDomain">example.com</div>
+                                <div class="authority-score" id="authorityScore">72</div>
+                                <div class="score-text">Domain Authority Score</div>
+                                
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progressFill"></div>
+                                </div>
+                                
+                                <div class="quality-indicator">
+                                    <span>Low</span>
+                                    <span>Medium</span>
+                                    <span>High</span>
+                                    <span>Excellent</span>
+                                </div>
+                                
+                                <div class="metrics-grid">
+                                    <div class="metric-card">
+                                        <div class="metric-value" id="pageAuthority">42</div>
+                                        <div class="metric-label">Page Authority</div>
+                                    </div>
+                                    <div class="metric-card">
+                                        <div class="metric-value" id="backlinks">1.2K</div>
+                                        <div class="metric-label">Backlinks</div>
+                                    </div>
+                                    <div class="metric-card">
+                                        <div class="metric-value" id="rankingKeywords">3.5K</div>
+                                        <div class="metric-label">Ranking Keywords</div>
+                                    </div>
+                                    <div class="metric-card">
+                                        <div class="metric-value" id="socialEngagement">78%</div>
+                                        <div class="metric-label">Social Engagement</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="comparison-chart" id="comparisonChart">
+                                    <div class="bar" style="height: 80%">
+                                        <div class="bar-value" id="currentDomainScore">72</div>
+                                        <div class="bar-label">Your Domain</div>
+                                    </div>
+                                    <div class="bar" style="height: 95%">
+                                        <div class="bar-value">95</div>
+                                        <div class="bar-label">Google</div>
+                                    </div>
+                                    <div class="bar" style="height: 88%">
+                                        <div class="bar-value">88</div>
+                                        <div class="bar-label">Amazon</div>
+                                    </div>
+                                    <div class="bar" style="height: 76%">
+                                        <div class="bar-value">76</div>
+                                        <div class="bar-label">Industry Avg</div>
+                                    </div>
+                                    <div class="bar" style="height: 68%">
+                                        <div class="bar-value">68</div>
+                                        <div class="bar-label">Competitor</div>
+                                    </div>
+                                </div>
+                                
+                                <button id="newCheckBtn" class="btn btn-outline"><i class="fas fa-redo"></i> Check Another Domain</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <!-- Google AdSense Ad Unit Code -->
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 ToolHubCenter - Free Online Tools for Everyone</p>
+            <p>Domain Authority Checker v1.0 | Improve your website's SEO performance</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const domainInput = document.getElementById('domainInput');
+            const checkBtn = document.getElementById('checkBtn');
+            const resultPlaceholder = document.getElementById('resultPlaceholder');
+            const resultContent = document.getElementById('resultContent');
+            const resultDomain = document.getElementById('resultDomain');
+            const authorityScore = document.getElementById('authorityScore');
+            const progressFill = document.getElementById('progressFill');
+            const pageAuthority = document.getElementById('pageAuthority');
+            const backlinks = document.getElementById('backlinks');
+            const rankingKeywords = document.getElementById('rankingKeywords');
+            const socialEngagement = document.getElementById('socialEngagement');
+            const newCheckBtn = document.getElementById('newCheckBtn');
+            const recentList = document.getElementById('recentList');
+            const currentDomainScore = document.getElementById('currentDomainScore');
+            
+            // Sample data for different domains
+            const domainData = {
+                'google.com': { da: 96, pa: 95, backlinks: '14.5B', keywords: '1.2B', social: 92 },
+                'youtube.com': { da: 94, pa: 93, backlinks: '8.2B', keywords: '890M', social: 95 },
+                'wikipedia.org': { da: 93, pa: 92, backlinks: '5.7B', keywords: '450M', social: 87 },
+                'amazon.com': { da: 93, pa: 91, backlinks: '4.8B', keywords: '780M', social: 89 },
+                'facebook.com': { da: 94, pa: 93, backlinks: '6.3B', keywords: '520M', social: 97 },
+                'twitter.com': { da: 93, pa: 92, backlinks: '3.9B', keywords: '320M', social: 96 },
+                'toolhubcenter.com': { da: 72, pa: 68, backlinks: '1.2K', keywords: '3.5K', social: 78 },
+                'example.com': { da: 42, pa: 38, backlinks: '850', keywords: '1.2K', social: 45 }
+            };
+            
+            // Recently checked domains
+            const recentDomains = [
+                { domain: 'google.com', score: 96 },
+                { domain: 'youtube.com', score: 94 },
+                { domain: 'wikipedia.org', score: 93 }
+            ];
+            
+            // Render recent domains
+            function renderRecentDomains() {
+                recentList.innerHTML = '';
+                recentDomains.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'recent-item';
+                    div.innerHTML = `
+                        <span class="recent-domain">${item.domain}</span>
+                        <span class="recent-score">${item.score}/100</span>
+                    `;
+                    recentList.appendChild(div);
+                });
+            }
+            
+            // Check domain authority
+            checkBtn.addEventListener('click', function() {
+                const domain = domainInput.value.trim().toLowerCase();
+                
+                if (!domain) {
+                    alert('Please enter a domain name');
+                    return;
+                }
+                
+                // Remove protocol and paths
+                const cleanDomain = domain.replace(/^https?:\/\//, '').split('/')[0];
+                
+                // Check if domain is in our sample data
+                const domainInfo = domainData[cleanDomain] || domainData['example.com'];
+                
+                // Update UI
+                resultPlaceholder.style.display = 'none';
+                resultContent.style.display = 'flex';
+                resultDomain.textContent = cleanDomain;
+                authorityScore.textContent = domainInfo.da;
+                currentDomainScore.textContent = domainInfo.da;
+                
+                // Animate progress bar
+                progressFill.style.width = '0';
+                setTimeout(() => {
+                    progressFill.style.width = `${domainInfo.da}%`;
+                }, 100);
+                
+                // Update metrics
+                pageAuthority.textContent = domainInfo.pa;
+                backlinks.textContent = domainInfo.backlinks;
+                rankingKeywords.textContent = domainInfo.keywords;
+                socialEngagement.textContent = `${domainInfo.social}%`;
+                
+                // Add to recent domains if not already there
+                if (!recentDomains.some(item => item.domain === cleanDomain)) {
+                    recentDomains.unshift({ domain: cleanDomain, score: domainInfo.da });
+                    if (recentDomains.length > 5) recentDomains.pop();
+                    renderRecentDomains();
+                }
+            });
+            
+            // New check button
+            newCheckBtn.addEventListener('click', function() {
+                resultPlaceholder.style.display = 'flex';
+                resultContent.style.display = 'none';
+                domainInput.value = '';
+                domainInput.focus();
+            });
+            
+            // Allow Enter key to submit
+            domainInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkBtn.click();
+                }
+            });
+            
+            // Initialize
+            renderRecentDomains();
+            
+            // Demo animation on load
+            setTimeout(() => {
+                progressFill.style.width = '72%';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
