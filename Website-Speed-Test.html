@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Website Speed Test Tool - Analyze your website performance, load time, and page size instantly">
+    <meta name="keywords" content="website speed test, page speed, website performance, seo tool, web optimization">
+    <title>Website Speed Test Tool | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --gray: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7ff;
+            background-image: linear-gradient(135deg, #f5f7ff 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        nav a.active {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .ad-container {
+            background: white;
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            min-height: 90px;
+        }
+
+        .ad-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(0,0,0,0.2);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            border-bottom-left-radius: 4px;
+        }
+
+        main {
+            padding: 30px 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .test-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .url-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .url-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        .results-container {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .metric-title {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .metric-unit {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .progress-container {
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .history-title {
+            margin: 30px 0 15px;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .history-table th {
+            background: #f8f9fa;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        .history-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .how-to-use {
+            margin-top: 40px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .step-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(67, 97, 238, 0.1);
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #343a40;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .metric-card {
+                padding: 15px;
+            }
+            
+            .metric-value {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loader */
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        /* Performance rating */
+        .performance-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .rating-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .rating-excellent {
+            color: var(--success);
+        }
+
+        .rating-good {
+            color: #8bc34a;
+        }
+
+        .rating-average {
+            color: var(--warning);
+        }
+
+        .rating-poor {
+            color: #ff5722;
+        }
+
+        .rating-bad {
+            color: var(--danger);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="logo-text">ToolHubCenter</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">Speed Test</a></li>
+                        <li><a href="#">How to Use</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Ad Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <main>
+            <div class="card">
+                <h2 class="card-title">Website Speed Test</h2>
+                <div class="test-container">
+                    <div class="input-group">
+                        <input type="url" id="url-input" class="url-input" placeholder="Enter website URL (e.g., https://example.com)" required>
+                        <button id="test-btn" class="btn">
+                            <i class="fas fa-bolt"></i> Test Speed
+                        </button>
+                    </div>
+                    
+                    <div class="loader" id="loader">
+                        <div class="loader-spinner"></div>
+                        <p class="loader-text">Analyzing website performance...</p>
+                    </div>
+                    
+                    <div class="results-container" id="results-container">
+                        <div class="results-grid">
+                            <div class="metric-card">
+                                <div class="metric-title">Load Time</div>
+                                <div class="metric-value" id="load-time">1.24</div>
+                                <div class="metric-unit">seconds</div>
+                                <div class="performance-rating">
+                                    <span class="rating-value rating-excellent">Excellent</span>
+                                </div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-title">Page Size</div>
+                                <div class="metric-value" id="page-size">1.8</div>
+                                <div class="metric-unit">MB</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-title">Requests</div>
+                                <div class="metric-value" id="requests">42</div>
+                                <div class="metric-unit">files</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-title">Performance</div>
+                                <div class="metric-value" id="performance">92</div>
+                                <div class="metric-unit">/100</div>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 92%"></div>
+                                    </div>
+                                    <div class="progress-labels">
+                                        <span>0</span>
+                                        <span>50</span>
+                                        <span>100</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="history-title">Recent Tests</h3>
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Website</th>
+                                    <th>Load Time</th>
+                                    <th>Size</th>
+                                    <th>Performance</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>google.com</td>
+                                    <td>0.45s</td>
+                                    <td>0.7MB</td>
+                                    <td>98/100</td>
+                                    <td>Today</td>
+                                </tr>
+                                <tr>
+                                    <td>youtube.com</td>
+                                    <td>1.82s</td>
+                                    <td>2.1MB</td>
+                                    <td>87/100</td>
+                                    <td>Today</td>
+                                </tr>
+                                <tr>
+                                    <td>amazon.com</td>
+                                    <td>1.35s</td>
+                                    <td>1.5MB</td>
+                                    <td>91/100</td>
+                                    <td>Yesterday</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card how-to-use">
+                <h2 class="card-title">How to Use Our Speed Test Tool</h2>
+                <div class="steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Enter Website URL</h3>
+                        <p>Type the full URL of the website you want to test in the input field. Make sure to include "https://" for accurate results.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Run the Test</h3>
+                        <p>Click the "Test Speed" button to start the analysis. Our tool will connect to the website and measure its performance.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Analyze Results</h3>
+                        <p>Review the detailed metrics including load time, page size, and performance score. Use these insights to optimize your website.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Ad Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your all-in-one platform for web tools and utilities designed to improve your online presence and productivity.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">All Tools</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">SEO Analyzer</a></li>
+                        <li><a href="#">Keyword Research</a></li>
+                        <li><a href="#">Backlink Checker</a></li>
+                        <li><a href="#">SSL Checker</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> support@toolhubcenter.com</li>
+                        <li><i class="fas fa-globe"></i> www.toolhubcenter.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 ToolHubCenter. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const testBtn = document.getElementById('test-btn');
+            const urlInput = document.getElementById('url-input');
+            const loader = document.getElementById('loader');
+            const resultsContainer = document.getElementById('results-container');
+            
+            testBtn.addEventListener('click', function() {
+                const url = urlInput.value.trim();
+                
+                if (!url) {
+                    alert('Please enter a valid URL');
+                    return;
+                }
+                
+                // Validate URL format
+                const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+                if (!urlPattern.test(url)) {
+                    alert('Please enter a valid URL format (e.g., https://example.com)');
+                    return;
+                }
+                
+                // Show loader, hide results
+                loader.style.display = 'block';
+                resultsContainer.style.display = 'none';
+                
+                // Simulate speed test with random results
+                setTimeout(() => {
+                    // Generate random test results
+                    const loadTime = (Math.random() * 3 + 0.3).toFixed(2);
+                    const pageSize = (Math.random() * 3 + 0.5).toFixed(1);
+                    const requests = Math.floor(Math.random() * 100 + 20);
+                    const performance = Math.floor(Math.random() * 30 + 70);
+                    
+                    // Update DOM with results
+                    document.getElementById('load-time').textContent = loadTime;
+                    document.getElementById('page-size').textContent = pageSize;
+                    document.getElementById('requests').textContent = requests;
+                    document.getElementById('performance').textContent = performance;
+                    
+                    // Update progress bar
+                    document.querySelector('.progress-fill').style.width = performance + '%';
+                    
+                    // Update performance rating
+                    const ratingValue = document.querySelector('.rating-value');
+                    ratingValue.className = 'rating-value ';
+                    
+                    if (performance >= 90) {
+                        ratingValue.classList.add('rating-excellent');
+                        ratingValue.textContent = 'Excellent';
+                    } else if (performance >= 80) {
+                        ratingValue.classList.add('rating-good');
+                        ratingValue.textContent = 'Good';
+                    } else if (performance >= 70) {
+                        ratingValue.classList.add('rating-average');
+                        ratingValue.textContent = 'Average';
+                    } else if (performance >= 60) {
+                        ratingValue.classList.add('rating-poor');
+                        ratingValue.textContent = 'Poor';
+                    } else {
+                        ratingValue.classList.add('rating-bad');
+                        ratingValue.textContent = 'Bad';
+                    }
+                    
+                    // Hide loader, show results
+                    loader.style.display = 'none';
+                    resultsContainer.style.display = 'block';
+                }, 2000);
+            });
+            
+            // Allow Enter key to trigger the test
+            urlInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    testBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
