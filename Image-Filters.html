@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online image filter tool - apply various filters to your images instantly. Grayscale, sepia, invert and more!">
+    <meta name="keywords" content="image filter, photo editor, online photo tool, image effects, photo filters">
+    <title>Image Filters Tool - Edit Photos Online | ToolHubCenter</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #1a2a6c;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #b21f1f;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, #1a2a6c, #2a3a8c);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .ad-container {
+            background: #f8f9fa;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-label {
+            background: #e9ecef;
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .preview-container {
+            border: 2px dashed #1a2a6c;
+            border-radius: 8px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+        }
+        
+        #imagePreview {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        
+        .placeholder-text {
+            color: #6c757d;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #1a2a6c, #2a3a8c);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #2a3a8c, #3a4a9c);
+            transform: translateY(-2px);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1a2a6c;
+            color: #1a2a6c;
+        }
+        
+        .btn-outline:hover {
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .filter-option {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-option:hover {
+            border-color: #1a2a6c;
+            background: #f0f5ff;
+            transform: translateY(-3px);
+        }
+        
+        .filter-option.active {
+            border-color: #1a2a6c;
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .filter-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            margin: 0 auto 10px;
+            background: #6c757d;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .instructions {
+            background: #e9f7fe;
+            border-left: 4px solid #1a2a6c;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+        }
+        
+        .instructions h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .filter-name {
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
+        .filter-option .icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #1a2a6c;
+        }
+        
+        .filter-option.active .icon {
+            color: white;
+        }
+        
+        /* Filter preview colors */
+        .original { background: linear-gradient(45deg, #1a2a6c, #b21f1f); }
+        .grayscale { background: linear-gradient(45deg, #888, #555); }
+        .sepia { background: linear-gradient(45deg, #704214, #8b5a2b); }
+        .invert { background: linear-gradient(45deg, #000, #fff); }
+        .brightness { background: linear-gradient(45deg, #ff9d00, #ffce00); }
+        .contrast { background: linear-gradient(45deg, #00b4d8, #0077b6); }
+        .saturation { background: linear-gradient(45deg, #e63946, #ff758f); }
+        .blur { background: linear-gradient(45deg, #adb5bd, #dee2e6); filter: blur(2px); }
+        .hue-rotate { background: linear-gradient(45deg, #ff0, #f0f); }
+        
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Image Filters Tool</h1>
+            <p class="subtitle">Enhance your photos with our collection of professional filters. Apply effects instantly and download your edited images for free!</p>
+        </header>
+        
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <!-- Google AdSense Ad Unit Code -->
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            </div>
+        </div>
+        
+        <div class="tool-container">
+            <div class="card">
+                <div class="card-header">Upload & Filters</div>
+                <div class="card-body">
+                    <div class="upload-section">
+                        <input type="file" id="imageUpload" accept="image/*" class="btn" style="margin-bottom: 20px;">
+                        
+                        <div class="filter-grid">
+                            <div class="filter-option active" data-filter="original">
+                                <div class="icon">🖼️</div>
+                                <div class="filter-preview original"></div>
+                                <div class="filter-name">Original</div>
+                            </div>
+                            <div class="filter-option" data-filter="grayscale">
+                                <div class="icon">⚫</div>
+                                <div class="filter-preview grayscale"></div>
+                                <div class="filter-name">Grayscale</div>
+                            </div>
+                            <div class="filter-option" data-filter="sepia">
+                                <div class="icon">🟤</div>
+                                <div class="filter-preview sepia"></div>
+                                <div class="filter-name">Sepia</div>
+                            </div>
+                            <div class="filter-option" data-filter="invert">
+                                <div class="icon">🔳</div>
+                                <div class="filter-preview invert"></div>
+                                <div class="filter-name">Invert</div>
+                            </div>
+                            <div class="filter-option" data-filter="brightness">
+                                <div class="icon">🔆</div>
+                                <div class="filter-preview brightness"></div>
+                                <div class="filter-name">Brightness</div>
+                            </div>
+                            <div class="filter-option" data-filter="contrast">
+                                <div class="icon">◐</div>
+                                <div class="filter-preview contrast"></div>
+                                <div class="filter-name">Contrast</div>
+                            </div>
+                            <div class="filter-option" data-filter="saturation">
+                                <div class="icon">🌈</div>
+                                <div class="filter-preview saturation"></div>
+                                <div class="filter-name">Saturation</div>
+                            </div>
+                            <div class="filter-option" data-filter="blur">
+                                <div class="icon">🌫️</div>
+                                <div class="filter-preview blur"></div>
+                                <div class="filter-name">Blur</div>
+                            </div>
+                        </div>
+                        
+                        <div class="actions">
+                            <button id="applyBtn" class="btn"><i>✓</i> Apply Filter</button>
+                            <button id="resetBtn" class="btn btn-outline"><i>↺</i> Reset</button>
+                            <button id="downloadBtn" class="btn"><i>⤓</i> Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">Preview</div>
+                <div class="card-body">
+                    <div class="preview-section">
+                        <div class="preview-container">
+                            <img id="imagePreview" alt="Filtered image preview">
+                            <div class="placeholder-text" id="previewPlaceholder">
+                                <p>Upload an image to see the preview</p>
+                                <p style="font-size: 3rem;">🖼️</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instructions">
+                            <h3>How to Use This Tool</h3>
+                            <ol>
+                                <li>Upload an image using the "Choose File" button</li>
+                                <li>Select a filter from the available options</li>
+                                <li>Click "Apply Filter" to see the effect</li>
+                                <li>Use "Reset" to revert to original image</li>
+                                <li>Click "Download" to save your edited image</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <!-- Google AdSense Ad Unit Code -->
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 ToolHubCenter - Free Online Tools for Everyone</p>
+            <p>Image Filters Tool v1.0 | All image processing happens in your browser - no server uploads!</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageUpload = document.getElementById('imageUpload');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewPlaceholder = document.getElementById('previewPlaceholder');
+            const applyBtn = document.getElementById('applyBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const filterOptions = document.querySelectorAll('.filter-option');
+            
+            let originalImage = null;
+            let currentFilter = 'original';
+            
+            // File upload handling
+            imageUpload.addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        imagePreview.src = event.target.result;
+                        imagePreview.style.display = 'block';
+                        previewPlaceholder.style.display = 'none';
+                        originalImage = new Image();
+                        originalImage.src = event.target.result;
+                    }
+                    
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+            
+            // Filter selection
+            filterOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    filterOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-filter');
+                });
+            });
+            
+            // Apply filter
+            applyBtn.addEventListener('click', function() {
+                if (!imagePreview.src) return;
+                
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                canvas.width = imagePreview.width;
+                canvas.height = imagePreview.height;
+                
+                ctx.drawImage(imagePreview, 0, 0, canvas.width, canvas.height);
+                
+                switch(currentFilter) {
+                    case 'grayscale':
+                        applyGrayscale(ctx, canvas.width, canvas.height);
+                        break;
+                    case 'sepia':
+                        applySepia(ctx, canvas.width, canvas.height);
+                        break;
+                    case 'invert':
+                        applyInvert(ctx, canvas.width, canvas.height);
+                        break;
+                    case 'brightness':
+                        applyBrightness(ctx, canvas.width, canvas.height);
+                        break;
+                    case 'contrast':
+                        applyContrast(ctx, canvas.width, canvas.height);
+                        break;
+                    case 'saturation':
+                        applySaturation(ctx, canvas.width, canvas.height);
+                        break;
+                    case 'blur':
+                        applyBlur(ctx, canvas.width, canvas.height);
+                        break;
+                    default:
+                        // Original - do nothing
+                        return;
+                }
+                
+                imagePreview.src = canvas.toDataURL('image/png');
+            });
+            
+            // Reset to original
+            resetBtn.addEventListener('click', function() {
+                if (originalImage) {
+                    imagePreview.src = originalImage.src;
+                }
+                
+                // Reset filter selection
+                filterOptions.forEach(opt => opt.classList.remove('active'));
+                document.querySelector('.filter-option[data-filter="original"]').classList.add('active');
+                currentFilter = 'original';
+            });
+            
+            // Download image
+            downloadBtn.addEventListener('click', function() {
+                if (!imagePreview.src) return;
+                
+                const link = document.createElement('a');
+                link.download = 'filtered-image.png';
+                link.href = imagePreview.src;
+                link.click();
+            });
+            
+            // Filter functions
+            function applyGrayscale(ctx, width, height) {
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const data = imageData.data;
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                    data[i] = avg; // red
+                    data[i + 1] = avg; // green
+                    data[i + 2] = avg; // blue
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+            }
+            
+            function applySepia(ctx, width, height) {
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const data = imageData.data;
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+                    
+                    data[i] = Math.min(255, (r * 0.393) + (g * 0.769) + (b * 0.189));
+                    data[i + 1] = Math.min(255, (r * 0.349) + (g * 0.686) + (b * 0.168));
+                    data[i + 2] = Math.min(255, (r * 0.272) + (g * 0.534) + (b * 0.131));
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+            }
+            
+            function applyInvert(ctx, width, height) {
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const data = imageData.data;
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    data[i] = 255 - data[i]; // red
+                    data[i + 1] = 255 - data[i + 1]; // green
+                    data[i + 2] = 255 - data[i + 2]; // blue
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+            }
+            
+            function applyBrightness(ctx, width, height) {
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const data = imageData.data;
+                const brightness = 30; // Adjust as needed
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    data[i] = Math.min(255, data[i] + brightness); // red
+                    data[i + 1] = Math.min(255, data[i + 1] + brightness); // green
+                    data[i + 2] = Math.min(255, data[i + 2] + brightness); // blue
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+            }
+            
+            function applyContrast(ctx, width, height) {
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const data = imageData.data;
+                const contrast = 30; // Adjust as needed
+                const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    data[i] = clamp(factor * (data[i] - 128) + 128); // red
+                    data[i + 1] = clamp(factor * (data[i + 1] - 128) + 128); // green
+                    data[i + 2] = clamp(factor * (data[i + 2] - 128) + 128); // blue
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+            }
+            
+            function applySaturation(ctx, width, height) {
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const data = imageData.data;
+                const saturation = 1.5; // Adjust as needed
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+                    const gray = 0.2989 * r + 0.5870 * g + 0.1140 * b; // Grayscale
+                    
+                    data[i] = clamp(gray + saturation * (r - gray)); // red
+                    data[i + 1] = clamp(gray + saturation * (g - gray)); // green
+                    data[i + 2] = clamp(gray + saturation * (b - gray)); // blue
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+            }
+            
+            function applyBlur(ctx, width, height) {
+                // Simplified blur effect for demo purposes
+                ctx.filter = 'blur(4px)';
+                ctx.drawImage(imagePreview, 0, 0, width, height);
+                ctx.filter = 'none';
+            }
+            
+            // Helper function to clamp values between 0-255
+            function clamp(value) {
+                return Math.min(255, Math.max(0, value));
+            }
+        });
+    </script>
+</body>
+</html>
