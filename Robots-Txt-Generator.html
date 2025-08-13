@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online robots.txt generator tool - create perfect robots.txt files for your website to control search engine crawlers.">
+    <meta name="keywords" content="robots.txt generator, SEO tool, search engine optimization, crawl control, website robots">
+    <title>Robots.txt Generator - SEO Tool | ToolHubCenter</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #1a2a6c;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #b21f1f;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, #1a2a6c, #2a3a8c);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .ad-container {
+            background: #f8f9fa;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-label {
+            background: #e9ecef;
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .preview-container {
+            border: 2px dashed #1a2a6c;
+            border-radius: 8px;
+            min-height: 350px;
+            padding: 20px;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow: auto;
+            max-height: 400px;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #1a2a6c, #2a3a8c);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #2a3a8c, #3a4a9c);
+            transform: translateY(-2px);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1a2a6c;
+            color: #1a2a6c;
+        }
+        
+        .btn-outline:hover {
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #1a2a6c;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26, 42, 108, 0.2);
+        }
+        
+        .user-agent-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .user-agent-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .user-agent-option:hover {
+            border-color: #1a2a6c;
+            background: #f0f5ff;
+        }
+        
+        .user-agent-option input {
+            margin-right: 10px;
+        }
+        
+        .instructions {
+            background: #e9f7fe;
+            border-left: 4px solid #1a2a6c;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+        }
+        
+        .instructions h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .disallow-list {
+            margin-top: 10px;
+        }
+        
+        .disallow-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .disallow-item span {
+            flex-grow: 1;
+        }
+        
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .add-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Robots.txt Generator</h1>
+            <p class="subtitle">Create the perfect robots.txt file for your website to control search engine crawlers and improve SEO performance.</p>
+        </header>
+        
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <!-- Google AdSense Ad Unit Code -->
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            </div>
+        </div>
+        
+        <div class="tool-container">
+            <div class="card">
+                <div class="card-header">Configuration</div>
+                <div class="card-body">
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="userAgent">User-agent:</label>
+                            <select id="userAgent" class="form-control">
+                                <option value="*">All crawlers (*)</option>
+                                <option value="Googlebot">Googlebot (Google)</option>
+                                <option value="Bingbot">Bingbot (Bing)</option>
+                                <option value="Slurp">Slurp (Yahoo)</option>
+                                <option value="DuckDuckBot">DuckDuckBot (DuckDuckGo)</option>
+                                <option value="Baiduspider">Baiduspider (Baidu)</option>
+                                <option value="Yandex">Yandex (Yandex)</option>
+                                <option value="custom">Custom user-agent</option>
+                            </select>
+                            <div id="customAgentContainer" style="display: none; margin-top: 10px;">
+                                <input type="text" id="customAgent" placeholder="Enter custom user-agent">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Disallow Paths:</label>
+                            <div class="input-group">
+                                <input type="text" id="disallowPath" placeholder="/private/ or /admin/">
+                                <button class="add-btn" id="addDisallow">+ Add Path</button>
+                            </div>
+                            <div class="disallow-list" id="disallowList"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sitemap">Sitemap URL:</label>
+                            <input type="text" id="sitemap" placeholder="https://example.com/sitemap.xml">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="crawlDelay">Crawl Delay (seconds):</label>
+                            <input type="text" id="crawlDelay" placeholder="10">
+                        </div>
+                        
+                        <div class="actions">
+                            <button id="generateBtn" class="btn"><i>⚙️</i> Generate Robots.txt</button>
+                            <button id="resetBtn" class="btn btn-outline"><i>↺</i> Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">Robots.txt Preview</div>
+                <div class="card-body">
+                    <div class="preview-section">
+                        <div class="preview-container" id="robotsPreview">
+                            # Welcome to ToolHubCenter Robots.txt Generator
+                            # Configure your settings and generate your file
+                        </div>
+                        
+                        <div class="actions">
+                            <button id="copyBtn" class="btn"><i>📋</i> Copy to Clipboard</button>
+                            <button id="downloadBtn" class="btn"><i>⤓</i> Download Robots.txt</button>
+                        </div>
+                        
+                        <div class="instructions">
+                            <h3>How to Use This Tool</h3>
+                            <ol>
+                                <li>Select a user-agent or enter a custom one</li>
+                                <li>Add disallow paths to block crawlers from specific areas</li>
+                                <li>Enter your sitemap URL (optional)</li>
+                                <li>Set crawl delay if needed (optional)</li>
+                                <li>Generate your robots.txt file</li>
+                                <li>Copy or download the generated file</li>
+                                <li>Upload the file to your website's root directory</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <!-- Google AdSense Ad Unit Code -->
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 ToolHubCenter - Free Online Tools for Everyone</p>
+            <p>Robots.txt Generator v1.0 | Improve your website's SEO with proper crawl control</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userAgentSelect = document.getElementById('userAgent');
+            const customAgentContainer = document.getElementById('customAgentContainer');
+            const customAgentInput = document.getElementById('customAgent');
+            const disallowPathInput = document.getElementById('disallowPath');
+            const addDisallowBtn = document.getElementById('addDisallow');
+            const disallowList = document.getElementById('disallowList');
+            const sitemapInput = document.getElementById('sitemap');
+            const crawlDelayInput = document.getElementById('crawlDelay');
+            const generateBtn = document.getElementById('generateBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const robotsPreview = document.getElementById('robotsPreview');
+            
+            let disallowPaths = [];
+            
+            // Toggle custom user-agent input
+            userAgentSelect.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customAgentContainer.style.display = 'block';
+                } else {
+                    customAgentContainer.style.display = 'none';
+                }
+            });
+            
+            // Add disallow path
+            addDisallowBtn.addEventListener('click', function() {
+                const path = disallowPathInput.value.trim();
+                if (path && !disallowPaths.includes(path)) {
+                    disallowPaths.push(path);
+                    renderDisallowList();
+                    disallowPathInput.value = '';
+                }
+            });
+            
+            // Remove disallow path
+            function removeDisallow(index) {
+                disallowPaths.splice(index, 1);
+                renderDisallowList();
+            }
+            
+            // Render disallow paths list
+            function renderDisallowList() {
+                disallowList.innerHTML = '';
+                if (disallowPaths.length === 0) {
+                    disallowList.innerHTML = '<p>No disallow paths added yet</p>';
+                    return;
+                }
+                
+                disallowPaths.forEach((path, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'disallow-item';
+                    item.innerHTML = `
+                        <span>Disallow: ${path}</span>
+                        <button class="remove-btn" onclick="removeDisallow(${index})">×</button>
+                    `;
+                    disallowList.appendChild(item);
+                });
+            }
+            
+            // Generate robots.txt content
+            generateBtn.addEventListener('click', function() {
+                let content = `# Robots.txt generated by ToolHubCenter\n`;
+                content += `# Generated on: ${new Date().toLocaleDateString()}\n\n`;
+                
+                // Get selected user-agent
+                let userAgent = userAgentSelect.value;
+                if (userAgent === 'custom' && customAgentInput.value.trim()) {
+                    userAgent = customAgentInput.value.trim();
+                }
+                
+                // User-agent section
+                content += `User-agent: ${userAgent}\n`;
+                
+                // Disallow paths
+                if (disallowPaths.length > 0) {
+                    disallowPaths.forEach(path => {
+                        content += `Disallow: ${path}\n`;
+                    });
+                } else {
+                    content += `Disallow: \n`;
+                }
+                
+                // Crawl delay
+                const crawlDelay = crawlDelayInput.value.trim();
+                if (crawlDelay) {
+                    content += `Crawl-delay: ${crawlDelay}\n`;
+                }
+                
+                // Sitemap
+                const sitemap = sitemapInput.value.trim();
+                if (sitemap) {
+                    content += `\nSitemap: ${sitemap}\n`;
+                }
+                
+                robotsPreview.textContent = content;
+            });
+            
+            // Reset form
+            resetBtn.addEventListener('click', function() {
+                userAgentSelect.value = '*';
+                customAgentContainer.style.display = 'none';
+                customAgentInput.value = '';
+                disallowPathInput.value = '';
+                disallowPaths = [];
+                sitemapInput.value = '';
+                crawlDelayInput.value = '';
+                robotsPreview.textContent = '# Welcome to ToolHubCenter Robots.txt Generator\n# Configure your settings and generate your file';
+                renderDisallowList();
+            });
+            
+            // Copy to clipboard
+            copyBtn.addEventListener('click', function() {
+                const textarea = document.createElement('textarea');
+                textarea.value = robotsPreview.textContent;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                // Show feedback
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i>✓</i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+            
+            // Download robots.txt
+            downloadBtn.addEventListener('click', function() {
+                const content = robotsPreview.textContent;
+                const blob = new Blob([content], {type: 'text/plain'});
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'robots.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            // Initialize disallow list
+            renderDisallowList();
+            
+            // Allow Enter key to add disallow paths
+            disallowPathInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addDisallowBtn.click();
+                }
+            });
+        });
+        
+        // Make remove function available globally
+        window.removeDisallow = function(index) {
+            document.dispatchEvent(new CustomEvent('removeDisallowEvent', { detail: index }));
+        };
+        
+        // Listen for the custom event to remove disallow paths
+        document.addEventListener('removeDisallowEvent', function(e) {
+            const index = e.detail;
+            const event = new Event('removeDisallow');
+            event.index = index;
+            document.dispatchEvent(event);
+        });
+        
+        // Handle the remove event
+        document.addEventListener('removeDisallow', function(e) {
+            const disallowPaths = Array.from(document.querySelectorAll('.disallow-item')).map(item => {
+                return item.querySelector('span').textContent.replace('Disallow: ', '');
+            });
+            
+            disallowPaths.splice(e.index, 1);
+            document.querySelectorAll('.disallow-item').forEach((item, i) => {
+                if (i === e.index) {
+                    item.remove();
+                }
+            });
+            
+            // Update the global disallowPaths array
+            const generateBtn = document.getElementById('generateBtn');
+            generateBtn.disallowPaths = disallowPaths;
+        });
+    </script>
+</body>
+</html>
