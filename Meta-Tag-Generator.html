@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Tag Generator - ToolHubCenter</title>
+    <meta name="description" content="Generate perfect meta tags for your website with our free Meta Tag Generator. Improve SEO and social media sharing.">
+    <meta name="keywords" content="meta tag generator, seo meta tags, html meta tags, open graph tags, twitter cards">
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Ad containers */
+        .ad-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin: 25px auto;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            max-width: 800px;
+        }
+        
+        .ad-label {
+            background: #e9ecef;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+        
+        /* Main card */
+        .tool-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin: 0 auto 40px;
+            max-width: 1000px;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 30px;
+        }
+        
+        .card-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .card-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus, 
+        .form-group select:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-section {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+        }
+        
+        .form-section h3 {
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .result-container {
+            background: #2b2d42;
+            color: #edf2f4;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .result-header h3 {
+            color: #8d99ae;
+        }
+        
+        .result-content {
+            background: #1d1e2c;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .meta-tag {
+            color: #90e0ef;
+        }
+        
+        .meta-name {
+            color: #ff9e00;
+        }
+        
+        .meta-content {
+            color: #a7c957;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-3px);
+        }
+        
+        .btn-success {
+            background: #2a9d8f;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #21867a;
+            transform: translateY(-3px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* How to use section */
+        .how-to-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+        }
+        
+        .how-to-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2rem;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            background: #f8f9fa;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .step p {
+            color: #495057;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .card-header {
+                padding: 20px;
+            }
+            
+            .card-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .how-to-section {
+                padding: 25px 15px;
+            }
+        }
+        
+        .info-box {
+            background: #e7f5ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+        
+        .copy-btn {
+            background: #343a40;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+        
+        .copy-btn:hover {
+            background: #495057;
+        }
+        
+        .copy-success {
+            color: #2a9d8f;
+            font-weight: 600;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">M</div>
+                <h1>Meta Tag Generator</h1>
+            </div>
+            <p class="tagline">Create perfect meta tags for your website to boost SEO and social media engagement</p>
+        </header>
+        
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <!-- Main Tool Card -->
+        <div class="tool-card">
+            <div class="card-header">
+                <h2>Generate SEO Meta Tags</h2>
+                <p>Fill in the details below to create optimized meta tags for your website</p>
+            </div>
+            <div class="card-body">
+                <div class="form-container">
+                    <div>
+                        <div class="form-section">
+                            <h3>Basic Information</h3>
+                            
+                            <div class="form-group">
+                                <label for="pageTitle">Page Title *</label>
+                                <input type="text" id="pageTitle" placeholder="My Awesome Website - Home Page">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="pageDescription">Page Description *</label>
+                                <textarea id="pageDescription" placeholder="A brief description of your page content"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="keywords">Keywords (comma separated)</label>
+                                <input type="text" id="keywords" placeholder="seo, meta tags, web development">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="author">Author</label>
+                                <input type="text" id="author" placeholder="John Doe">
+                            </div>
+                        </div>
+                        
+                        <div class="form-section" style="margin-top: 25px;">
+                            <h3>Technical Settings</h3>
+                            
+                            <div class="form-group">
+                                <label for="viewport">Viewport</label>
+                                <input type="text" id="viewport" value="width=device-width, initial-scale=1.0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="charset">Charset</label>
+                                <input type="text" id="charset" value="UTF-8">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="canonical">Canonical URL</label>
+                                <input type="url" id="canonical" placeholder="https://example.com/page-url">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="form-section">
+                            <h3>Open Graph (Facebook) Tags</h3>
+                            
+                            <div class="form-group">
+                                <label for="ogType">OG Type</label>
+                                <select id="ogType">
+                                    <option value="website">Website</option>
+                                    <option value="article">Article</option>
+                                    <option value="product">Product</option>
+                                    <option value="profile">Profile</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ogTitle">OG Title</label>
+                                <input type="text" id="ogTitle" placeholder="Title for social media">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ogDescription">OG Description</label>
+                                <textarea id="ogDescription" placeholder="Description for social media"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ogUrl">OG URL</label>
+                                <input type="url" id="ogUrl" placeholder="https://example.com/page-url">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ogImage">OG Image URL</label>
+                                <input type="url" id="ogImage" placeholder="https://example.com/image.jpg">
+                            </div>
+                        </div>
+                        
+                        <div class="form-section" style="margin-top: 25px;">
+                            <h3>Twitter Cards</h3>
+                            
+                            <div class="form-group">
+                                <label for="twitterCard">Twitter Card Type</label>
+                                <select id="twitterCard">
+                                    <option value="summary">Summary</option>
+                                    <option value="summary_large_image">Summary Large Image</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="twitterTitle">Twitter Title</label>
+                                <input type="text" id="twitterTitle" placeholder="Title for Twitter">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="twitterDescription">Twitter Description</label>
+                                <textarea id="twitterDescription" placeholder="Description for Twitter"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="twitterImage">Twitter Image URL</label>
+                                <input type="url" id="twitterImage" placeholder="https://example.com/twitter-image.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <p><strong>Tip:</strong> Fields marked with * are required. For best SEO results, keep your title under 60 characters and description under 160 characters.</p>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary" id="generateBtn">
+                        <span>Generate Meta Tags</span>
+                    </button>
+                    <button class="btn btn-secondary" id="resetBtn">
+                        <span>Reset Form</span>
+                    </button>
+                </div>
+                
+                <div class="result-container" id="resultContainer" style="display: none;">
+                    <div class="result-header">
+                        <h3>Generated Meta Tags</h3>
+                        <div>
+                            <button class="copy-btn" id="copyBtn">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                </svg>
+                                Copy to Clipboard
+                            </button>
+                            <span class="copy-success" id="copySuccess">Copied successfully!</span>
+                        </div>
+                    </div>
+                    <div class="result-content" id="resultContent">
+                        <!-- Generated meta tags will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <!-- How to Use Section -->
+        <div class="how-to-section">
+            <h2>How to Use the Meta Tag Generator</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Fill in the Details</h3>
+                    <p>Enter your page information in the form. Provide a title, description, and other relevant details.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Generate Tags</h3>
+                    <p>Click the "Generate Meta Tags" button to create your customized meta tags.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Copy and Implement</h3>
+                    <p>Copy the generated code and paste it into the &lt;head&gt; section of your HTML documents.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Improve SEO</h3>
+                    <p>Enjoy better search engine rankings and improved social media sharing.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="how-to-section">
+            <h2>Why Meta Tags Are Important</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number"><i>🔍</i></div>
+                    <h3>Search Engine Visibility</h3>
+                    <p>Meta tags help search engines understand your content and improve your rankings.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"><i>📱</i></div>
+                    <h3>Social Media Optimization</h3>
+                    <p>Open Graph and Twitter Card tags control how your content appears when shared.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"><i>👁️</i></div>
+                    <h3>User Experience</h3>
+                    <p>Well-crafted meta descriptions improve click-through rates from search results.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"><i>📈</i></div>
+                    <h3>Performance Tracking</h3>
+                    <p>Proper tagging helps with analytics and tracking your website's performance.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 ToolHubCenter - Meta Tag Generator. All rights reserved.</p>
+            <p>Create perfect meta tags to boost your website's visibility and SEO performance.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generateBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const resultContainer = document.getElementById('resultContainer');
+            const resultContent = document.getElementById('resultContent');
+            const copySuccess = document.getElementById('copySuccess');
+            
+            // Form elements
+            const pageTitle = document.getElementById('pageTitle');
+            const pageDescription = document.getElementById('pageDescription');
+            const keywords = document.getElementById('keywords');
+            const author = document.getElementById('author');
+            const viewport = document.getElementById('viewport');
+            const charset = document.getElementById('charset');
+            const canonical = document.getElementById('canonical');
+            const ogType = document.getElementById('ogType');
+            const ogTitle = document.getElementById('ogTitle');
+            const ogDescription = document.getElementById('ogDescription');
+            const ogUrl = document.getElementById('ogUrl');
+            const ogImage = document.getElementById('ogImage');
+            const twitterCard = document.getElementById('twitterCard');
+            const twitterTitle = document.getElementById('twitterTitle');
+            const twitterDescription = document.getElementById('twitterDescription');
+            const twitterImage = document.getElementById('twitterImage');
+            
+            // Set default values for OG and Twitter fields
+            ogTitle.placeholder = pageTitle.placeholder;
+            ogDescription.placeholder = pageDescription.placeholder;
+            twitterTitle.placeholder = pageTitle.placeholder;
+            twitterDescription.placeholder = pageDescription.placeholder;
+            
+            // Generate button click
+            generateBtn.addEventListener('click', function() {
+                // Validate required fields
+                if (!pageTitle.value.trim()) {
+                    alert('Page Title is required');
+                    pageTitle.focus();
+                    return;
+                }
+                
+                if (!pageDescription.value.trim()) {
+                    alert('Page Description is required');
+                    pageDescription.focus();
+                    return;
+                }
+                
+                // Generate meta tags
+                let metaTags = `<!-- Basic Meta Tags -->\n`;
+                metaTags += `<title>${escapeHTML(pageTitle.value)}</title>\n`;
+                metaTags += `<meta name="description" content="${escapeHTML(pageDescription.value)}">\n`;
+                
+                if (keywords.value.trim()) {
+                    metaTags += `<meta name="keywords" content="${escapeHTML(keywords.value)}">\n`;
+                }
+                
+                if (author.value.trim()) {
+                    metaTags += `<meta name="author" content="${escapeHTML(author.value)}">\n`;
+                }
+                
+                metaTags += `<meta name="viewport" content="${escapeHTML(viewport.value)}">\n`;
+                metaTags += `<meta charset="${escapeHTML(charset.value)}">\n`;
+                
+                if (canonical.value.trim()) {
+                    metaTags += `<link rel="canonical" href="${escapeHTML(canonical.value)}">\n\n`;
+                } else {
+                    metaTags += `\n`;
+                }
+                
+                // Open Graph Meta Tags
+                if (ogTitle.value.trim() || ogDescription.value.trim() || ogUrl.value.trim() || ogImage.value.trim()) {
+                    metaTags += `<!-- Open Graph / Facebook -->\n`;
+                    metaTags += `<meta property="og:type" content="${escapeHTML(ogType.value)}">\n`;
+                    metaTags += `<meta property="og:title" content="${escapeHTML(ogTitle.value.trim() || pageTitle.value)}">\n`;
+                    metaTags += `<meta property="og:description" content="${escapeHTML(ogDescription.value.trim() || pageDescription.value)}">\n`;
+                    
+                    if (ogUrl.value.trim()) {
+                        metaTags += `<meta property="og:url" content="${escapeHTML(ogUrl.value)}">\n`;
+                    }
+                    
+                    if (ogImage.value.trim()) {
+                        metaTags += `<meta property="og:image" content="${escapeHTML(ogImage.value)}">\n`;
+                    }
+                    
+                    metaTags += `\n`;
+                }
+                
+                // Twitter Card Meta Tags
+                if (twitterTitle.value.trim() || twitterDescription.value.trim() || twitterImage.value.trim()) {
+                    metaTags += `<!-- Twitter -->\n`;
+                    metaTags += `<meta name="twitter:card" content="${escapeHTML(twitterCard.value)}">\n`;
+                    metaTags += `<meta name="twitter:title" content="${escapeHTML(twitterTitle.value.trim() || pageTitle.value)}">\n`;
+                    metaTags += `<meta name="twitter:description" content="${escapeHTML(twitterDescription.value.trim() || pageDescription.value)}">\n`;
+                    
+                    if (twitterImage.value.trim()) {
+                        metaTags += `<meta name="twitter:image" content="${escapeHTML(twitterImage.value)}">\n`;
+                    }
+                }
+                
+                // Format the meta tags with syntax highlighting
+                const formattedTags = metaTags
+                    .replace(/&lt;title&gt;(.*?)&lt;\/title&gt;/g, '<span class="meta-tag">&lt;title&gt;</span>$1<span class="meta-tag">&lt;/title&gt;</span>')
+                    .replace(/&lt;meta name="([^"]+)" content="([^"]+)"&gt;/g, '<span class="meta-tag">&lt;meta</span> <span class="meta-name">name</span>="<span class="meta-content">$1</span>" <span class="meta-name">content</span>="<span class="meta-content">$2</span>"<span class="meta-tag">&gt;</span>')
+                    .replace(/&lt;meta property="([^"]+)" content="([^"]+)"&gt;/g, '<span class="meta-tag">&lt;meta</span> <span class="meta-name">property</span>="<span class="meta-content">$1</span>" <span class="meta-name">content</span>="<span class="meta-content">$2</span>"<span class="meta-tag">&gt;</span>')
+                    .replace(/&lt;link rel="canonical" href="([^"]+)"&gt;/g, '<span class="meta-tag">&lt;link</span> <span class="meta-name">rel</span>="<span class="meta-content">canonical</span>" <span class="meta-name">href</span>="<span class="meta-content">$1</span>"<span class="meta-tag">&gt;</span>')
+                    .replace(/&lt;meta charset="([^"]+)"&gt;/g, '<span class="meta-tag">&lt;meta</span> <span class="meta-name">charset</span>="<span class="meta-content">$1</span>"<span class="meta-tag">&gt;</span>')
+                    .replace(/&lt;!--(.*?)--&gt;/g, '<span class="meta-content" style="color: #8d99ae;">&lt;!--$1--&gt;</span>');
+                
+                resultContent.innerHTML = formattedTags;
+                resultContainer.style.display = 'block';
+                
+                // Scroll to results
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Reset button click
+            resetBtn.addEventListener('click', function() {
+                pageTitle.value = '';
+                pageDescription.value = '';
+                keywords.value = '';
+                author.value = '';
+                viewport.value = 'width=device-width, initial-scale=1.0';
+                charset.value = 'UTF-8';
+                canonical.value = '';
+                ogType.value = 'website';
+                ogTitle.value = '';
+                ogDescription.value = '';
+                ogUrl.value = '';
+                ogImage.value = '';
+                twitterCard.value = 'summary';
+                twitterTitle.value = '';
+                twitterDescription.value = '';
+                twitterImage.value = '';
+                resultContainer.style.display = 'none';
+                
+                pageTitle.focus();
+            });
+            
+            // Copy to clipboard button
+            copyBtn.addEventListener('click', function() {
+                const textToCopy = resultContent.innerText;
+                
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    copySuccess.style.display = 'inline-block';
+                    copyBtn.style.display = 'none';
+                    
+                    setTimeout(() => {
+                        copySuccess.style.display = 'none';
+                        copyBtn.style.display = 'flex';
+                    }, 3000);
+                }).catch(err => {
+                    alert('Failed to copy: ' + err);
+                });
+            });
+            
+            // Helper function to escape HTML
+            function escapeHTML(str) {
+                return str
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+        });
+    </script>
+</body>
+</html>
