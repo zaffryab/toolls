@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Domain WHOIS Lookup tool - get detailed domain registration information instantly. Check domain availability and ownership details.">
+    <meta name="keywords" content="whois, domain lookup, domain checker, domain availability, domain registration, dns lookup, toolhubcenter">
+    <title>Domain WHOIS Lookup | ToolHubCenter - Free Online Domain Information Tool</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --dark: #1d3557;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray: #6c757d;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f5ff 0%, #e6eeff 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        nav a:hover {
+            color: white;
+        }
+        
+        .ad-container {
+            text-align: center;
+            background: white;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        @media (min-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr 350px;
+            }
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 18px 25px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .domain-input-container {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .domain-prefix {
+            background: #f8f9fa;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: var(--gray);
+        }
+        
+        input {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        input:focus {
+            outline: none;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary {
+            background: #e9ecef;
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+        
+        .result-container {
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .result-summary {
+            background: linear-gradient(135deg, var(--success), var(--accent));
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .domain-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .status-badge {
+            background: white;
+            color: var(--success);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .domain-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .info-card h4 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-card p {
+            font-size: 1.1rem;
+            color: #333;
+            word-break: break-all;
+        }
+        
+        .how-to-use li {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            padding-left: 10px;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .how-to-use li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .tld-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .tld-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .tld-card:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .domain-suggestion {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .suggestion-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .suggestion-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span>🔧</span>
+                    <h1>ToolHubCenter</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">How to Use</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Code Here -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <div class="main-content">
+            <main>
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-globe-americas"></i> Domain WHOIS Lookup
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="domainInput">Enter Domain Name:</label>
+                            <div class="domain-input-container">
+                                <div class="domain-prefix">https://</div>
+                                <input type="text" id="domainInput" placeholder="example.com">
+                            </div>
+                            <div class="domain-suggestion">
+                                <div class="suggestion-tag">google.com</div>
+                                <div class="suggestion-tag">youtube.com</div>
+                                <div class="suggestion-tag">wikipedia.org</div>
+                                <div class="suggestion-tag">github.io</div>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="lookupBtn">
+                                <i class="fas fa-search"></i> Lookup Domain
+                            </button>
+                            <button class="btn btn-secondary" id="clearBtn">
+                                <i class="fas fa-trash-alt"></i> Clear
+                            </button>
+                        </div>
+                        
+                        <div class="spinner" id="spinner"></div>
+                        
+                        <div class="result-container" id="resultContainer">
+                            <div class="result-summary">
+                                <div class="domain-status">
+                                    <div class="status-badge">REGISTERED</div>
+                                    <div>Domain Status: Active</div>
+                                </div>
+                                <div class="domain-name" id="resultDomain">example.com</div>
+                            </div>
+                            
+                            <div class="result-grid">
+                                <div class="info-card">
+                                    <h4><i class="fas fa-user"></i> Registrant</h4>
+                                    <p id="registrant">REDACTED FOR PRIVACY</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h4><i class="fas fa-building"></i> Registrar</h4>
+                                    <p id="registrar">MarkMonitor, Inc.</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h4><i class="fas fa-calendar-plus"></i> Creation Date</h4>
+                                    <p id="creationDate">1997-09-15T04:00:00Z</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h4><i class="fas fa-calendar-check"></i> Expiration Date</h4>
+                                    <p id="expirationDate">2028-09-14T04:00:00Z</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h4><i class="fas fa-sync-alt"></i> Last Updated</h4>
+                                    <p id="updatedDate">2023-09-06T07:39:04Z</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h4><i class="fas fa-server"></i> Name Servers</h4>
+                                    <p id="nameServers">ns1.google.com<br>ns2.google.com<br>ns3.google.com<br>ns4.google.com</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h4><i class="fas fa-shield-alt"></i> Domain Status</h4>
+                                    <p id="domainStatus">clientDeleteProhibited<br>clientTransferProhibited<br>clientUpdateProhibited<br>serverDeleteProhibited<br>serverTransferProhibited<br>serverUpdateProhibited</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h4><i class="fas fa-id-card"></i> Registrar IANA ID</h4>
+                                    <p id="ianaId">292</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+            <aside>
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle"></i> How to Use
+                    </div>
+                    <div class="card-body">
+                        <div class="how-to-use">
+                            <ol>
+                                <li>Enter the domain name you want to look up in the input field (without http:// or www)</li>
+                                <li>Click the <strong>"Lookup Domain"</strong> button to retrieve WHOIS information</li>
+                                <li>Review the domain registration details including creation date, expiration, and registrar</li>
+                                <li>Check domain status to see if it's available for registration</li>
+                                <li>Use the <strong>"Clear"</strong> button to reset the form and results</li>
+                                <li>Click on any popular TLDs below to quickly check availability</li>
+                                <li>WHOIS data may be redacted for privacy in some cases</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-lightbulb"></i> What is WHOIS?
+                    </div>
+                    <div class="card-body">
+                        <p>WHOIS is a protocol used to query databases that store information about registered domain names. A WHOIS lookup provides:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Domain ownership information</li>
+                            <li>Registration and expiration dates</li>
+                            <li>Registrar details</li>
+                            <li>Name server information</li>
+                            <li>Domain status (active, expired, etc.)</li>
+                        </ul>
+                        <p>This tool helps you check domain availability and get important details about any registered domain.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-tags"></i> Popular TLDs
+                    </div>
+                    <div class="card-body">
+                        <p>Quickly check availability for these popular domain extensions:</p>
+                        <div class="tld-grid">
+                            <div class="tld-card">.com</div>
+                            <div class="tld-card">.org</div>
+                            <div class="tld-card">.net</div>
+                            <div class="tld-card">.io</div>
+                            <div class="tld-card">.co</div>
+                            <div class="tld-card">.ai</div>
+                            <div class="tld-card">.app</div>
+                            <div class="tld-card">.dev</div>
+                            <div class="tld-card">.xyz</div>
+                            <div class="tld-card">.shop</div>
+                            <div class="tld-card">.site</div>
+                            <div class="tld-card">.online</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-exclamation-triangle"></i> Domain Status Codes
+                    </div>
+                    <div class="card-body">
+                        <div class="info-card">
+                            <h4>clientDeleteProhibited</h4>
+                            <p>Domain cannot be deleted</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>clientTransferProhibited</h4>
+                            <p>Domain cannot be transferred</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>clientUpdateProhibited</h4>
+                            <p>Domain info cannot be updated</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>serverHold</h4>
+                            <p>Domain not activated in DNS</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Code Here -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your one-stop destination for free online tools that make development easier and more efficient.</p>
+                    <p>We provide reliable, easy-to-use tools for developers, designers, and tech enthusiasts.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <p>JWT Debugger</p>
+                    <p>File Splitter</p>
+                    <p>Currency Converter</p>
+                    <p>Base64 Encoder</p>
+                    <p>Domain WHOIS Lookup</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@toolhubcenter.com</p>
+                    <p>Feedback: feedback@toolhubcenter.com</p>
+                    <p>Twitter: @ToolHubCenter</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 ToolHubCenter. All rights reserved. | WHOIS data provided for informational purposes only
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const domainInput = document.getElementById('domainInput');
+            const lookupBtn = document.getElementById('lookupBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const resultContainer = document.getElementById('resultContainer');
+            const spinner = document.getElementById('spinner');
+            const resultDomain = document.getElementById('resultDomain');
+            const registrant = document.getElementById('registrant');
+            const registrar = document.getElementById('registrar');
+            const creationDate = document.getElementById('creationDate');
+            const expirationDate = document.getElementById('expirationDate');
+            const updatedDate = document.getElementById('updatedDate');
+            const nameServers = document.getElementById('nameServers');
+            const domainStatus = document.getElementById('domainStatus');
+            const ianaId = document.getElementById('ianaId');
+            
+            // Sample WHOIS data for popular domains
+            const sampleData = {
+                "google.com": {
+                    registrant: "REDACTED FOR PRIVACY",
+                    registrar: "MarkMonitor, Inc.",
+                    creationDate: "1997-09-15T04:00:00Z",
+                    expirationDate: "2028-09-14T04:00:00Z",
+                    updatedDate: "2023-09-06T07:39:04Z",
+                    nameServers: "ns1.google.com<br>ns2.google.com<br>ns3.google.com<br>ns4.google.com",
+                    domainStatus: "clientDeleteProhibited<br>clientTransferProhibited<br>clientUpdateProhibited<br>serverDeleteProhibited<br>serverTransferProhibited<br>serverUpdateProhibited",
+                    ianaId: "292"
+                },
+                "youtube.com": {
+                    registrant: "REDACTED FOR PRIVACY",
+                    registrar: "MarkMonitor, Inc.",
+                    creationDate: "2005-02-15T05:13:12Z",
+                    expirationDate: "2026-02-15T05:13:12Z",
+                    updatedDate: "2023-08-21T07:01:45Z",
+                    nameServers: "ns1.google.com<br>ns2.google.com<br>ns3.google.com<br>ns4.google.com",
+                    domainStatus: "clientDeleteProhibited<br>clientTransferProhibited<br>clientUpdateProhibited",
+                    ianaId: "292"
+                },
+                "wikipedia.org": {
+                    registrant: "Wikimedia Foundation, Inc.",
+                    registrar: "MarkMonitor, Inc.",
+                    creationDate: "2001-01-13T00:12:14Z",
+                    expirationDate: "2025-01-13T00:12:14Z",
+                    updatedDate: "2023-07-18T06:45:23Z",
+                    nameServers: "ns0.wikimedia.org<br>ns1.wikimedia.org<br>ns2.wikimedia.org",
+                    domainStatus: "clientDeleteProhibited<br>clientTransferProhibited<br>clientUpdateProhibited",
+                    ianaId: "292"
+                },
+                "github.io": {
+                    registrant: "GitHub, Inc.",
+                    registrar: "MarkMonitor, Inc.",
+                    creationDate: "2013-03-08T18:17:19Z",
+                    expirationDate: "2024-03-08T18:17:19Z",
+                    updatedDate: "2023-02-15T09:28:37Z",
+                    nameServers: "dns1.p08.nsone.net<br>dns2.p08.nsone.net<br>dns3.p08.nsone.net<br>dns4.p08.nsone.net",
+                    domainStatus: "clientTransferProhibited<br>serverTransferProhibited",
+                    ianaId: "292"
+                }
+            };
+            
+            // Event listeners
+            lookupBtn.addEventListener('click', lookupDomain);
+            clearBtn.addEventListener('click', clearForm);
+            domainInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') lookupDomain();
+            });
+            
+            // Add event listeners to suggestion tags
+            document.querySelectorAll('.suggestion-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    domainInput.value = this.textContent;
+                    lookupDomain();
+                });
+            });
+            
+            // Add event listeners to TLD cards
+            document.querySelectorAll('.tld-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const domain = domainInput.value.split('.')[0] || 'example';
+                    domainInput.value = domain + this.textContent;
+                    lookupDomain();
+                });
+            });
+            
+            // Functions
+            function lookupDomain() {
+                const domain = domainInput.value.trim().toLowerCase();
+                
+                if (!domain) {
+                    alert('Please enter a domain name');
+                    return;
+                }
+                
+                // Validate domain format
+                if (!isValidDomain(domain)) {
+                    alert('Please enter a valid domain name (e.g., example.com)');
+                    return;
+                }
+                
+                // Show spinner
+                spinner.style.display = 'block';
+                resultContainer.style.display = 'none';
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    displayResults(domain);
+                    spinner.style.display = 'none';
+                    resultContainer.style.display = 'block';
+                    
+                    // Scroll to results
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 1500);
+            }
+            
+            function isValidDomain(domain) {
+                const regex = /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/i;
+                return regex.test(domain);
+            }
+            
+            function displayResults(domain) {
+                const domainKey = domain.replace('www.', '');
+                
+                // Get data or use default sample
+                const data = sampleData[domainKey] || {
+                    registrant: "REDACTED FOR PRIVACY",
+                    registrar: "Domain Registrar, Inc.",
+                    creationDate: "2020-01-01T00:00:00Z",
+                    expirationDate: "2025-01-01T00:00:00Z",
+                    updatedDate: "2023-10-01T12:00:00Z",
+                    nameServers: "ns1.example.com<br>ns2.example.com",
+                    domainStatus: "ok",
+                    ianaId: "1234"
+                };
+                
+                // Update UI
+                resultDomain.textContent = domain;
+                registrant.innerHTML = data.registrant;
+                registrar.innerHTML = data.registrar;
+                creationDate.innerHTML = formatDate(data.creationDate);
+                expirationDate.innerHTML = formatDate(data.expirationDate);
+                updatedDate.innerHTML = formatDate(data.updatedDate);
+                nameServers.innerHTML = data.nameServers;
+                domainStatus.innerHTML = data.domainStatus;
+                ianaId.innerHTML = data.ianaId;
+            }
+            
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }) + ' ' + date.toLocaleTimeString();
+            }
+            
+            function clearForm() {
+                domainInput.value = '';
+                resultContainer.style.display = 'none';
+            }
+            
+            // Initialize with a sample domain
+            domainInput.value = 'google.com';
+        });
+    </script>
+</body>
+</html>
