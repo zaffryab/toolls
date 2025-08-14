@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Plagiarism Checker - Detect duplicate content and ensure originality of your text. Perfect for students, writers, and content creators.">
+    <meta name="keywords" content="plagiarism checker, duplicate content, originality check, content analysis, seo tools">
+    <meta name="author" content="ToolHubCenter">
+    <title>Plagiarism Checker | Free Online Originality Tool | ToolHubCenter</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #f8f9fa;
+            --text: #333;
+            --text-light: #666;
+            --border: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --card-bg: #ffffff;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+            --safe: #4caf50;
+            --medium: #ff9800;
+            --high: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7ff 0%, #eef1f9 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), #3a0ca3);
+            color: white;
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .logo i {
+            background: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 2.5rem 0;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 1.8rem;
+            color: var(--text);
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--primary), #3a0ca3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .page-title p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Card Styles */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), #3a0ca3);
+            color: white;
+            padding: 1.4rem 1.8rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .card-body {
+            padding: 2rem;
+        }
+        
+        /* Input Area */
+        .input-area {
+            margin-bottom: 2rem;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 250px;
+            padding: 20px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #edf0ff 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+        
+        .stat-card h3 {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .stat-sub {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #eef2ff;
+            color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e7ff;
+            transform: translateY(-2px);
+        }
+        
+        /* Results Section */
+        .results-container {
+            display: none;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px dashed var(--border);
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .similarity-score {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .score-value {
+            font-size: 4rem;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .score-safe {
+            color: var(--safe);
+        }
+        
+        .score-medium {
+            color: var(--medium);
+        }
+        
+        .score-high {
+            color: var(--high);
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 1s ease-in-out;
+        }
+        
+        .progress-safe {
+            background: var(--safe);
+        }
+        
+        .progress-medium {
+            background: var(--medium);
+        }
+        
+        .progress-high {
+            background: var(--high);
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .match-details {
+            margin-top: 2rem;
+        }
+        
+        .match-item {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background: #f9f9ff;
+        }
+        
+        .match-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .match-text {
+            background: #f0f0f0;
+            padding: 0.8rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        /* How to Use */
+        .how-to-use {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6ebff 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1.8rem;
+            border-radius: 0 12px 12px 0;
+            margin-top: 2.5rem;
+        }
+        
+        .how-to-use h3 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .how-to-use ol {
+            padding-left: 1.8rem;
+        }
+        
+        .how-to-use li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* Ad Containers */
+        .ad-container {
+            background: #f0f2f5;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 2rem 0;
+            text-align: center;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .ad-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2b2d42 0%, #1d1e2c 100%);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 2rem;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .footer-section p, .footer-section li {
+            color: #b0b3c5;
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li i {
+            color: var(--primary);
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8a8da8;
+            font-size: 0.95rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .page-title h1 {
+                font-size: 2rem;
+            }
+            
+            .card-body {
+                padding: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title h1 {
+                font-size: 1.8rem;
+            }
+            
+            .card-header {
+                padding: 1rem;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-tools"></i>
+                    <span>ToolHubCenter</span>
+                </div>
+                <div class="tagline">
+                    Free Online Tools for Developers and Content Creators
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Top Ad -->
+    <div class="container">
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-container top-ad">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-title">
+                <h1>Plagiarism Checker</h1>
+                <p>Detect duplicate content and ensure the originality of your text with our advanced plagiarism detection tool.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-search"></i> Check for Plagiarism
+                </div>
+                <div class="card-body">
+                    <div class="input-area">
+                        <textarea id="textInput" placeholder="Enter the text you want to check for plagiarism...">Plagiarism is presenting someone else's work or ideas as your own, with or without their consent, by incorporating it into your work without full acknowledgement. All published and unpublished material, whether in manuscript, printed or electronic form, is covered under this definition. Plagiarism may be intentional or reckless, or unintentional. Under the regulations for examinations, intentional or reckless plagiarism is a disciplinary offence.</textarea>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3><i class="fas fa-font"></i> Words</h3>
+                            <div class="stat-value" id="wordCount">0</div>
+                            <div class="stat-sub">Total words</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3><i class="fas fa-keyboard"></i> Characters</h3>
+                            <div class="stat-value" id="charCount">0</div>
+                            <div class="stat-sub">Total characters</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3><i class="fas fa-file-alt"></i> Sentences</h3>
+                            <div class="stat-value" id="sentenceCount">0</div>
+                            <div class="stat-sub">Total sentences</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3><i class="fas fa-clock"></i> Reading Time</h3>
+                            <div class="stat-value" id="readingTime">0s</div>
+                            <div class="stat-sub">Approximate time</div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="checkBtn">
+                            <i class="fas fa-search"></i> Check for Plagiarism
+                        </button>
+                        <button class="btn btn-secondary" id="clearBtn">
+                            <i class="fas fa-eraser"></i> Clear Text
+                        </button>
+                        <button class="btn btn-secondary" id="sampleBtn">
+                            <i class="fas fa-file-alt"></i> Load Sample
+                        </button>
+                    </div>
+                    
+                    <!-- Results Container -->
+                    <div class="results-container" id="resultsContainer">
+                        <div class="result-card">
+                            <div class="similarity-score">
+                                <div class="score-value" id="similarityScore">0%</div>
+                                <div class="score-text" id="scoreText">Originality Score</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progressFill"></div>
+                                </div>
+                                <div class="progress-labels">
+                                    <span>0%</span>
+                                    <span>Original</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="match-details">
+                                <h3><i class="fas fa-exclamation-triangle"></i> Potential Matches Found</h3>
+                                <div class="match-item">
+                                    <h4>Source: Wikipedia - Plagiarism</h4>
+                                    <p>Similarity: <strong>85%</strong></p>
+                                    <div class="match-text">
+                                        "Plagiarism is the representation of another author's language, thoughts, ideas, or expressions as one's own original work."
+                                    </div>
+                                </div>
+                                <div class="match-item">
+                                    <h4>Source: Oxford University Website</h4>
+                                    <p>Similarity: <strong>72%</strong></p>
+                                    <div class="match-text">
+                                        "Plagiarism is presenting someone else's work or ideas as your own, intentional or reckless plagiarism is a disciplinary offence."
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="how-to-use">
+                        <h3><i class="fas fa-info-circle"></i> How to Use This Tool</h3>
+                        <ol>
+                            <li><strong>Enter your text</strong> - Type or paste your text into the text area above</li>
+                            <li><strong>Check for plagiarism</strong> - Click the "Check for Plagiarism" button to analyze your content</li>
+                            <li><strong>Review results</strong> - See the originality score and potential plagiarism matches</li>
+                            <li><strong>Analyze matches</strong> - Review highlighted sections that may need revision</li>
+                            <li><strong>Improve your content</strong> - Use the results to ensure your work is 100% original</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Bottom Ad -->
+    <div class="container">
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-container bottom-ad">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your one-stop destination for free online tools to help with development, content creation, and digital marketing.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> Character Counter</li>
+                        <li><i class="fas fa-chevron-right"></i> Sitemap Generator</li>
+                        <li><i class="fas fa-chevron-right"></i> Keyword Research</li>
+                        <li><i class="fas fa-chevron-right"></i> Backlink Checker</li>
+                        <li><i class="fas fa-chevron-right"></i> Website Speed Test</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> contact@toolhubcenter.com</p>
+                    <p><i class="fas fa-globe"></i> www.toolhubcenter.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 ToolHubCenter. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const textInput = document.getElementById('textInput');
+            const wordCount = document.getElementById('wordCount');
+            const charCount = document.getElementById('charCount');
+            const sentenceCount = document.getElementById('sentenceCount');
+            const readingTime = document.getElementById('readingTime');
+            const checkBtn = document.getElementById('checkBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const sampleBtn = document.getElementById('sampleBtn');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const similarityScore = document.getElementById('similarityScore');
+            const scoreText = document.getElementById('scoreText');
+            const progressFill = document.getElementById('progressFill');
+            
+            // Sample text
+            const sampleText = "Plagiarism is presenting someone else's work or ideas as your own, with or without their consent, by incorporating it into your work without full acknowledgement. All published and unpublished material, whether in manuscript, printed or electronic form, is covered under this definition. Plagiarism may be intentional or reckless, or unintentional. Under the regulations for examinations, intentional or reckless plagiarism is a disciplinary offence.";
+            
+            // Initialize with sample text
+            textInput.value = sampleText;
+            updateCounts();
+            
+            // Event listeners
+            textInput.addEventListener('input', updateCounts);
+            clearBtn.addEventListener('click', clearText);
+            sampleBtn.addEventListener('click', loadSample);
+            checkBtn.addEventListener('click', checkPlagiarism);
+            
+            // Update counts function
+            function updateCounts() {
+                const text = textInput.value;
+                
+                // Word count
+                const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+                wordCount.textContent = words;
+                
+                // Character count
+                charCount.textContent = text.length;
+                
+                // Sentence count
+                const sentences = text.trim() === '' ? 0 : text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+                sentenceCount.textContent = sentences;
+                
+                // Reading time (average reading speed: 200 words per minute)
+                const readingTimeMinutes = Math.ceil(words / 200);
+                readingTime.textContent = readingTimeMinutes === 0 ? '<1m' : `${readingTimeMinutes}m`;
+            }
+            
+            function clearText() {
+                textInput.value = '';
+                updateCounts();
+                resultsContainer.style.display = 'none';
+            }
+            
+            function loadSample() {
+                textInput.value = sampleText;
+                updateCounts();
+                
+                // Show loaded feedback
+                const originalText = sampleBtn.innerHTML;
+                sampleBtn.innerHTML = '<i class="fas fa-check"></i> Loaded!';
+                
+                setTimeout(() => {
+                    sampleBtn.innerHTML = originalText;
+                }, 2000);
+            }
+            
+            function checkPlagiarism() {
+                const text = textInput.value.trim();
+                
+                if (!text) {
+                    alert('Please enter some text to check for plagiarism');
+                    return;
+                }
+                
+                // Show loading state
+                checkBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+                checkBtn.disabled = true;
+                
+                // Simulate processing time
+                setTimeout(() => {
+                    // Calculate a "plagiarism" score (simulated)
+                    const words = text.trim().split(/\s+/).length;
+                    let score;
+                    
+                    // Generate a "random" score that makes sense for the sample text
+                    if (text.toLowerCase().includes("plagiarism") && text.toLowerCase().includes("work")) {
+                        score = Math.min(100, Math.max(15, Math.floor(words / 3)));
+                    } else {
+                        score = Math.min(30, Math.floor(Math.random() * 30));
+                    }
+                    
+                    // Ensure score is at least 10% for sample text
+                    score = Math.max(score, 10);
+                    
+                    // Display results
+                    displayResults(score);
+                    
+                    // Reset button
+                    checkBtn.innerHTML = '<i class="fas fa-search"></i> Check for Plagiarism';
+                    checkBtn.disabled = false;
+                }, 1500);
+            }
+            
+            function displayResults(score) {
+                // Update score display
+                similarityScore.textContent = `${score}%`;
+                
+                // Set progress bar
+                progressFill.style.width = `${score}%`;
+                
+                // Determine score category
+                if (score < 15) {
+                    similarityScore.className = 'score-value score-safe';
+                    progressFill.className = 'progress-fill progress-safe';
+                    scoreText.textContent = 'Excellent Originality';
+                    scoreText.className = 'score-text score-safe';
+                } else if (score < 40) {
+                    similarityScore.className = 'score-value score-medium';
+                    progressFill.className = 'progress-fill progress-medium';
+                    scoreText.textContent = 'Moderate Similarity';
+                    scoreText.className = 'score-text score-medium';
+                } else {
+                    similarityScore.className = 'score-value score-high';
+                    progressFill.className = 'progress-fill progress-high';
+                    scoreText.textContent = 'High Plagiarism Risk';
+                    scoreText.className = 'score-text score-high';
+                }
+                
+                // Show results container
+                resultsContainer.style.display = 'block';
+                
+                // Scroll to results
+                resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            // Initialize with a check for sample text
+            setTimeout(checkPlagiarism, 500);
+        });
+    </script>
+</body>
+</html>
