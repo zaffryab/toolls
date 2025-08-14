@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online File Splitter tool - split large files into smaller parts for easier sharing and storage. No installation required.">
+    <meta name="keywords" content="file splitter, split files, file division, toolhubcenter, split large files">
+    <title>File Splitter | ToolHubCenter - Split Large Files Online</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --dark: #1d3557;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray: #6c757d;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        nav a:hover {
+            color: white;
+        }
+        
+        .ad-container {
+            text-align: center;
+            background: white;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        @media (min-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr 350px;
+            }
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 18px 25px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select, button {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .file-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .file-input-container input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-input-label {
+            flex: 1;
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-weight: 500;
+            color: var(--gray);
+            transition: all 0.3s;
+        }
+        
+        .file-input-container:hover .file-input-label {
+            border-color: var(--accent);
+            background-color: rgba(72, 149, 239, 0.05);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary {
+            background: #e9ecef;
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+        
+        .result-container {
+            margin-top: 30px;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .result-box h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .result-content {
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .how-to-use li {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .how-to-use code {
+            background: #f1f3f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--warning);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        .split-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        @media (min-width: 576px) {
+            .split-options {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .option-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        
+        .option-card:hover, .option-card.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .option-card h4 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .file-info {
+            background: #f1f3f5;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .file-info.active {
+            display: block;
+        }
+        
+        .file-info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .file-info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .file-parts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .file-part {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--success);
+        }
+        
+        .file-part h4 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .progress-container {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: var(--dark);
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span>🔧</span>
+                    <h1>ToolHubCenter</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">How to Use</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Code Here -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <div class="main-content">
+            <main>
+                <div class="card">
+                    <div class="card-header">
+                        File Splitter Tool
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="fileInput">Select File to Split:</label>
+                            <div class="file-input-container">
+                                <input type="file" id="fileInput">
+                                <div class="file-input-label" id="fileInputLabel">
+                                    <div>📁 Click to select a file</div>
+                                    <div style="font-size: 0.9rem; margin-top: 8px; color: var(--gray);">or drag & drop here</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="file-info" id="fileInfo">
+                            <div class="file-info-item">
+                                <span>File Name:</span>
+                                <strong id="fileName">-</strong>
+                            </div>
+                            <div class="file-info-item">
+                                <span>File Size:</span>
+                                <strong id="fileSize">-</strong>
+                            </div>
+                            <div class="file-info-item">
+                                <span>File Type:</span>
+                                <strong id="fileType">-</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Split Method:</label>
+                            <div class="split-options">
+                                <div class="option-card active" id="byPartsOption">
+                                    <h4>📦 By Number of Parts</h4>
+                                    <p>Split into a specific number of parts</p>
+                                </div>
+                                <div class="option-card" id="bySizeOption">
+                                    <h4>📏 By Size per Part</h4>
+                                    <p>Set maximum size for each part</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" id="partsInputGroup">
+                            <label for="partsCount">Number of Parts:</label>
+                            <input type="number" id="partsCount" min="2" max="100" value="4">
+                        </div>
+                        
+                        <div class="form-group" id="sizeInputGroup" style="display: none;">
+                            <label for="partSize">Maximum Size per Part (MB):</label>
+                            <input type="number" id="partSize" min="1" max="1000" value="10">
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <div class="progress-text" id="progressText">0%</div>
+                        
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="splitBtn">
+                                <span>✂️</span> Split File
+                            </button>
+                            <button class="btn btn-secondary" id="resetBtn">
+                                <span>🔄</span> Reset
+                            </button>
+                        </div>
+                        
+                        <div class="result-container" id="resultContainer" style="display: none;">
+                            <h3>Split File Parts:</h3>
+                            <div class="file-parts-container" id="filePartsContainer">
+                                <!-- File parts will be generated here -->
+                            </div>
+                            <div style="text-align: center; margin-top: 20px;">
+                                <button class="btn btn-primary" id="downloadAllBtn">
+                                    <span>📥</span> Download All Parts
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+            <aside>
+                <div class="card">
+                    <div class="card-header">
+                        How to Use
+                    </div>
+                    <div class="card-body">
+                        <div class="how-to-use">
+                            <ol>
+                                <li>Click on the file area or drag & drop your file to select it.</li>
+                                <li>Choose your splitting method: by number of parts or by size per part.</li>
+                                <li>Set your desired split parameters (number of parts or max size per part).</li>
+                                <li>Click the <strong>"Split File"</strong> button to start the splitting process.</li>
+                                <li>Once split, you'll see all file parts listed with download buttons.</li>
+                                <li>Download individual parts or use the <strong>"Download All Parts"</strong> button.</li>
+                                <li>To reassemble the file, use our <a href="#">File Joiner Tool</a>.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        About File Splitting
+                    </div>
+                    <div class="card-body">
+                        <p>File splitting is the process of dividing a large file into smaller, more manageable parts. This is useful for:</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>Emailing large files that exceed attachment limits</li>
+                            <li>Storing files on media with size limitations</li>
+                            <li>Transferring files over unstable connections</li>
+                            <li>Organizing large datasets</li>
+                        </ul>
+                        <p style="margin-top: 15px">Our tool processes files entirely in your browser - your files never leave your computer.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        Supported File Types
+                    </div>
+                    <div class="card-body">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div>📄 Documents</div>
+                            <div>PDF, DOC, DOCX</div>
+                            <div>📊 Spreadsheets</div>
+                            <div>XLS, XLSX, CSV</div>
+                            <div>🖼️ Images</div>
+                            <div>JPG, PNG, GIF</div>
+                            <div>🎬 Media</div>
+                            <div>MP4, MP3, AVI</div>
+                            <div>📦 Archives</div>
+                            <div>ZIP, RAR, 7Z</div>
+                            <div>💻 Executables</div>
+                            <div>EXE, MSI</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Code Here -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your one-stop destination for free online tools that make development easier and more efficient.</p>
+                    <p>We provide reliable, easy-to-use tools for developers, designers, and tech enthusiasts.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <p>JSON Formatter</p>
+                    <p>Base64 Encoder/Decoder</p>
+                    <p>UUID Generator</p>
+                    <p>File Joiner</p>
+                    <p>JWT Debugger</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@toolhubcenter.com</p>
+                    <p>Feedback: feedback@toolhubcenter.com</p>
+                    <p>Twitter: @ToolHubCenter</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 ToolHubCenter. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const fileInput = document.getElementById('fileInput');
+            const fileInputLabel = document.getElementById('fileInputLabel');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const fileSize = document.getElementById('fileSize');
+            const fileType = document.getElementById('fileType');
+            const byPartsOption = document.getElementById('byPartsOption');
+            const bySizeOption = document.getElementById('bySizeOption');
+            const partsInputGroup = document.getElementById('partsInputGroup');
+            const sizeInputGroup = document.getElementById('sizeInputGroup');
+            const splitBtn = document.getElementById('splitBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const resultContainer = document.getElementById('resultContainer');
+            const filePartsContainer = document.getElementById('filePartsContainer');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const downloadAllBtn = document.getElementById('downloadAllBtn');
+            
+            let selectedFile = null;
+            
+            // Event Listeners
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            byPartsOption.addEventListener('click', () => {
+                byPartsOption.classList.add('active');
+                bySizeOption.classList.remove('active');
+                partsInputGroup.style.display = 'block';
+                sizeInputGroup.style.display = 'none';
+            });
+            
+            bySizeOption.addEventListener('click', () => {
+                bySizeOption.classList.add('active');
+                byPartsOption.classList.remove('active');
+                partsInputGroup.style.display = 'none';
+                sizeInputGroup.style.display = 'block';
+            });
+            
+            splitBtn.addEventListener('click', splitFile);
+            resetBtn.addEventListener('click', resetTool);
+            downloadAllBtn.addEventListener('click', downloadAllParts);
+            
+            // Functions
+            function handleFileSelect(e) {
+                if (e.target.files.length === 0) return;
+                
+                selectedFile = e.target.files[0];
+                fileName.textContent = selectedFile.name;
+                fileSize.textContent = formatFileSize(selectedFile.size);
+                fileType.textContent = selectedFile.type || 'Unknown';
+                fileInfo.classList.add('active');
+                
+                fileInputLabel.innerHTML = `
+                    <div>✅ ${selectedFile.name}</div>
+                    <div style="font-size: 0.9rem; margin-top: 8px; color: var(--gray);">${formatFileSize(selectedFile.size)}</div>
+                `;
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            function splitFile() {
+                if (!selectedFile) {
+                    alert('Please select a file first!');
+                    return;
+                }
+                
+                // Simulate processing
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 5;
+                    progressBar.style.width = `${progress}%`;
+                    progressText.textContent = `${progress}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        showResults();
+                    }
+                }, 100);
+            }
+            
+            function showResults() {
+                // Clear previous results
+                filePartsContainer.innerHTML = '';
+                
+                // Determine split method
+                const isByParts = byPartsOption.classList.contains('active');
+                const partsCount = isByParts ? parseInt(document.getElementById('partsCount').value) : 
+                                            Math.ceil(selectedFile.size / (parseInt(document.getElementById('partSize').value) * 1024 * 1024));
+                
+                // Generate file parts
+                for (let i = 1; i <= partsCount; i++) {
+                    const partElement = document.createElement('div');
+                    partElement.className = 'file-part';
+                    partElement.innerHTML = `
+                        <h4>Part ${i}</h4>
+                        <p>${formatFileSize(selectedFile.size / partsCount)}</p>
+                        <p style="margin: 10px 0; font-size: 0.9rem; color: var(--gray);">${selectedFile.name}.part${i}</p>
+                        <button class="btn btn-secondary" style="margin-top: 10px;">
+                            <span>📥</span> Download
+                        </button>
+                    `;
+                    filePartsContainer.appendChild(partElement);
+                }
+                
+                resultContainer.style.display = 'block';
+                
+                // Scroll to results
+                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            function resetTool() {
+                fileInput.value = '';
+                fileInputLabel.innerHTML = `
+                    <div>📁 Click to select a file</div>
+                    <div style="font-size: 0.9rem; margin-top: 8px; color: var(--gray);">or drag & drop here</div>
+                `;
+                fileInfo.classList.remove('active');
+                fileName.textContent = '-';
+                fileSize.textContent = '-';
+                fileType.textContent = '-';
+                resultContainer.style.display = 'none';
+                progressBar.style.width = '0%';
+                progressText.textContent = '0%';
+                selectedFile = null;
+                
+                // Reset to default split method
+                byPartsOption.classList.add('active');
+                bySizeOption.classList.remove('active');
+                partsInputGroup.style.display = 'block';
+                sizeInputGroup.style.display = 'none';
+            }
+            
+            function downloadAllParts() {
+                alert('In a real implementation, this would download a ZIP file containing all parts. For demonstration, we\'re showing this message.');
+            }
+            
+            // Initialize tooltips for file parts
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.file-part button')) {
+                    const partNum = e.target.closest('.file-part').querySelector('h4').textContent;
+                    alert(`In a real implementation, this would download ${partNum} of the file. For demonstration, we're showing this message.`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
