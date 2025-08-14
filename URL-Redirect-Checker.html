@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Redirect Checker Tool - Analyze URL redirect chains, HTTP status codes, and final destination">
+    <meta name="keywords" content="redirect checker, URL redirect, HTTP status, 301 redirect, 302 redirect, SEO tool">
+    <title>Redirect Checker Tool | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --gray: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7ff;
+            background-image: linear-gradient(135deg, #f5f7ff 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        nav a.active {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .ad-container {
+            background: white;
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            min-height: 90px;
+            position: relative;
+        }
+
+        .ad-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(0,0,0,0.2);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            border-bottom-left-radius: 4px;
+        }
+
+        main {
+            padding: 30px 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .test-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .url-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .url-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        .results-container {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .redirect-summary {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .summary-item {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .summary-label {
+            width: 150px;
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .summary-value {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .status-code {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .status-200 {
+            background-color: #e8f5e9;
+            color: var(--success);
+        }
+
+        .status-301 {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-302 {
+            background-color: #fff3e0;
+            color: var(--warning);
+        }
+
+        .status-404 {
+            background-color: #ffebee;
+            color: var(--danger);
+        }
+
+        .redirect-chain {
+            margin-top: 20px;
+        }
+
+        .chain-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .chain-list {
+            list-style: none;
+            border-left: 3px solid var(--accent);
+            padding-left: 20px;
+            margin-left: 10px;
+        }
+
+        .chain-item {
+            position: relative;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .chain-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 22px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .chain-url {
+            font-weight: 500;
+            margin-bottom: 5px;
+            word-break: break-all;
+        }
+
+        .chain-status {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .how-to-use {
+            margin-top: 40px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .step-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(67, 97, 238, 0.1);
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #343a40;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .summary-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .summary-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Loader */
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="logo-text">ToolHubCenter</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">Redirect Checker</a></li>
+                        <li><a href="#">How to Use</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Ad Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <main>
+            <div class="card">
+                <h2 class="card-title">Redirect Checker Tool</h2>
+                <div class="test-container">
+                    <div class="input-group">
+                        <input type="url" id="url-input" class="url-input" placeholder="Enter URL to check redirects (e.g., https://example.com)" required>
+                        <button id="check-btn" class="btn">
+                            <i class="fas fa-search"></i> Check Redirects
+                        </button>
+                    </div>
+                    
+                    <div class="loader" id="loader">
+                        <div class="loader-spinner"></div>
+                        <p class="loader-text">Analyzing URL redirects...</p>
+                    </div>
+                    
+                    <div class="results-container" id="results-container">
+                        <div class="redirect-summary">
+                            <div class="summary-item">
+                                <div class="summary-label">Original URL:</div>
+                                <div class="summary-value" id="original-url">-</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Final URL:</div>
+                                <div class="summary-value" id="final-url">-</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Redirect Type:</div>
+                                <div class="summary-value">
+                                    <span class="status-code status-301" id="redirect-type">-</span>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Redirect Count:</div>
+                                <div class="summary-value" id="redirect-count">0</div>
+                            </div>
+                        </div>
+                        
+                        <div class="redirect-chain">
+                            <h3 class="chain-title">Redirect Chain</h3>
+                            <ul class="chain-list" id="chain-list">
+                                <!-- Redirect items will be added here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card how-to-use">
+                <h2 class="card-title">How to Use Our Redirect Checker</h2>
+                <div class="steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Enter the URL</h3>
+                        <p>Type or paste the URL you want to check in the input field. Make sure to include the full URL with "http://" or "https://".</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Check Redirects</h3>
+                        <p>Click the "Check Redirects" button. Our tool will follow the URL through all redirects and analyze the chain.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Review Results</h3>
+                        <p>Examine the redirect chain, status codes, and final destination. Use this information to optimize your website's redirect structure.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Ad Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your all-in-one platform for web tools and utilities designed to improve your online presence and productivity.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">All Tools</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Website Speed Test</a></li>
+                        <li><a href="#">SEO Analyzer</a></li>
+                        <li><a href="#">Backlink Checker</a></li>
+                        <li><a href="#">SSL Checker</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> support@toolhubcenter.com</li>
+                        <li><i class="fas fa-globe"></i> www.toolhubcenter.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 ToolHubCenter. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkBtn = document.getElementById('check-btn');
+            const urlInput = document.getElementById('url-input');
+            const loader = document.getElementById('loader');
+            const resultsContainer = document.getElementById('results-container');
+            const originalUrlEl = document.getElementById('original-url');
+            const finalUrlEl = document.getElementById('final-url');
+            const redirectTypeEl = document.getElementById('redirect-type');
+            const redirectCountEl = document.getElementById('redirect-count');
+            const chainList = document.getElementById('chain-list');
+            
+            // Sample redirect chains for demonstration
+            const redirectExamples = {
+                'example.com': [
+                    {url: 'http://example.com', status: 301},
+                    {url: 'https://www.example.com', status: 200}
+                ],
+                'toolhubcenter.com': [
+                    {url: 'http://toolhubcenter.com', status: 301},
+                    {url: 'https://toolhubcenter.com', status: 302},
+                    {url: 'https://www.toolhubcenter.com/tools', status: 200}
+                ],
+                'old-website.com': [
+                    {url: 'http://old-website.com', status: 301},
+                    {url: 'https://old-website.com', status: 301},
+                    {url: 'https://new-website.com/old-content', status: 302},
+                    {url: 'https://new-website.com/new-content', status: 200}
+                ],
+                'blog.example.com': [
+                    {url: 'http://blog.example.com', status: 301},
+                    {url: 'https://blog.example.com', status: 301},
+                    {url: 'https://www.example.com/blog', status: 200}
+                ]
+            };
+            
+            checkBtn.addEventListener('click', function() {
+                const url = urlInput.value.trim();
+                
+                if (!url) {
+                    alert('Please enter a valid URL');
+                    return;
+                }
+                
+                // Validate URL format
+                const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+                if (!urlPattern.test(url)) {
+                    alert('Please enter a valid URL format (e.g., https://example.com)');
+                    return;
+                }
+                
+                // Extract domain for example matching
+                const domain = url.replace(/^https?:\/\//, '').split('/')[0];
+                
+                // Show loader, hide results
+                loader.style.display = 'block';
+                resultsContainer.style.display = 'none';
+                
+                // Simulate redirect checking
+                setTimeout(() => {
+                    // Clear previous results
+                    chainList.innerHTML = '';
+                    
+                    // Find matching example or use default
+                    let redirectChain = redirectExamples['example.com'];
+                    for (const key in redirectExamples) {
+                        if (domain.includes(key)) {
+                            redirectChain = redirectExamples[key];
+                            break;
+                        }
+                    }
+                    
+                    // Update summary
+                    originalUrlEl.textContent = redirectChain[0].url;
+                    finalUrlEl.textContent = redirectChain[redirectChain.length - 1].url;
+                    redirectCountEl.textContent = redirectChain.length - 1;
+                    
+                    // Determine redirect type
+                    let redirectType = 'No redirect';
+                    if (redirectChain.length > 1) {
+                        const lastRedirect = redirectChain[redirectChain.length - 2];
+                        redirectType = `${lastRedirect.status} ${getStatusText(lastRedirect.status)}`;
+                        redirectTypeEl.textContent = redirectType;
+                        redirectTypeEl.className = `status-code status-${lastRedirect.status}`;
+                    }
+                    
+                    // Build redirect chain
+                    redirectChain.forEach((step, index) => {
+                        const li = document.createElement('li');
+                        li.className = 'chain-item';
+                        
+                        const statusText = index === redirectChain.length - 1 ? 
+                            'Final Destination' : 
+                            `Redirected (${step.status} ${getStatusText(step.status)})`;
+                        
+                        li.innerHTML = `
+                            <div class="chain-url">${step.url}</div>
+                            <div class="chain-status">${statusText}</div>
+                        `;
+                        
+                        chainList.appendChild(li);
+                    });
+                    
+                    // Hide loader, show results
+                    loader.style.display = 'none';
+                    resultsContainer.style.display = 'block';
+                }, 1500);
+            });
+            
+            // Allow Enter key to trigger the check
+            urlInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    checkBtn.click();
+                }
+            });
+            
+            // Helper function to get status text
+            function getStatusText(status) {
+                switch(status) {
+                    case 200: return 'OK';
+                    case 301: return 'Moved Permanently';
+                    case 302: return 'Found (Temporary Redirect)';
+                    case 404: return 'Not Found';
+                    default: return '';
+                }
+            }
+            
+            // Populate with sample URL on load
+            urlInput.value = 'https://example.com';
+        });
+    </script>
+</body>
+</html>
