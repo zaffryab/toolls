@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Meta Description Generator - Create compelling SEO meta descriptions that improve click-through rates and search rankings.">
+    <meta name="keywords" content="meta description generator, seo tool, seo meta description, search engine optimization">
+    <title>Meta Description Generator | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a57c7;
+            --secondary: #6c757d;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --border: #dee2e6;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --card-radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(120deg, #e0f7ff, #f0f5ff);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--secondary);
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+        }
+        
+        .tool-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .ad-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+        
+        .result-container {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .result-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        #generated-description {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.5;
+            min-height: 100px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn-copy {
+            background: var(--success);
+        }
+        
+        .btn-reset {
+            background: var(--secondary);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: var(--card-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .how-to-use {
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+        }
+        
+        .how-to-use h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .step {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+        
+        .counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        .counter {
+            font-weight: 600;
+            margin-left: 5px;
+            color: var(--primary);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .feature-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTEyIDJMNCA3bDggNSA4LTUtOC01ek00IDE3bDggNSA4LTVsLTgtNS04IDV6bTAgNnYtOWw4IDV2OWwtOC01eiIvPjwvc3ZnPg==" alt="ToolHubCenter Logo">
+                    <span>ToolHubCenter</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">How to Use</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Meta Description Generator</h1>
+            <p>Create compelling SEO meta descriptions that improve click-through rates and search rankings.</p>
+        </div>
+    </section>
+
+    <!-- Top Ad Container -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- Meta Description Generator Tool -->
+    <section class="tool-card">
+        <h2 class="tool-title">Meta Description Generator</h2>
+        <div class="form-group">
+            <label for="page-title">Page Title</label>
+            <input type="text" id="page-title" class="form-control" placeholder="Enter your page title..." value="SEO Tools for Better Rankings">
+            <div class="counter-box">Character count: <span id="title-counter" class="counter">0</span>/60</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="keywords">Keywords (comma separated)</label>
+            <input type="text" id="keywords" class="form-control" placeholder="Enter keywords (e.g., seo tools, keyword research)" value="meta description, seo tool, search optimization">
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Content Summary</label>
+            <textarea id="content" class="form-control" placeholder="Describe your content or paste a summary...">Our free meta description generator helps you create compelling descriptions for search results. Improve your click-through rates with optimized meta descriptions that accurately describe your page content.</textarea>
+            <div class="counter-box">Character count: <span id="content-counter" class="counter">0</span>/300</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="tone">Description Tone</label>
+            <select id="tone" class="form-control">
+                <option value="professional">Professional</option>
+                <option value="friendly">Friendly & Casual</option>
+                <option value="persuasive">Persuasive</option>
+                <option value="urgent">Urgent</option>
+            </select>
+        </div>
+        
+        <button id="generate-btn" class="btn btn-block">Generate Meta Description</button>
+        
+        <div class="result-container" id="result-container">
+            <div class="result-title">Your Generated Meta Description:</div>
+            <div id="generated-description">Your meta description will appear here after generation.</div>
+            <div class="action-buttons">
+                <button id="copy-btn" class="btn btn-copy">Copy to Clipboard</button>
+                <button id="reset-btn" class="btn btn-reset">Reset Form</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Ad Container -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="container">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Key Features</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>SEO-Optimized</h3>
+                <p>Create meta descriptions that improve search rankings and click-through rates with targeted keywords.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📐</div>
+                <h3>Perfect Length</h3>
+                <p>Generate descriptions that fit within the optimal 155-160 character limit for search results.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎚️</div>
+                <h3>Tone Control</h3>
+                <p>Choose from professional, friendly, persuasive or urgent tones to match your brand voice.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="how-to-use">
+        <h2>How to Use the Meta Description Generator</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Enter Page Details</h3>
+                    <p>Provide your page title, target keywords, and a brief summary of your content.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Select Your Tone</h3>
+                    <p>Choose the appropriate tone for your audience and content type.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Generate Description</h3>
+                    <p>Click the generate button to create your optimized meta description.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Copy and Implement</h3>
+                    <p>Copy the generated description and add it to your website's HTML meta tags.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About ToolHubCenter</h3>
+                    <p>ToolHubCenter provides a comprehensive suite of free online tools for developers, designers, marketers, and content creators.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">SERP Simulator</a></li>
+                        <li><a href="#">Meta Description Generator</a></li>
+                        <li><a href="#">Keyword Research Tool</a></li>
+                        <li><a href="#">Backlink Analyzer</a></li>
+                        <li><a href="#">Website Speed Test</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">SEO Guides</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 ToolHubCenter. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const pageTitle = document.getElementById('page-title');
+            const keywords = document.getElementById('keywords');
+            const content = document.getElementById('content');
+            const tone = document.getElementById('tone');
+            const generateBtn = document.getElementById('generate-btn');
+            const resultContainer = document.getElementById('result-container');
+            const generatedDesc = document.getElementById('generated-description');
+            const copyBtn = document.getElementById('copy-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const titleCounter = document.getElementById('title-counter');
+            const contentCounter = document.getElementById('content-counter');
+            
+            // Character counters
+            function updateCounters() {
+                titleCounter.textContent = pageTitle.value.length;
+                contentCounter.textContent = content.value.length;
+            }
+            
+            pageTitle.addEventListener('input', updateCounters);
+            content.addEventListener('input', updateCounters);
+            
+            // Initialize counters
+            updateCounters();
+            
+            // Generate meta description
+            generateBtn.addEventListener('click', function() {
+                const title = pageTitle.value.trim();
+                const keywordList = keywords.value.split(',').map(k => k.trim()).filter(k => k !== '');
+                const contentText = content.value.trim();
+                const selectedTone = tone.value;
+                
+                if (!title || !contentText) {
+                    alert('Please fill in the required fields: Page Title and Content Summary');
+                    return;
+                }
+                
+                // Generate description based on inputs
+                const description = generateMetaDescription(title, keywordList, contentText, selectedTone);
+                generatedDesc.textContent = description;
+                resultContainer.style.display = 'block';
+                
+                // Scroll to results
+                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            
+            // Copy to clipboard
+            copyBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText(generatedDesc.textContent)
+                    .then(() => {
+                        copyBtn.textContent = 'Copied!';
+                        setTimeout(() => {
+                            copyBtn.textContent = 'Copy to Clipboard';
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                    });
+            });
+            
+            // Reset form
+            resetBtn.addEventListener('click', function() {
+                pageTitle.value = '';
+                keywords.value = '';
+                content.value = '';
+                tone.value = 'professional';
+                resultContainer.style.display = 'none';
+                updateCounters();
+            });
+            
+            // Generate meta description algorithm
+            function generateMetaDescription(title, keywords, content, tone) {
+                let description = "";
+                
+                // Start with a base from the content
+                if (content.length > 160) {
+                    description = content.substring(0, 157) + "...";
+                } else {
+                    description = content;
+                }
+                
+                // Incorporate keywords
+                if (keywords.length > 0) {
+                    // Try to include up to 3 keywords
+                    const includedKeywords = [];
+                    for (const keyword of keywords) {
+                        if (keyword && !description.includes(keyword) && keyword.length < 20) {
+                            includedKeywords.push(keyword);
+                            if (includedKeywords.length >= 3) break;
+                        }
+                    }
+                    
+                    if (includedKeywords.length > 0) {
+                        const keywordString = includedKeywords.join(", ");
+                        if (description.length + keywordString.length + 5 < 160) {
+                            description += ` | ${keywordString}`;
+                        }
+                    }
+                }
+                
+                // Adjust based on tone
+                switch(tone) {
+                    case "friendly":
+                        description = description.charAt(0).toLowerCase() + description.slice(1);
+                        if (!description.endsWith('!') && !description.endsWith('?')) {
+                            description = description.replace(/\.$/, '!');
+                        }
+                        break;
+                    case "persuasive":
+                        if (!description.startsWith('Discover') && !description.startsWith('Learn') && 
+                            !description.startsWith('Find')) {
+                            description = "Discover " + description.charAt(0).toLowerCase() + description.slice(1);
+                        }
+                        break;
+                    case "urgent":
+                        if (!description.includes('now') && !description.includes('today')) {
+                            description = description.replace(/\.$/, ' - learn more today!');
+                        }
+                        break;
+                }
+                
+                // Ensure proper length
+                if (description.length > 160) {
+                    description = description.substring(0, 157) + "...";
+                }
+                
+                // Capitalize first letter
+                description = description.charAt(0).toUpperCase() + description.slice(1);
+                
+                return description;
+            }
+            
+            // Generate initial description on page load
+            setTimeout(() => {
+                generateBtn.click();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
