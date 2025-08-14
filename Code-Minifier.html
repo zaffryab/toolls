@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tool to minify HTML, CSS, and JavaScript code. Reduce file size and optimize your code for better performance.">
+    <meta name="keywords" content="code minifier, minify html, minify css, minify javascript, code optimization, web tools">
+    <title>Code Minifier Test Tool | ToolHubCenter</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f2f5;
+            color: var(--dark-color);
+            padding-bottom: 40px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .ad-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.25);
+        }
+        
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary {
+            background-color: #e9ecef;
+            color: var(--dark-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #dee2e6;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #3aa8d0;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e9ecef;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .how-to-use {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .how-to-use h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+        
+        .step-content p {
+            color: #6c757d;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .feature {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">THC</div>
+                <h1>Code Minifier Test Tool</h1>
+            </div>
+            <p class="subtitle">Optimize your HTML, CSS, and JavaScript by removing unnecessary characters without changing functionality</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">Minify Your Code</h2>
+            
+            <div class="input-group">
+                <label for="codeType">Select Code Type</label>
+                <select id="codeType">
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="js">JavaScript</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="inputCode">Enter Your Code</label>
+                <textarea id="inputCode" placeholder="Paste your HTML, CSS, or JavaScript code here..."></textarea>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="minifyBtn">
+                    <i>⚡</i> Minify Code
+                </button>
+                <button class="btn btn-secondary" id="clearBtn">
+                    <i>🗑️</i> Clear
+                </button>
+            </div>
+            
+            <div class="input-group">
+                <label for="outputCode">Minified Code</label>
+                <textarea id="outputCode" placeholder="Your minified code will appear here..." readonly></textarea>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-success" id="copyBtn">
+                    <i>📋</i> Copy to Clipboard
+                </button>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Original Size</span>
+                    <span class="stat-value" id="originalSize">0 KB</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Minified Size</span>
+                    <span class="stat-value" id="minifiedSize">0 KB</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Reduction</span>
+                    <span class="stat-value" id="reduction">0%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <div class="how-to-use">
+            <h2>How to Use the Code Minifier</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Select Your Code Type</h3>
+                    <p>Choose the type of code you want to minify - HTML, CSS, or JavaScript.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Paste Your Code</h3>
+                    <p>Copy and paste your code into the input field. The tool handles all types of code formatting.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Minify Your Code</h3>
+                    <p>Click the "Minify Code" button to optimize your code and reduce its size.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Copy and Use</h3>
+                    <p>Copy the minified code to your clipboard and use it in your projects for faster loading times.</p>
+                </div>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <i>🚀</i>
+                    <h3>Lightning Fast</h3>
+                    <p>Minify your code in milliseconds with our optimized algorithms</p>
+                </div>
+                
+                <div class="feature">
+                    <i>📊</i>
+                    <h3>Size Comparison</h3>
+                    <p>See exactly how much you've reduced your file size</p>
+                </div>
+                
+                <div class="feature">
+                    <i>🔒</i>
+                    <h3>Secure Processing</h3>
+                    <p>Your code is processed locally and never stored on our servers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 ToolHubCenter - Code Minifier Test Tool | All rights reserved</p>
+            <p>Optimize your web projects for better performance and faster loading times</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeType = document.getElementById('codeType');
+            const inputCode = document.getElementById('inputCode');
+            const outputCode = document.getElementById('outputCode');
+            const minifyBtn = document.getElementById('minifyBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const originalSize = document.getElementById('originalSize');
+            const minifiedSize = document.getElementById('minifiedSize');
+            const reduction = document.getElementById('reduction');
+            
+            // Function to minify code
+            function minifyCode(code, type) {
+                let minified = code;
+                
+                // Remove comments
+                minified = minified.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, '$1');
+                
+                // Remove whitespace
+                minified = minified.replace(/\s+/g, ' ');
+                
+                // Remove line breaks
+                minified = minified.replace(/\n/g, '');
+                
+                // Type-specific minification
+                if (type === 'html') {
+                    minified = minified.replace(/>\s+</g, '><');
+                } else if (type === 'css') {
+                    minified = minified.replace(/\s*([{}|:;,])\s*/g, '$1');
+                    minified = minified.replace(/;}/g, '}');
+                } else if (type === 'js') {
+                    // Additional JS minification would go here
+                }
+                
+                return minified.trim();
+            }
+            
+            // Update size statistics
+            function updateStats(input, output) {
+                const inputSize = (new TextEncoder().encode(input).length / 1024).toFixed(2);
+                const outputSize = (new TextEncoder().encode(output).length / 1024).toFixed(2);
+                const reductionPercent = (100 - (outputSize / inputSize * 100)).toFixed(1);
+                
+                originalSize.textContent = `${inputSize} KB`;
+                minifiedSize.textContent = `${outputSize} KB`;
+                reduction.textContent = `${reductionPercent}%`;
+            }
+            
+            // Minify button event
+            minifyBtn.addEventListener('click', function() {
+                if (inputCode.value.trim() === '') {
+                    alert('Please enter some code to minify');
+                    return;
+                }
+                
+                const minified = minifyCode(inputCode.value, codeType.value);
+                outputCode.value = minified;
+                updateStats(inputCode.value, minified);
+            });
+            
+            // Clear button event
+            clearBtn.addEventListener('click', function() {
+                inputCode.value = '';
+                outputCode.value = '';
+                originalSize.textContent = '0 KB';
+                minifiedSize.textContent = '0 KB';
+                reduction.textContent = '0%';
+            });
+            
+            // Copy button event
+            copyBtn.addEventListener('click', function() {
+                if (outputCode.value.trim() === '') {
+                    alert('No minified code to copy');
+                    return;
+                }
+                
+                outputCode.select();
+                document.execCommand('copy');
+                
+                // Show copied feedback
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i>✓</i> Copied!';
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+            
+            // Example code for demonstration
+            inputCode.value = `/* Sample CSS to demonstrate minification */
+body {
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}`;
+        });
+    </script>
+</body>
+</html>
