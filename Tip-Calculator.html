@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Tip Calculator tool to calculate tips and split bills. Determine how much to tip based on service quality and number of people.">
+    <meta name="keywords" content="tip calculator, gratuity calculator, bill splitter, restaurant tip, service tip">
+    <title>Tip Calculator - Calculate Gratuity & Split Bills | ToolHubCenter</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #4a6cf7;
+            --primary-dark: #3a5af5;
+            --secondary-color: #6c757d;
+            --light-bg: #f8f9fa;
+            --dark-bg: #212529;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #dee2e6;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4ecfb 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: 40px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            background: linear-gradient(90deg, var(--primary-color), #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: 42px;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-bottom: 40px;
+            font-size: 18px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Ad Container */
+        .ad-container {
+            background-color: #f0f0f0;
+            padding: 15px;
+            text-align: center;
+            margin: 30px 0;
+            border-radius: 8px;
+            border: 1px dashed #ccc;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        /* Tool Card */
+        .tool-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            background: linear-gradient(90deg, var(--primary-color), #6c5ce7);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 22px;
+            text-align: center;
+        }
+        
+        .card-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 500;
+            font-size: 17px;
+            color: var(--dark-bg);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), #6c5ce7);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(74, 108, 247, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(108, 117, 125, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(90deg, var(--success-color), #20bf6b);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(40, 167, 69, 0.3);
+        }
+        
+        /* Tip Percentage Options */
+        .tip-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tip-option {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .tip-option:hover {
+            border-color: var(--primary-color);
+            background: #eef2ff;
+        }
+        
+        .tip-option.selected {
+            border-color: var(--primary-color);
+            background: #eef2ff;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+        }
+        
+        .custom-tip {
+            grid-column: span 3;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .custom-tip input {
+            flex: 1;
+        }
+        
+        /* Results Panel */
+        .results-panel {
+            background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%);
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .result-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .result-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .result-label h3 {
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+        
+        .result-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-bg);
+            text-align: right;
+        }
+        
+        .result-description {
+            color: var(--secondary-color);
+            font-size: 14px;
+        }
+        
+        /* How to Use Section */
+        .how-to-use {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 35px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .how-to-use h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 28px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .how-to-use h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, var(--primary-color), #6c5ce7);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(74, 108, 247, 0.3);
+        }
+        
+        .step-content h3 {
+            margin-bottom: 12px;
+            font-size: 20px;
+            color: var(--dark-bg);
+        }
+        
+        .step-content p {
+            color: var(--secondary-color);
+            font-size: 16px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-bg), #000000);
+            color: white;
+            padding: 50px 0 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            text-align: center;
+        }
+        
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+            width: 50px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 28px;
+            background: linear-gradient(90deg, #4a6cf7, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #e9ecef;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 17px;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: #adb5bd;
+            font-size: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .card-body {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .results-panel {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tip-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .custom-tip {
+                grid-column: span 2;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 20px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .card-header {
+                font-size: 18px;
+            }
+            
+            .how-to-use h2 {
+                font-size: 24px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .tip-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .custom-tip {
+                grid-column: span 1;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 18px 30px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: var(--transition);
+            z-index: 1000;
+            font-size: 16px;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .notification.success {
+            background: linear-gradient(90deg, var(--success-color), #20bf6b);
+        }
+        
+        .notification.error {
+            background: linear-gradient(90deg, var(--error-color), #e74c3c);
+        }
+        
+        /* Pulse Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fade-in">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234a6cf7' d='M12 0L0 12l12 12 12-12L12 0zm0 2.828l9.172 9.172L12 21.172 2.828 12 12 2.828zM8 11v2h8v-2H8z'/%3E%3C/svg%3E" alt="ToolHubCenter Logo">
+                    <h1>ToolHubCenter</h1>
+                </div>
+                <nav>
+                    <a href="#" class="btn btn-secondary">Home</a>
+                    <a href="#" class="btn btn-secondary">Tools</a>
+                    <a href="#" class="btn btn-secondary">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container main-content">
+        <h1 class="section-title fade-in">Tip Calculator</h1>
+        <p class="section-subtitle fade-in">Calculate how much to tip based on your bill amount and service quality</p>
+        
+        <!-- Top Ad Container -->
+        <div class="ad-container fade-in">
+            <!-- Google AdSense Ad Unit -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <!-- Tip Calculator Tool Card -->
+        <div class="tool-card fade-in">
+            <div class="card-header">
+                Calculate Your Tip
+            </div>
+            <div class="card-body">
+                <!-- Input Panel -->
+                <div class="input-panel">
+                    <div class="form-group">
+                        <label for="bill-amount">Bill Amount ($)</label>
+                        <input type="number" id="bill-amount" placeholder="Enter bill amount" value="100.00" min="0" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tip Percentage</label>
+                        <div class="tip-options">
+                            <div class="tip-option" data-percent="5">5%</div>
+                            <div class="tip-option" data-percent="10">10%</div>
+                            <div class="tip-option" data-percent="15">15%</div>
+                            <div class="tip-option selected" data-percent="18">18%</div>
+                            <div class="tip-option" data-percent="20">20%</div>
+                            <div class="tip-option" data-percent="25">25%</div>
+                            <div class="custom-tip">
+                                <input type="number" id="custom-tip" placeholder="Custom %" min="0" max="100">
+                                <span>%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="people-count">Number of People</label>
+                        <input type="number" id="people-count" placeholder="Number of people" value="2" min="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service-quality">Service Quality</label>
+                        <select id="service-quality">
+                            <option value="1">Poor</option>
+                            <option value="1.1">Average</option>
+                            <option value="1.15" selected>Good</option>
+                            <option value="1.2">Very Good</option>
+                            <option value="1.25">Excellent</option>
+                        </select>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button id="calculate-btn" class="btn btn-primary">
+                            <i>🧮</i> Calculate Tip
+                        </button>
+                        <button id="reset-btn" class="btn btn-secondary">
+                            <i>🔄</i> Reset
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results Panel -->
+                <div class="results-panel">
+                    <div>
+                        <div class="result-item">
+                            <div class="result-label">
+                                <h3>Tip Amount</h3>
+                            </div>
+                            <div class="result-value" id="tip-amount">$18.00</div>
+                            <div class="result-description">Total tip for your bill</div>
+                        </div>
+                        
+                        <div class="result-item">
+                            <div class="result-label">
+                                <h3>Total Bill</h3>
+                            </div>
+                            <div class="result-value" id="total-bill">$118.00</div>
+                            <div class="result-description">Bill amount including tip</div>
+                        </div>
+                        
+                        <div class="result-item">
+                            <div class="result-label">
+                                <h3>Tip Per Person</h3>
+                            </div>
+                            <div class="result-value" id="tip-per-person">$9.00</div>
+                            <div class="result-description">Each person's share of the tip</div>
+                        </div>
+                        
+                        <div class="result-item">
+                            <div class="result-label">
+                                <h3>Total Per Person</h3>
+                            </div>
+                            <div class="result-value" id="total-per-person">$59.00</div>
+                            <div class="result-description">Each person's total payment</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-suggestion">
+                        <div class="result-label">
+                            <h3>Recommended Tip</h3>
+                        </div>
+                        <div class="result-description">Based on your service quality rating, we recommend an 18% tip for good service.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- How to Use Section -->
+        <div class="how-to-use fade-in">
+            <h2>How to Use the Tip Calculator</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Enter Bill Amount</h3>
+                        <p>Input the total amount of your bill before tax or tip.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Select Tip Percentage</h3>
+                        <p>Choose a standard tip percentage or enter a custom amount.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Set Number of People</h3>
+                        <p>Enter how many people are splitting the bill.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Calculate & View Results</h3>
+                        <p>See the tip amount, total bill, and per-person costs instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tip Guide Section -->
+        <div class="how-to-use fade-in">
+            <h2>Standard Tipping Guide</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-content">
+                        <h3>Restaurants</h3>
+                        <p>15-20% of pre-tax bill for good service. 18% is standard for good service.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-content">
+                        <h3>Food Delivery</h3>
+                        <p>10-15% of the bill, or $2-5 for pizza delivery depending on order size.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-content">
+                        <h3>Taxi/Rideshare</h3>
+                        <p>15-20% of the fare. Round up to the nearest dollar for shorter trips.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-content">
+                        <h3>Hotel Staff</h3>
+                        <p>$1-5 per bag for bellhops, $2-5 per night for housekeeping.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container fade-in">
+            <!-- Google AdSense Ad Unit -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234a6cf7' d='M12 0L0 12l12 12 12-12L12 0zm0 2.828l9.172 9.172L12 21.172 2.828 12 12 2.828zM8 11v2h8v-2H8z'/%3E%3C/svg%3E" alt="ToolHubCenter Logo">
+                    <h2>ToolHubCenter</h2>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#">All Tools</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <p class="copyright">© 2023 ToolHubCenter. All rights reserved. The ultimate toolbox for developers and creators.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const billAmountInput = document.getElementById('bill-amount');
+            const tipOptions = document.querySelectorAll('.tip-option');
+            const customTipInput = document.getElementById('custom-tip');
+            const peopleCountInput = document.getElementById('people-count');
+            const serviceQualitySelect = document.getElementById('service-quality');
+            const calculateBtn = document.getElementById('calculate-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            
+            const tipAmountEl = document.getElementById('tip-amount');
+            const totalBillEl = document.getElementById('total-bill');
+            const tipPerPersonEl = document.getElementById('tip-per-person');
+            const totalPerPersonEl = document.getElementById('total-per-person');
+            
+            const notification = document.getElementById('notification');
+            
+            let currentTipPercent = 18;
+            
+            // Set initial calculation
+            calculateTip();
+            
+            // Tip selection
+            tipOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    tipOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Update current tip percent
+                    if (this.getAttribute('data-percent')) {
+                        currentTipPercent = parseFloat(this.getAttribute('data-percent'));
+                        customTipInput.value = '';
+                    }
+                    
+                    // Calculate tip
+                    calculateTip();
+                });
+            });
+            
+            // Custom tip input
+            customTipInput.addEventListener('input', function() {
+                if (this.value) {
+                    // Remove selected class from all options
+                    tipOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Update current tip percent
+                    currentTipPercent = parseFloat(this.value) || 0;
+                    
+                    // Calculate tip
+                    calculateTip();
+                }
+            });
+            
+            // Calculate tip function
+            function calculateTip() {
+                const billAmount = parseFloat(billAmountInput.value) || 0;
+                const peopleCount = parseInt(peopleCountInput.value) || 1;
+                const serviceQuality = parseFloat(serviceQualitySelect.value);
+                
+                // Validate inputs
+                if (billAmount <= 0) {
+                    showNotification('Please enter a valid bill amount!', false);
+                    return;
+                }
+                
+                if (peopleCount <= 0) {
+                    showNotification('Please enter a valid number of people!', false);
+                    return;
+                }
+                
+                // Calculate tip amount
+                const tipAmount = billAmount * (currentTipPercent / 100) * serviceQuality;
+                const totalBill = billAmount + tipAmount;
+                const tipPerPerson = tipAmount / peopleCount;
+                const totalPerPerson = totalBill / peopleCount;
+                
+                // Update UI
+                tipAmountEl.textContent = '$' + tipAmount.toFixed(2);
+                totalBillEl.textContent = '$' + totalBill.toFixed(2);
+                tipPerPersonEl.textContent = '$' + tipPerPerson.toFixed(2);
+                totalPerPersonEl.textContent = '$' + totalPerPerson.toFixed(2);
+                
+                // Add animation
+                [tipAmountEl, totalBillEl, tipPerPersonEl, totalPerPersonEl].forEach(el => {
+                    el.classList.add('pulse');
+                    setTimeout(() => {
+                        el.classList.remove('pulse');
+                    }, 500);
+                });
+            }
+            
+            // Show notification
+            function showNotification(message, isSuccess) {
+                notification.textContent = message;
+                notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Reset form
+            function resetForm() {
+                billAmountInput.value = '100.00';
+                peopleCountInput.value = '2';
+                serviceQualitySelect.value = '1.15';
+                customTipInput.value = '';
+                
+                // Reset tip selection
+                tipOptions.forEach(opt => opt.classList.remove('selected'));
+                document.querySelector('.tip-option[data-percent="18"]').classList.add('selected');
+                currentTipPercent = 18;
+                
+                // Recalculate
+                calculateTip();
+                
+                showNotification('Form reset successfully!', true);
+            }
+            
+            // Event listeners
+            [billAmountInput, peopleCountInput, serviceQualitySelect].forEach(input => {
+                input.addEventListener('input', calculateTip);
+            });
+            
+            calculateBtn.addEventListener('click', calculateTip);
+            resetBtn.addEventListener('click', resetForm);
+            
+            // Initial calculation
+            calculateTip();
+        });
+    </script>
+</body>
+</html>
