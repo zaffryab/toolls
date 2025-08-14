@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Text Extractor tool to extract emails, URLs, phone numbers and custom patterns from any text. Fast, easy and accurate text extraction.">
+    <meta name="keywords" content="text extractor, email extractor, url extractor, phone extractor, text processing, online tools">
+    <title>Text Extractor Tool | ToolHubCenter - Extract Emails, URLs, Phone Numbers</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .ad-container {
+            margin: 25px auto;
+            display: flex;
+            justify-content: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            min-height: 90px;
+            max-width: 728px;
+        }
+        
+        .ad-label {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.7rem;
+            color: #888;
+            background: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px var(--shadow);
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            background: var(--accent);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.2);
+        }
+        
+        .extraction-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .option-btn {
+            padding: 12px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .option-btn:hover {
+            background: #f8f9ff;
+            border-color: var(--accent);
+        }
+        
+        .option-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .custom-pattern {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .custom-pattern input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .custom-pattern input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .btn {
+            padding: 14px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn i {
+            font-size: 18px;
+        }
+        
+        .result-container {
+            background: #f8f9ff;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 200px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px dashed #ddd;
+        }
+        
+        .result-item {
+            padding: 10px 15px;
+            background: white;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .copy-btn {
+            background: #f0f4ff;
+            border: none;
+            color: var(--primary);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .how-to-use {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .how-to-use h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .step {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+        
+        .step-content h3 {
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .step-content p {
+            color: #555;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .extraction-options {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .custom-pattern {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">THC</div>
+                <h1>Text Extractor Tool</h1>
+            </div>
+            <p class="tagline">Extract emails, URLs, phone numbers, and custom patterns from any text with our powerful online tool</p>
+        </header>
+        
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">ADVERTISEMENT</div>
+            <!-- Google AdSense Ad Unit -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <div class="tool-container">
+            <div class="card">
+                <h2 class="card-title"><i>📝</i> Input Text</h2>
+                <textarea id="inputText" placeholder="Paste your text here...">Hello! Contact me at john.doe@example.com or visit our website at https://example.com. You can also call us at (123) 456-7890 or +44 123456789. For support, email support@company.com.</textarea>
+                
+                <h3>Extraction Options</h3>
+                <div class="extraction-options">
+                    <div class="option-btn active" data-type="email">Emails</div>
+                    <div class="option-btn" data-type="url">URLs</div>
+                    <div class="option-btn" data-type="phone">Phone Numbers</div>
+                    <div class="option-btn" data-type="custom">Custom Pattern</div>
+                </div>
+                
+                <div class="custom-pattern" id="customPattern" style="display: none;">
+                    <input type="text" id="patternInput" placeholder="Enter regex pattern (e.g. #[a-zA-Z0-9_]+)">
+                    <button class="btn" onclick="extractText()"><i>🔍</i> Extract</button>
+                </div>
+                
+                <button class="btn" onclick="extractText()"><i>⚡</i> Extract Text</button>
+                <button class="btn" onclick="clearAll()" style="background: #6c757d; margin-left: 10px;"><i>🗑️</i> Clear All</button>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i>📋</i> Extracted Results</h2>
+                <div class="result-container" id="resultContainer">
+                    <!-- Results will appear here -->
+                    <div class="result-item">
+                        <span>john.doe@example.com</span>
+                        <button class="copy-btn" title="Copy">⎘</button>
+                    </div>
+                    <div class="result-item">
+                        <span>support@company.com</span>
+                        <button class="copy-btn" title="Copy">⎘</button>
+                    </div>
+                    <div class="result-item">
+                        <span>https://example.com</span>
+                        <button class="copy-btn" title="Copy">⎘</button>
+                    </div>
+                    <div class="result-item">
+                        <span>(123) 456-7890</span>
+                        <button class="copy-btn" title="Copy">⎘</button>
+                    </div>
+                    <div class="result-item">
+                        <span>+44 123456789</span>
+                        <button class="copy-btn" title="Copy">⎘</button>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button class="btn" onclick="copyAllResults()"><i>📄</i> Copy All</button>
+                    <button class="btn" onclick="downloadResults()" style="background: #4caf50;"><i>💾</i> Download</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">ADVERTISEMENT</div>
+            <!-- Google AdSense Ad Unit -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <div class="how-to-use">
+            <h2><i>❓</i> How to Use the Text Extractor Tool</h2>
+            <p>Our Text Extractor makes it easy to find and extract specific information from any text. Follow these simple steps:</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Paste Your Text</h3>
+                        <p>Copy and paste any text into the input box. This could be from a document, webpage, email, or any other source.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Choose Extraction Type</h3>
+                        <p>Select what you want to extract - emails, URLs, phone numbers, or use a custom pattern for more specific extraction.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Extract</h3>
+                        <p>Click the "Extract Text" button. The tool will process your text and display all matches in the results area.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Copy or Download</h3>
+                        <p>Copy individual results or download all extracted data as a text file for later use.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 ToolHubCenter - Your One-Stop Solution for Online Tools</p>
+            <p>Text Extractor Tool v1.0 | All Rights Reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // Set up extraction option buttons
+        const optionButtons = document.querySelectorAll('.option-btn');
+        const customPatternDiv = document.getElementById('customPattern');
+        
+        optionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                optionButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Show custom pattern input if custom is selected
+                if (this.dataset.type === 'custom') {
+                    customPatternDiv.style.display = 'flex';
+                } else {
+                    customPatternDiv.style.display = 'none';
+                }
+            });
+        });
+        
+        // Function to extract text based on selection
+        function extractText() {
+            const inputText = document.getElementById('inputText').value;
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.innerHTML = '';
+            
+            // Get active extraction type
+            const activeOption = document.querySelector('.option-btn.active').dataset.type;
+            let matches = [];
+            
+            switch(activeOption) {
+                case 'email':
+                    matches = extractEmails(inputText);
+                    break;
+                case 'url':
+                    matches = extractUrls(inputText);
+                    break;
+                case 'phone':
+                    matches = extractPhoneNumbers(inputText);
+                    break;
+                case 'custom':
+                    const pattern = document.getElementById('patternInput').value;
+                    if (pattern) {
+                        try {
+                            const regex = new RegExp(pattern, 'gi');
+                            matches = extractWithPattern(inputText, regex);
+                        } catch (e) {
+                            alert('Invalid regular expression pattern. Please try again.');
+                            return;
+                        }
+                    } else {
+                        alert('Please enter a custom pattern.');
+                        return;
+                    }
+                    break;
+            }
+            
+            // Display results
+            if (matches.length === 0) {
+                resultContainer.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">No matches found. Try a different extraction type or pattern.</p>';
+                return;
+            }
+            
+            matches.forEach(match => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                resultItem.innerHTML = `
+                    <span>${match}</span>
+                    <button class="copy-btn" title="Copy" onclick="copyToClipboard('${match}')">⎘</button>
+                `;
+                resultContainer.appendChild(resultItem);
+            });
+        }
+        
+        // Extraction functions
+        function extractEmails(text) {
+            const emailRegex = /[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}/gi;
+            return [...new Set(text.match(emailRegex) || [])];
+        }
+        
+        function extractUrls(text) {
+            const urlRegex = /https?:\/\/[^\s/$.?#].[^\s]*/gi;
+            return [...new Set(text.match(urlRegex) || [])];
+        }
+        
+        function extractPhoneNumbers(text) {
+            const phoneRegex = /(\+\d{1,3}\s?)?(\(\d{1,4}\)|\d{1,4})[\s.-]?\d{1,12}/g;
+            return [...new Set(text.match(phoneRegex) || [])];
+        }
+        
+        function extractWithPattern(text, pattern) {
+            return [...new Set(text.match(pattern) || [])];
+        }
+        
+        // Utility functions
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard: ' + text);
+            });
+        }
+        
+        function copyAllResults() {
+            const resultItems = document.querySelectorAll('.result-item span');
+            if (resultItems.length === 0) {
+                alert('No results to copy!');
+                return;
+            }
+            
+            let allText = '';
+            resultItems.forEach(item => {
+                allText += item.textContent + '\n';
+            });
+            
+            navigator.clipboard.writeText(allText).then(() => {
+                alert('All results copied to clipboard!');
+            });
+        }
+        
+        function downloadResults() {
+            const resultItems = document.querySelectorAll('.result-item span');
+            if (resultItems.length === 0) {
+                alert('No results to download!');
+                return;
+            }
+            
+            let allText = 'Extracted Results:\n\n';
+            resultItems.forEach((item, index) => {
+                allText += `${index + 1}. ${item.textContent}\n`;
+            });
+            
+            const blob = new Blob([allText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'extracted-text.txt';
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        }
+        
+        function clearAll() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('resultContainer').innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">Extracted results will appear here...</p>';
+            document.getElementById('patternInput').value = '';
+            optionButtons[0].classList.add('active');
+            customPatternDiv.style.display = 'none';
+        }
+        
+        // Initialize with sample data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up copy buttons for initial sample results
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const text = this.parentElement.querySelector('span').textContent;
+                    copyToClipboard(text);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
