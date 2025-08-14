@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free SERP Simulator tool - Test how your website appears in search results. Perfect for SEO analysis and optimization.">
+    <meta name="keywords" content="serp simulator, seo tool, search engine results, seo analysis, keyword ranking">
+    <title>SERP Simulator | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a57c7;
+            --secondary: #6c757d;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --border: #dee2e6;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --card-radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(120deg, #e0f7ff, #f0f5ff);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--secondary);
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+        }
+        
+        .tool-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+        }
+        
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box button:hover {
+            background: var(--primary-dark);
+        }
+        
+        .ad-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+        
+        .serp-results {
+            display: none;
+        }
+        
+        .serp-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .serp-item:last-child {
+            border-bottom: none;
+        }
+        
+        .serp-title {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .serp-title:hover {
+            text-decoration: underline;
+        }
+        
+        .serp-url {
+            color: var(--success);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .serp-description {
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: var(--card-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .how-to-use {
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+        }
+        
+        .how-to-use h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .step {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .feature-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTEyIDJMNCA3bDggNSA4LTUtOC01ek00IDE3bDggNSA4LTVsLTgtNS04IDV6bTAgNnYtOWw4IDV2OWwtOC01eiIvPjwvc3ZnPg==" alt="ToolHubCenter Logo">
+                    <span>ToolHubCenter</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">How to Use</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>SERP Simulator Tool</h1>
+            <p>Simulate how your website appears in search engine results pages. Perfect for SEO analysis and optimization.</p>
+        </div>
+    </section>
+
+    <!-- Top Ad Container -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- SERP Simulator Tool -->
+    <section class="tool-card">
+        <h2 class="tool-title">SERP Simulator</h2>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Enter your keyword or website URL..." value="SEO optimization tools">
+            <button id="search-btn">Simulate SERP</button>
+        </div>
+        
+        <div class="serp-results" id="serp-results">
+            <div class="serp-item">
+                <a href="#" class="serp-title">ToolHubCenter - Top SEO Tools for Optimization</a>
+                <div class="serp-url">https://www.toolhubcenter.com › seo-tools</div>
+                <div class="serp-description">Discover the best SEO tools at ToolHubCenter. Our comprehensive suite includes keyword research, backlink analysis, rank tracking, and more to boost your website's visibility.</div>
+            </div>
+            
+            <div class="serp-item">
+                <a href="#" class="serp-title">10 Best SEO Tools in 2023 - Comprehensive Review</a>
+                <div class="serp-url">https://www.seojournal.com › best-seo-tools</div>
+                <div class="serp-description">Looking for the best SEO tools? We've tested and reviewed the top SEO software for keyword research, technical SEO, content optimization, and more.</div>
+            </div>
+            
+            <div class="serp-item">
+                <a href="#" class="serp-title">Free SEO Tools - Google Search Console</a>
+                <div class="serp-url">https://search.google.com › search-console</div>
+                <div class="serp-description">Google's free Search Console helps you monitor, maintain, and troubleshoot your site's presence in Google Search results with free SEO tools and reports.</div>
+            </div>
+            
+            <div class="serp-item">
+                <a href="#" class="serp-title">The Complete Guide to SEO Tools - Moz</a>
+                <div class="serp-url">https://moz.com › blog › complete-guide-seo-tools</div>
+                <div class="serp-description">Learn about the essential SEO tools you need for a successful optimization strategy. From keyword research to technical audits, we cover all the tools you need.</div>
+            </div>
+            
+            <div class="serp-item">
+                <a href="#" class="serp-title">SEMrush: Online Marketing Suite for Digital Marketing</a>
+                <div class="serp-url">https://www.semrush.com</div>
+                <div class="serp-description">SEMrush is an online visibility management and content marketing SaaS platform that ensures businesses get measurable results from online marketing.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Ad Container -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="container">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Key Features</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Realistic Simulation</h3>
+                <p>Simulate search engine results pages with accurate formatting and structure to see how your site appears to users.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>SEO Analysis</h3>
+                <p>Analyze your title tags, meta descriptions, and URL structures to optimize for better click-through rates.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile Responsive</h3>
+                <p>Preview how your SERP listings appear on desktop, tablet, and mobile devices for comprehensive analysis.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="how-to-use">
+        <h2>How to Use the SERP Simulator</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Enter Your Keyword or URL</h3>
+                    <p>Type the keyword you want to rank for or your website URL in the search box.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Click "Simulate SERP"</h3>
+                    <p>Press the button to generate a simulated search engine results page for your query.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Analyze the Results</h3>
+                    <p>Review how your website appears in the search results and identify areas for improvement.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Optimize Your Listing</h3>
+                    <p>Adjust your title tags, meta descriptions, and URL structures to improve visibility and click-through rates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About ToolHubCenter</h3>
+                    <p>ToolHubCenter provides a comprehensive suite of free online tools for developers, designers, marketers, and content creators.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">SERP Simulator</a></li>
+                        <li><a href="#">Keyword Research Tool</a></li>
+                        <li><a href="#">Backlink Analyzer</a></li>
+                        <li><a href="#">Website Speed Test</a></li>
+                        <li><a href="#">Meta Tag Generator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">SEO Guides</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 ToolHubCenter. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBtn = document.getElementById('search-btn');
+            const searchInput = document.getElementById('search-input');
+            const serpResults = document.getElementById('serp-results');
+            
+            // Function to simulate SERP
+            function simulateSERP() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    serpResults.style.display = 'block';
+                    
+                    // Scroll to results
+                    serpResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            // Event listeners
+            searchBtn.addEventListener('click', simulateSERP);
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    simulateSERP();
+                }
+            });
+            
+            // Initialize with simulated results
+            setTimeout(() => {
+                serpResults.style.display = 'block';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
