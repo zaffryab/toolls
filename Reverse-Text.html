@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Text Reverser tool. Reverse any text, reverse words, or reverse letters instantly. Perfect for coding, puzzles, and creative writing.">
+    <meta name="keywords" content="text reverser, reverse text, reverse words, letter reverser, online text tool">
+    <title>Text Reverser Tool | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --gray: #6c757d;
+            --border: #dee2e6;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            flex: 1;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .ad-container {
+            background-color: white;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ad-label {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(0,0,0,0.1);
+            color: var(--gray);
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            margin: 20px 0;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+
+        .card-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        select, input {
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .how-to-use {
+            margin-top: 30px;
+        }
+
+        .how-to-use h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .step-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border-top: 4px solid var(--accent);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step-card h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        .result-container {
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .result-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .char-count {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .reverse-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .option-card.active {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .option-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example-text {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--success);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .tool-description {
+            margin-bottom: 20px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTEyLDE1QzEyLjgzLDE1IDEzLjUsMTQuMzMgMTMuNSwxMy41UzEyLjgzLDEyIDEyLDEyUzEwLjUsMTIuNjcgMTAuNSwxMy41UzExLjE3LDE1IDEyLDE1TTEyLDJBNy43IDcuNyAwIDAgMSAxOSw5VjE0LjVIMTdWOUExLjUgMS41IDAgMCAwIDE1LjUsNy41SDE0LjVWMTdIMTQuNUExLjUgMS41IDAgMCAwIDEzLDE4LjVWMjBIMTFWMTguNUExLjUgMS41IDAgMCAwIDkuNSwxN0g1VjcuNUg5LjVBMS41IDEuNSAwIDAgMCAxMSw2VjJIMTJNMTIsMkE3LDcgMCAwLDEgMTksOVYxNC41SDE3VjlBNSw1IDAgMCwwIDEyLDRBNSw1IDAgMCwwIDcsOVYxNC41SDVWOUMyLDUuNTkgNC41OSwyIDEyLDJNMTQuNSwxNi41QTIuNSwyLjUgMCAwLDEgMTcsMTlBNC41LDQuNSAwIDAsMSAxMi41LDIzSDExLjVBNC41LDQuNSAwIDAsMSA3LDE5QTEuNSwxLjUgMCAwLDEgOC41LDE3LjVIMTBWMTQuNUg1VjE3SDE0LjVWMTYuNVoiPjwvcGF0aD48L3N2Zz4=" alt="ToolHubCenter">
+                    <h1>ToolHubCenter</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Top Ad Space -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <!-- Main Card -->
+        <div class="card">
+            <h2 class="card-title">
+                <i>↔️</i> Text Reverser Tool
+            </h2>
+            
+            <p class="tool-description">
+                Reverse your text in multiple ways! Choose to reverse the entire text, reverse the order of words, or reverse each word individually. Perfect for coding challenges, puzzles, and creative writing.
+            </p>
+            
+            <div class="form-group">
+                <label for="text-input">Enter your text:</label>
+                <textarea id="text-input" placeholder="Type or paste text here...">Hello! Welcome to ToolHubCenter. This free Text Reverser tool can flip your text in creative ways. Try it now!</textarea>
+            </div>
+            
+            <div class="reverse-options">
+                <div class="option-card active" data-type="full">
+                    <h3><i>🔄</i> Reverse Entire Text</h3>
+                    <p>Reverse the entire string of characters</p>
+                    <div class="example-text">Example: "Hello" → "olleH"</div>
+                </div>
+                
+                <div class="option-card" data-type="words">
+                    <h3><i>🔀</i> Reverse Words Order</h3>
+                    <p>Reverse the order of words but keep each word intact</p>
+                    <div class="example-text">Example: "Hello World" → "World Hello"</div>
+                </div>
+                
+                <div class="option-card" data-type="letters">
+                    <h3><i>🔤</i> Reverse Letters in Words</h3>
+                    <p>Reverse the letters within each word but keep word order</p>
+                    <div class="example-text">Example: "Hello World" → "olleH dlroW"</div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button id="reverse-btn" class="btn btn-primary">
+                    <i>↔️</i> Reverse Text
+                </button>
+                <button id="clear-btn" class="btn btn-outline">
+                    <i>🧹</i> Clear Text
+                </button>
+            </div>
+            
+            <div class="result-container">
+                <div class="result-label">
+                    <label for="result">Reversed Text:</label>
+                    <span class="char-count">Characters: <span id="char-count">0</span></span>
+                </div>
+                <textarea id="result" placeholder="Your reversed text will appear here..." readonly></textarea>
+            </div>
+            
+            <div class="btn-group">
+                <button id="copy-btn" class="btn btn-success" disabled>
+                    <i>📋</i> Copy to Clipboard
+                </button>
+            </div>
+        </div>
+
+        <!-- How to Use Section -->
+        <div class="how-to-use">
+            <h2>How to Use Our Text Reverser Tool</h2>
+            <p>Our Text Reverser is simple and intuitive. Follow these steps to transform your text:</p>
+            
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Enter Your Text</h3>
+                    <p>Type or paste the text you want to reverse into the input box. You can enter any text up to 10,000 characters.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Select Reverse Method</h3>
+                    <p>Choose how you want to reverse your text: reverse entire text, reverse word order, or reverse letters in each word.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Reverse Text</h3>
+                    <p>Click the "Reverse Text" button to transform your text based on your selected method.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Copy Result</h3>
+                    <p>Use the "Copy to Clipboard" button to easily copy your reversed text for use elsewhere.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Ad Space -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your one-stop destination for free online tools. We provide easy-to-use utilities to make your digital life simpler.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">All Tools</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Text Reverser</a></li>
+                        <li><a href="#">Text to Speech</a></li>
+                        <li><a href="#">PDF Converter</a></li>
+                        <li><a href="#">Password Generator</a></li>
+                        <li><a href="#">QR Code Generator</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 ToolHubCenter. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <div class="notification" id="notification">Text copied to clipboard!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const textInput = document.getElementById('text-input');
+            const resultInput = document.getElementById('result');
+            const reverseBtn = document.getElementById('reverse-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const charCount = document.getElementById('char-count');
+            const optionCards = document.querySelectorAll('.option-card');
+            const notification = document.getElementById('notification');
+            
+            // Current reverse method
+            let currentMethod = 'full';
+            
+            // Initialize
+            function init() {
+                // Set initial char count
+                updateCharCount();
+                
+                // Set up event listeners
+                setupEventListeners();
+            }
+            
+            // Set up event listeners
+            function setupEventListeners() {
+                // Text input
+                textInput.addEventListener('input', updateCharCount);
+                
+                // Reverse button
+                reverseBtn.addEventListener('click', reverseText);
+                
+                // Clear button
+                clearBtn.addEventListener('click', clearText);
+                
+                // Copy button
+                copyBtn.addEventListener('click', copyToClipboard);
+                
+                // Option cards
+                optionCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        // Remove active class from all cards
+                        optionCards.forEach(c => c.classList.remove('active'));
+                        
+                        // Add active class to clicked card
+                        card.classList.add('active');
+                        
+                        // Update current method
+                        currentMethod = card.dataset.type;
+                        
+                        // Re-reverse text with new method
+                        if (textInput.value.trim() !== '') {
+                            reverseText();
+                        }
+                    });
+                });
+            }
+            
+            // Update character count
+            function updateCharCount() {
+                const count = textInput.value.length;
+                charCount.textContent = count;
+            }
+            
+            // Reverse text based on selected method
+            function reverseText() {
+                const text = textInput.value;
+                if (text.trim() === '') {
+                    showNotification('Please enter some text first!', 'warning');
+                    return;
+                }
+                
+                let reversedText = '';
+                
+                switch(currentMethod) {
+                    case 'full':
+                        // Reverse entire text
+                        reversedText = text.split('').reverse().join('');
+                        break;
+                    case 'words':
+                        // Reverse word order
+                        reversedText = text.split(/\s+/).reverse().join(' ');
+                        break;
+                    case 'letters':
+                        // Reverse letters in each word
+                        reversedText = text.split(/\s+/).map(word => 
+                            word.split('').reverse().join('')
+                        ).join(' ');
+                        break;
+                }
+                
+                resultInput.value = reversedText;
+                copyBtn.disabled = false;
+                showNotification('Text reversed successfully!', 'success');
+            }
+            
+            // Clear text
+            function clearText() {
+                textInput.value = '';
+                resultInput.value = '';
+                updateCharCount();
+                copyBtn.disabled = true;
+            }
+            
+            // Copy to clipboard
+            function copyToClipboard() {
+                if (resultInput.value.trim() === '') {
+                    showNotification('Nothing to copy!', 'warning');
+                    return;
+                }
+                
+                resultInput.select();
+                document.execCommand('copy');
+                
+                // Show notification
+                showNotification('Text copied to clipboard!', 'success');
+            }
+            
+            // Show notification
+            function showNotification(message, type) {
+                notification.textContent = message;
+                
+                // Set color based on type
+                switch(type) {
+                    case 'success':
+                        notification.style.backgroundColor = 'var(--success)';
+                        break;
+                    case 'warning':
+                        notification.style.backgroundColor = 'var(--warning)';
+                        break;
+                    case 'error':
+                        notification.style.backgroundColor = 'var(--danger)';
+                        break;
+                }
+                
+                notification.classList.add('show');
+                
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Initialize the app
+            init();
+        });
+    </script>
+</body>
+</html>
