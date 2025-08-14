@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online loan calculator tool - calculate monthly payments, total interest, and amortization schedule for any loan.">
+    <meta name="keywords" content="loan calculator, mortgage calculator, car loan calculator, personal loan, EMI calculator, financial calculator">
+    <title>Loan Calculator - Calculate EMI & Interest | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #1abc9c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 0;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .ad-banner {
+            background-color: white;
+            text-align: center;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 5px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 30px 0;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--accent-color), #16a085);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .card-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .card-header p {
+            opacity: 0.9;
+        }
+        
+        .card-body {
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .calculator-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .calculator-results {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .input-group span {
+            background-color: #f1f1f1;
+            padding: 0 15px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .range-slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: #ddd;
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        .value-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-color);
+        }
+        
+        .btn-accent:hover {
+            background-color: #16a085;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .result-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .summary-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .summary-card h4 {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .summary-card .value {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .chart-container {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+        }
+        
+        .chart-bar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .bar {
+            width: 100%;
+            background: linear-gradient(to top, var(--accent-color), #16a085);
+            border-radius: 4px 4px 0 0;
+            transition: var(--transition);
+        }
+        
+        .bar-label {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        
+        .how-to-use {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .how-to-use h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .loan-types {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+        
+        .loan-types h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+        
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .type-card {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .type-card i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .type-card h3 {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .card-body {
+                flex-direction: column;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animation for results */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQgMkg2YTIgMiAwIDAgMC0yIDJ2MTZhMiAyIDAgMCAwIDIgMmgxMmEyIDIgMCAwIDAgMi0yVjhsLTYtNnoiPjwvcGF0aD48cGF0aCBkPSJNMTQgMnY2aDYiPjwvcGF0aD48cGF0aCBkPSJNMTYgMTNINiI+PC9wYXRoPjxwYXRoIGQ9Ik0xNiAxN0g2Ij48L3BhdGg+PHBhdGggZD0iTTEwIDlINiI+PC9wYXRoPjwvc3ZnPg==" alt="ToolHubCenter Logo">
+                    <h1>ToolHubCenter</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">Finance</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Top Ad Banner -->
+        <div class="ad-banner">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="tool-card">
+                <div class="card-header">
+                    <h2>Loan Calculator</h2>
+                    <p>Calculate your monthly payments and total interest</p>
+                </div>
+                <div class="card-body">
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="loanAmount">Loan Amount</label>
+                            <div class="input-group">
+                                <span>$</span>
+                                <input type="number" id="loanAmount" class="form-control" value="25000" min="100" max="1000000">
+                            </div>
+                            <input type="range" id="loanAmountRange" class="range-slider" min="1000" max="100000" value="25000" step="1000">
+                            <div class="value-display">
+                                <span>$1,000</span>
+                                <span>$100,000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interestRate">Interest Rate</label>
+                            <div class="input-group">
+                                <input type="number" id="interestRate" class="form-control" value="5.5" min="0.1" max="30" step="0.1">
+                                <span>%</span>
+                            </div>
+                            <input type="range" id="interestRateRange" class="range-slider" min="0.1" max="20" value="5.5" step="0.1">
+                            <div class="value-display">
+                                <span>0.1%</span>
+                                <span>20%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loanTerm">Loan Term (Years)</label>
+                            <div class="input-group">
+                                <input type="number" id="loanTerm" class="form-control" value="5" min="1" max="30">
+                                <span>years</span>
+                            </div>
+                            <input type="range" id="loanTermRange" class="range-slider" min="1" max="30" value="5">
+                            <div class="value-display">
+                                <span>1 year</span>
+                                <span>30 years</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-accent" id="calculateBtn">Calculate Loan</button>
+                    </div>
+                    
+                    <div class="calculator-results">
+                        <h3>Loan Summary</h3>
+                        <div class="result-item">
+                            <span>Monthly Payment</span>
+                            <span class="result-value" id="monthlyPayment">$478.77</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Total Interest</span>
+                            <span class="result-value" id="totalInterest">$3,726.20</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Total Payment</span>
+                            <span class="result-value" id="totalPayment">$28,726.20</span>
+                        </div>
+                        
+                        <div class="summary-grid">
+                            <div class="summary-card">
+                                <h4>Loan Amount</h4>
+                                <div class="value" id="summaryLoanAmount">$25,000</div>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Interest Rate</h4>
+                                <div class="value" id="summaryInterestRate">5.5%</div>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Loan Term</h4>
+                                <div class="value" id="summaryLoanTerm">5 years</div>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Payments</h4>
+                                <div class="value" id="summaryPayments">60</div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <div class="chart-bar">
+                                <div class="bar" id="principalBar" style="height: 70%;"></div>
+                                <div class="bar-label">Principal</div>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar" id="interestBar" style="height: 30%;"></div>
+                                <div class="bar-label">Interest</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="how-to-use">
+                <h2>How to Use Our Loan Calculator</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Enter Loan Details</h3>
+                        <p>Input your loan amount, interest rate, and loan term using the sliders or input fields.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Click Calculate</h3>
+                        <p>Press the "Calculate Loan" button to see your monthly payment details.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Review Results</h3>
+                        <p>See your monthly payment, total interest, and payment breakdown.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Adjust as Needed</h3>
+                        <p>Modify any values to see how different terms affect your payments.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="loan-types">
+                <h2>Common Loan Types</h2>
+                <div class="types-grid">
+                    <div class="type-card">
+                        <i>🏠</i>
+                        <h3>Mortgage Loans</h3>
+                        <p>Calculate your home loan payments with fixed or adjustable rates.</p>
+                    </div>
+                    <div class="type-card">
+                        <i>🚗</i>
+                        <h3>Auto Loans</h3>
+                        <p>Determine monthly payments for your car purchase or lease.</p>
+                    </div>
+                    <div class="type-card">
+                        <i>🎓</i>
+                        <h3>Student Loans</h3>
+                        <p>Plan your education financing with various repayment options.</p>
+                    </div>
+                    <div class="type-card">
+                        <i>💳</i>
+                        <h3>Personal Loans</h3>
+                        <p>Calculate payments for unsecured personal financing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="container">
+        <!-- Bottom Ad Banner -->
+        <div class="ad-banner">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About ToolHubCenter</h3>
+                    <p>Your one-stop solution for all online tools. We provide free, easy-to-use utilities to simplify your digital tasks.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Financial Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Mortgage Calculator</a></li>
+                        <li><a href="#">Auto Loan Calculator</a></li>
+                        <li><a href="#">Investment Calculator</a></li>
+                        <li><a href="#">Credit Card Payoff</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ToolHubCenter. All rights reserved. This tool provides estimates only - consult a financial advisor for professional advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const loanAmount = document.getElementById('loanAmount');
+            const loanAmountRange = document.getElementById('loanAmountRange');
+            const interestRate = document.getElementById('interestRate');
+            const interestRateRange = document.getElementById('interestRateRange');
+            const loanTerm = document.getElementById('loanTerm');
+            const loanTermRange = document.getElementById('loanTermRange');
+            const calculateBtn = document.getElementById('calculateBtn');
+            
+            // Result elements
+            const monthlyPayment = document.getElementById('monthlyPayment');
+            const totalInterest = document.getElementById('totalInterest');
+            const totalPayment = document.getElementById('totalPayment');
+            const summaryLoanAmount = document.getElementById('summaryLoanAmount');
+            const summaryInterestRate = document.getElementById('summaryInterestRate');
+            const summaryLoanTerm = document.getElementById('summaryLoanTerm');
+            const summaryPayments = document.getElementById('summaryPayments');
+            const principalBar = document.getElementById('principalBar');
+            const interestBar = document.getElementById('interestBar');
+            
+            // Initialize calculator
+            updateSliderValues();
+            calculateLoan();
+            
+            // Event listeners for input changes
+            loanAmount.addEventListener('input', function() {
+                loanAmountRange.value = this.value;
+                calculateLoan();
+            });
+            
+            loanAmountRange.addEventListener('input', function() {
+                loanAmount.value = this.value;
+                calculateLoan();
+            });
+            
+            interestRate.addEventListener('input', function() {
+                interestRateRange.value = this.value;
+                calculateLoan();
+            });
+            
+            interestRateRange.addEventListener('input', function() {
+                interestRate.value = this.value;
+                calculateLoan();
+            });
+            
+            loanTerm.addEventListener('input', function() {
+                loanTermRange.value = this.value;
+                calculateLoan();
+            });
+            
+            loanTermRange.addEventListener('input', function() {
+                loanTerm.value = this.value;
+                calculateLoan();
+            });
+            
+            calculateBtn.addEventListener('click', calculateLoan);
+            
+            // Calculate loan function
+            function calculateLoan() {
+                // Get input values
+                const amount = parseFloat(loanAmount.value);
+                const rate = parseFloat(interestRate.value) / 100 / 12; // Monthly interest rate
+                const term = parseFloat(loanTerm.value) * 12; // Months
+                
+                // Calculate monthly payment
+                const x = Math.pow(1 + rate, term);
+                const monthly = (amount * x * rate) / (x - 1);
+                
+                // Calculate total values
+                const total = monthly * term;
+                const interest = total - amount;
+                
+                // Update results
+                monthlyPayment.textContent = `$${monthly.toFixed(2)}`;
+                totalInterest.textContent = `$${interest.toFixed(2)}`;
+                totalPayment.textContent = `$${total.toFixed(2)}`;
+                
+                // Update summary
+                summaryLoanAmount.textContent = `$${amount.toLocaleString()}`;
+                summaryInterestRate.textContent = `${parseFloat(interestRate.value).toFixed(1)}%`;
+                summaryLoanTerm.textContent = `${loanTerm.value} years`;
+                summaryPayments.textContent = term;
+                
+                // Update chart
+                const principalPercent = Math.round((amount / total) * 100);
+                const interestPercent = 100 - principalPercent;
+                
+                principalBar.style.height = `${principalPercent}%`;
+                interestBar.style.height = `${interestPercent}%`;
+                
+                // Add animation
+                const results = document.querySelector('.calculator-results');
+                results.classList.remove('fade-in');
+                setTimeout(() => results.classList.add('fade-in'), 10);
+            }
+            
+            // Format slider values
+            function updateSliderValues() {
+                const loanValue = parseFloat(loanAmountRange.value).toLocaleString();
+                loanAmount.value = loanAmountRange.value;
+                
+                const rateValue = parseFloat(interestRateRange.value).toFixed(1);
+                interestRate.value = rateValue;
+                
+                loanTerm.value = loanTermRange.value;
+            }
+        });
+    </script>
+</body>
+</html>
