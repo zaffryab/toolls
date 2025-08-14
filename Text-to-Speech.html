@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Text to Speech converter. Convert any text to natural sounding speech instantly. Supports multiple voices and languages.">
+    <meta name="keywords" content="text to speech, tts, speech synthesis, voice generator, online converter">
+    <title>Text to Speech Converter | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --gray: #6c757d;
+            --border: #dee2e6;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .ad-container {
+            background-color: white;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .ad-label {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(0,0,0,0.1);
+            color: var(--gray);
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            margin: 20px 0;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+
+        .card-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        select, input {
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        select {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .range-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+        }
+
+        .range-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .how-to-use {
+            margin-top: 30px;
+        }
+
+        .how-to-use h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .step-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border-top: 4px solid var(--accent);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step-card h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        .status-indicator {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #e9ecef;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status-indicator.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .voice-preview {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTEyLDE1QzEyLjgzLDE1IDEzLjUsMTQuMzMgMTMuNSwxMy41UzEyLjgzLDEyIDEyLDEyUzEwLjUsMTIuNjcgMTAuNSwxMy41UzExLjE3LDE1IDEyLDE1TTEyLDJBNyw3IDAgMCwxIDE5LDlWMTQuNUgxN1Y5QTUsNSAwIDAsMCAxMiw0QTUsNSAwIDAsMCA3LDlWMTQuNUg1VjlDNyw0LjU5IDkuNTksMiAxMiwyTTE0LjUsMTYuNUEyLjUsMi41IDAgMCwxIDE3LDE5QTQuNSw0LjUgMCAwLDEgMTIuNSwyM0gxMS41QTQuNSw0LjUgMCAwLDEgNywxOUExLjUsMS41IDAgMCwxIDguNSwxNy41SDEwVjE0LjVINTRWMTdIMTQuNVYxNi41WiI+PC9wYXRoPjwvc3ZnPg==" alt="ToolHubCenter">
+                    <h1>ToolHubCenter</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Top Ad Space -->
+        <div class="ad-container" style="position: relative;">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <!-- Main Card -->
+        <div class="card">
+            <h2 class="card-title">
+                <i>🔊</i> Text to Speech Converter
+            </h2>
+            
+            <div class="form-group">
+                <label for="text-input">Enter your text:</label>
+                <textarea id="text-input" placeholder="Type or paste text here...">Hello! Welcome to ToolHubCenter. This is a free online Text to Speech converter that transforms your text into natural sounding speech. Try it now!</textarea>
+            </div>
+            
+            <div class="controls">
+                <div class="form-group" style="flex: 1;">
+                    <label for="voice-select">Select Voice:</label>
+                    <select id="voice-select">
+                        <option value="">Loading voices...</option>
+                    </select>
+                    <div class="voice-preview">Preview voice: <span id="voice-preview-text">American English - Female</span></div>
+                </div>
+                
+                <div class="form-group range-group">
+                    <label for="rate">Speed:</label>
+                    <div class="range-container">
+                        <input type="range" id="rate" min="0.5" max="2" step="0.1" value="1">
+                        <span class="range-value" id="rate-value">1.0</span>
+                    </div>
+                </div>
+                
+                <div class="form-group range-group">
+                    <label for="pitch">Pitch:</label>
+                    <div class="range-container">
+                        <input type="range" id="pitch" min="0.5" max="2" step="0.1" value="1">
+                        <span class="range-value" id="pitch-value">1.0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="status-indicator" id="status">
+                Ready to convert your text to speech
+            </div>
+            
+            <div class="btn-group">
+                <button id="speak-btn" class="btn btn-primary">
+                    <i>▶️</i> Speak
+                </button>
+                <button id="pause-btn" class="btn btn-warning" disabled>
+                    <i>⏸️</i> Pause
+                </button>
+                <button id="resume-btn" class="btn btn-success" disabled>
+                    <i>⏯️</i> Resume
+                </button>
+                <button id="stop-btn" class="btn btn-danger" disabled>
+                    <i>⏹️</i> Stop
+                </button>
+                <button id="download-btn" class="btn btn-outline" disabled>
+                    <i>💾</i> Download
+                </button>
+            </div>
+        </div>
+
+        <!-- How to Use Section -->
+        <div class="how-to-use">
+            <h2>How to Use Our Text to Speech Tool</h2>
+            <p>Our Text to Speech converter is simple and straightforward. Follow these steps to transform your text into speech:</p>
+            
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Enter Your Text</h3>
+                    <p>Type or paste the text you want to convert into the text box. You can enter up to 5000 characters at a time.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Customize Settings</h3>
+                    <p>Select a voice from the dropdown menu and adjust the speed and pitch to your preference.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Generate Speech</h3>
+                    <p>Click the "Speak" button to listen to your text. Use playback controls to pause, resume, or stop the speech.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Download (Optional)</h3>
+                    <p>If you want to save the audio, click the "Download" button to get an MP3 file of the speech.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Ad Space -->
+        <div class="ad-container" style="position: relative;">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your one-stop destination for free online tools. We provide easy-to-use utilities to make your digital life simpler.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">All Tools</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Text to Speech</a></li>
+                        <li><a href="#">PDF Converter</a></li>
+                        <li><a href="#">Image Compressor</a></li>
+                        <li><a href="#">Password Generator</a></li>
+                        <li><a href="#">QR Code Generator</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 ToolHubCenter. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const textInput = document.getElementById('text-input');
+            const voiceSelect = document.getElementById('voice-select');
+            const rateInput = document.getElementById('rate');
+            const rateValue = document.getElementById('rate-value');
+            const pitchInput = document.getElementById('pitch');
+            const pitchValue = document.getElementById('pitch-value');
+            const speakBtn = document.getElementById('speak-btn');
+            const pauseBtn = document.getElementById('pause-btn');
+            const resumeBtn = document.getElementById('resume-btn');
+            const stopBtn = document.getElementById('stop-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const statusIndicator = document.getElementById('status');
+            const voicePreviewText = document.getElementById('voice-preview-text');
+            
+            // Speech Synthesis
+            let speech = new SpeechSynthesisUtterance();
+            let voices = [];
+            
+            // Initialize
+            function init() {
+                // Set initial values
+                rateValue.textContent = rateInput.value;
+                pitchValue.textContent = pitchInput.value;
+                
+                // Populate voices
+                loadVoices();
+                
+                // Set up event listeners
+                setupEventListeners();
+                
+                // Update status
+                updateStatus('Ready to convert text to speech', 'info');
+            }
+            
+            // Load available voices
+            function loadVoices() {
+                voices = window.speechSynthesis.getVoices();
+                
+                // Clear existing options
+                voiceSelect.innerHTML = '';
+                
+                // Filter English voices for simplicity
+                const englishVoices = voices.filter(voice => voice.lang.includes('en'));
+                
+                if (englishVoices.length === 0) {
+                    voiceSelect.innerHTML = '<option value="">No voices available</option>';
+                    return;
+                }
+                
+                // Add voices to dropdown
+                englishVoices.forEach((voice, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `${voice.name} (${voice.lang})`;
+                    voiceSelect.appendChild(option);
+                });
+                
+                // Set default voice
+                if (englishVoices.length > 0) {
+                    const defaultVoice = englishVoices.find(voice => voice.name.includes('Google US English') && voice.name.includes('Female')) || 
+                                        englishVoices.find(voice => voice.name.includes('Female')) || 
+                                        englishVoices[0];
+                    const voiceIndex = englishVoices.indexOf(defaultVoice);
+                    voiceSelect.value = voiceIndex;
+                    
+                    // Update voice preview
+                    voicePreviewText.textContent = `${defaultVoice.name.split(' - ')[1] || defaultVoice.name} (${defaultVoice.lang})`;
+                }
+            }
+            
+            // Set up event listeners
+            function setupEventListeners() {
+                // Rate and pitch
+                rateInput.addEventListener('input', () => {
+                    rateValue.textContent = parseFloat(rateInput.value).toFixed(1);
+                });
+                
+                pitchInput.addEventListener('input', () => {
+                    pitchValue.textContent = parseFloat(pitchInput.value).toFixed(1);
+                });
+                
+                // Voice selection
+                voiceSelect.addEventListener('change', () => {
+                    if (voices.length > 0 && voiceSelect.value !== '') {
+                        const selectedVoice = voices[voiceSelect.value];
+                        voicePreviewText.textContent = `${selectedVoice.name.split(' - ')[1] || selectedVoice.name} (${selectedVoice.lang})`;
+                    }
+                });
+                
+                // Speech buttons
+                speakBtn.addEventListener('click', speakText);
+                pauseBtn.addEventListener('click', pauseSpeech);
+                resumeBtn.addEventListener('click', resumeSpeech);
+                stopBtn.addEventListener('click', stopSpeech);
+                downloadBtn.addEventListener('click', downloadAudio);
+                
+                // Speech events
+                speech.onstart = () => {
+                    updateStatus('Speaking...', 'speaking');
+                    toggleSpeechControls(true);
+                };
+                
+                speech.onend = () => {
+                    updateStatus('Speech completed', 'success');
+                    toggleSpeechControls(false);
+                };
+                
+                speech.onerror = (event) => {
+                    updateStatus(`Error: ${event.error}`, 'error');
+                    toggleSpeechControls(false);
+                };
+            }
+            
+            // Speak text
+            function speakText() {
+                if (textInput.value.trim() === '') {
+                    updateStatus('Please enter some text first', 'error');
+                    return;
+                }
+                
+                if (voiceSelect.value === '') {
+                    updateStatus('Please select a voice', 'error');
+                    return;
+                }
+                
+                // Set speech properties
+                speech.text = textInput.value;
+                speech.voice = voices[voiceSelect.value];
+                speech.rate = parseFloat(rateInput.value);
+                speech.pitch = parseFloat(pitchInput.value);
+                speech.volume = 1;
+                
+                // Cancel any ongoing speech
+                window.speechSynthesis.cancel();
+                
+                // Speak
+                window.speechSynthesis.speak(speech);
+            }
+            
+            // Pause speech
+            function pauseSpeech() {
+                window.speechSynthesis.pause();
+                updateStatus('Speech paused', 'warning');
+                pauseBtn.disabled = true;
+                resumeBtn.disabled = false;
+            }
+            
+            // Resume speech
+            function resumeSpeech() {
+                window.speechSynthesis.resume();
+                updateStatus('Resuming speech...', 'speaking');
+                pauseBtn.disabled = false;
+                resumeBtn.disabled = true;
+            }
+            
+            // Stop speech
+            function stopSpeech() {
+                window.speechSynthesis.cancel();
+                updateStatus('Speech stopped', 'info');
+                toggleSpeechControls(false);
+            }
+            
+            // Download audio (simulated)
+            function downloadAudio() {
+                updateStatus('Preparing download...', 'info');
+                
+                // Simulate processing delay
+                setTimeout(() => {
+                    updateStatus('Download started!', 'success');
+                    
+                    // In a real implementation, this would generate and download an audio file
+                    alert('In a real implementation, this would download the audio file. For demonstration purposes, this is simulated.');
+                }, 1500);
+            }
+            
+            // Update status indicator
+            function updateStatus(message, type) {
+                statusIndicator.textContent = message;
+                statusIndicator.className = 'status-indicator active';
+                
+                // Set color based on type
+                switch(type) {
+                    case 'info':
+                        statusIndicator.style.backgroundColor = '#e9ecef';
+                        statusIndicator.style.color = '#212529';
+                        break;
+                    case 'speaking':
+                        statusIndicator.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
+                        statusIndicator.style.color = 'var(--primary)';
+                        break;
+                    case 'success':
+                        statusIndicator.style.backgroundColor = 'rgba(76, 175, 80, 0.1)';
+                        statusIndicator.style.color = 'var(--success)';
+                        break;
+                    case 'warning':
+                        statusIndicator.style.backgroundColor = 'rgba(255, 152, 0, 0.1)';
+                        statusIndicator.style.color = 'var(--warning)';
+                        break;
+                    case 'error':
+                        statusIndicator.style.backgroundColor = 'rgba(244, 67, 54, 0.1)';
+                        statusIndicator.style.color = 'var(--danger)';
+                        break;
+                }
+            }
+            
+            // Toggle speech controls
+            function toggleSpeechControls(isSpeaking) {
+                speakBtn.disabled = isSpeaking;
+                pauseBtn.disabled = !isSpeaking;
+                resumeBtn.disabled = true;
+                stopBtn.disabled = !isSpeaking;
+                downloadBtn.disabled = !isSpeaking;
+            }
+            
+            // Chrome requires voices to be loaded this way
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+            
+            // Initialize the app
+            init();
+        });
+    </script>
+</body>
+</html>
