@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online grammar checker tool to analyze and improve your writing. Get instant grammar suggestions and corrections.">
+    <meta name="keywords" content="grammar checker, grammar tool, writing assistant, grammar correction, online grammar check">
+    <meta name="author" content="ToolHubCenter">
+    <title>Grammar Checker Tool | Analyze & Improve Your Writing | ToolHubCenter</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Grammar Checker Tool | ToolHubCenter">
+    <meta property="og:description" content="Free online grammar checker to analyze and improve your writing with instant suggestions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolhubcenter.com/grammar-checker">
+    <meta property="og:image" content="https://toolhubcenter.com/images/grammar-checker-preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Grammar Checker Tool | ToolHubCenter">
+    <meta name="twitter:description" content="Free online grammar checker to analyze and improve your writing with instant suggestions.">
+    <meta name="twitter:image" content="https://toolhubcenter.com/images/grammar-checker-preview.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolhubcenter.com/grammar-checker">
+    
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --light-color: #f8f9fa;
+            --dark-color: #202124;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .ad-container {
+            text-align: center;
+            margin: 20px 0;
+            background-color: white;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .tool-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .input-area, .output-area {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            margin-bottom: 15px;
+            resize: vertical;
+        }
+        
+        .output-area {
+            background-color: #f9f9f9;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3367d6;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2d9249;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #d33426;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .how-to-use {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .steps {
+            list-style-type: none;
+            counter-reset: step-counter;
+        }
+        
+        .steps li {
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 15px;
+            counter-increment: step-counter;
+        }
+        
+        .steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: var(--light-color);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+            
+            .stat-item {
+                margin-bottom: 15px;
+            }
+        }
+        
+        /* Highlight classes for grammar suggestions */
+        .spelling-error {
+            background-color: #ffeb3b;
+            border-bottom: 2px dotted #f44336;
+            cursor: pointer;
+        }
+        
+        .grammar-error {
+            background-color: #ffcdd2;
+            border-bottom: 2px dotted #e91e63;
+            cursor: pointer;
+        }
+        
+        .punctuation-error {
+            background-color: #bbdefb;
+            border-bottom: 2px dotted #2196f3;
+            cursor: pointer;
+        }
+        
+        .suggestion-popup {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 100;
+            font-size: 14px;
+        }
+        
+        .suggestion-popup ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .suggestion-popup li {
+            padding: 3px 0;
+            cursor: pointer;
+        }
+        
+        .suggestion-popup li:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="https://toolhubcenter.com" class="logo">
+                <img src="favicon-16x16.png" alt="ToolHubCenter Logo">
+                ToolHubCenter
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="https://toolhubcenter.com">Home</a></li>
+                    <li><a href="https://toolhubcenter.com/tools">All Tools</a></li>
+                    <li><a href="https://toolhubcenter.com/about">About</a></li>
+                    <li><a href="https://toolhubcenter.com/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Top Ad Banner -->
+        <div class="ad-container">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <!-- Grammar Checker Tool Card -->
+        <div class="tool-card">
+            <h1 class="tool-title">Grammar Checker Tool</h1>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="word-count">0</div>
+                    <div class="stat-label">Words</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="character-count">0</div>
+                    <div class="stat-label">Characters</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="sentence-count">0</div>
+                    <div class="stat-label">Sentences</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="error-count">0</div>
+                    <div class="stat-label">Errors Found</div>
+                </div>
+            </div>
+            
+            <textarea id="input-text" class="input-area" placeholder="Type or paste your text here to check for grammar, spelling, and punctuation errors..."></textarea>
+            
+            <div class="button-group">
+                <button id="check-grammar" class="btn btn-primary">Check Grammar</button>
+                <button id="clear-text" class="btn btn-accent">Clear Text</button>
+                <button id="copy-text" class="btn btn-secondary">Copy Text</button>
+            </div>
+            
+            <div id="output-text" class="output-area" readonly></div>
+            
+            <div class="button-group">
+                <button id="accept-all" class="btn btn-primary">Accept All Changes</button>
+                <button id="copy-corrected" class="btn btn-secondary">Copy Corrected Text</button>
+            </div>
+        </div>
+        
+        <!-- How to Use Section -->
+        <div class="how-to-use">
+            <h2 class="section-title">How to Use the Grammar Checker Tool</h2>
+            <ol class="steps">
+                <li><strong>Enter your text</strong> in the input box above. You can type directly or paste text from any document.</li>
+                <li>Click the <strong>"Check Grammar"</strong> button to analyze your text for errors.</li>
+                <li>Review the highlighted errors in the output box. Different colors indicate different types of issues:
+                    <ul style="list-style-type: none; margin-top: 10px;">
+                        <li><span style="background-color: #ffeb3b; padding: 2px 5px;">Yellow</span> - Spelling errors</li>
+                        <li><span style="background-color: #ffcdd2; padding: 2px 5px;">Pink</span> - Grammar errors</li>
+                        <li><span style="background-color: #bbdefb; padding: 2px 5px;">Blue</span> - Punctuation issues</li>
+                    </ul>
+                </li>
+                <li>Click on any highlighted error to see suggested corrections.</li>
+                <li>Use the <strong>"Accept All Changes"</strong> button to automatically apply all corrections.</li>
+                <li>Copy the corrected text using the <strong>"Copy Corrected Text"</strong> button.</li>
+            </ol>
+            
+            <h3 class="section-title" style="margin-top: 20px;">Tips for Effective Grammar Checking</h3>
+            <ul class="steps" style="counter-reset: none; list-style-type: disc; padding-left: 20px;">
+                <li style="padding-left: 0; margin-left: 20px;">Check one paragraph at a time for better focus.</li>
+                <li style="padding-left: 0; margin-left: 20px;">Review suggestions carefully - not all automated corrections may be appropriate for your context.</li>
+                <li style="padding-left: 0; margin-left: 20px;">Use this tool as a first pass, then proofread manually for best results.</li>
+                <li style="padding-left: 0; margin-left: 20px;">For academic or professional writing, consider additional proofreading.</li>
+            </ul>
+        </div>
+        
+        <!-- Bottom Ad Banner -->
+        <div class="ad-container">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your one-stop destination for free online tools to make your digital life easier.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="https://toolhubcenter.com">Home</a></li>
+                        <li><a href="https://toolhubcenter.com/tools">All Tools</a></li>
+                        <li><a href="https://toolhubcenter.com/privacy">Privacy Policy</a></li>
+                        <li><a href="https://toolhubcenter.com/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <ul>
+                        <li><a href="https://toolhubcenter.com/word-counter">Word Counter</a></li>
+                        <li><a href="https://toolhubcenter.com/plagiarism-checker">Plagiarism Checker</a></li>
+                        <li><a href="https://toolhubcenter.com/grammar-checker">Grammar Checker</a></li>
+                        <li><a href="https://toolhubcenter.com/seo-analyzer">SEO Analyzer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="mailto:contact@toolhubcenter.com">contact@toolhubcenter.com</a></li>
+                        <li><a href="https://twitter.com/toolhubcenter">Twitter</a></li>
+                        <li><a href="https://facebook.com/toolhubcenter">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; <script>document.write(new Date().getFullYear())</script> ToolHubCenter. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const inputText = document.getElementById('input-text');
+            const outputText = document.getElementById('output-text');
+            const checkGrammarBtn = document.getElementById('check-grammar');
+            const clearTextBtn = document.getElementById('clear-text');
+            const copyTextBtn = document.getElementById('copy-text');
+            const acceptAllBtn = document.getElementById('accept-all');
+            const copyCorrectedBtn = document.getElementById('copy-corrected');
+            const wordCountEl = document.getElementById('word-count');
+            const characterCountEl = document.getElementById('character-count');
+            const sentenceCountEl = document.getElementById('sentence-count');
+            const errorCountEl = document.getElementById('error-count');
+            
+            // Sample grammar rules and error detection (simplified for demo)
+            const grammarRules = {
+                commonMistakes: [
+                    { pattern: /\btheir\s+are\b/gi, correction: 'there are', type: 'grammar' },
+                    { pattern: /\byour\s+welcome\b/gi, correction: "you're welcome", type: 'grammar' },
+                    { pattern: /\bit's\s+mean\b/gi, correction: 'it means', type: 'grammar' },
+                    { pattern: /\bcould of\b/gi, correction: 'could have', type: 'grammar' },
+                    { pattern: /\bshould of\b/gi, correction: 'should have', type: 'grammar' },
+                    { pattern: /\bwould of\b/gi, correction: 'would have', type: 'grammar' },
+                    { pattern: /\baffect\b(?=.*\beffect\b)/gi, correction: 'effect', type: 'grammar' },
+                    { pattern: /\beffect\b(?=.*\baffect\b)/gi, correction: 'affect', type: 'grammar' },
+                    { pattern: /\bthan\b(?=.*\bthen\b)/gi, correction: 'then', type: 'grammar' },
+                    { pattern: /\bthen\b(?=.*\bthan\b)/gi, correction: 'than', type: 'grammar' }
+                ],
+                punctuationMistakes: [
+                    { pattern: /([a-z])\s+\./g, correction: '$1.', type: 'punctuation' },
+                    { pattern: /([a-z])\s+\?/g, correction: '$1?', type: 'punctuation' },
+                    { pattern: /([a-z])\s+\!/g, correction: '$1!', type: 'punctuation' },
+                    { pattern: /([a-z])\s+\,/g, correction: '$1,', type: 'punctuation' },
+                    { pattern: /([a-z])\s+\;/g, correction: '$1;', type: 'punctuation' },
+                    { pattern: /([a-z])\s+\:/g, correction: '$1:', type: 'punctuation' },
+                    { pattern: /\.{4,}/g, correction: '...', type: 'punctuation' },
+                    { pattern: /([?!])\1+/g, correction: '$1', type: 'punctuation' }
+                ],
+                spellingMistakes: [
+                    { pattern: /\bseperate\b/gi, correction: 'separate', type: 'spelling' },
+                    { pattern: /\bdefinately\b/gi, correction: 'definitely', type: 'spelling' },
+                    { pattern: /\baccomodate\b/gi, correction: 'accommodate', type: 'spelling' },
+                    { pattern: /\brecieve\b/gi, correction: 'receive', type: 'spelling' },
+                    { pattern: /\boccured\b/gi, correction: 'occurred', type: 'spelling' },
+                    { pattern: /\bcommittment\b/gi, correction: 'commitment', type: 'spelling' },
+                    { pattern: /\bembarass\b/gi, correction: 'embarrass', type: 'spelling' },
+                    { pattern: /\bwierd\b/gi, correction: 'weird', type: 'spelling' },
+                    { pattern: /\bacheive\b/gi, correction: 'achieve', type: 'spelling' },
+                    { pattern: /\barguement\b/gi, correction: 'argument', type: 'spelling' }
+                ]
+            };
+            
+            // Update statistics
+            function updateStats(text) {
+                // Word count
+                const words = text.trim() ? text.trim().split(/\s+/) : [];
+                wordCountEl.textContent = words.length;
+                
+                // Character count
+                characterCountEl.textContent = text.length;
+                
+                // Sentence count (simplified)
+                const sentences = text.trim() ? text.split(/[.!?]+/) : [];
+                sentenceCountEl.textContent = sentences.length - 1;
+            }
+            
+            // Highlight errors in text
+            function highlightErrors(text) {
+                let errorCount = 0;
+                let highlightedText = text;
+                
+                // Process each type of error
+                for (const errorType in grammarRules) {
+                    grammarRules[errorType].forEach(rule => {
+                        const matches = text.match(rule.pattern);
+                        if (matches) {
+                            errorCount += matches.length;
+                            highlightedText = highlightedText.replace(rule.pattern, match => {
+                                return <span class="${rule.type}-error" data-correction="${rule.correction}" data-original="${match}">${match}</span>;
+                            });
+                        }
+                    });
+                }
+                
+                errorCountEl.textContent = errorCount;
+                return highlightedText;
+            }
+            
+            // Check grammar button click handler
+            checkGrammarBtn.addEventListener('click', function() {
+                const text = inputText.value;
+                updateStats(text);
+                
+                if (!text.trim()) {
+                    outputText.innerHTML = '<p style="color:#666; text-align:center;">Please enter some text to check for grammar errors.</p>';
+                    return;
+                }
+                
+                outputText.innerHTML = highlightErrors(text);
+                
+                // Add click event listeners to highlighted errors
+                const errorSpans = outputText.querySelectorAll('span[class$="-error"]');
+                errorSpans.forEach(span => {
+                    span.addEventListener('click', function(e) {
+                        showSuggestionPopup(e.target, e);
+                    });
+                });
+            });
+            
+            // Show suggestion popup
+            function showSuggestionPopup(element, event) {
+                // Remove any existing popup
+                const existingPopup = document.querySelector('.suggestion-popup');
+                if (existingPopup) {
+                    existingPopup.remove();
+                }
+                
+                // Create new popup
+                const popup = document.createElement('div');
+                popup.className = 'suggestion-popup';
+                
+                const originalText = element.getAttribute('data-original');
+                const correction = element.getAttribute('data-correction');
+                const errorType = element.className.replace('-error', '').replace('spelling', 'Spelling').replace('grammar', 'Grammar').replace('punctuation', 'Punctuation');
+                
+                popup.innerHTML = `
+                    <div style="margin-bottom:5px; font-weight:bold;">${errorType} Error</div>
+                    <div style="margin-bottom:5px;"><strong>Original:</strong> ${originalText}</div>
+                    <div style="margin-bottom:5px;"><strong>Suggestion:</strong> ${correction}</div>
+                    <ul>
+                        <li data-action="replace">Replace with "${correction}"</li>
+                        <li data-action="ignore">Ignore this suggestion</li>
+                    </ul>
+                `;
+                
+                // Position the popup near the clicked element
+                const rect = element.getBoundingClientRect();
+                popup.style.left = ${rect.left + window.scrollX}px;
+                popup.style.top = ${rect.bottom + window.scrollY + 5}px;
+                
+                document.body.appendChild(popup);
+                
+                // Handle popup clicks
+                popup.querySelectorAll('li').forEach(li => {
+                    li.addEventListener('click', function() {
+                        const action = this.getAttribute('data-action');
+                        if (action === 'replace') {
+                            // Replace the error with correction in the output
+                            const outputHtml = outputText.innerHTML;
+                            const newHtml = outputHtml.replace(
+                                <span class="${element.className}" data-correction="${correction}" data-original="${originalText}">${originalText}</span>, 
+                                correction
+                            );
+                            outputText.innerHTML = newHtml;
+                            errorCountEl.textContent = parseInt(errorCountEl.textContent) - 1;
+                        }
+                        popup.remove();
+                    });
+                });
+                
+                // Close popup when clicking outside
+                document.addEventListener('click', function closePopup(e) {
+                    if (!popup.contains(e.target) {
+                        popup.remove();
+                        document.removeEventListener('click', closePopup);
+                    }
+                });
+            }
+            
+            // Clear text button click handler
+            clearTextBtn.addEventListener('click', function() {
+                inputText.value = '';
+                outputText.innerHTML = '';
+                wordCountEl.textContent = '0';
+                characterCountEl.textContent = '0';
+                sentenceCountEl.textContent = '0';
+                errorCountEl.textContent = '0';
+            });
+            
+            // Copy text button click handler
+            copyTextBtn.addEventListener('click', function() {
+                inputText.select();
+                document.execCommand('copy');
+                
+                // Show feedback
+                const originalText = copyTextBtn.textContent;
+                copyTextBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyTextBtn.textContent = originalText;
+                }, 2000);
+            });
+            
+            // Accept all changes button click handler
+            acceptAllBtn.addEventListener('click', function() {
+                const errorSpans = outputText.querySelectorAll('span[class$="-error"]');
+                if (errorSpans.length === 0) {
+                    return;
+                }
+                
+                let correctedHtml = outputText.innerHTML;
+                errorSpans.forEach(span => {
+                    const correction = span.getAttribute('data-correction');
+                    const original = span.getAttribute('data-original');
+                    const errorClass = span.className;
+                    
+                    correctedHtml = correctedHtml.replace(
+                        <span class="${errorClass}" data-correction="${correction}" data-original="${original}">${original}</span>, 
+                        correction
+                    );
+                });
+                
+                outputText.innerHTML = correctedHtml;
+                errorCountEl.textContent = '0';
+            });
+            
+            // Copy corrected text button click handler
+            copyCorrectedBtn.addEventListener('click', function() {
+                const correctedText = outputText.textContent;
+                if (!correctedText.trim()) {
+                    return;
+                }
+                
+                const textarea = document.createElement('textarea');
+                textarea.value = correctedText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                // Show feedback
+                const originalText = copyCorrectedBtn.textContent;
+                copyCorrectedBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyCorrectedBtn.textContent = originalText;
+                }, 2000);
+            });
+            
+            // Update stats as user types
+            inputText.addEventListener('input', function() {
+                updateStats(inputText.value);
+            });
+        });
+    </script>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Grammar Checker Tool",
+        "url": "https://toolhubcenter.com/grammar-checker",
+        "description": "Free online grammar checker tool to analyze and improve your writing with instant suggestions and corrections.",
+        "applicationCategory": "WritingApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "ToolHubCenter"
+        }
+    }
+    </script>
+</body>
+</html>
