@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online HTML Formatter tool to beautify and minify HTML code. Make your HTML clean and readable with our responsive tool.">
+    <meta name="keywords" content="html formatter, html beautifier, html prettifier, html minifier, html tool">
+    <meta name="author" content="ToolHubCenter">
+    <title>Free Online HTML Formatter Tool | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            background-color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .ad-container {
+            text-align: center;
+            background-color: white;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .ad-label {
+            background-color: #e9ecef;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+        
+        .ad-banner {
+            background: linear-gradient(45deg, #e0e0e0, #f5f5f5);
+            border: 1px dashed #ced4da;
+            border-radius: 6px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin: 0 auto;
+            width: 728px;
+            max-width: 100%;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .card-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        
+        @media (min-width: 768px) {
+            .tool-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 250px;
+            padding: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.25);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #388e3c;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .instructions {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .instructions h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .instructions code {
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #495057;
+            margin-top: 20px;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+        
+        /* Formatted HTML output styling */
+        .formatted-html {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .formatted-html .tag {
+            color: #e45649;
+        }
+        
+        .formatted-html .attr {
+            color: #986801;
+        }
+        
+        .formatted-html .value {
+            color: #50a14f;
+        }
+        
+        .formatted-html .comment {
+            color: #a0a1a7;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">THC</div>
+                    <div class="logo-text">ToolHubCenter</div>
+                </div>
+                <nav>
+                    <a href="#" style="color: white; text-decoration: none; margin-left: 20px;">Tools</a>
+                    <a href="#" style="color: white; text-decoration: none; margin-left: 20px;">About</a>
+                    <a href="#" style="color: white; text-decoration: none; margin-left: 20px;">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">ADVERTISEMENT</div>
+            <div class="ad-banner">
+                <!-- Google AdSense Ad Unit -->
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            </div>
+        </div>
+        
+        <!-- HTML Formatter Tool Card -->
+        <div class="tool-card">
+            <div class="card-header">
+                <h1 class="card-title">HTML Formatter</h1>
+                <p class="card-subtitle">Beautify and minify your HTML code for better readability and performance</p>
+            </div>
+            
+            <div class="card-body">
+                <div class="tool-grid">
+                    <div class="input-group">
+                        <label for="html-input">Enter your HTML code:</label>
+                        <textarea id="html-input" placeholder="Paste your HTML code here...">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Sample Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to HTML Formatter&lt;/h1&gt;
+&lt;p&gt;This tool will format your HTML code for better readability.&lt;/p&gt;
+&lt;div class="container"&gt;
+&lt;ul id="list"&gt;
+&lt;li&gt;Item 1&lt;/li&gt;
+&lt;li&gt;Item 2&lt;/li&gt;
+&lt;li&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="html-output">Formatted HTML:</label>
+                        <div id="html-output" class="formatted-html"></div>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button id="format-btn" class="btn btn-primary">
+                        <i class="fas fa-magic"></i> Format HTML
+                    </button>
+                    <button id="minify-btn" class="btn btn-outline">
+                        <i class="fas fa-compress"></i> Minify HTML
+                    </button>
+                    <button id="copy-btn" class="btn btn-success">
+                        <i class="fas fa-copy"></i> Copy to Clipboard
+                    </button>
+                    <button id="clear-btn" class="btn btn-outline">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                </div>
+                
+                <div class="instructions">
+                    <h3>How to Use This Tool</h3>
+                    <ol>
+                        <li><strong>Paste your HTML code</strong> into the input area on the left</li>
+                        <li>Click <strong>"Format HTML"</strong> to beautify your code with proper indentation</li>
+                        <li>Click <strong>"Minify HTML"</strong> to compress your code (remove whitespace)</li>
+                        <li>Use <strong>"Copy to Clipboard"</strong> to copy the formatted/minified code</li>
+                        <li>Click <strong>"Clear"</strong> to reset both input and output areas</li>
+                    </ol>
+                    <p><strong>Tip:</strong> You can also use keyboard shortcuts: <code>Ctrl+Enter</code> to format and <code>Ctrl+Shift+M</code> to minify.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">ADVERTISEMENT</div>
+            <div class="ad-banner">
+                <!-- Google AdSense Ad Unit -->
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your one-stop destination for free online tools to simplify your web development workflow.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">HTML Formatter</a></li>
+                        <li><a href="#">CSS Minifier</a></li>
+                        <li><a href="#">JavaScript Validator</a></li>
+                        <li><a href="#">JSON Formatter</a></li>
+                        <li><a href="#">Base64 Encoder</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">GitHub Repository</a></li>
+                        <li><a href="#">API Access</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 ToolHubCenter. All rights reserved. | Designed with ❤️ for developers</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Font Awesome icons (using CDN for simplicity)
+        document.head.innerHTML += '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">';
+        
+        // HTML Formatter Functions
+        function formatHTML(html) {
+            // Remove existing whitespace
+            html = html.replace(/\s+/g, ' ').trim();
+            
+            let formatted = '';
+            let indentLevel = 0;
+            const indentSize = 2;
+            let inTag = false;
+            let inAttribute = false;
+            let inComment = false;
+            let inScript = false;
+            let inStyle = false;
+            let tagBuffer = '';
+            
+            for (let i = 0; i < html.length; i++) {
+                const char = html[i];
+                
+                // Handle comments
+                if (!inScript && !inStyle && !inComment && char === '<' && html.substr(i, 4) === '<!--') {
+                    inComment = true;
+                    formatted += '\n' + ' '.repeat(indentLevel * indentSize) + '<!--';
+                    i += 3; // Skip next 3 characters
+                    continue;
+                }
+                
+                if (inComment) {
+                    formatted += char;
+                    if (char === '>' && html[i-1] === '-' && html[i-2] === '-') {
+                        inComment = false;
+                    }
+                    continue;
+                }
+                
+                // Handle script and style tags (don't format inside)
+                if (!inScript && !inStyle && !inTag && char === '<' && html.substr(i+1, 6).toLowerCase() === 'script') {
+                    inScript = true;
+                }
+                
+                if (!inScript && !inStyle && !inTag && char === '<' && html.substr(i+1, 5).toLowerCase() === 'style') {
+                    inStyle = true;
+                }
+                
+                if (inScript || inStyle) {
+                    formatted += char;
+                    if (char === '>' && tagBuffer.toLowerCase() === '/script') {
+                        inScript = false;
+                        tagBuffer = '';
+                    }
+                    if (char === '>' && tagBuffer.toLowerCase() === '/style') {
+                        inStyle = false;
+                        tagBuffer = '';
+                    }
+                    continue;
+                }
+                
+                // Handle tags
+                if (char === '<') {
+                    inTag = true;
+                    tagBuffer = '';
+                    
+                    // Add newline and indentation before opening tag
+                    if (html[i+1] !== '/') {
+                        formatted += '\n' + ' '.repeat(indentLevel * indentSize);
+                    }
+                    
+                    formatted += '<';
+                    continue;
+                }
+                
+                if (inTag) {
+                    if (char === '>') {
+                        inTag = false;
+                        formatted += '>';
+                        
+                        // Handle indentation for closing tags
+                        if (tagBuffer.startsWith('/')) {
+                            indentLevel = Math.max(0, indentLevel - 1);
+                        }
+                        // Handle self-closing tags
+                        else if (tagBuffer.endsWith('/') || ['meta', 'link', 'img', 'br', 'hr', 'input'].includes(tagBuffer.split(' ')[0].toLowerCase())) {
+                            // No indent change for self-closing
+                        }
+                        // Increase indent for opening tags
+                        else if (!tagBuffer.startsWith('!') && !tagBuffer.startsWith('?')) {
+                            indentLevel++;
+                        }
+                        
+                        tagBuffer = '';
+                        continue;
+                    }
+                    
+                    // Handle attributes
+                    if (char === '"' || char === "'") {
+                        inAttribute = !inAttribute;
+                    }
+                    
+                    if (!inAttribute && char === ' ') {
+                        formatted += '\n' + ' '.repeat((indentLevel + 1) * indentSize);
+                    }
+                    
+                    tagBuffer += char;
+                    formatted += char;
+                    continue;
+                }
+                
+                // Handle text content
+                if (!inTag) {
+                    // Add newline and indentation before text content
+                    if (formatted.length === 0 || formatted[formatted.length - 1] === '>') {
+                        formatted += '\n' + ' '.repeat(indentLevel * indentSize);
+                    }
+                    formatted += char;
+                }
+            }
+            
+            return formatted.trim();
+        }
+        
+        function minifyHTML(html) {
+            return html
+                .replace(/<!--[\s\S]*?-->/g, '') // Remove comments
+                .replace(/\s+/g, ' ') // Collapse whitespace
+                .replace(/>\s+</g, '><') // Remove whitespace between tags
+                .trim();
+        }
+        
+        // Highlight HTML syntax
+        function highlightHTML(html) {
+            return html
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/(&lt;\/?)(\w+)/g, '$1<span class="tag">$2</span>')
+                .replace(/(\s+\w+)=(".*?"|'.*?')/g, ' <span class="attr">$1</span>=<span class="value">$2</span>')
+                .replace(/&lt;!--[\s\S]*?--&gt;/g, '<span class="comment">$&</span>');
+        }
+        
+        // DOM Elements
+        const htmlInput = document.getElementById('html-input');
+        const htmlOutput = document.getElementById('html-output');
+        const formatBtn = document.getElementById('format-btn');
+        const minifyBtn = document.getElementById('minify-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        
+        // Event Listeners
+        formatBtn.addEventListener('click', () => {
+            const formatted = formatHTML(htmlInput.value);
+            htmlOutput.innerHTML = highlightHTML(formatted);
+        });
+        
+        minifyBtn.addEventListener('click', () => {
+            const minified = minifyHTML(htmlInput.value);
+            htmlOutput.innerHTML = highlightHTML(minified);
+        });
+        
+        copyBtn.addEventListener('click', () => {
+            const text = htmlOutput.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy to Clipboard';
+                }, 2000);
+            });
+        });
+        
+        clearBtn.addEventListener('click', () => {
+            htmlInput.value = '';
+            htmlOutput.innerHTML = '';
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                formatBtn.click();
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'M') {
+                minifyBtn.click();
+                e.preventDefault();
+            }
+        });
+        
+        // Format on page load
+        window.addEventListener('load', () => {
+            formatBtn.click();
+        });
+    </script>
+</body>
+</html>
