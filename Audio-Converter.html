@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Audio Converter tool - convert between MP3, WAV, AAC, FLAC, and other audio formats">
+    <meta name="keywords" content="audio converter, mp3 converter, wav to mp3, audio format converter, online audio tool">
+    <title>Audio Converter | ToolHubCenter - Convert Audio Files Online</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --secondary-color: #6a75ff;
+            --dark-bg: #1d2144;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --light-text: #666666;
+            --border-color: #e0e0e0;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #eef2ff 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0f172a 100%);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: white;
+        }
+
+        /* Tool Container */
+        .tool-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        /* Card Styling */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 18px 25px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #f9faff;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .upload-area:hover, .upload-area.drag-over {
+            border-color: var(--primary-color);
+            background-color: #f0f4ff;
+        }
+
+        .upload-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .browse-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .browse-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 108, 247, 0.3);
+        }
+
+        /* Form Elements */
+        .conversion-settings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            background-color: white;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 108, 247, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(74, 108, 247, 0.05);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        /* Results Section */
+        .results-section {
+            margin-top: 25px;
+            display: none;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background-color: #f8f9ff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .file-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .file-meta {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            height: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .conversion-result {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f0f7ff;
+            border-radius: 10px;
+            border-left: 4px solid var(--success-color);
+            display: none;
+        }
+
+        .download-btn {
+            margin-top: 15px;
+        }
+
+        /* How to Use Section */
+        .how-to-use {
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        .step-content h3 {
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        /* Ad Containers */
+        .ad-container {
+            background-color: #f5f7ff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 25px 0;
+            border: 1px dashed var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .ad-label {
+            background-color: #f59e0b;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            position: absolute;
+            top: -10px;
+            left: 15px;
+        }
+
+        .ad-placeholder {
+            width: 100%;
+            height: 90px;
+            background: repeating-linear-gradient(
+                45deg,
+                #f0f0f0,
+                #f0f0f0 10px,
+                #e0e0e0 10px,
+                #e0e0e0 20px
+            );
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .ad-placeholder i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--light-text);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            margin-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .conversion-settings {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cubes"></i>
+                    <span>ToolHubCenter</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#" class="active">Audio Converter</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-placeholder">
+                <i class="fas fa-ad"></i>
+                <div>Google AdSense Ad Unit (728x90)</div>
+            </div>
+            <!-- Google AdSense code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <!-- Tool Title -->
+        <h1 style="text-align: center; margin: 20px 0 30px; color: var(--dark-bg);">
+            <i class="fas fa-file-audio"></i> Audio Converter Tool
+        </h1>
+
+        <!-- Tool Container -->
+        <div class="tool-container">
+            <!-- Audio Converter Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-exchange-alt"></i> Convert Audio Files
+                </div>
+                <div class="card-body">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="upload-text">
+                            <h3>Drag & Drop your audio file here</h3>
+                            <p>or</p>
+                        </div>
+                        <div class="browse-btn" id="browseBtn">
+                            Browse Files
+                        </div>
+                        <input type="file" id="fileInput" accept="audio/*" style="display: none;">
+                        <p style="margin-top: 15px; color: var(--light-text); font-size: 0.9rem;">
+                            Supported formats: MP3, WAV, AAC, FLAC, OGG, M4A
+                        </p>
+                    </div>
+                    
+                    <div id="filePreview" class="file-info" style="display: none;">
+                        <div class="file-icon">
+                            <i class="fas fa-file-audio"></i>
+                        </div>
+                        <div class="file-details">
+                            <div class="file-name" id="fileName">sample.mp3</div>
+                            <div class="file-meta" id="fileMeta">2.5 MB • 3:15 duration</div>
+                        </div>
+                    </div>
+                    
+                    <div class="conversion-settings">
+                        <div class="form-group">
+                            <label for="formatSelect">Convert To:</label>
+                            <select id="formatSelect">
+                                <option value="mp3">MP3 (Standard Quality)</option>
+                                <option value="wav">WAV (Lossless)</option>
+                                <option value="aac">AAC (Advanced Audio Coding)</option>
+                                <option value="flac">FLAC (Free Lossless Audio Codec)</option>
+                                <option value="ogg">OGG (Ogg Vorbis)</option>
+                                <option value="m4a">M4A (MPEG-4 Audio)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="qualitySelect">Audio Quality:</label>
+                            <select id="qualitySelect">
+                                <option value="high">High (320 kbps)</option>
+                                <option value="medium" selected>Medium (192 kbps)</option>
+                                <option value="standard">Standard (128 kbps)</option>
+                                <option value="low">Low (64 kbps)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fileNameInput">Output File Name:</label>
+                        <input type="text" id="fileNameInput" placeholder="Enter output file name" value="converted_audio">
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button id="convertBtn" class="btn btn-primary">
+                            <i class="fas fa-cogs"></i> Convert Audio
+                        </button>
+                        <button id="resetBtn" class="btn btn-outline">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                    
+                    <div id="resultsSection" class="results-section">
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        
+                        <div id="conversionResult" class="conversion-result">
+                            <div class="result-title">
+                                <i class="fas fa-check-circle"></i> Conversion Successful!
+                            </div>
+                            <p>Your audio file has been converted successfully.</p>
+                            <button id="downloadBtn" class="btn btn-primary download-btn">
+                                <i class="fas fa-download"></i> Download Converted File
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- How to Use Section -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-question-circle"></i> How to Use This Audio Converter
+                </div>
+                <div class="card-body">
+                    <div class="how-to-use">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Upload Your Audio File</h3>
+                                <p>Click the "Browse Files" button or drag and drop your audio file onto the upload area. We support MP3, WAV, AAC, FLAC, OGG, and M4A formats.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Select Output Format</h3>
+                                <p>Choose your desired output format from the dropdown menu. You can convert to MP3, WAV, AAC, FLAC, OGG, or M4A.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Adjust Quality Settings</h3>
+                                <p>Select the audio quality for your converted file. Higher quality means larger file sizes.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Convert and Download</h3>
+                                <p>Click the "Convert Audio" button. Once the conversion is complete, click the download button to save your converted file.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 25px; background-color: #f0f7ff; padding: 20px; border-radius: 8px;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 15px;">
+                            <i class="fas fa-graduation-cap"></i> Audio Format Guide
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">
+                            <div>
+                                <h4>MP3</h4>
+                                <p>The most popular audio format. Good compression with decent quality. Compatible with all devices.</p>
+                            </div>
+                            <div>
+                                <h4>WAV</h4>
+                                <p>Uncompressed, lossless audio format. Best quality but large file sizes. Ideal for professional use.</p>
+                            </div>
+                            <div>
+                                <h4>AAC</h4>
+                                <p>Advanced Audio Coding. Better quality than MP3 at similar bitrates. Used by Apple devices.</p>
+                            </div>
+                            <div>
+                                <h4>FLAC</h4>
+                                <p>Free Lossless Audio Codec. Compressed without quality loss. Perfect for archiving music.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-placeholder">
+                <i class="fas fa-ad"></i>
+                <div>Google AdSense Ad Unit (728x90)</div>
+            </div>
+            <!-- Google AdSense code -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ToolHubCenter</h3>
+                    <p>Your one-stop destination for powerful, easy-to-use online tools for developers, designers, and content creators.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Popular Tools</h3>
+                    <ul>
+                        <li><a href="#">Regex Tester</a></li>
+                        <li><a href="#">Color Converter</a></li>
+                        <li><a href="#">Image Compressor</a></li>
+                        <li><a href="#">PDF Tools</a></li>
+                        <li><a href="#">Password Generator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Access</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 ToolHubCenter. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const uploadArea = document.getElementById('uploadArea');
+            const browseBtn = document.getElementById('browseBtn');
+            const fileInput = document.getElementById('fileInput');
+            const filePreview = document.getElementById('filePreview');
+            const fileName = document.getElementById('fileName');
+            const fileMeta = document.getElementById('fileMeta');
+            const convertBtn = document.getElementById('convertBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const resultsSection = document.getElementById('resultsSection');
+            const progressBar = document.getElementById('progressBar');
+            const conversionResult = document.getElementById('conversionResult');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const fileNameInput = document.getElementById('fileNameInput');
+            
+            // Sample audio file for demo
+            const sampleFiles = [
+                {
+                    name: 'music_sample.mp3',
+                    size: '3.2 MB',
+                    duration: '4:18'
+                },
+                {
+                    name: 'podcast_episode.wav',
+                    size: '42.5 MB',
+                    duration: '15:22'
+                },
+                {
+                    name: 'voice_memo.m4a',
+                    size: '1.8 MB',
+                    duration: '2:05'
+                }
+            ];
+            
+            // Initialize tool
+            resetTool();
+            
+            // Event listeners
+            browseBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleFileSelect);
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('dragleave', handleDragLeave);
+            uploadArea.addEventListener('drop', handleDrop);
+            convertBtn.addEventListener('click', convertAudio);
+            resetBtn.addEventListener('click', resetTool);
+            downloadBtn.addEventListener('click', downloadFile);
+            
+            // Handle file selection
+            function handleFileSelect(e) {
+                const files = e.target.files;
+                if (files.length > 0) {
+                    processFile(files[0]);
+                }
+            }
+            
+            // Handle drag over
+            function handleDragOver(e) {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            }
+            
+            // Handle drag leave
+            function handleDragLeave(e) {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+            }
+            
+            // Handle file drop
+            function handleDrop(e) {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    processFile(files[0]);
+                }
+            }
+            
+            // Process the selected file
+            function processFile(file) {
+                // Basic validation
+                if (!file.type.startsWith('audio/')) {
+                    alert('Please select an audio file (MP3, WAV, AAC, etc.)');
+                    return;
+                }
+                
+                // Display file info
+                const randomFile = sampleFiles[Math.floor(Math.random() * sampleFiles.length)];
+                fileName.textContent = file.name;
+                fileMeta.textContent = `${formatFileSize(file.size)} • ${randomFile.duration} duration`;
+                
+                // Show file preview
+                filePreview.style.display = 'flex';
+                
+                // Enable convert button
+                convertBtn.disabled = false;
+                
+                // Set default output name
+                const baseName = file.name.replace(/\.[^/.]+$/, "");
+                fileNameInput.value = baseName + '_converted';
+            }
+            
+            // Format file size
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            // Convert audio (simulated)
+            function convertAudio() {
+                // Show results section
+                resultsSection.style.display = 'block';
+                conversionResult.style.display = 'none';
+                
+                // Simulate conversion progress
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        
+                        // Show conversion result after a delay
+                        setTimeout(() => {
+                            conversionResult.style.display = 'block';
+                            
+                            // Update download button text
+                            const format = document.getElementById('formatSelect').value;
+                            downloadBtn.innerHTML = `<i class="fas fa-download"></i> Download ${format.toUpperCase()} File`;
+                        }, 300);
+                    }
+                    progressBar.style.width = progress + '%';
+                }, 200);
+            }
+            
+            // Download file (simulated)
+            function downloadFile() {
+                // Create a sample audio file for download
+                const format = document.getElementById('formatSelect').value;
+                const fileName = fileNameInput.value + '.' + format;
+                
+                // Create a ZIP file for demo purposes
+                const zip = new JSZip();
+                zip.file("README.txt", "This is a demo file from ToolHubCenter Audio Converter.\nActual conversion would require server-side processing.\n\nThank you for using our tool!");
+                
+                // Generate the ZIP file
+                zip.generateAsync({type:"blob"})
+                .then(function(content) {
+                    // Create download link
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(content);
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Show success message
+                    alert(`Download started: ${fileName}`);
+                });
+            }
+            
+            // Reset tool to initial state
+            function resetTool() {
+                // Reset UI elements
+                fileInput.value = '';
+                filePreview.style.display = 'none';
+                resultsSection.style.display = 'none';
+                progressBar.style.width = '0%';
+                conversionResult.style.display = 'none';
+                convertBtn.disabled = true;
+                
+                // Reset form values
+                document.getElementById('formatSelect').value = 'mp3';
+                document.getElementById('qualitySelect').value = 'medium';
+                fileNameInput.value = 'converted_audio';
+                
+                // Reset drag area
+                uploadArea.classList.remove('drag-over');
+            }
+        });
+    </script>
+</body>
+</html>
