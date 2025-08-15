@@ -3,512 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Meta Description Generator - Create compelling SEO meta descriptions to improve click-through rates and search rankings">
-    <meta name="keywords" content="meta description generator, seo tool, search engine optimization, snippet creator">
-    <title>Meta Description Generator | ToolHubCenter</title>
-    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <meta name="description" content="Free online Meta Description Generator. Create SEO-optimized meta descriptions to improve click-through rates and search engine rankings.">
+    <meta name="keywords" content="meta description generator, seo tool, search engine optimization, website description">
+    <meta name="author" content="ToolHubCenter">
+    <title>Meta Description Generator - SEO Tool | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4895ef;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4cc9f0;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
         }
         
         body {
-            background-color: #f5f7ff;
-            color: var(--dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark-color);
             line-height: 1.6;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            padding-bottom: 2rem;
         }
         
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            flex: 1;
-        }
-        
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-icon {
-            background-color: white;
-            color: var(--primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .logo-text span {
-            color: var(--success);
-        }
-        
-        /* Main Card */
-        .main-card {
+        .tool-card {
             background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            margin: 2rem auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            max-width: 800px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .card-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(67, 97, 238, 0.15);
+        }
+        
+        .tool-header {
+            background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 1.5rem;
-            text-align: center;
+            border-radius: 15px 15px 0 0;
         }
         
-        .card-title {
+        .tool-title {
+            font-weight: 700;
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
         }
         
-        .card-subtitle {
-            font-size: 1rem;
+        .tool-description {
+            font-size: 1.1rem;
             opacity: 0.9;
+            margin-bottom: 0;
         }
         
-        .card-body {
-            padding: 2rem;
-        }
-        
-        /* Tool Section */
         .input-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .input-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .input-field {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            transition: border-color 0.3s;
-            margin-bottom: 15px;
-        }
-        
-        .input-field:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-        
-        textarea.input-field {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        #generate-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: block;
-            width: 100%;
             margin: 1.5rem 0;
         }
         
-        #generate-btn:hover {
-            background-color: var(--secondary);
-        }
-        
-        /* Results Section */
-        .results-container {
-            margin-top: 2rem;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            background-color: #f8f9fa;
-        }
-        
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .results-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--secondary);
-        }
-        
-        .copy-btn {
-            background-color: var(--light-gray);
-            color: var(--gray);
-            border: none;
-            border-radius: var(--border-radius);
-            padding: 8px 15px;
-            font-size: 0.9rem;
-            cursor: pointer;
+        .form-control {
+            border: 2px solid #e1e5eb;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-size: 1rem;
             transition: all 0.3s;
         }
         
-        .copy-btn:hover {
-            background-color: var(--primary);
-            color: white;
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(76, 201, 240, 0.25);
         }
         
-        .meta-description {
-            background-color: white;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-top: 15px;
-            line-height: 1.6;
-            min-height: 100px;
+        .btn-primary {
+            background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 0.75rem 1.75rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(120deg, #3a56d4, #3830b0);
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background: linear-gradient(120deg, var(--success-color), #27ae60);
+            border: none;
+            padding: 0.75rem 1.75rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(120deg, #27ae60, #219653);
+            transform: translateY(-2px);
+        }
+        
+        .result-container {
+            background-color: #f8fafc;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            display: none;
+        }
+        
+        .result-header {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .meta-preview {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .meta-preview h5 {
+            color: #1a0dab;
+            margin-bottom: 0.25rem;
+        }
+        
+        .meta-preview .url {
+            color: #006621;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .meta-preview .description {
+            color: #545454;
+            line-height: 1.4;
         }
         
         .character-count {
             text-align: right;
             font-size: 0.9rem;
-            color: var(--gray);
-            margin-top: 10px;
+            color: #6c757d;
+            margin-top: 0.5rem;
         }
         
-        /* How to Use Section */
-        .how-to-use {
-            background-color: var(--light);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            margin-top: 2rem;
+        .count-good {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+        
+        .count-warning {
+            color: var(--warning-color);
+            font-weight: 600;
+        }
+        
+        .count-danger {
+            color: var(--danger-color);
+            font-weight: 600;
         }
         
         .section-title {
-            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 0.75rem;
+            margin-top: 2rem;
             margin-bottom: 1.5rem;
-            color: var(--secondary);
-            text-align: center;
         }
         
-        .steps {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+        
+        .how-to-use {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
         }
         
         .step-card {
-            background: white;
-            border-radius: var(--border-radius);
+            background: #f8fafc;
+            border-radius: 10px;
             padding: 1.5rem;
-            flex: 1;
-            min-width: 250px;
-            max-width: 300px;
-            box-shadow: var(--box-shadow);
-            text-align: center;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s;
         }
         
-        .step-number {
-            background-color: var(--primary);
+        .step-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .ad-container {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+            border: 1px dashed #dee2e6;
+            position: relative;
+        }
+        
+        .ad-label {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.75rem;
+            color: #6c757d;
+            background: #f8f9fa;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.15);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4cc9f0, #4361ee);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
             color: white;
-            width: 40px;
-            height: 40px;
+            font-size: 1.5rem;
+        }
+        
+        .feature-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .tips-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .tip-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .tip-number {
+            background: var(--primary-color);
+            color: white;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            margin: 0 auto 1rem;
+            flex-shrink: 0;
         }
         
-        .step-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            color: var(--secondary);
-        }
-        
-        /* Ad Containers */
-        .ad-container {
-            background-color: var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 15px;
-            text-align: center;
-            margin: 2rem 0;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .ad-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-        
-        .ad-placeholder {
-            background: #e9ecef;
-            padding: 20px;
-            border-radius: 4px;
-            color: #6c757d;
-            width: 100%;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-        
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-title {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--success);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-links a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--success);
-        }
-        
-        .copyright {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #444;
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
+            .tool-title {
+                font-size: 1.5rem;
             }
             
-            .footer-content {
-                flex-direction: column;
+            .tool-description {
+                font-size: 1rem;
             }
             
-            .steps {
+            .tip-item {
                 flex-direction: column;
-                align-items: center;
             }
-            
-            .step-card {
-                max-width: 100%;
-            }
-        }
-        
-        /* Loading Animation */
-        .loader {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .loader-spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: var(--primary);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* SEO Tips */
-        .seo-tips {
-            background-color: #e8f4fd;
-            border-left: 4px solid var(--accent);
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-            padding: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        .seo-tips h3 {
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .seo-tips ul {
-            padding-left: 1.5rem;
-        }
-        
-        .seo-tips li {
-            margin-bottom: 0.5rem;
         }
     </style>
 </head>
 <body>
-    <!-- Header with Logo -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">M</div>
-                    <div class="logo-text">Tool<span>Hub</span>Center</div>
-                </div>
-                <nav>
-                    <button class="copy-btn">Home</button>
-                    <button class="copy-btn">Tools</button>
-                    <button class="copy-btn">About</button>
-                    <button class="copy-btn">Contact</button>
-                </nav>
-            </div>
+    <!-- Header -->
+    <header class="container py-3">
+        <div class="d-flex align-items-center">
+            <img src="favicon-16x16.png" alt="ToolHubCenter Logo" class="me-2" style="width: 40px; height: 40px;">
+            <h1 class="h3 mb-0">ToolHubCenter</h1>
         </div>
     </header>
-
-    <div class="container">
-        <!-- Top Ad Unit -->
+    
+    <!-- Top Ad Container -->
+    <div class="container position-relative">
+        <span class="ad-label">Advertisement</span>
         <div class="ad-container">
-            <div>
-                <div class="ad-label">Advertisement</div>
-                <!-- Google AdSense code -->
-                <div class="ad-placeholder">
-                    Google AdSense 728x90 Ad
-                </div>
-            </div>
+            <!-- Google AdSense Ad Unit -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
-
-        <!-- Main Tool Card -->
-        <div class="main-card">
-            <div class="card-header">
-                <h1 class="card-title">Meta Description Generator</h1>
-                <p class="card-subtitle">Create compelling meta descriptions to improve click-through rates and SEO</p>
-            </div>
-            
-            <div class="card-body">
-                <div class="tool-section">
-                    <div class="input-group">
-                        <label for="page-title" class="input-label">Page Title</label>
-                        <input type="text" id="page-title" class="input-field" placeholder="Enter your page title (e.g., 'Digital Marketing Strategies')">
-                        
-                        <label for="keywords" class="input-label">Target Keywords</label>
-                        <input type="text" id="keywords" class="input-field" placeholder="Enter primary keywords (comma separated)">
-                        
-                        <label for="content-summary" class="input-label">Content Summary</label>
-                        <textarea id="content-summary" class="input-field" placeholder="Briefly describe your page content..."></textarea>
-                        
-                        <button id="generate-btn">Generate Meta Description</button>
+    </div>
+    
+    <!-- Main Tool Card -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="tool-card">
+                    <div class="tool-header text-center">
+                        <h1 class="tool-title">Meta Description Generator</h1>
+                        <p class="tool-description">Create SEO-optimized meta descriptions to improve click-through rates</p>
                     </div>
                     
-                    <!-- SEO Tips -->
-                    <div class="seo-tips">
-                        <h3>SEO Best Practices:</h3>
-                        <ul>
-                            <li>Keep descriptions between 150-160 characters</li>
-                            <li>Include primary keywords naturally</li>
-                            <li>Create a compelling call-to-action</li>
-                            <li>Ensure it accurately reflects page content</li>
-                            <li>Make it unique for every page</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Loading Indicator -->
-                    <div class="loader" id="loader">
-                        <div class="loader-spinner"></div>
-                        <p>Generating meta description...</p>
-                    </div>
-                    
-                    <!-- Results Container -->
-                    <div class="results-container" id="results-container" style="display: none;">
-                        <div class="results-header">
-                            <h2 class="results-title">Generated Meta Description</h2>
-                            <button class="copy-btn" id="copy-btn">Copy to Clipboard</button>
+                    <div class="card-body p-4">
+                        <div class="mb-4">
+                            <label for="keywordsInput" class="form-label fw-bold">Keywords/Topic</label>
+                            <input type="text" class="form-control" id="keywordsInput" placeholder="Enter your main keywords or topic">
                         </div>
                         
-                        <div class="meta-description" id="meta-description">
-                            <!-- Generated meta description will appear here -->
+                        <div class="mb-4">
+                            <label for="contentInput" class="form-label fw-bold">Content Summary</label>
+                            <textarea class="form-control" id="contentInput" rows="4" placeholder="Describe your content or paste a brief summary"></textarea>
                         </div>
-                        <div class="character-count">
-                            Character count: <span id="char-count">0</span>/160
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Tone</label>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button class="btn btn-outline-primary tone-btn active" data-tone="professional">Professional</button>
+                                <button class="btn btn-outline-primary tone-btn" data-tone="friendly">Friendly</button>
+                                <button class="btn btn-outline-primary tone-btn" data-tone="persuasive">Persuasive</button>
+                                <button class="btn btn-outline-primary tone-btn" data-tone="informative">Informative</button>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between flex-wrap gap-3">
+                            <button class="btn btn-primary" id="generateBtn">
+                                <i class="fas fa-magic me-2"></i>Generate Description
+                            </button>
+                            
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-secondary" id="clearBtn">
+                                    <i class="fas fa-eraser me-2"></i>Clear
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-center my-4">
+                            <div class="spinner-border text-primary" id="loadingSpinner" style="display: none;" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="result-container" id="resultContainer">
+                            <h3 class="result-header">
+                                <i class="fas fa-file-alt"></i> Generated Meta Description
+                            </h3>
+                            
+                            <div class="meta-preview">
+                                <h5>Example Page Title - ToolHubCenter</h5>
+                                <div class="url">https://www.toolhubcenter.com › example-page</div>
+                                <div class="description" id="generatedDescription"></div>
+                            </div>
+                            
+                            <div class="character-count">
+                                Character count: <span id="charCount">0</span>/160 
+                                <span id="countStatus" class="count-good">(Perfect for SEO)</span>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end mt-3 gap-2">
+                                <button class="btn btn-success" id="copyBtn">
+                                    <i class="fas fa-copy me-2"></i>Copy to Clipboard
+                                </button>
+                                <button class="btn btn-outline-primary" id="regenerateBtn">
+                                    <i class="fas fa-sync me-2"></i>Regenerate
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -517,154 +448,293 @@
         
         <!-- How to Use Section -->
         <div class="how-to-use">
-            <h2 class="section-title">How to Use This Tool</h2>
-            <div class="steps">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Enter Page Details</h3>
-                    <p>Provide your page title, target keywords, and a brief summary of your content.</p>
+            <h2 class="section-title">How to Use the Meta Description Generator</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="step-card">
+                        <h4><i class="fas fa-1 text-primary"></i> Enter Information</h4>
+                        <p>Provide your main keywords and a brief summary of your content. Select the tone that matches your brand.</p>
+                    </div>
                 </div>
-                
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Generate Description</h3>
-                    <p>Click the generate button to create a compelling meta description.</p>
+                <div class="col-md-4 mb-4">
+                    <div class="step-card">
+                        <h4><i class="fas fa-2 text-primary"></i> Generate Description</h4>
+                        <p>Click the "Generate Description" button. Our AI-powered tool will create an optimized meta description.</p>
+                    </div>
                 </div>
-                
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Review & Optimize</h3>
-                    <p>Check the character count and ensure it includes your primary keywords.</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">Copy & Implement</h3>
-                    <p>Copy the description and add it to your website's HTML meta tags.</p>
+                <div class="col-md-4 mb-4">
+                    <div class="step-card">
+                        <h4><i class="fas fa-3 text-primary"></i> Copy & Implement</h4>
+                        <p>Review the generated description, copy it to your clipboard, and add it to your website's HTML meta tags.</p>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Bottom Ad Unit -->
-        <div class="ad-container">
-            <div>
-                <div class="ad-label">Advertisement</div>
-                <!-- Google AdSense code -->
-                <div class="ad-placeholder">
-                    Google AdSense 728x90 Ad
+        <!-- SEO Tips Section -->
+        <div class="tips-container">
+            <h2 class="section-title">SEO Tips for Effective Meta Descriptions</h2>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <div class="tip-number">1</div>
+                    <div>
+                        <h4>Optimal Length</h4>
+                        <p>Keep your meta descriptions between 50-160 characters. Search engines typically truncate longer descriptions.</p>
+                    </div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-number">2</div>
+                    <div>
+                        <h4>Include Keywords</h4>
+                        <p>Place important keywords near the beginning of your description to improve relevance and visibility.</p>
+                    </div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-number">3</div>
+                    <div>
+                        <h4>Clear Call to Action</h4>
+                        <p>Use action verbs like "Learn," "Discover," or "Get" to encourage clicks and engagement.</p>
+                    </div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-number">4</div>
+                    <div>
+                        <h4>Unique Content</h4>
+                        <p>Avoid duplicate meta descriptions. Create unique descriptions for each page to maximize SEO benefits.</p>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Features Section -->
+        <h2 class="section-title">Why Use Our Meta Description Generator?</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>SEO-Optimized</h4>
+                    <p>Generate descriptions that follow SEO best practices to improve your search rankings.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>Save Time</h4>
+                    <p>Create compelling meta descriptions in seconds instead of spending hours writing them manually.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h4>Multiple Tones</h4>
+                    <p>Choose from professional, friendly, persuasive, or informative tones to match your brand voice.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Ad Container -->
+    <div class="container position-relative mt-4">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-container">
+            <!-- Google AdSense Ad Unit -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
     </div>
     
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 class="footer-title">ToolHubCenter</h3>
-                    <p>Your all-in-one platform for digital marketing tools and resources. Enhance your online presence with our free tools.</p>
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h4>Meta Description Generator</h4>
+                    <p>A free online tool to create SEO-optimized meta descriptions for better search engine visibility.</p>
                 </div>
-                
-                <div class="footer-section">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">All Tools</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">All Tools</a></li>
+                        <li><a href="#" class="text-white">Contact Us</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-section">
-                    <h3 class="footer-title">Popular Tools</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Keyword Generator</a></li>
-                        <li><a href="#">SEO Analyzer</a></li>
-                        <li><a href="#">Content Generator</a></li>
-                        <li><a href="#">Backlink Checker</a></li>
+                <div class="col-md-3">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-white">Cookie Policy</a></li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="copyright">
-                &copy; 2023 ToolHubCenter. All rights reserved.
+            <hr class="my-4 bg-light opacity-25">
+            <div class="text-center">
+                <p class="mb-0">© 2023 ToolHubCenter. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const generateBtn = document.getElementById('generate-btn');
-            const resultsContainer = document.getElementById('results-container');
-            const metaDescription = document.getElementById('meta-description');
-            const loader = document.getElementById('loader');
-            const copyBtn = document.getElementById('copy-btn');
-            const charCount = document.getElementById('char-count');
+            const generateBtn = document.getElementById('generateBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const regenerateBtn = document.getElementById('regenerateBtn');
+            const toneBtns = document.querySelectorAll('.tone-btn');
+            const keywordsInput = document.getElementById('keywordsInput');
+            const contentInput = document.getElementById('contentInput');
+            const resultContainer = document.getElementById('resultContainer');
+            const generatedDescription = document.getElementById('generatedDescription');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const charCount = document.getElementById('charCount');
+            const countStatus = document.getElementById('countStatus');
             
-            // Sample descriptions for different industries
-            const descriptionTemplates = [
-                "Discover effective {keywords} strategies to boost your online presence. Learn expert tips and techniques for {pageTitle}.",
-                "Looking for the best {pageTitle}? Our comprehensive guide covers everything you need to know about {keywords}.",
-                "Maximize your results with our proven {keywords} methods. Get actionable insights for {pageTitle} today!",
-                "Transform your approach to {keywords} with our innovative solutions. Achieve success with {pageTitle}.",
-                "Unlock the secrets of successful {keywords}. Our guide to {pageTitle} provides step-by-step instructions.",
-                "Elevate your {keywords} game with our professional tips. Learn how to master {pageTitle} effectively."
-            ];
+            let currentTone = 'professional';
             
-            // Generate meta description
-            generateBtn.addEventListener('click', function() {
-                const pageTitle = document.getElementById('page-title').value.trim();
-                const keywords = document.getElementById('keywords').value.trim();
-                const contentSummary = document.getElementById('content-summary').value.trim();
+            // Set active tone button
+            toneBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    toneBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTone = this.dataset.tone;
+                });
+            });
+            
+            // Generate description
+            generateBtn.addEventListener('click', generateDescription);
+            
+            // Regenerate description
+            regenerateBtn.addEventListener('click', generateDescription);
+            
+            // Clear inputs
+            clearBtn.addEventListener('click', function() {
+                keywordsInput.value = '';
+                contentInput.value = '';
+                resultContainer.style.display = 'none';
                 
-                if (!pageTitle) {
-                    alert('Please enter a page title');
-                    return;
-                }
-                
-                // Show loading indicator
-                loader.style.display = 'block';
-                resultsContainer.style.display = 'none';
-                
-                // Simulate API call delay
-                setTimeout(() => {
-                    // Hide loader and show results
-                    loader.style.display = 'none';
-                    resultsContainer.style.display = 'block';
-                    
-                    // Generate description
-                    const randomTemplate = descriptionTemplates[Math.floor(Math.random() * descriptionTemplates.length)];
-                    
-                    // Replace placeholders with actual content
-                    let description = randomTemplate
-                        .replace('{pageTitle}', pageTitle)
-                        .replace('{keywords}', keywords || pageTitle.split(' ')[0] + ' strategies');
-                    
-                    // Ensure it's not too long
-                    if (description.length > 160) {
-                        description = description.substring(0, 157) + '...';
-                    }
-                    
-                    // Display the description
-                    metaDescription.textContent = description;
-                    
-                    // Update character count
-                    charCount.textContent = description.length;
-                }, 1200);
+                // Reset tone to default
+                toneBtns.forEach(b => b.classList.remove('active'));
+                document.querySelector('.tone-btn[data-tone="professional"]').classList.add('active');
+                currentTone = 'professional';
             });
             
             // Copy to clipboard
             copyBtn.addEventListener('click', function() {
-                const descriptionText = metaDescription.textContent;
-                
-                navigator.clipboard.writeText(descriptionText).then(() => {
-                    copyBtn.textContent = 'Copied!';
+                const text = generatedDescription.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
                     setTimeout(() => {
-                        copyBtn.textContent = 'Copy to Clipboard';
+                        copyBtn.innerHTML = originalText;
                     }, 2000);
                 });
             });
+            
+            function generateDescription() {
+                const keywords = keywordsInput.value.trim();
+                const content = contentInput.value.trim();
+                
+                if (!keywords && !content) {
+                    alert('Please enter keywords or content summary');
+                    return;
+                }
+                
+                // Show loading spinner
+                loadingSpinner.style.display = 'block';
+                resultContainer.style.display = 'none';
+                
+                // Simulate processing time
+                setTimeout(() => {
+                    // Hide loading spinner
+                    loadingSpinner.style.display = 'none';
+                    
+                    // Generate description based on inputs
+                    const description = generateMetaDescription(keywords, content, currentTone);
+                    generatedDescription.textContent = description;
+                    
+                    // Update character count
+                    const count = description.length;
+                    charCount.textContent = count;
+                    
+                    // Update count status
+                    if (count < 50) {
+                        countStatus.textContent = '(Too short)';
+                        countStatus.className = 'count-danger';
+                    } else if (count > 160) {
+                        countStatus.textContent = '(Too long - may be truncated)';
+                        countStatus.className = 'count-warning';
+                    } else if (count > 120) {
+                        countStatus.textContent = '(Good - near optimal length)';
+                        countStatus.className = 'count-good';
+                    } else {
+                        countStatus.textContent = '(Perfect for SEO)';
+                        countStatus.className = 'count-good';
+                    }
+                    
+                    // Show result container
+                    resultContainer.style.display = 'block';
+                }, 1000);
+            }
+            
+            function generateMetaDescription(keywords, content, tone) {
+                // Sample templates for different tones
+                const templates = {
+                    professional: [
+                        `Discover expert insights on ${keywords}. ${content.substring(0, 80)}... Learn more at ToolHubCenter.`,
+                        `Comprehensive guide to ${keywords}. Explore ${content.substring(0, 70)}... Enhance your knowledge today.`,
+                        `Professional analysis of ${keywords}. ${content.substring(0, 90)}... Trusted resource for professionals.`
+                    ],
+                    friendly: [
+                        `Learn all about ${keywords} in a fun, easy way! ${content.substring(0, 70)}... Join our community today!`,
+                        `Your friendly guide to ${keywords}. ${content.substring(0, 80)}... Let's explore together!`,
+                        `Discover the secrets of ${keywords} with our simple guide. ${content.substring(0, 75)}... Start learning now!`
+                    ],
+                    persuasive: [
+                        `Unlock the power of ${keywords}! ${content.substring(0, 80)}... Transform your approach today!`,
+                        `Master ${keywords} with our proven methods. ${content.substring(0, 75)}... Get started now!`,
+                        `Why you need ${keywords} in your life. ${content.substring(0, 85)}... See the difference today!`
+                    ],
+                    informative: [
+                        `Everything you need to know about ${keywords}. ${content.substring(0, 85)}... Essential guide for beginners.`,
+                        `Complete reference on ${keywords}. ${content.substring(0, 80)}... Detailed explanations and examples.`,
+                        `In-depth analysis of ${keywords}. ${content.substring(0, 90)}... Comprehensive resource for learners.`
+                    ]
+                };
+                
+                // Select a random template from the chosen tone
+                const toneTemplates = templates[tone];
+                const randomIndex = Math.floor(Math.random() * toneTemplates.length);
+                let description = toneTemplates[randomIndex];
+                
+                // If we have keywords, make sure they appear in the description
+                if (keywords && !description.includes(keywords)) {
+                    description = description.replace('...', ` ${keywords}...`);
+                }
+                
+                // Truncate to 160 characters if needed
+                if (description.length > 160) {
+                    description = description.substring(0, 157) + '...';
+                }
+                
+                return description;
+            }
         });
     </script>
 </body>
