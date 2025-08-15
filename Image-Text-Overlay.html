@@ -3,295 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online Text Overlay Tool - Add custom text to your images in seconds. Perfect for creating banners, social media posts, and marketing materials.">
-    <meta name="keywords" content="text overlay, image editor, online tool, text on image, free image editor">
-    <meta name="author" content="ToolHubCenter">
-    <title>Text Overlay Tool | Free Online Image Text Editor | ToolHubCenter</title>
+    <meta name="description" content="Free online text overlay tool - Add custom text to your images instantly. Perfect for social media, marketing, and personal projects.">
+    <meta name="keywords" content="text overlay, image editor, free tool, add text to images, online editor">
+    <title>Text Overlay Tool | ToolHubCenter</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
     
-    <!-- Open Graph Tags for Social Sharing -->
-    <meta property="og:title" content="Free Text Overlay Tool by ToolHubCenter">
-    <meta property="og:description" content="Add custom text to any image in seconds with our free online tool.">
-    <meta property="og:type" content="website">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4895ef;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --dark: #1a1a2e;
             --light: #f8f9fa;
-            --dark: #212529;
+            --gray: #6c757d;
             --success: #4cc9f0;
-            --warning: #f72585;
             --card-bg: #ffffff;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-            color: var(--dark);
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #333;
             line-height: 1.6;
             min-height: 100vh;
-            padding-bottom: 40px;
+            padding: 20px;
         }
         
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-content {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 1.8rem;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: white;
+            background: var(--primary);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 1.4rem;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-        
-        nav a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 8px 4px;
-            border-bottom: 2px solid transparent;
-        }
-        
-        nav a:hover, nav a.active {
             color: white;
-            border-bottom: 2px solid white;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+        .logo h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: white;
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
         }
         
+        .tagline {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Ad Container Styles */
         .ad-container {
             background: white;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin: 20px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 1.5rem 0;
-            height: 90px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
+            min-height: 100px;
+            box-shadow: var(--card-shadow);
         }
         
         .ad-label {
             position: absolute;
-            top: 0;
-            right: 0;
-            background: rgba(0,0,0,0.05);
-            color: rgba(0,0,0,0.4);
+            top: 5px;
+            right: 10px;
             font-size: 0.7rem;
+            color: var(--gray);
+            background: rgba(0,0,0,0.05);
             padding: 2px 8px;
-            border-radius: 0 0 0 8px;
+            border-radius: 20px;
+        }
+        
+        /* Main Content Styles */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        
+        @media (min-width: 992px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
         
         .card {
             background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: var(--transition);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .card:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
         
         .card-header {
-            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
         }
         
-        .card-title {
-            color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+        .card-body {
+            padding: 25px;
         }
         
-        .card-subtitle {
-            color: #6c757d;
-            font-size: 1.1rem;
-        }
-        
-        .tool-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-        
-        .preview-section {
+        /* Tool Styles */
+        .editor-container {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 25px;
         }
         
-        .preview-container {
-            background: #f8f9fa;
-            border-radius: 12px;
-            border: 2px dashed #dee2e6;
-            height: 400px;
+        .image-upload {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-upload:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .image-upload i {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .image-preview {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f9f9f9;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
         }
         
-        #imagePreview {
+        .image-preview img {
             max-width: 100%;
             max-height: 100%;
-            display: none;
+            object-fit: contain;
         }
         
         .text-overlay {
             position: absolute;
-            color: white;
-            font-size: 32px;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
             cursor: move;
             user-select: none;
             padding: 10px;
-            max-width: 80%;
-            text-align: center;
-            word-wrap: break-word;
+            border: 2px dashed transparent;
         }
         
-        .controls-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        .text-overlay.active {
+            border-color: var(--primary);
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .controls {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         
         .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+            margin-bottom: 15px;
         }
         
         label {
-            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
             color: var(--dark);
         }
         
-        input, select, button, textarea {
-            padding: 12px 15px;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: var(--transition);
+        input[type="text"],
+        input[type="color"],
+        input[type="range"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Roboto', sans-serif;
         }
         
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-        }
-        
-        .btn-primary {
+        button {
             background: var(--primary);
             color: white;
-            flex: 1;
-        }
-        
-        .btn-primary:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            flex: 1;
-        }
-        
-        .btn-secondary:hover {
-            background: #f0f4ff;
-        }
-        
-        .how-to-use {
-            margin-top: 3rem;
-        }
-        
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .step-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s;
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-download {
+            background: var(--secondary);
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .btn-download:hover {
+            background: #5d0a94;
+        }
+        
+        /* How to Use Styles */
+        .instructions {
+            padding: 0;
+        }
+        
+        .step {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
         }
         
         .step-number {
@@ -303,125 +304,100 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
-        .step-title {
-            font-weight: 600;
-            font-size: 1.2rem;
+        .step-content h3 {
+            margin-bottom: 8px;
             color: var(--dark);
         }
         
+        /* Footer Styles */
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #6c757d;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 30px 20px;
+            margin-top: 40px;
             font-size: 0.9rem;
-            margin-top: 2rem;
         }
         
-        @media (max-width: 900px) {
-            .tool-container {
-                grid-template-columns: 1fr;
-            }
-            
-            nav ul {
-                gap: 1rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-            }
-            
-            .logo {
-                font-size: 1.5rem;
-            }
-        }
-        
-        /* Color picker styling */
-        .color-picker-container {
+        .footer-links {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        #textColor {
-            width: 60px;
-            height: 40px;
-            padding: 2px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        
-        /* Range slider styling */
-        input[type="range"] {
-            width: 100%;
-            height: 8px;
-            -webkit-appearance: none;
-            background: #e9ecef;
-            border-radius: 4px;
-            outline: none;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: var(--primary);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-        /* Upload area styling */
-        .upload-area {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            gap: 1rem;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
+            gap: 25px;
+            margin: 20px 0;
         }
         
-        .upload-icon {
-            font-size: 3rem;
-            color: var(--accent);
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .card-header {
+                font-size: 1.3rem;
+                padding: 15px;
+            }
+            
+            .card-body {
+                padding: 20px;
+            }
+        }
+        
+        /* SEO Optimized Content */
+        .seo-content {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .seo-content h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .seo-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
         }
     </style>
 </head>
 <body>
-    <!-- Header with Navigation -->
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <div class="logo-icon">T</div>
-                <span>ToolHubCenter</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Text Overlay</a></li>
-                    <li><a href="#">Tools</a></li>
-                    <li><a href="#">Tutorials</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
     <div class="container">
-        <!-- Top Ad Container -->
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-text-height"></i>
+                </div>
+                <h1>Text Overlay Tool</h1>
+            </div>
+            <p class="tagline">Add custom text to your images in seconds - no design skills required!</p>
+        </header>
+        
+        <!-- Top Ad -->
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
-            <!-- Google AdSense Code (Top) -->
+            <!-- Google AdSense Ad Unit -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -433,129 +409,129 @@
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
-
-        <!-- Main Tool Card -->
-        <div class="card">
-            <div class="card-header">
-                <h1 class="card-title">Text Overlay Tool</h1>
-                <p class="card-subtitle">Add custom text to any image in seconds</p>
-            </div>
-            
-            <div class="tool-container">
-                <!-- Preview Section -->
-                <div class="preview-section">
-                    <div class="preview-container" id="previewContainer">
-                        <div class="upload-area" id="uploadArea">
-                            <div class="upload-icon">📁</div>
-                            <h3>Upload an Image</h3>
-                            <p>Click here or drag & drop an image</p>
-                            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-                        </div>
-                        <img id="imagePreview" alt="Preview">
-                        <div class="text-overlay" id="textOverlay">Your Text Here</div>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button class="btn btn-primary" id="downloadBtn">Download Image</button>
-                    </div>
-                </div>
-                
-                <!-- Controls Section -->
-                <div class="controls-section">
-                    <div class="control-group">
-                        <label for="overlayText">Overlay Text</label>
-                        <textarea id="overlayText" placeholder="Enter text to overlay">Your Text Here</textarea>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="fontFamily">Font Family</label>
-                        <select id="fontFamily">
-                            <option value="Arial, sans-serif">Arial</option>
-                            <option value="'Times New Roman', serif">Times New Roman</option>
-                            <option value="'Courier New', monospace">Courier New</option>
-                            <option value="'Comic Sans MS', cursive">Comic Sans</option>
-                            <option value="'Impact', fantasy">Impact</option>
-                        </select>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="fontSize">Font Size (px)</label>
-                        <input type="range" id="fontSize" min="10" max="120" value="32">
-                        <span id="fontSizeValue">32px</span>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="textColor">Text Color</label>
-                        <div class="color-picker-container">
-                            <input type="color" id="textColor" value="#ffffff">
-                            <span>White</span>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="textAlign">Text Alignment</label>
-                        <select id="textAlign">
-                            <option value="center">Center</option>
-                            <option value="left">Left</option>
-                            <option value="right">Right</option>
-                        </select>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="textShadow">Text Shadow</label>
-                        <select id="textShadow">
-                            <option value="2px 2px 4px rgba(0,0,0,0.7)">On (Default)</option>
-                            <option value="none">Off</option>
-                        </select>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button class="btn btn-secondary" id="resetBtn">Reset Position</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         
-        <!-- How to Use Section -->
-        <div class="how-to-use">
+        <!-- Main Content -->
+        <div class="card-grid">
+            <!-- Editor Card -->
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">How to Use the Text Overlay Tool</h2>
-                    <p class="card-subtitle">Follow these simple steps to add text to your images</p>
+                    <i class="fas fa-edit"></i> Image Editor
                 </div>
-                
-                <div class="steps">
-                    <div class="step-card">
+                <div class="card-body">
+                    <div class="editor-container">
+                        <div class="image-upload" id="uploadArea">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Upload Your Image</h3>
+                            <p>Click to browse or drag & drop an image</p>
+                            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <div class="image-preview" id="imagePreview">
+                            <div id="noImageMessage">
+                                <i class="fas fa-image" style="font-size: 4rem; color: #ddd;"></i>
+                                <p>Your image will appear here</p>
+                            </div>
+                            <div class="text-overlay" id="textOverlay" contenteditable="true">Your Text Here</div>
+                        </div>
+                        
+                        <div class="controls">
+                            <div class="control-group">
+                                <label for="textInput">Text Content</label>
+                                <input type="text" id="textInput" value="Your Text Here">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="fontFamily">Font Family</label>
+                                <select id="fontFamily">
+                                    <option value="Arial, sans-serif">Arial</option>
+                                    <option value="Georgia, serif">Georgia</option>
+                                    <option value="'Times New Roman', serif">Times New Roman</option>
+                                    <option value="'Courier New', monospace">Courier New</option>
+                                    <option value="Verdana, sans-serif">Verdana</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="fontSize">Font Size (px)</label>
+                                <input type="range" id="fontSize" min="10" max="100" value="30">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="textColor">Text Color</label>
+                                <input type="color" id="textColor" value="#ffffff">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="bgColor">Background Color</label>
+                                <input type="color" id="bgColor" value="#000000">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="bgOpacity">Background Opacity</label>
+                                <input type="range" id="bgOpacity" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                        
+                        <button class="btn-download" id="downloadBtn">
+                            <i class="fas fa-download"></i> Download Image
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- How to Use Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-book"></i> How to Use
+                </div>
+                <div class="instructions">
+                    <div class="step">
                         <div class="step-number">1</div>
-                        <h3 class="step-title">Upload Your Image</h3>
-                        <p>Click the upload area to select an image from your device or drag and drop it onto the preview area.</p>
+                        <div class="step-content">
+                            <h3>Upload Your Image</h3>
+                            <p>Click on the upload area to select an image from your device. Supported formats: JPG, PNG, GIF.</p>
+                        </div>
                     </div>
                     
-                    <div class="step-card">
+                    <div class="step">
                         <div class="step-number">2</div>
-                        <h3 class="step-title">Customize Your Text</h3>
-                        <p>Type your desired text in the text box and adjust the font, size, color, and alignment using the controls.</p>
+                        <div class="step-content">
+                            <h3>Customize Your Text</h3>
+                            <p>Edit the text content, choose font style, size, color, and background. Drag the text to position it on your image.</p>
+                        </div>
                     </div>
                     
-                    <div class="step-card">
+                    <div class="step">
                         <div class="step-number">3</div>
-                        <h3 class="step-title">Position the Text</h3>
-                        <p>Drag the text overlay to position it anywhere on your image. Resize it as needed.</p>
+                        <div class="step-content">
+                            <h3>Adjust Position & Size</h3>
+                            <p>Drag the text box to position it anywhere on your image. Resize it by dragging the corners.</p>
+                        </div>
                     </div>
                     
-                    <div class="step-card">
+                    <div class="step">
                         <div class="step-number">4</div>
-                        <h3 class="step-title">Download Your Image</h3>
-                        <p>Click the "Download Image" button to save your customized image to your device.</p>
+                        <div class="step-content">
+                            <h3>Download Your Creation</h3>
+                            <p>Click the download button to save your customized image with text overlay to your device.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Bottom Ad Container -->
+        <!-- SEO Content Section -->
+        <div class="seo-content">
+            <h2>Create Stunning Images with Text Overlays</h2>
+            <p>Our free online text overlay tool makes it easy to add custom text to any image. Perfect for creating social media posts, marketing materials, memes, invitations, and personal projects. No design experience required - just upload your image, add your text, customize it to your liking, and download your creation in seconds.</p>
+            <p>With our intuitive interface, you can choose from various fonts, adjust text size and color, add a background with adjustable opacity, and position your text anywhere on the image. The tool works on any device - desktop, tablet, or mobile phone.</p>
+            <p>Whether you're a social media manager, blogger, marketer, or just someone who wants to add text to photos, our text overlay tool is the perfect solution. Try it today and see how easy it is to create professional-looking images!</p>
+        </div>
+        
+        <!-- Bottom Ad -->
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
-            <!-- Google AdSense Code (Bottom) -->
+            <!-- Google AdSense Ad Unit -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -567,165 +543,166 @@
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Tools</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+            <p>&copy; 2023 ToolHubCenter. All rights reserved.</p>
+            <p>Text Overlay Tool - Add custom text to images online for free.</p>
+        </footer>
     </div>
     
-    <footer>
-        <p>© 2023 ToolHubCenter - Free Online Tools for Everyone</p>
-        <p>Text Overlay Tool v1.0 | All rights reserved</p>
-    </footer>
-    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // DOM Elements
-            const imageUpload = document.getElementById('imageUpload');
-            const uploadArea = document.getElementById('uploadArea');
-            const imagePreview = document.getElementById('imagePreview');
-            const previewContainer = document.getElementById('previewContainer');
-            const textOverlay = document.getElementById('textOverlay');
-            const overlayText = document.getElementById('overlayText');
-            const fontFamily = document.getElementById('fontFamily');
-            const fontSize = document.getElementById('fontSize');
-            const fontSizeValue = document.getElementById('fontSizeValue');
-            const textColor = document.getElementById('textColor');
-            const textAlign = document.getElementById('textAlign');
-            const textShadow = document.getElementById('textShadow');
-            const resetBtn = document.getElementById('resetBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-            
-            // Initialize variables
-            let isDragging = false;
-            let offsetX, offsetY;
-            
-            // Event Listeners
-            
-            // Upload image
-            uploadArea.addEventListener('click', () => imageUpload.click());
-            
-            imageUpload.addEventListener('change', function(e) {
-                if (e.target.files && e.target.files[0]) {
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                        uploadArea.style.display = 'none';
-                    }
-                    
-                    reader.readAsDataURL(e.target.files[0]);
-                }
-            });
-            
-            // Drag and drop for image upload
-            previewContainer.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                this.style.borderColor = '#4361ee';
-            });
-            
-            previewContainer.addEventListener('dragleave', function() {
-                this.style.borderColor = '#dee2e6';
-            });
-            
-            previewContainer.addEventListener('drop', function(e) {
-                e.preventDefault();
-                this.style.borderColor = '#dee2e6';
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const imageUpload = document.getElementById('imageUpload');
+        const imagePreview = document.getElementById('imagePreview');
+        const noImageMessage = document.getElementById('noImageMessage');
+        const textOverlay = document.getElementById('textOverlay');
+        const textInput = document.getElementById('textInput');
+        const fontFamily = document.getElementById('fontFamily');
+        const fontSize = document.getElementById('fontSize');
+        const textColor = document.getElementById('textColor');
+        const bgColor = document.getElementById('bgColor');
+        const bgOpacity = document.getElementById('bgOpacity');
+        const downloadBtn = document.getElementById('downloadBtn');
+        
+        // Initialize
+        let isDragging = false;
+        let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+        
+        // Event Listeners
+        uploadArea.addEventListener('click', () => imageUpload.click());
+        
+        imageUpload.addEventListener('change', function(e) {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
                 
-                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-                    const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Create image element
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.id = 'previewImage';
                     
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                        uploadArea.style.display = 'none';
-                    }
+                    // Clear preview area and add new image
+                    imagePreview.innerHTML = '';
+                    imagePreview.appendChild(img);
+                    imagePreview.appendChild(textOverlay);
                     
-                    reader.readAsDataURL(e.dataTransfer.files[0]);
+                    // Show text overlay
+                    textOverlay.style.display = 'block';
                 }
-            });
-            
-            // Text input
-            overlayText.addEventListener('input', function() {
-                textOverlay.textContent = this.value;
-            });
-            
-            // Font family
-            fontFamily.addEventListener('change', function() {
-                textOverlay.style.fontFamily = this.value;
-            });
-            
-            // Font size
-            fontSize.addEventListener('input', function() {
-                const size = this.value + 'px';
-                textOverlay.style.fontSize = size;
-                fontSizeValue.textContent = size;
-            });
-            
-            // Text color
-            textColor.addEventListener('input', function() {
-                textOverlay.style.color = this.value;
-            });
-            
-            // Text alignment
-            textAlign.addEventListener('change', function() {
-                textOverlay.style.textAlign = this.value;
-            });
-            
-            // Text shadow
-            textShadow.addEventListener('change', function() {
-                textOverlay.style.textShadow = this.value;
-            });
-            
-            // Reset text position
-            resetBtn.addEventListener('click', function() {
-                textOverlay.style.left = '50%';
-                textOverlay.style.top = '50%';
-                textOverlay.style.transform = 'translate(-50%, -50%)';
-            });
-            
-            // Download image
-            downloadBtn.addEventListener('click', function() {
-                alert('Image downloaded! In a real implementation, this would save the image with your text overlay.');
-                // Actual implementation would use canvas to combine image and text
-            });
-            
-            // Make text draggable
-            textOverlay.addEventListener('mousedown', startDrag);
-            
-            function startDrag(e) {
-                isDragging = true;
                 
-                // Get initial mouse position
-                offsetX = e.clientX - textOverlay.getBoundingClientRect().left;
-                offsetY = e.clientY - textOverlay.getBoundingClientRect().top;
-                
-                // Add event listeners
-                document.addEventListener('mousemove', drag);
-                document.addEventListener('mouseup', stopDrag);
-            }
-            
-            function drag(e) {
-                if (isDragging) {
-                    // Calculate new position
-                    const containerRect = previewContainer.getBoundingClientRect();
-                    let x = e.clientX - containerRect.left - offsetX;
-                    let y = e.clientY - containerRect.top - offsetY;
-                    
-                    // Constrain within container
-                    x = Math.max(0, Math.min(x, containerRect.width - textOverlay.offsetWidth));
-                    y = Math.max(0, Math.min(y, containerRect.height - textOverlay.offsetHeight));
-                    
-                    // Apply position
-                    textOverlay.style.left = x + 'px';
-                    textOverlay.style.top = y + 'px';
-                    textOverlay.style.transform = 'none';
-                }
-            }
-            
-            function stopDrag() {
-                isDragging = false;
-                document.removeEventListener('mousemove', drag);
-                document.removeEventListener('mouseup', stopDrag);
+                reader.readAsDataURL(this.files[0]);
             }
         });
+        
+        // Text editing
+        textInput.addEventListener('input', function() {
+            textOverlay.textContent = this.value;
+        });
+        
+        // Styling controls
+        fontFamily.addEventListener('change', function() {
+            textOverlay.style.fontFamily = this.value;
+        });
+        
+        fontSize.addEventListener('input', function() {
+            textOverlay.style.fontSize = this.value + 'px';
+        });
+        
+        textColor.addEventListener('input', function() {
+            textOverlay.style.color = this.value;
+        });
+        
+        bgColor.addEventListener('input', function() {
+            updateBackground();
+        });
+        
+        bgOpacity.addEventListener('input', function() {
+            updateBackground();
+        });
+        
+        function updateBackground() {
+            const opacity = bgOpacity.value / 100;
+            const color = bgColor.value;
+            const r = parseInt(color.substr(1, 2), 16);
+            const g = parseInt(color.substr(3, 2), 16);
+            const b = parseInt(color.substr(5, 2), 16);
+            
+            textOverlay.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+        }
+        
+        // Drag functionality
+        textOverlay.addEventListener('mousedown', dragStart);
+        textOverlay.addEventListener('touchstart', dragStart);
+        
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('touchend', dragEnd);
+        
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag);
+        
+        function dragStart(e) {
+            if (e.type === "touchstart") {
+                initialX = e.touches[0].clientX - xOffset;
+                initialY = e.touches[0].clientY - yOffset;
+            } else {
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+            }
+            
+            if (e.target === textOverlay) {
+                isDragging = true;
+                textOverlay.classList.add('active');
+            }
+        }
+        
+        function dragEnd() {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+            textOverlay.classList.remove('active');
+        }
+        
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                
+                if (e.type === "touchmove") {
+                    currentX = e.touches[0].clientX - initialX;
+                    currentY = e.touches[0].clientY - initialY;
+                } else {
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                }
+                
+                xOffset = currentX;
+                yOffset = currentY;
+                
+                setTranslate(currentX, currentY, textOverlay);
+            }
+        }
+        
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+        }
+        
+        // Download functionality
+        downloadBtn.addEventListener('click', function() {
+            alert('In a real implementation, this would download your image with text overlay. For this demo, functionality is simulated.');
+            // Actual implementation would use canvas to render image with text
+        });
+        
+        // Initialize text overlay
+        updateBackground();
     </script>
 </body>
 </html>
