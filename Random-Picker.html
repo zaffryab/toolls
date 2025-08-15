@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Random Picker tool - Select random items, names, or choices from a list. Perfect for giveaways, decision making, and random selections.">
+    <meta name="keywords" content="random picker, random selector, random choice, decision maker, giveaway tool">
+    <meta name="author" content="ToolHubCenter">
+    <title>Random Picker | Select Random Items from a List | ToolHubCenter</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 20px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .ad-container {
+            text-align: center;
+            margin: 25px 0;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 5px;
+        }
+        
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .input-section, .result-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-section label, .result-section label {
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 250px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .result-display {
+            min-height: 250px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border: 2px dashed #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .result-display .winner {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 15px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-pick {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            padding: 15px 40px;
+            font-size: 1.2rem;
+        }
+        
+        .btn-clear {
+            background: var(--warning);
+        }
+        
+        .btn-clear:hover {
+            background: #d31667;
+        }
+        
+        .how-to-use {
+            margin-top: 30px;
+        }
+        
+        .how-to-use h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .instructions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .instruction-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .instruction-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .instruction-card h4 i {
+            margin-right: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-style: normal;
+        }
+        
+        .examples {
+            margin-top: 30px;
+        }
+        
+        .examples h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .example-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .example-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 20px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Random Picker</h1>
+            <p>Select random items, names, or choices from your list. Perfect for giveaways, decision making, and random selections.</p>
+        </header>
+
+        <!-- Top Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <main>
+            <div class="card">
+                <div class="card-header">
+                    Random Selection Tool
+                </div>
+                <div class="card-body">
+                    <div class="tool-container">
+                        <div class="input-section">
+                            <label for="itemList">Enter your items (one per line):</label>
+                            <textarea id="itemList" placeholder="Add items here, each on a new line...
+Example:
+John Smith
+Jane Doe
+Mike Johnson
+Sarah Williams">Red Team
+Blue Team
+Green Team
+Yellow Team
+Purple Team
+Orange Team</textarea>
+                        </div>
+                        
+                        <div class="result-section">
+                            <label for="resultDisplay">Random Selection Result:</label>
+                            <div id="resultDisplay" class="result-display">
+                                <div>Your random selection will appear here</div>
+                                <div class="winner" id="winnerResult"></div>
+                                <div id="selectionInfo"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button id="btnPick" class="btn btn-pick">Pick Random Item</button>
+                        <button id="btnClear" class="btn btn-clear">Clear All</button>
+                    </div>
+                    
+                    <div class="how-to-use">
+                        <h3>How to Use This Tool</h3>
+                        <div class="instructions">
+                            <div class="instruction-card">
+                                <h4><i>1</i> Enter Items</h4>
+                                <p>Type or paste your list of items in the left box. Put each item on a new line.</p>
+                            </div>
+                            <div class="instruction-card">
+                                <h4><i>2</i> Pick Randomly</h4>
+                                <p>Click "Pick Random Item" to select one item randomly from your list.</p>
+                            </div>
+                            <div class="instruction-card">
+                                <h4><i>3</i> Clear & Reset</h4>
+                                <p>Use "Clear All" to reset the tool and start with a new list.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="examples">
+                        <h3>Common Use Cases</h3>
+                        <div class="example-list">
+                            <div class="example-item">
+                                <strong>Giveaway Winners</strong>
+                                <p>Select random winners from a list of participants</p>
+                            </div>
+                            <div class="example-item">
+                                <strong>Team Selection</strong>
+                                <p>Randomly assign people to teams or groups</p>
+                            </div>
+                            <div class="example-item">
+                                <strong>Decision Making</strong>
+                                <p>Choose randomly between options when you can't decide</p>
+                            </div>
+                            <div class="example-item">
+                                <strong>Classroom Activities</strong>
+                                <p>Pick students randomly for questions or activities</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Ad Container -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 ToolHubCenter - Your Ultimate Tool Collection</p>
+            <p>Random Picker Tool | All rights reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // DOM elements
+        const itemList = document.getElementById('itemList');
+        const resultDisplay = document.getElementById('resultDisplay');
+        const winnerResult = document.getElementById('winnerResult');
+        const selectionInfo = document.getElementById('selectionInfo');
+        const btnPick = document.getElementById('btnPick');
+        const btnClear = document.getElementById('btnClear');
+        
+        // Animation elements
+        const spinningItems = [
+            "🎲 Spinning the wheel...",
+            "🔍 Making selection...",
+            "✨ Choosing randomly...",
+            "⏳ Processing...",
+            "🎯 Finding the winner..."
+        ];
+        
+        let animationInterval;
+        
+        // Pick random item
+        function pickRandomItem() {
+            const items = itemList.value.split('\n').filter(item => item.trim() !== '');
+            
+            if (items.length === 0) {
+                winnerResult.textContent = "";
+                selectionInfo.textContent = "Please add some items first!";
+                selectionInfo.style.color = "#f72585";
+                return;
+            }
+            
+            // Clear previous result
+            winnerResult.textContent = "";
+            selectionInfo.textContent = "";
+            
+            // Animation before selection
+            let counter = 0;
+            clearInterval(animationInterval);
+            animationInterval = setInterval(() => {
+                selectionInfo.textContent = spinningItems[counter % spinningItems.length];
+                counter++;
+            }, 200);
+            
+            // Final selection after delay
+            setTimeout(() => {
+                clearInterval(animationInterval);
+                
+                const randomIndex = Math.floor(Math.random() * items.length);
+                const selectedItem = items[randomIndex].trim();
+                
+                winnerResult.textContent = selectedItem;
+                selectionInfo.innerHTML = `Selected from ${items.length} items`;
+                selectionInfo.style.color = "#4361ee";
+                
+                // Add to history
+                addToHistory(selectedItem, items.length);
+            }, 2000);
+        }
+        
+        // Add to history
+        function addToHistory(item, totalItems) {
+            const history = document.querySelector('.history-items');
+            if (!history) return;
+            
+            const historyItem = document.createElement('div');
+            historyItem.className = 'history-item';
+            historyItem.innerHTML = `
+                <span>${item}</span>
+                <span>${new Date().toLocaleTimeString()}</span>
+                <span>${totalItems} items</span>
+            `;
+            
+            // Prepend to keep latest on top
+            history.insertBefore(historyItem, history.firstChild);
+            
+            // Limit to 5 items
+            if (history.children.length > 5) {
+                history.removeChild(history.lastChild);
+            }
+        }
+        
+        // Clear all items
+        function clearAll() {
+            itemList.value = '';
+            winnerResult.textContent = '';
+            selectionInfo.textContent = 'Your random selection will appear here';
+            selectionInfo.style.color = '#666';
+        }
+        
+        // Event listeners
+        btnPick.addEventListener('click', pickRandomItem);
+        btnClear.addEventListener('click', clearAll);
+        
+        // Initialize with some items
+        window.addEventListener('load', () => {
+            // Initialize with some example items
+            if (itemList.value.trim() === '') {
+                itemList.value = "Red Team\nBlue Team\nGreen Team\nYellow Team\nPurple Team\nOrange Team";
+            }
+        });
+    </script>
+</body>
+</html>
