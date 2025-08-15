@@ -3,407 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free SERP Simulator tool - Test how your website appears in search results. Perfect for SEO analysis and optimization.">
-    <meta name="keywords" content="serp simulator, seo tool, search engine results, seo analysis, keyword ranking">
+    <meta name="description" content="Free online SERP Simulator - Preview how your website appears in search engine results. Perfect for SEO optimization and marketing.">
+    <meta name="keywords" content="serp simulator, search engine results, seo tool, search preview, free seo tool">
     <title>SERP Simulator | ToolHubCenter</title>
+    
+    <!-- Favicon -->
     <link rel="icon" href="favicon-16x16.png" type="image/png">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #4a6cf7;
-            --primary-dark: #3a57c7;
-            --secondary: #6c757d;
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --dark: #1a1a2e;
             --light: #f8f9fa;
-            --dark: #343a40;
-            --success: #28a745;
-            --border: #dee2e6;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --card-radius: 10px;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --card-bg: #ffffff;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+            --serp-title: #1a0dab;
+            --serp-url: #006621;
+            --serp-desc: #545454;
+            --serp-border: #dfe1e5;
+            --serp-bg: #f8f9fa;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #f5f7ff;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
         }
         
+        /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 1rem 0;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         
-        .logo img {
-            height: 40px;
-        }
-        
-        nav ul {
+        .logo-icon {
+            background: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-        
-        nav a {
+            align-items: center;
+            justify-content: center;
             color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
         }
         
-        nav a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-        
-        .hero {
-            text-align: center;
-            padding: 3rem 0;
-            background: linear-gradient(120deg, #e0f7ff, #f0f5ff);
-        }
-        
-        .hero h1 {
+        .logo h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: white;
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
+            letter-spacing: -0.5px;
         }
         
-        .hero p {
+        .tagline {
+            color: rgba(255, 255, 255, 0.85);
             font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto 2rem;
-            color: var(--secondary);
+            margin: 0 auto;
         }
         
-        .card {
-            background: white;
-            border-radius: var(--card-radius);
-            box-shadow: var(--shadow);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .tool-card {
-            background: white;
-            border-radius: var(--card-radius);
-            box-shadow: var(--shadow);
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 1000px;
-        }
-        
-        .tool-title {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 2rem;
-        }
-        
-        .search-box input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid var(--border);
-            border-radius: 50px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .search-box input:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
-        }
-        
-        .search-box button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .search-box button:hover {
-            background: var(--primary-dark);
-        }
-        
+        /* Ad Container Styles */
         .ad-container {
-            text-align: center;
-            margin: 2rem 0;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 1px dashed var(--border);
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+            box-shadow: var(--card-shadow);
+            position: relative;
         }
         
         .ad-label {
-            font-size: 0.8rem;
-            color: var(--secondary);
-            margin-bottom: 5px;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.7rem;
+            color: var(--gray);
+            background: rgba(0,0,0,0.05);
+            padding: 2px 8px;
+            border-radius: 20px;
         }
         
-        .serp-results {
-            display: none;
+        /* Main Content Styles */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
         }
         
-        .serp-item {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
+        @media (min-width: 992px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
         
-        .serp-item:last-child {
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        /* Tool Styles */
+        .tool-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .char-count {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        .optimal {
+            color: #28a745;
+        }
+        
+        .warning {
+            color: #ffc107;
+        }
+        
+        .danger {
+            color: #dc3545;
+        }
+        
+        .serp-preview {
+            background: var(--serp-bg);
+            border: 1px solid var(--serp-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .serp-result {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--serp-border);
+        }
+        
+        .serp-result:last-child {
             border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
         
         .serp-title {
-            color: var(--primary);
+            color: var(--serp-title);
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 5px;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .serp-title:hover {
-            text-decoration: underline;
+            line-height: 1.3;
         }
         
         .serp-url {
-            color: var(--success);
+            color: var(--serp-url);
             font-size: 0.9rem;
             margin-bottom: 5px;
         }
         
         .serp-description {
-            color: var(--dark);
+            color: var(--serp-desc);
             font-size: 0.95rem;
+            line-height: 1.5;
         }
         
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
+        .serp-featured {
+            background: #f8f9fa;
+            border-left: 3px solid #4d90fe;
+            padding: 15px;
+            margin-top: 10px;
         }
         
-        .feature-card {
-            background: white;
-            border-radius: var(--card-radius);
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+        .serp-featured .serp-title {
+            font-size: 1.3rem;
         }
         
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .how-to-use {
-            background: white;
-            border-radius: var(--card-radius);
-            box-shadow: var(--shadow);
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 1000px;
-        }
-        
-        .how-to-use h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
-        }
-        
-        .steps {
+        .btn-generate {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s;
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .btn-generate:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* How to Use Styles */
+        .instructions {
+            padding: 0;
         }
         
         .step {
             display: flex;
             gap: 15px;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
         }
         
         .step-number {
             background: var(--primary);
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             font-weight: bold;
+            font-size: 1.1rem;
         }
         
+        .step-content h3 {
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        /* SEO Tips */
+        .seo-tips {
+            background: #f0f7ff;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 25px;
+        }
+        
+        .seo-tips h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .seo-tips ul {
+            padding-left: 20px;
+        }
+        
+        .seo-tips li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        /* Footer Styles */
         footer {
-            background: var(--dark);
-            color: white;
-            padding: 3rem 0 2rem;
-            margin-top: 3rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .footer-section h3 {
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--primary);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 30px 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
         }
         
         .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+            flex-wrap: wrap;
         }
         
         .footer-links a {
-            color: #ccc;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: color 0.3s;
         }
         
         .footer-links a:hover {
             color: white;
-            padding-left: 5px;
         }
         
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #aaa;
-        }
-        
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .hero h1 {
+            .logo h1 {
                 font-size: 2rem;
             }
             
-            .search-box {
-                flex-direction: column;
+            .tagline {
+                font-size: 1rem;
             }
             
-            .feature-card {
-                padding: 1rem;
+            .card-header {
+                font-size: 1.3rem;
+                padding: 15px;
             }
+            
+            .card-body {
+                padding: 20px;
+            }
+            
+            .footer-links {
+                gap: 15px;
+            }
+        }
+        
+        /* SEO Optimized Content */
+        .seo-content {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .seo-content h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .seo-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
         }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTEyIDJMNCA3bDggNSA4LTUtOC01ek00IDE3bDggNSA4LTVsLTgtNS04IDV6bTAgNnYtOWw4IDV2OWwtOC01eiIvPjwvc3ZnPg==" alt="ToolHubCenter Logo">
-                    <span>ToolHubCenter</span>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><a href="#">How to Use</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>SERP Simulator Tool</h1>
-            <p>Simulate how your website appears in search engine results pages. Perfect for SEO analysis and optimization.</p>
-        </div>
-    </section>
-
-    <!-- Top Ad Container -->
     <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h1>SERP Simulator</h1>
+            </div>
+            <p class="tagline">Preview how your website appears in search results and optimize for better click-through rates</p>
+        </header>
+        
+        <!-- Top Ad -->
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Ad Unit -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -414,54 +450,136 @@
                 };
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
-        </div>
-    </div>
-
-    <!-- SERP Simulator Tool -->
-    <section class="tool-card">
-        <h2 class="tool-title">SERP Simulator</h2>
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Enter your keyword or website URL..." value="SEO optimization tools">
-            <button id="search-btn">Simulate SERP</button>
         </div>
         
-        <div class="serp-results" id="serp-results">
-            <div class="serp-item">
-                <a href="#" class="serp-title">ToolHubCenter - Top SEO Tools for Optimization</a>
-                <div class="serp-url">https://www.toolhubcenter.com › seo-tools</div>
-                <div class="serp-description">Discover the best SEO tools at ToolHubCenter. Our comprehensive suite includes keyword research, backlink analysis, rank tracking, and more to boost your website's visibility.</div>
+        <!-- Main Content -->
+        <div class="card-grid">
+            <!-- Editor Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-chart-line"></i> SERP Preview Generator
+                </div>
+                <div class="card-body">
+                    <div class="tool-container">
+                        <div class="input-group">
+                            <label for="serpTitle">Page Title</label>
+                            <input type="text" id="serpTitle" placeholder="Enter your page title" value="SERP Simulator - Free Online Search Results Preview Tool">
+                            <div class="char-count"><span id="titleCount">0</span>/60 characters (Optimal: 50-60)</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="serpUrl">Page URL</label>
+                            <input type="text" id="serpUrl" placeholder="Enter your page URL" value="https://www.toolhubcenter.com/serp-simulator">
+                            <div class="char-count"><span id="urlCount">0</span> characters</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="serpDescription">Meta Description</label>
+                            <textarea id="serpDescription" placeholder="Enter your meta description">Preview how your website appears in search results with our free SERP Simulator. Test and optimize your title tags, meta descriptions, and URLs for better SEO performance.</textarea>
+                            <div class="char-count"><span id="descCount">0</span>/160 characters (Optimal: 120-160)</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="serpType">Result Type</label>
+                            <select id="serpType">
+                                <option value="standard">Standard Result</option>
+                                <option value="featured">Featured Snippet</option>
+                                <option value="news">News Result</option>
+                                <option value="video">Video Result</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn-generate" id="generateBtn">
+                            <i class="fas fa-sync-alt"></i> Update Preview
+                        </button>
+                        
+                        <div class="serp-preview">
+                            <h3 style="margin-bottom: 15px; color: var(--dark);">Search Results Preview</h3>
+                            <div id="serpResultContainer">
+                                <!-- SERP results will be generated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="seo-tips">
+                            <h3><i class="fas fa-lightbulb"></i> SEO Optimization Tips</h3>
+                            <ul>
+                                <li>Include your primary keyword in the title and description</li>
+                                <li>Keep titles under 60 characters to avoid truncation</li>
+                                <li>Write compelling descriptions that encourage clicks</li>
+                                <li>Use action-oriented language in your meta description</li>
+                                <li>Include your brand name in the title when possible</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="serp-item">
-                <a href="#" class="serp-title">10 Best SEO Tools in 2023 - Comprehensive Review</a>
-                <div class="serp-url">https://www.seojournal.com › best-seo-tools</div>
-                <div class="serp-description">Looking for the best SEO tools? We've tested and reviewed the top SEO software for keyword research, technical SEO, content optimization, and more.</div>
-            </div>
-            
-            <div class="serp-item">
-                <a href="#" class="serp-title">Free SEO Tools - Google Search Console</a>
-                <div class="serp-url">https://search.google.com › search-console</div>
-                <div class="serp-description">Google's free Search Console helps you monitor, maintain, and troubleshoot your site's presence in Google Search results with free SEO tools and reports.</div>
-            </div>
-            
-            <div class="serp-item">
-                <a href="#" class="serp-title">The Complete Guide to SEO Tools - Moz</a>
-                <div class="serp-url">https://moz.com › blog › complete-guide-seo-tools</div>
-                <div class="serp-description">Learn about the essential SEO tools you need for a successful optimization strategy. From keyword research to technical audits, we cover all the tools you need.</div>
-            </div>
-            
-            <div class="serp-item">
-                <a href="#" class="serp-title">SEMrush: Online Marketing Suite for Digital Marketing</a>
-                <div class="serp-url">https://www.semrush.com</div>
-                <div class="serp-description">SEMrush is an online visibility management and content marketing SaaS platform that ensures businesses get measurable results from online marketing.</div>
+            <!-- How to Use Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-book"></i> How to Use
+                </div>
+                <div class="instructions">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Enter Your Details</h3>
+                            <p>Fill in your page title, URL, and meta description in the input fields.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Select Result Type</h3>
+                            <p>Choose the type of search result you want to simulate (standard, featured, etc.).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Generate Preview</h3>
+                            <p>Click "Update Preview" to see how your page appears in search results.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Optimize Your Content</h3>
+                            <p>Use the SEO tips and character counters to optimize your title and description.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-header" style="background: linear-gradient(135deg, var(--secondary), #5a189a); margin-top: 20px;">
+                    <i class="fas fa-star"></i> Why Use SERP Simulator?
+                </div>
+                <div class="card-body">
+                    <ul style="padding-left: 20px;">
+                        <li style="margin-bottom: 15px;"><strong>Improve CTR:</strong> Test different titles and descriptions to increase click-through rates</li>
+                        <li style="margin-bottom: 15px;"><strong>SEO Optimization:</strong> Ensure your content meets search engine requirements</li>
+                        <li style="margin-bottom: 15px;"><strong>Mobile Preview:</strong> See how your results appear on different devices</li>
+                        <li style="margin-bottom: 15px;"><strong>Competitive Analysis:</strong> Compare your results against competitors</li>
+                        <li><strong>Free Tool:</strong> No cost for unlimited simulations</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </section>
-
-    <!-- Bottom Ad Container -->
-    <div class="container">
+        
+        <!-- SEO Content Section -->
+        <div class="seo-content">
+            <h2>Optimize Your Search Engine Results with SERP Simulator</h2>
+            <p>A SERP (Search Engine Results Page) Simulator is an essential tool for SEO professionals, marketers, and website owners. It allows you to preview how your website appears in search engine results before publishing changes. This helps you optimize your title tags, meta descriptions, and URLs to maximize click-through rates and improve your search rankings.</p>
+            <p>With our free SERP Simulator, you can test different variations of your page titles and descriptions to see which ones are most compelling to users. The tool provides real-time feedback on character counts, shows how your results will appear on both desktop and mobile devices, and offers suggestions for improvement.</p>
+            <p>Whether you're preparing a new page for launch, optimizing existing content, or conducting competitive research, our SERP Simulator gives you the insights you need to stand out in search results. Start optimizing your listings today to drive more organic traffic to your website!</p>
+        </div>
+        
+        <!-- Bottom Ad -->
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Ad Unit -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -473,139 +591,121 @@
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#"><i class="fas fa-tools"></i> Tools</a>
+                <a href="#"><i class="fas fa-lock"></i> Privacy Policy</a>
+                <a href="#"><i class="fas fa-file-contract"></i> Terms</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+            <p>&copy; 2023 ToolHubCenter. All rights reserved.</p>
+            <p>SERP Simulator - Preview and optimize your search engine results</p>
+        </footer>
     </div>
-
-    <!-- Features Section -->
-    <section class="container">
-        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Key Features</h2>
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">🔍</div>
-                <h3>Realistic Simulation</h3>
-                <p>Simulate search engine results pages with accurate formatting and structure to see how your site appears to users.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>SEO Analysis</h3>
-                <p>Analyze your title tags, meta descriptions, and URL structures to optimize for better click-through rates.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3>Mobile Responsive</h3>
-                <p>Preview how your SERP listings appear on desktop, tablet, and mobile devices for comprehensive analysis.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- How to Use Section -->
-    <section class="how-to-use">
-        <h2>How to Use the SERP Simulator</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Enter Your Keyword or URL</h3>
-                    <p>Type the keyword you want to rank for or your website URL in the search box.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Click "Simulate SERP"</h3>
-                    <p>Press the button to generate a simulated search engine results page for your query.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Analyze the Results</h3>
-                    <p>Review how your website appears in the search results and identify areas for improvement.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Optimize Your Listing</h3>
-                    <p>Adjust your title tags, meta descriptions, and URL structures to improve visibility and click-through rates.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>About ToolHubCenter</h3>
-                    <p>ToolHubCenter provides a comprehensive suite of free online tools for developers, designers, marketers, and content creators.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Popular Tools</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">SERP Simulator</a></li>
-                        <li><a href="#">Keyword Research Tool</a></li>
-                        <li><a href="#">Backlink Analyzer</a></li>
-                        <li><a href="#">Website Speed Test</a></li>
-                        <li><a href="#">Meta Tag Generator</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">SEO Guides</a></li>
-                        <li><a href="#">Tutorials</a></li>
-                        <li><a href="#">API Documentation</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 ToolHubCenter. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchBtn = document.getElementById('search-btn');
-            const searchInput = document.getElementById('search-input');
-            const serpResults = document.getElementById('serp-results');
+        // DOM Elements
+        const serpTitle = document.getElementById('serpTitle');
+        const serpUrl = document.getElementById('serpUrl');
+        const serpDescription = document.getElementById('serpDescription');
+        const serpType = document.getElementById('serpType');
+        const generateBtn = document.getElementById('generateBtn');
+        const serpResultContainer = document.getElementById('serpResultContainer');
+        const titleCount = document.getElementById('titleCount');
+        const urlCount = document.getElementById('urlCount');
+        const descCount = document.getElementById('descCount');
+        
+        // Initialize character counts
+        updateCharacterCounts();
+        
+        // Event Listeners
+        serpTitle.addEventListener('input', updateCharacterCounts);
+        serpUrl.addEventListener('input', updateCharacterCounts);
+        serpDescription.addEventListener('input', updateCharacterCounts);
+        generateBtn.addEventListener('click', generateSerpPreview);
+        
+        // Initialize with first preview
+        generateSerpPreview();
+        
+        // Functions
+        function updateCharacterCounts() {
+            titleCount.textContent = serpTitle.value.length;
+            urlCount.textContent = serpUrl.value.length;
+            descCount.textContent = serpDescription.value.length;
             
-            // Function to simulate SERP
-            function simulateSERP() {
-                const query = searchInput.value.trim();
-                if (query) {
-                    serpResults.style.display = 'block';
-                    
-                    // Scroll to results
-                    serpResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+            // Update color indicators
+            updateCountIndicator(titleCount, serpTitle.value.length, 50, 60);
+            updateCountIndicator(descCount, serpDescription.value.length, 120, 160);
+        }
+        
+        function updateCountIndicator(element, count, minOptimal, maxOptimal) {
+            // Reset classes
+            element.className = '';
+            
+            if (count < minOptimal) {
+                element.classList.add('warning');
+            } else if (count > maxOptimal) {
+                element.classList.add('danger');
+            } else {
+                element.classList.add('optimal');
+            }
+        }
+        
+        function generateSerpPreview() {
+            const title = serpTitle.value || "SERP Simulator - Free Online Search Results Preview Tool";
+            const url = serpUrl.value || "https://www.toolhubcenter.com/serp-simulator";
+            const description = serpDescription.value || "Preview how your website appears in search results with our free SERP Simulator. Test and optimize your title tags, meta descriptions, and URLs for better SEO performance.";
+            const type = serpType.value;
+            
+            let html = '';
+            
+            // Generate regular result
+            if (type === 'featured') {
+                html += `
+                <div class="serp-result serp-featured">
+                    <div class="serp-title">${title}</div>
+                    <div class="serp-url">${url}</div>
+                    <div class="serp-description">${description}</div>
+                    <div style="margin-top: 10px; font-size: 0.9rem; color: #5f6368;">
+                        <i class="fas fa-crown" style="color: #f4b400;"></i> Featured snippet from the web
+                    </div>
+                </div>
+                `;
+            } else {
+                html += `
+                <div class="serp-result">
+                    <div class="serp-title">${title}</div>
+                    <div class="serp-url">${url}</div>
+                    <div class="serp-description">${description}</div>
+                </div>
+                `;
             }
             
-            // Event listeners
-            searchBtn.addEventListener('click', simulateSERP);
+            // Generate additional results for context
+            html += `
+            <div class="serp-result">
+                <div class="serp-title">Competitor Website - SEO Analysis Tools</div>
+                <div class="serp-url">https://www.competitor.com/seo-tools</div>
+                <div class="serp-description">Discover the best SEO tools for keyword research, backlink analysis, and website optimization. Improve your search rankings with our comprehensive toolkit.</div>
+            </div>
             
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    simulateSERP();
-                }
-            });
+            <div class="serp-result">
+                <div class="serp-title">What is SERP? - Search Engine Results Page Explained</div>
+                <div class="serp-url">https://www.seowiki.org/what-is-serp</div>
+                <div class="serp-description">A search engine results page (SERP) is the page displayed by a search engine in response to a query. Learn how to optimize for SERP features and improve visibility.</div>
+            </div>
+            `;
             
-            // Initialize with simulated results
-            setTimeout(() => {
-                serpResults.style.display = 'block';
-            }, 1000);
-        });
+            serpResultContainer.innerHTML = html;
+        }
+        
+        // Initialize character indicators
+        updateCountIndicator(titleCount, serpTitle.value.length, 50, 60);
+        updateCountIndicator(descCount, serpDescription.value.length, 120, 160);
     </script>
 </body>
 </html>
