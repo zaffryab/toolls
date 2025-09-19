@@ -3,476 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online Hash Generator tool to create secure hashes from your text. Supports MD5, SHA-1, SHA-256, SHA-512 algorithms.">
-    <meta name="keywords" content="hash generator, md5 generator, sha1 generator, sha256 generator, password hashing, online hash tool">
-    <title>Hash Generator - Create Secure Hashes | ToolHubCenter</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <meta name="description" content="Free online Hash Generator tool to create MD5, SHA-1, SHA-256, and SHA-512 hashes from your text. Secure and easy to use.">
+    <meta name="keywords" content="hash generator, md5, sha1, sha256, sha512, password hash, checksum">
+    <title>Hash Generator Tool - Create MD5, SHA-1, SHA-256, SHA-512 Hashes | ToolHubCenter</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
     <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #7209b7;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-color: #4a6cf7;
-            --primary-dark: #3a5af5;
-            --secondary-color: #6c757d;
-            --light-bg: #f8f9fa;
-            --dark-bg: #212529;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-color: #dee2e6;
-            --success-color: #28a745;
-            --error-color: #dc3545;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-color);
+            background-color: #f5f7ff;
+            color: var(--dark-color);
             line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: var(--card-bg);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-content {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo img {
-            height: 40px;
-            width: 40px;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        
-        /* Main Content */
-        .main-content {
-            padding: 30px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary-color);
-            font-size: 32px;
-            font-weight: 700;
-        }
-        
-        /* Ad Container */
-        .ad-container {
-            background-color: #f0f0f0;
-            padding: 15px;
-            text-align: center;
-            margin: 20px 0;
-            border-radius: 8px;
-            border: 1px dashed #ccc;
-            min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Tool Card */
-        .tool-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        
-        .card-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 20px;
-            font-weight: 600;
-            font-size: 18px;
-        }
-        
-        .card-body {
-            padding: 20px;
-        }
-        
-        /* Form Elements */
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        textarea, input, select {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 15px;
-            transition: border-color 0.3s;
-        }
-        
-        textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        textarea:focus, input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin: 15px 0;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 15px;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background-color: #5a6268;
-            transform: translateY(-2px);
-        }
-        
-        .btn-success {
-            background-color: var(--success-color);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background-color: #218838;
-            transform: translateY(-2px);
-        }
-        
-        .algorithms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .algorithm-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            border: 2px solid #e9ecef;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .algorithm-option:hover {
-            border-color: var(--primary-color);
-            background: #eef2ff;
-        }
-        
-        .algorithm-option.selected {
-            border-color: var(--primary-color);
-            background: #eef2ff;
-            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
-        }
-        
-        .algorithm-option input {
-            width: auto;
-            margin: 0;
-        }
-        
-        /* Result Section */
-        .result-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 25px;
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .result-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .result-title h3 {
-            color: var(--primary-color);
-            font-size: 18px;
-        }
-        
-        .hash-result {
-            font-family: monospace;
-            word-break: break-all;
-            background: white;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            font-size: 16px;
-            line-height: 1.6;
-            min-height: 80px;
-        }
-        
-        /* How to Use Section */
-        .how-to-use {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .how-to-use h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        
-        .steps {
-            display: grid;
+            flex-direction: column;
             gap: 20px;
         }
         
-        .step {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .step-number {
-            background-color: var(--primary-color);
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-weight: 600;
-            font-size: 18px;
-        }
-        
-        .step-content h3 {
-            margin-bottom: 8px;
-            font-size: 18px;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-bg);
-            color: white;
-            padding: 30px 0;
-            margin-top: 40px;
-        }
-        
-        .footer-content {
+        header {
             text-align: center;
+            margin-bottom: 10px;
         }
         
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: #e9ecef;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
+        header h1 {
             color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2.2rem;
         }
         
-        .copyright {
-            color: #adb5bd;
-            font-size: 14px;
+        header p {
+            color: #666;
+            font-size: 1.1rem;
         }
         
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 26px;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .algorithms-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            transition: var(--transition);
         }
         
-        @media (max-width: 480px) {
-            .logo h1 {
-                font-size: 20px;
-            }
-            
-            .section-title {
-                font-size: 22px;
-            }
-            
-            .card-header {
-                font-size: 16px;
-            }
-            
-            .how-to-use h2 {
-                font-size: 20px;
-            }
-            
-            .algorithms-grid {
-                grid-template-columns: 1fr;
-            }
+        .card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
         
-        /* Utility Classes */
-        .text-center {
-            text-align: center;
+        .card-title {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            font-size: 1.4rem;
         }
         
-        .mb-20 {
+        .input-group {
             margin-bottom: 20px;
         }
         
-        .mt-20 {
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: monospace;
+            font-size: 16px;
+            resize: vertical;
+            transition: var(--transition);
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .hash-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .option-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .option-checkbox input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-copy {
+            background-color: var(--accent-color);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        
+        .result-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
             margin-top: 20px;
         }
         
-        /* Notification */
+        .result-box {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .result-box h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .hash-value {
+            font-family: monospace;
+            font-size: 14px;
+            word-break: break-all;
+            line-height: 1.5;
+            background: #2b2d42;
+            color: #edf2f4;
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+        
+        .ad-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .how-to-use {
+            margin-top: 30px;
+        }
+        
+        .how-to-use h2 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        
+        .how-to-use ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .how-to-use li {
+            margin-bottom: 10px;
+        }
+        
+        .example {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .hash-options {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 15px 25px;
-            border-radius: 6px;
+            padding: 15px 20px;
+            background: var(--success-color);
             color: white;
-            font-weight: 500;
-            box-shadow: var(--shadow);
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 0.3s ease;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
             z-index: 1000;
         }
         
         .notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .notification.success {
-            background-color: var(--success-color);
-        }
-        
-        .notification.error {
-            background-color: var(--error-color);
+            transform: translateX(0);
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234a6cf7' d='M12 0L0 12l12 12 12-12L12 0zm0 2.828l9.172 9.172L12 21.172 2.828 12 12 2.828zM8 11v2h8v-2H8z'/%3E%3C/svg%3E" alt="ToolHubCenter Logo">
-                    <h1>ToolHubCenter</h1>
-                </div>
-                <nav>
-                    <a href="#" class="btn btn-secondary">Home</a>
-                    <a href="#" class="btn btn-secondary">Tools</a>
-                    <a href="#" class="btn btn-secondary">Contact</a>
-                </nav>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Main Content -->
-    <div class="container main-content">
-        <h1 class="section-title">Hash Generator Tool</h1>
+    <div class="container">
+        <header>
+            <h1>Hash Generator Tool</h1>
+            <p>Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from your text</p>
+        </header>
         
         <!-- Top Ad Container -->
         <div class="ad-container">
-            <!-- Google AdSense Ad Unit -->
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Ad Code -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -485,109 +296,77 @@
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
         
-        <!-- Hash Generator Tool Card -->
-        <div class="tool-card">
-            <div class="card-header">
-                Generate Secure Hashes
+        <div class="card">
+            <h2 class="card-title">Input Text</h2>
+            
+            <div class="input-group">
+                <label for="text-input">Enter text to hash:</label>
+                <textarea id="text-input" placeholder="Type or paste your text here">Hello, World!</textarea>
             </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="text-input">Enter text to hash:</label>
-                    <textarea id="text-input" placeholder="Enter the text you want to generate hash for...">Secure password hashing example</textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label>Select Hashing Algorithm:</label>
-                    <div class="algorithms-grid">
-                        <div class="algorithm-option selected" data-algo="md5">
-                            <input type="radio" name="algorithm" id="md5" checked>
-                            <label for="md5">MD5</label>
-                        </div>
-                        <div class="algorithm-option" data-algo="sha1">
-                            <input type="radio" name="algorithm" id="sha1">
-                            <label for="sha1">SHA-1</label>
-                        </div>
-                        <div class="algorithm-option" data-algo="sha256">
-                            <input type="radio" name="algorithm" id="sha256">
-                            <label for="sha256">SHA-256</label>
-                        </div>
-                        <div class="algorithm-option" data-algo="sha512">
-                            <input type="radio" name="algorithm" id="sha512">
-                            <label for="sha512">SHA-512</label>
-                        </div>
-                        <div class="algorithm-option" data-algo="sha384">
-                            <input type="radio" name="algorithm" id="sha384">
-                            <label for="sha384">SHA-384</label>
-                        </div>
-                        <div class="algorithm-option" data-algo="sha3">
-                            <input type="radio" name="algorithm" id="sha3">
-                            <label for="sha3">SHA-3</label>
-                        </div>
+            
+            <div class="input-group">
+                <label>Select hash algorithms:</label>
+                <div class="hash-options">
+                    <div class="option-checkbox">
+                        <input type="checkbox" id="md5" checked>
+                        <label for="md5">MD5</label>
                     </div>
-                </div>
-                
-                <div class="btn-group">
-                    <button id="generate-btn" class="btn btn-primary">
-                        <i>🔑</i> Generate Hash
-                    </button>
-                    <button id="copy-btn" class="btn btn-success">
-                        <i>📋</i> Copy Hash
-                    </button>
-                    <button id="clear-btn" class="btn btn-secondary">
-                        <i>❌</i> Clear
-                    </button>
-                </div>
-                
-                <div class="result-card">
-                    <div class="result-title">
-                        <h3>Generated Hash</h3>
-                        <div id="hash-type">MD5</div>
+                    <div class="option-checkbox">
+                        <input type="checkbox" id="sha1" checked>
+                        <label for="sha1">SHA-1</label>
                     </div>
-                    <div class="hash-result" id="hash-result">
-                        Hash will appear here after generation...
+                    <div class="option-checkbox">
+                        <input type="checkbox" id="sha256" checked>
+                        <label for="sha256">SHA-256</label>
+                    </div>
+                    <div class="option-checkbox">
+                        <input type="checkbox" id="sha512" checked>
+                        <label for="sha512">SHA-512</label>
                     </div>
                 </div>
             </div>
+            
+            <button id="generate-btn" class="btn">Generate Hashes</button>
         </div>
         
-        <!-- How to Use Section -->
-        <div class="how-to-use">
-            <h2>How to Use the Hash Generator Tool</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Enter Your Text</h3>
-                        <p>Type or paste the text you want to generate a hash for in the input field.</p>
-                    </div>
+        <div class="card">
+            <h2 class="card-title">Generated Hashes</h2>
+            <div class="result-container">
+                <div class="result-box" id="md5-result">
+                    <h3>
+                        MD5 Hash
+                        <button class="btn btn-copy" data-clipboard-target="#md5-value">Copy</button>
+                    </h3>
+                    <div class="hash-value" id="md5-value">Waiting for input...</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Select Algorithm</h3>
-                        <p>Choose the hashing algorithm you want to use from the available options (MD5, SHA-1, SHA-256, etc.).</p>
-                    </div>
+                <div class="result-box" id="sha1-result">
+                    <h3>
+                        SHA-1 Hash
+                        <button class="btn btn-copy" data-clipboard-target="#sha1-value">Copy</button>
+                    </h3>
+                    <div class="hash-value" id="sha1-value">Waiting for input...</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Generate Hash</h3>
-                        <p>Click the "Generate Hash" button to create a secure hash of your input text.</p>
-                    </div>
+                <div class="result-box" id="sha256-result">
+                    <h3>
+                        SHA-256 Hash
+                        <button class="btn btn-copy" data-clipboard-target="#sha256-value">Copy</button>
+                    </h3>
+                    <div class="hash-value" id="sha256-value">Waiting for input...</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Copy and Use</h3>
-                        <p>Copy the generated hash to your clipboard and use it in your application or security system.</p>
-                    </div>
+                <div class="result-box" id="sha512-result">
+                    <h3>
+                        SHA-512 Hash
+                        <button class="btn btn-copy" data-clipboard-target="#sha512-value">Copy</button>
+                    </h3>
+                    <div class="hash-value" id="sha512-value">Waiting for input...</div>
                 </div>
             </div>
         </div>
         
         <!-- Bottom Ad Container -->
         <div class="ad-container">
-            <!-- Google AdSense Ad Unit -->
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense Ad Code -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -599,153 +378,282 @@
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
+        
+        <div class="card how-to-use">
+            <h2 class="card-title">How to Use the Hash Generator Tool</h2>
+            <ol>
+                <li>Enter the text you want to hash in the input field</li>
+                <li>Select the hash algorithms you want to generate (MD5, SHA-1, SHA-256, SHA-512)</li>
+                <li>Click the "Generate Hashes" button to create the hashes</li>
+                <li>Copy the generated hash values using the copy buttons next to each hash</li>
+                <li>Use the hashes for your applications, password storage, or data verification</li>
+            </ol>
+            
+            <h3>About Hash Algorithms</h3>
+            <p>Hash functions are algorithms that take an input (or 'message') and return a fixed-size string of bytes. The output is typically a 'digest' that is unique to each unique input. Even a small change in the input will produce a significantly different hash.</p>
+            
+            <div class="example">
+                <strong>Example:</strong><br>
+                Input: "Hello, World!"<br>
+                MD5: 65a8e27d8879283831b664bd8b7f0ad4<br>
+                SHA-1: 0a0a9f2a6772942557ab5355d76af442f8f65e01<br>
+                SHA-256: dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f<br>
+                SHA-512: 374d794a95cdcfd8b35993185fef9ba368f160d8daf432d08ba9f1ed1e5abe6cc69291e0fa2fe0006a52570ef18c19def4e617c33ce52ef0a6e5fbe318cb0387
+            </div>
+            
+            <h3>Common Uses of Hash Functions</h3>
+            <ul>
+                <li>Password storage and verification</li>
+                <li>Data integrity checks</li>
+                <li>Digital signatures</li>
+                <li>File verification</li>
+                <li>Blockchain technology</li>
+            </ul>
+        </div>
     </div>
     
-    <!-- Footer -->
+    <div class="notification" id="copy-notification">Copied to clipboard!</div>
+    
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo text-center">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234a6cf7' d='M12 0L0 12l12 12 12-12L12 0zm0 2.828l9.172 9.172L12 21.172 2.828 12 12 2.828zM8 11v2h8v-2H8z'/%3E%3C/svg%3E" alt="ToolHubCenter Logo">
-                    <h2>ToolHubCenter</h2>
-                </div>
-                <div class="footer-links">
-                    <a href="#">Home</a>
-                    <a href="#">Tools</a>
-                    <a href="#">About Us</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-                <p class="copyright">© 2023 ToolHubCenter. All rights reserved.</p>
-            </div>
-        </div>
+        <p>© 2023 ToolHubCenter - Hash Generator Tool. All rights reserved.</p>
     </footer>
-    
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const textInput = document.getElementById('text-input');
             const generateBtn = document.getElementById('generate-btn');
-            const copyBtn = document.getElementById('copy-btn');
-            const clearBtn = document.getElementById('clear-btn');
-            const hashResult = document.getElementById('hash-result');
-            const hashType = document.getElementById('hash-type');
-            const notification = document.getElementById('notification');
-            const algorithmOptions = document.querySelectorAll('.algorithm-option');
+            const textInput = document.getElementById('text-input');
+            const copyNotification = document.getElementById('copy-notification');
             
-            let currentAlgorithm = 'md5';
+            // Hash algorithm checkboxes
+            const md5Checkbox = document.getElementById('md5');
+            const sha1Checkbox = document.getElementById('sha1');
+            const sha256Checkbox = document.getElementById('sha256');
+            const sha512Checkbox = document.getElementById('sha512');
             
-            // Algorithm selection
-            algorithmOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove selected class from all options
-                    algorithmOptions.forEach(opt => opt.classList.remove('selected'));
+            // Hash result elements
+            const md5Value = document.getElementById('md5-value');
+            const sha1Value = document.getElementById('sha1-value');
+            const sha256Value = document.getElementById('sha256-value');
+            const sha512Value = document.getElementById('sha512-value');
+            
+            // Hash result containers (to show/hide)
+            const md5Result = document.getElementById('md5-result');
+            const sha1Result = document.getElementById('sha1-result');
+            const sha256Result = document.getElementById('sha256-result');
+            const sha512Result = document.getElementById('sha512-result');
+            
+            // Generate hashes on button click
+            generateBtn.addEventListener('click', function() {
+                const text = textInput.value;
+                
+                if (!text) {
+                    alert('Please enter some text to hash');
+                    return;
+                }
+                
+                // Show/hide result boxes based on selected algorithms
+                md5Result.style.display = md5Checkbox.checked ? 'block' : 'none';
+                sha1Result.style.display = sha1Checkbox.checked ? 'block' : 'none';
+                sha256Result.style.display = sha256Checkbox.checked ? 'block' : 'none';
+                sha512Result.style.display = sha512Checkbox.checked ? 'block' : 'none';
+                
+                // Generate hashes
+                if (md5Checkbox.checked) {
+                    md5Value.textContent = generateMD5(text);
+                }
+                
+                if (sha1Checkbox.checked) {
+                    generateSHA1(text).then(hash => {
+                        sha1Value.textContent = hash;
+                    });
+                }
+                
+                if (sha256Checkbox.checked) {
+                    generateSHA256(text).then(hash => {
+                        sha256Value.textContent = hash;
+                    });
+                }
+                
+                if (sha512Checkbox.checked) {
+                    generateSHA512(text).then(hash => {
+                        sha512Value.textContent = hash;
+                    });
+                }
+            });
+            
+            // Copy to clipboard functionality
+            document.querySelectorAll('.btn-copy').forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-clipboard-target');
+                    const textToCopy = document.querySelector(targetId).textContent;
                     
-                    // Add selected class to clicked option
-                    this.classList.add('selected');
-                    
-                    // Update current algorithm
-                    currentAlgorithm = this.getAttribute('data-algo');
-                    
-                    // Update hash type display
-                    hashType.textContent = currentAlgorithm.toUpperCase();
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        // Show notification
+                        copyNotification.classList.add('show');
+                        setTimeout(() => {
+                            copyNotification.classList.remove('show');
+                        }, 2000);
+                    });
                 });
             });
             
-            // Generate hash function
-            function generateHash(text, algorithm) {
-                // This is a simplified version - in a real implementation, 
-                // you would use the Web Crypto API or a library like CryptoJS
+            // MD5 hash function
+            function generateMD5(input) {
+                // Simple MD5 implementation (for demonstration purposes)
+                // Note: This is not a cryptographically secure implementation
+                function md5(s) {
+                    function L(k, d) { return (k << d) | (k >>> (32 - d)); }
+                    function K(G, k) {
+                        var I = (G & 65535) + (k & 65535);
+                        return (G >> 16) + (k >> 16) + (I >> 16) << 16 | I & 65535;
+                    }
+                    function r(N, c, b, a, w, k, I) {
+                        return L(K(K(c, N), K(a, I)), k) + w;
+                    }
+                    function e(c, b, a, w, N, k, I) {
+                        return r(b & a | ~b & w, c, b, N, k, I);
+                    }
+                    function n(c, b, a, w, N, k, I) {
+                        return r(b & w | a & ~w, c, b, N, k, I);
+                    }
+                    function t(c, b, a, w, N, k, I) {
+                        return r(b ^ a ^ w, c, b, N, k, I);
+                    }
+                    function i(c, b, a, w, N, k, I) {
+                        return r(a ^ (b | ~w), c, b, N, k, I);
+                    }
+                    
+                    var x = [], j = unescape(encodeURIComponent(s)), u = j.length;
+                    for (var V = 0; V < u; V++) {
+                        x[V >> 2] |= (j.charCodeAt(V) & 255) << (V % 4 << 3);
+                    }
+                    var l = 8 * u;
+                    x[l >> 2] |= 128 << (l % 4 << 3);
+                    x[14 + (l + 64 >>> 9 << 4)] = l;
+                    
+                    var C = 1732584193, 
+                        F = -271733879, 
+                        D = -1732584194, 
+                        O = 271733878;
+                    
+                    for (var V = 0; V < x.length; V += 16) {
+                        var g = C, 
+                            f = F, 
+                            M = D, 
+                            H = O;
+                        
+                        C = e(C, F, D, O, x[V], 7, -680876936);
+                        O = e(O, C, F, D, x[V + 1], 12, -389564586);
+                        D = e(D, O, C, F, x[V + 2], 17, 606105819);
+                        F = e(F, D, O, C, x[V + 3], 22, -1044525330);
+                        C = e(C, F, D, O, x[V + 4], 7, -176418897);
+                        O = e(O, C, F, D, x[V + 5], 12, 1200080426);
+                        D = e(D, O, C, F, x[V + 6], 17, -1473231341);
+                        F = e(F, D, O, C, x[V + 7], 22, -45705983);
+                        C = e(C, F, D, O, x[V + 8], 7, 1770035416);
+                        O = e(O, C, F, D, x[V + 9], 12, -1958414417);
+                        D = e(D, O, C, F, x[V + 10], 17, -42063);
+                        F = e(F, D, O, C, x[V + 11], 22, -1990404162);
+                        C = e(C, F, D, O, x[V + 12], 7, 1804603682);
+                        O = e(O, C, F, D, x[V + 13], 12, -40341101);
+                        D = e(D, O, C, F, x[V + 14], 17, -1502002290);
+                        F = e(F, D, O, C, x[V + 15], 22, 1236535329);
+                        
+                        C = n(C, F, D, O, x[V + 1], 5, -165796510);
+                        O = n(O, C, F, D, x[V + 6], 9, -1069501632);
+                        D = n(D, O, C, F, x[V + 11], 14, 643717713);
+                        F = n(F, D, O, C, x[V], 20, -373897302);
+                        C = n(C, F, D, O, x[V + 5], 5, -701558691);
+                        O = n(O, C, F, D, x[V + 10], 9, 38016083);
+                        D = n(D, O, C, F, x[V + 15], 14, -660478335);
+                        F = n(F, D, O, C, x[V + 4], 20, -405537848);
+                        C = n(C, F, D, O, x[V + 9], 5, 568446438);
+                        O = n(O, C, F, D, x[V + 14], 9, -1019803690);
+                        D = n(D, O, C, F, x[V + 3], 14, -187363961);
+                        F = n(F, D, O, C, x[V + 8], 20, 1163531501);
+                        C = n(C, F, D, O, x[V + 13], 5, -1444681467);
+                        O = n(O, C, F, D, x[V + 2], 9, -51403784);
+                        D = n(D, O, C, F, x[V + 7], 14, 1735328473);
+                        F = n(F, D, O, C, x[V + 12], 20, -1926607734);
+                        
+                        C = t(C, F, D, O, x[V + 5], 4, -378558);
+                        O = t(O, C, F, D, x[V + 8], 11, -2022574463);
+                        D = t(D, O, C, F, x[V + 11], 16, 1839030562);
+                        F = t(F, D, O, C, x[V + 14], 23, -35309556);
+                        C = t(C, F, D, O, x[V + 1], 4, -1530992060);
+                        O = t(O, C, F, D, x[V + 4], 11, 1272893353);
+                        D = t(D, O, C, F, x[V + 7], 16, -155497632);
+                        F = t(F, D, O, C, x[V + 10], 23, -1094730640);
+                        C = t(C, F, D, O, x[V + 13], 4, 681279174);
+                        O = t(O, C, F, D, x[V], 11, -358537222);
+                        D = t(D, O, C, F, x[V + 3], 16, -722521979);
+                        F = t(F, D, O, C, x[V + 6], 23, 76029189);
+                        C = t(C, F, D, O, x[V + 9], 4, -640364487);
+                        O = t(O, C, F, D, x[V + 12], 11, -421815835);
+                        D = t(D, O, C, F, x[V + 15], 16, 530742520);
+                        F = t(F, D, O, C, x[V + 2], 23, -995338651);
+                        
+                        C = i(C, F, D, O, x[V], 6, -198630844);
+                        O = i(O, C, F, D, x[V + 7], 10, 1126891415);
+                        D = i(D, O, C, F, x[V + 14], 15, -1416354905);
+                        F = i(F, D, O, C, x[V + 5], 21, -57434055);
+                        C = i(C, F, D, O, x[V + 12], 6, 1700485571);
+                        O = i(O, C, F, D, x[V + 3], 10, -1894986606);
+                        D = i(D, O, C, F, x[V + 10], 15, -1051523);
+                        F = i(F, D, O, C, x[V + 1], 21, -2054922799);
+                        C = i(C, F, D, O, x[V + 8], 6, 1873313359);
+                        O = i(O, C, F, D, x[V + 15], 10, -30611744);
+                        D = i(D, O, C, F, x[V + 6], 15, -1560198380);
+                        F = i(F, D, O, C, x[V + 13], 21, 1309151649);
+                        C = i(C, F, D, O, x[V + 4], 6, -145523070);
+                        O = i(O, C, F, D, x[V + 11], 10, -1120210379);
+                        D = i(D, O, C, F, x[V + 2], 15, 718787259);
+                        F = i(F, D, O, C, x[V + 9], 21, -343485551);
+                        
+                        C = K(C, g);
+                        F = K(F, f);
+                        D = K(D, M);
+                        O = K(O, H);
+                    }
+                    
+                    return [C, F, D, O].map(function (X) {
+                        var Y = (X >>> 0).toString(16);
+                        return "00000000".substr(0, 8 - Y.length) + Y;
+                    }).join("");
+                }
                 
-                // For demonstration purposes, we'll simulate hash generation
-                const algorithms = {
-                    md5: 'MD5',
-                    sha1: 'SHA-1',
-                    sha256: 'SHA-256',
-                    sha512: 'SHA-512',
-                    sha384: 'SHA-384',
-                    sha3: 'SHA-3'
-                };
-                
-                // Simulate hash generation (in a real app, use crypto.subtle.digest)
-                const fakeHash = Array.from({length: 64}, () => 
-                    Math.floor(Math.random() * 16).toString(16)
-                ).join('');
-                
-                return {
-                    algorithm: algorithms[algorithm],
-                    hash: fakeHash
-                };
+                return md5(input);
             }
             
-            // Show notification
-            function showNotification(message, isSuccess) {
-                notification.textContent = message;
-                notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
-                notification.classList.add('show');
-                
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000);
+            // SHA-1 hash function
+            async function generateSHA1(input) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-1', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
             }
             
-            // Event listeners
-            generateBtn.addEventListener('click', function() {
-                const text = textInput.value.trim();
-                
-                if (!text) {
-                    showNotification('Please enter some text to hash!', false);
-                    return;
-                }
-                
-                try {
-                    const result = generateHash(text, currentAlgorithm);
-                    hashResult.textContent = result.hash;
-                    hashType.textContent = result.algorithm;
-                    showNotification('Hash generated successfully!', true);
-                } catch (error) {
-                    showNotification('Error generating hash. Please try again.', false);
-                    console.error(error);
-                }
-            });
+            // SHA-256 hash function
+            async function generateSHA256(input) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
             
-            copyBtn.addEventListener('click', function() {
-                if (!hashResult.textContent || hashResult.textContent === 'Hash will appear here after generation...') {
-                    showNotification('No hash to copy! Generate a hash first.', false);
-                    return;
-                }
-                
-                // Create a temporary textarea to copy from
-                const tempTextArea = document.createElement('textarea');
-                tempTextArea.value = hashResult.textContent;
-                document.body.appendChild(tempTextArea);
-                tempTextArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(tempTextArea);
-                
-                showNotification('Hash copied to clipboard!', true);
-            });
+            // SHA-512 hash function
+            async function generateSHA512(input) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-512', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
             
-            clearBtn.addEventListener('click', function() {
-                textInput.value = '';
-                hashResult.textContent = 'Hash will appear here after generation...';
-                hashType.textContent = 'MD5';
-                
-                // Reset algorithm selection
-                algorithmOptions.forEach(opt => opt.classList.remove('selected'));
-                document.querySelector('.algorithm-option[data-algo="md5"]').classList.add('selected');
-                currentAlgorithm = 'md5';
-                
-                showNotification('Fields cleared!', true);
-            });
-            
-            // Generate a hash on page load for demonstration
-            setTimeout(() => {
-                generateBtn.click();
-            }, 500);
+            // Generate hashes on page load with example text
+            generateBtn.click();
         });
     </script>
 </body>
