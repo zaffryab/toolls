@@ -3,450 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online Color Converter tool - convert between HEX, RGB, HSL, HSV, and CMYK color formats instantly">
-    <meta name="keywords" content="color converter, hex to rgb, rgb to hex, color picker, color conversion, web design tool">
-    <title>Color Converter | ToolHubCenter - Convert Between Color Formats</title>
+    <meta name="description" content="Free online Color Converter tool to convert between HEX, RGB, HSL, and other color formats. Easily translate colors for your web design projects.">
+    <meta name="keywords" content="color converter, hex to rgb, rgb to hex, hsl, color tool, web design tool">
+    <title>Color Converter Tool - Convert HEX, RGB, HSL | ToolHubCenter</title>
     <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4a6cf7;
-            --secondary-color: #6a75ff;
-            --dark-bg: #1d2144;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --light-text: #666666;
-            --border-color: #e0e0e0;
-            --success-color: #10b981;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --color-preview-size: 120px;
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #7209b7;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #eef2ff 100%);
-            color: var(--text-color);
+            background-color: #f5f7ff;
+            color: var(--dark-color);
             line-height: 1.6;
-            min-height: 100vh;
-            padding-bottom: 40px;
-        }
-
-        .container {
-            width: 100%;
+            padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
         }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #0f172a 100%);
-            color: white;
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            color: var(--primary-color);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        nav a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover, nav a.active {
-            color: white;
-        }
-
-        /* Tool Container */
-        .tool-container {
+        
+        .container {
             display: flex;
             flex-direction: column;
-            gap: 25px;
-            margin: 30px 0;
+            gap: 20px;
         }
-
-        /* Card Styling */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 18px 25px;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .card-body {
-            padding: 25px;
-        }
-
-        /* Color Preview */
-        .color-preview-section {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: #f9faff;
-            border-radius: 12px;
-        }
-
-        .color-display {
-            width: var(--color-preview-size);
-            height: var(--color-preview-size);
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .color-display:hover {
-            transform: scale(1.05);
-        }
-
-        .color-info {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .color-hex {
-            font-size: 1.8rem;
-            font-weight: 700;
+        
+        header {
+            text-align: center;
             margin-bottom: 10px;
-            font-family: monospace;
         }
-
-        .color-name {
-            font-size: 1.2rem;
-            color: var(--light-text);
+        
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+        
+        header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            font-size: 1.4rem;
+        }
+        
+        .input-group {
             margin-bottom: 20px;
         }
-
-        /* Form Elements */
-        .conversion-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .color-input-group {
-            background: #f8f9ff;
-            padding: 20px;
-            border-radius: 10px;
-            transition: all 0.3s;
-            border: 1px solid #e6e9ff;
-        }
-
-        .color-input-group:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.1);
-        }
-
-        .color-input-group h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
+        
+        label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text-color);
+            font-weight: 600;
+            color: #555;
         }
-
-        input, select {
+        
+        input[type="text"], select {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            background-color: white;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
         }
-
-        input:focus {
+        
+        input[type="text"]:focus, select:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
-
-        /* How to Use Section */
-        .how-to-use {
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .color-display {
+            height: 120px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .result-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
             margin-top: 20px;
         }
-
-        .step {
-            display: flex;
-            margin-bottom: 20px;
-            align-items: flex-start;
+        
+        @media (min-width: 768px) {
+            .result-container {
+                grid-template-columns: 1fr 1fr;
+            }
         }
-
-        .step-number {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-            font-weight: 600;
+        
+        .result-box {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            border-left: 4px solid var(--primary-color);
         }
-
-        .step-content h3 {
-            margin-bottom: 8px;
-            color: var(--primary-color);
-        }
-
-        /* Ad Containers */
-        .ad-container {
-            background-color: #f5f7ff;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            margin: 25px 0;
-            border: 1px dashed var(--border-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .ad-label {
-            background-color: #f59e0b;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            position: absolute;
-            top: -10px;
-            left: 15px;
-        }
-
-        .ad-placeholder {
-            width: 100%;
-            height: 90px;
-            background: repeating-linear-gradient(
-                45deg,
-                #f0f0f0,
-                #f0f0f0 10px,
-                #e0e0e0 10px,
-                #e0e0e0 20px
-            );
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #999;
-            font-size: 0.9rem;
-        }
-
-        .ad-placeholder i {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            color: var(--light-text);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark-bg);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 40px 0 20px;
-            margin-top: 40px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .footer-column h3 {
-            color: white;
-            margin-bottom: 20px;
+        
+        .result-box h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
             font-size: 1.2rem;
         }
-
-        .footer-column ul {
-            list-style: none;
+        
+        .color-values {
+            font-family: monospace;
+            font-size: 16px;
+            line-height: 1.8;
         }
-
-        .footer-column ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-column a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-column a:hover {
-            color: white;
-        }
-
-        .copyright {
+        
+        .ad-container {
             text-align: center;
-            padding-top: 25px;
-            margin-top: 25px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
+            margin: 20px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
         }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .how-to-use {
+            margin-top: 30px;
+        }
+        
+        .how-to-use h2 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        
+        .how-to-use ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .how-to-use li {
+            margin-bottom: 10px;
+        }
+        
+        .example {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
             }
             
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
+            header h1 {
+                font-size: 1.8rem;
             }
-        }
-
-        @media (max-width: 768px) {
-            .card-body {
+            
+            .card {
                 padding: 20px;
             }
-            
-            .color-preview-section {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .color-info {
-                width: 100%;
-            }
         }
-
-        @media (max-width: 576px) {
-            .conversion-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            :root {
-                --color-preview-size: 100px;
-            }
-        }
-
-        /* Color Palette */
-        .color-palette {
+        
+        .format-options {
             display: flex;
             gap: 10px;
-            margin: 20px 0;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
-
-        .palette-color {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+        
+        .format-btn {
+            padding: 8px 15px;
+            background: #e9ecef;
+            border: none;
+            border-radius: var(--border-radius);
             cursor: pointer;
-            transition: transform 0.2s;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            transition: var(--transition);
         }
-
-        .palette-color:hover {
-            transform: scale(1.1);
+        
+        .format-btn.active {
+            background: var(--primary-color);
+            color: white;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-cubes"></i>
-                    <span>ToolHubCenter</span>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><a href="#" class="active">Color Converter</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
+    <div class="container">
+        <header>
+            <h1>Color Converter Tool</h1>
+            <p>Convert between HEX, RGB, HSL, and other color formats</p>
+        </header>
+        
         <!-- Top Ad Container -->
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
-            <div class="ad-placeholder">
-                <i class="fas fa-ad"></i>
-                <div>Google AdSense Ad Unit (728x90)</div>
-            </div>
-            <!-- Google AdSense code -->
+            <!-- AdSense Ad Code -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -458,175 +278,60 @@
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
-
-        <!-- Tool Title -->
-        <h1 style="text-align: center; margin: 20px 0 30px; color: var(--dark-bg);">
-            <i class="fas fa-palette"></i> Color Converter Tool
-        </h1>
-
-        <!-- Tool Container -->
-        <div class="tool-container">
-            <!-- Color Converter Card -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-exchange-alt"></i> Convert Between Color Formats
-                </div>
-                <div class="card-body">
-                    <div class="color-preview-section">
-                        <div class="color-display" id="colorDisplay" style="background-color: #4a6cf7;"></div>
-                        <div class="color-info">
-                            <div class="color-hex" id="colorHex">#4A6CF7</div>
-                            <div class="color-name" id="colorName">Royal Blue</div>
-                            
-                            <div class="color-palette">
-                                <div class="palette-color" style="background-color: #4a6cf7;" onclick="setColor('#4a6cf7')"></div>
-                                <div class="palette-color" style="background-color: #10b981;" onclick="setColor('#10b981')"></div>
-                                <div class="palette-color" style="background-color: #f59e0b;" onclick="setColor('#f59e0b')"></div>
-                                <div class="palette-color" style="background-color: #ef4444;" onclick="setColor('#ef4444')"></div>
-                                <div class="palette-color" style="background-color: #8b5cf6;" onclick="setColor('#8b5cf6')"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="conversion-grid">
-                        <!-- HEX Input -->
-                        <div class="color-input-group">
-                            <h3><i class="fas fa-hashtag"></i> HEX</h3>
-                            <div class="form-group">
-                                <label for="hexInput">HEX Color Code</label>
-                                <input type="text" id="hexInput" value="#4A6CF7" maxlength="7">
-                            </div>
-                        </div>
-                        
-                        <!-- RGB Input -->
-                        <div class="color-input-group">
-                            <h3><i class="fas fa-barcode"></i> RGB</h3>
-                            <div class="form-group">
-                                <label for="rInput">Red (0-255)</label>
-                                <input type="number" id="rInput" min="0" max="255" value="74">
-                            </div>
-                            <div class="form-group">
-                                <label for="gInput">Green (0-255)</label>
-                                <input type="number" id="gInput" min="0" max="255" value="108">
-                            </div>
-                            <div class="form-group">
-                                <label for="bInput">Blue (0-255)</label>
-                                <input type="number" id="bInput" min="0" max="255" value="247">
-                            </div>
-                        </div>
-                        
-                        <!-- HSL Input -->
-                        <div class="color-input-group">
-                            <h3><i class="fas fa-sliders-h"></i> HSL</h3>
-                            <div class="form-group">
-                                <label for="hInput">Hue (0-360)</label>
-                                <input type="number" id="hInput" min="0" max="360" value="229">
-                            </div>
-                            <div class="form-group">
-                                <label for="sInput">Saturation (0-100)</label>
-                                <input type="number" id="sInput" min="0" max="100" value="90">
-                            </div>
-                            <div class="form-group">
-                                <label for="lInput">Lightness (0-100)</label>
-                                <input type="number" id="lInput" min="0" max="100" value="63">
-                            </div>
-                        </div>
-                        
-                        <!-- HSV Input -->
-                        <div class="color-input-group">
-                            <h3><i class="fas fa-sliders-h"></i> HSV</h3>
-                            <div class="form-group">
-                                <label for="hvInput">Hue (0-360)</label>
-                                <input type="number" id="hvInput" min="0" max="360" value="229">
-                            </div>
-                            <div class="form-group">
-                                <label for="svInput">Saturation (0-100)</label>
-                                <input type="number" id="svInput" min="0" max="100" value="70">
-                            </div>
-                            <div class="form-group">
-                                <label for="vInput">Value (0-100)</label>
-                                <input type="number" id="vInput" min="0" max="100" value="97">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        
+        <div class="card">
+            <h2 class="card-title">Color Input</h2>
+            
+            <div class="input-group">
+                <label for="color-input">Enter Color:</label>
+                <input type="text" id="color-input" placeholder="Enter color (e.g., #4361ee, rgb(67, 97, 238), hsl(230, 83%, 60%))">
             </div>
             
-            <!-- How to Use Section -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-question-circle"></i> How to Use This Color Converter
+            <div class="format-options">
+                <button class="format-btn active" data-format="hex">HEX</button>
+                <button class="format-btn" data-format="rgb">RGB</button>
+                <button class="format-btn" data-format="hsl">HSL</button>
+                <button class="format-btn" data-format="cmyk">CMYK</button>
+                <button class="format-btn" data-format="hsv">HSV</button>
+            </div>
+            
+            <button id="convert-btn" class="btn">Convert Color</button>
+            
+            <div class="color-display" id="color-display">
+                Color Preview
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">Conversion Results</h2>
+            <div class="result-container">
+                <div class="result-box">
+                    <h3>HEX</h3>
+                    <div class="color-values" id="hex-result">#4361ee</div>
                 </div>
-                <div class="card-body">
-                    <div class="how-to-use">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h3>Choose a Color</h3>
-                                <p>Select a color from the palette or enter a HEX code in the HEX field. You can also use the color display to pick a color visually.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h3>Convert Between Formats</h3>
-                                <p>Enter values in any color format field (HEX, RGB, HSL, or HSV). The converter will automatically update all other formats to match your color.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h3>Copy Color Values</h3>
-                                <p>Click on any color value to copy it to your clipboard. Use these values in your CSS, design software, or other applications.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <h3>Explore Color Variations</h3>
-                                <p>Adjust the HSL or HSV values to create lighter, darker, or more saturated versions of your color.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 25px; background-color: #f0f7ff; padding: 20px; border-radius: 8px;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 15px;">
-                            <i class="fas fa-graduation-cap"></i> Color Format Guide
-                        </h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">
-                            <div>
-                                <h4>HEX</h4>
-                                <p>Hexadecimal color codes start with # followed by 6 characters (0-9, A-F) representing red, green, and blue values.</p>
-                            </div>
-                            <div>
-                                <h4>RGB</h4>
-                                <p>Red, Green, Blue values each ranging from 0 to 255. Example: rgb(74, 108, 247)</p>
-                            </div>
-                            <div>
-                                <h4>HSL</h4>
-                                <p>Hue (0-360), Saturation (0-100%), Lightness (0-100%). A more intuitive way to describe colors.</p>
-                            </div>
-                            <div>
-                                <h4>HSV</h4>
-                                <p>Hue (0-360), Saturation (0-100%), Value (0-100%). Similar to HSL but with different calculations.</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="result-box">
+                    <h3>RGB</h3>
+                    <div class="color-values" id="rgb-result">rgb(67, 97, 238)</div>
+                </div>
+                <div class="result-box">
+                    <h3>HSL</h3>
+                    <div class="color-values" id="hsl-result">hsl(230, 83%, 60%)</div>
+                </div>
+                <div class="result-box">
+                    <h3>CMYK</h3>
+                    <div class="color-values" id="cmyk-result">cmyk(72%, 59%, 0%, 7%)</div>
+                </div>
+                <div class="result-box">
+                    <h3>HSV</h3>
+                    <div class="color-values" id="hsv-result">hsv(230, 72%, 93%)</div>
                 </div>
             </div>
         </div>
-
+        
         <!-- Bottom Ad Container -->
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
-            <div class="ad-placeholder">
-                <i class="fas fa-ad"></i>
-                <div>Google AdSense Ad Unit (728x90)</div>
-            </div>
-            <!-- Google AdSense code -->
+            <!-- AdSense Ad Code -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -638,227 +343,134 @@
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>ToolHubCenter</h3>
-                    <p>Your one-stop destination for powerful, easy-to-use online tools for developers, designers, and content creators.</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Popular Tools</h3>
-                    <ul>
-                        <li><a href="#">Regex Tester</a></li>
-                        <li><a href="#">Base64 Encoder</a></li>
-                        <li><a href="#">JSON Formatter</a></li>
-                        <li><a href="#">Image Compressor</a></li>
-                        <li><a href="#">Password Generator</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Tutorials</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">API Access</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Connect</h3>
-                    <ul>
-                        <li><a href="#">GitHub</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
+        
+        <div class="card how-to-use">
+            <h2 class="card-title">How to Use the Color Converter Tool</h2>
+            <ol>
+                <li>Enter your color value in the input field (HEX, RGB, HSL formats are supported)</li>
+                <li>Click the "Convert Color" button to process the color</li>
+                <li>View the converted color values in different formats</li>
+                <li>See the color preview in the display box</li>
+                <li>Click on any format button to emphasize that specific color format</li>
+                <li>Copy the converted values for use in your projects</li>
+            </ol>
+            
+            <h3>Examples of Supported Formats</h3>
+            <div class="example">
+                HEX: #4361ee, #09f, 4361ee<br>
+                RGB: rgb(67, 97, 238), rgb(67 97 238)<br>
+                HSL: hsl(230, 83%, 60%), hsl(230 83% 60%)<br>
+                Named Colors: red, blue, green, etc.
             </div>
             
-            <div class="copyright">
-                &copy; 2023 ToolHubCenter. All rights reserved.
-            </div>
+            <h3>About Color Formats</h3>
+            <p>Different color formats are used in various contexts. HEX is common in web design, RGB is used for screen display, HSL is more intuitive for color adjustments, and CMYK is used for print materials.</p>
         </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 ToolHubCenter - Color Converter Tool. All rights reserved.</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // DOM elements
-            const colorDisplay = document.getElementById('colorDisplay');
-            const colorHex = document.getElementById('colorHex');
-            const hexInput = document.getElementById('hexInput');
-            const rInput = document.getElementById('rInput');
-            const gInput = document.getElementById('gInput');
-            const bInput = document.getElementById('bInput');
-            const hInput = document.getElementById('hInput');
-            const sInput = document.getElementById('sInput');
-            const lInput = document.getElementById('lInput');
-            const hvInput = document.getElementById('hvInput');
-            const svInput = document.getElementById('svInput');
-            const vInput = document.getElementById('vInput');
+            const convertBtn = document.getElementById('convert-btn');
+            const colorInput = document.getElementById('color-input');
+            const colorDisplay = document.getElementById('color-display');
+            const formatButtons = document.querySelectorAll('.format-btn');
             
-            // Color names for display
-            const colorNames = {
-                '#4a6cf7': 'Royal Blue',
-                '#10b981': 'Emerald Green',
-                '#f59e0b': 'Amber',
-                '#ef4444': 'Crimson Red',
-                '#8b5cf6': 'Lavender',
-                '#ffffff': 'Pure White',
-                '#000000': 'Pure Black',
-                '#f8f9fa': 'Light Gray'
-            };
+            // Result elements
+            const hexResult = document.getElementById('hex-result');
+            const rgbResult = document.getElementById('rgb-result');
+            const hslResult = document.getElementById('hsl-result');
+            const cmykResult = document.getElementById('cmyk-result');
+            const hsvResult = document.getElementById('hsv-result');
             
-            // Set initial color
-            updateColor('#4a6cf7');
+            // Set default color
+            let currentColor = '#4361ee';
+            updateColorDisplay(currentColor);
             
-            // Event listeners
-            hexInput.addEventListener('input', function() {
-                const hex = this.value;
-                if (isValidHex(hex)) {
-                    updateColor(hex);
+            // Format buttons event listeners
+            formatButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    formatButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Convert button event listener
+            convertBtn.addEventListener('click', function() {
+                const colorValue = colorInput.value.trim();
+                if (colorValue) {
+                    if (isValidColor(colorValue)) {
+                        currentColor = colorValue;
+                        updateColorDisplay(colorValue);
+                    } else {
+                        alert('Please enter a valid color value');
+                    }
                 }
             });
             
-            [rInput, gInput, bInput].forEach(input => {
-                input.addEventListener('input', updateFromRGB);
-            });
-            
-            [hInput, sInput, lInput].forEach(input => {
-                input.addEventListener('input', updateFromHSL);
-            });
-            
-            [hvInput, svInput, vInput].forEach(input => {
-                input.addEventListener('input', updateFromHSV);
-            });
-            
-            // Copy HEX value on click
-            colorHex.addEventListener('click', function() {
-                copyToClipboard(colorHex.textContent);
-                showCopiedMessage(colorHex);
-            });
-            
-            // Set color from palette
-            window.setColor = function(hex) {
-                hexInput.value = hex;
-                updateColor(hex);
-            };
-            
-            // Update all color values
-            function updateColor(hex) {
-                // Update HEX display
-                const formattedHex = hex.toUpperCase();
-                colorHex.textContent = formattedHex;
-                hexInput.value = formattedHex;
-                
-                // Update color display
-                colorDisplay.style.backgroundColor = hex;
-                
-                // Update color name
-                const name = colorNames[hex.toLowerCase()] || getColorName(hex);
-                document.getElementById('colorName').textContent = name;
-                
-                // Update RGB
-                const rgb = hexToRgb(hex);
-                rInput.value = rgb.r;
-                gInput.value = rgb.g;
-                bInput.value = rgb.b;
-                
-                // Update HSL
-                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-                hInput.value = Math.round(hsl.h);
-                sInput.value = Math.round(hsl.s);
-                lInput.value = Math.round(hsl.l);
-                
-                // Update HSV
-                const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
-                hvInput.value = Math.round(hsv.h);
-                svInput.value = Math.round(hsv.s);
-                vInput.value = Math.round(hsv.v);
+            // Check if a color value is valid
+            function isValidColor(color) {
+                const s = new Option().style;
+                s.color = color;
+                return s.color !== '';
             }
             
-            // Update from RGB inputs
-            function updateFromRGB() {
-                const r = parseInt(rInput.value) || 0;
-                const g = parseInt(gInput.value) || 0;
-                const b = parseInt(bInput.value) || 0;
+            // Update the color display and results
+            function updateColorDisplay(color) {
+                // Set the background color
+                colorDisplay.style.backgroundColor = color;
                 
-                // Clamp values
-                rInput.value = clamp(r, 0, 255);
-                gInput.value = clamp(g, 0, 255);
-                bInput.value = clamp(b, 0, 255);
+                // Set text color based on brightness
+                const rgb = hexToRgb(getHexColor(color));
+                const brightness = Math.round(((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000);
+                colorDisplay.style.color = brightness > 125 ? 'black' : 'white';
+                colorDisplay.textContent = color;
                 
-                // Convert to HEX
-                const hex = rgbToHex(r, g, b);
-                updateColor(hex);
+                // Update result values
+                const hex = getHexColor(color);
+                hexResult.textContent = hex;
+                
+                const rgbVal = hexToRgb(hex);
+                rgbResult.textContent = `rgb(${rgbVal.r}, ${rgbVal.g}, ${rgbVal.b})`;
+                
+                const hslVal = rgbToHsl(rgbVal.r, rgbVal.g, rgbVal.b);
+                hslResult.textContent = `hsl(${Math.round(hslVal.h)}, ${Math.round(hslVal.s)}%, ${Math.round(hslVal.l)}%)`;
+                
+                const cmykVal = rgbToCmyk(rgbVal.r, rgbVal.g, rgbVal.b);
+                cmykResult.textContent = `cmyk(${Math.round(cmykVal.c)}%, ${Math.round(cmykVal.m)}%, ${Math.round(cmykVal.y)}%, ${Math.round(cmykVal.k)}%)`;
+                
+                const hsvVal = rgbToHsv(rgbVal.r, rgbVal.g, rgbVal.b);
+                hsvResult.textContent = `hsv(${Math.round(hsvVal.h)}, ${Math.round(hsvVal.s)}%, ${Math.round(hsvVal.v)}%)`;
             }
             
-            // Update from HSL inputs
-            function updateFromHSL() {
-                const h = parseInt(hInput.value) || 0;
-                const s = parseInt(sInput.value) || 0;
-                const l = parseInt(lInput.value) || 0;
-                
-                // Clamp values
-                hInput.value = clamp(h, 0, 360);
-                sInput.value = clamp(s, 0, 100);
-                lInput.value = clamp(l, 0, 100);
-                
-                // Convert to RGB then to HEX
-                const rgb = hslToRgb(h, s, l);
-                const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-                updateColor(hex);
+            // Get hex representation of any color
+            function getHexColor(color) {
+                const ctx = document.createElement('canvas').getContext('2d');
+                ctx.fillStyle = color;
+                return ctx.fillStyle;
             }
             
-            // Update from HSV inputs
-            function updateFromHSV() {
-                const h = parseInt(hvInput.value) || 0;
-                const s = parseInt(svInput.value) || 0;
-                const v = parseInt(vInput.value) || 0;
-                
-                // Clamp values
-                hvInput.value = clamp(h, 0, 360);
-                svInput.value = clamp(s, 0, 100);
-                vInput.value = clamp(v, 0, 100);
-                
-                // Convert to RGB then to HEX
-                const rgb = hsvToRgb(h, s, v);
-                const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-                updateColor(hex);
-            }
-            
-            // Utility functions
-            function isValidHex(hex) {
-                return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex);
-            }
-            
+            // Convert hex to RGB
             function hexToRgb(hex) {
-                hex = hex.replace('#', '');
-                if (hex.length === 3) {
-                    hex = hex.split('').map(char => char + char).join('');
-                }
-                const r = parseInt(hex.substring(0, 2), 16);
-                const g = parseInt(hex.substring(2, 4), 16);
-                const b = parseInt(hex.substring(4, 6), 16);
-                return { r, g, b };
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : { r: 0, g: 0, b: 0 };
             }
             
-            function rgbToHex(r, g, b) {
-                return '#' + [r, g, b].map(x => {
-                    const hex = x.toString(16);
-                    return hex.length === 1 ? '0' + hex : hex;
-                }).join('');
-            }
-            
+            // Convert RGB to HSL
             function rgbToHsl(r, g, b) {
-                r /= 255, g /= 255, b /= 255;
-                const max = Math.max(r, g, b), min = Math.min(r, g, b);
+                r /= 255;
+                g /= 255;
+                b /= 255;
+                
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
                 let h, s, l = (max + min) / 2;
                 
                 if (max === min) {
@@ -866,54 +478,50 @@
                 } else {
                     const d = max - min;
                     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                    
                     switch (max) {
                         case r: h = (g - b) / d + (g < b ? 6 : 0); break;
                         case g: h = (b - r) / d + 2; break;
                         case b: h = (r - g) / d + 4; break;
                     }
+                    
                     h /= 6;
                 }
                 
                 return {
-                    h: Math.round(h * 360),
-                    s: Math.round(s * 100),
-                    l: Math.round(l * 100)
+                    h: h * 360,
+                    s: s * 100,
+                    l: l * 100
                 };
             }
             
-            function hslToRgb(h, s, l) {
-                h /= 360;
-                s /= 100;
-                l /= 100;
+            // Convert RGB to CMYK
+            function rgbToCmyk(r, g, b) {
+                r /= 255;
+                g /= 255;
+                b /= 255;
                 
-                let r, g, b;
+                const k = 1 - Math.max(r, g, b);
+                const c = k === 1 ? 0 : (1 - r - k) / (1 - k);
+                const m = k === 1 ? 0 : (1 - g - k) / (1 - k);
+                const y = k === 1 ? 0 : (1 - b - k) / (1 - k);
                 
-                if (s === 0) {
-                    r = g = b = l; // achromatic
-                } else {
-                    const hue2rgb = (p, q, t) => {
-                        if (t < 0) t += 1;
-                        if (t > 1) t -= 1;
-                        if (t < 1/6) return p + (q - p) * 6 * t;
-                        if (t < 1/2) return q;
-                        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-                        return p;
-                    };
-                    
-                    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-                    const p = 2 * l - q;
-                    
-                    r = Math.round(hue2rgb(p, q, h + 1/3) * 255);
-                    g = Math.round(hue2rgb(p, q, h) * 255);
-                    b = Math.round(hue2rgb(p, q, h - 1/3) * 255);
-                }
-                
-                return { r, g, b };
+                return {
+                    c: c * 100,
+                    m: m * 100,
+                    y: y * 100,
+                    k: k * 100
+                };
             }
             
+            // Convert RGB to HSV
             function rgbToHsv(r, g, b) {
-                r /= 255, g /= 255, b /= 255;
-                const max = Math.max(r, g, b), min = Math.min(r, g, b);
+                r /= 255;
+                g /= 255;
+                b /= 255;
+                
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
                 let h, s, v = max;
                 
                 const d = max - min;
@@ -927,80 +535,19 @@
                         case g: h = (b - r) / d + 2; break;
                         case b: h = (r - g) / d + 4; break;
                     }
+                    
                     h /= 6;
                 }
                 
                 return {
-                    h: Math.round(h * 360),
-                    s: Math.round(s * 100),
-                    v: Math.round(v * 100)
+                    h: h * 360,
+                    s: s * 100,
+                    v: v * 100
                 };
             }
             
-            function hsvToRgb(h, s, v) {
-                h /= 360;
-                s /= 100;
-                v /= 100;
-                
-                let r, g, b;
-                
-                const i = Math.floor(h * 6);
-                const f = h * 6 - i;
-                const p = v * (1 - s);
-                const q = v * (1 - f * s);
-                const t = v * (1 - (1 - f) * s);
-                
-                switch (i % 6) {
-                    case 0: r = v, g = t, b = p; break;
-                    case 1: r = q, g = v, b = p; break;
-                    case 2: r = p, g = v, b = t; break;
-                    case 3: r = p, g = q, b = v; break;
-                    case 4: r = t, g = p, b = v; break;
-                    case 5: r = v, g = p, b = q; break;
-                }
-                
-                return {
-                    r: Math.round(r * 255),
-                    g: Math.round(g * 255),
-                    b: Math.round(b * 255)
-                };
-            }
-            
-            function clamp(value, min, max) {
-                return Math.min(Math.max(value, min), max);
-            }
-            
-            function getColorName(hex) {
-                // Simple color name mapping (in a real app, use a color name library)
-                const rgb = hexToRgb(hex);
-                const r = rgb.r, g = rgb.g, b = rgb.b;
-                
-                if (r > 200 && g > 200 && b > 200) return 'Light Color';
-                if (r < 50 && g < 50 && b < 50) return 'Dark Color';
-                if (r > g && r > b) return 'Reddish';
-                if (g > r && g > b) return 'Greenish';
-                if (b > r && b > g) return 'Bluish';
-                return 'Custom Color';
-            }
-            
-            function copyToClipboard(text) {
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-            }
-            
-            function showCopiedMessage(element) {
-                const originalText = element.textContent;
-                element.textContent = 'Copied!';
-                element.style.color = var(--success-color);
-                setTimeout(() => {
-                    element.textContent = originalText;
-                    element.style.color = '';
-                }, 1500);
-            }
+            // Set example color on load
+            colorInput.value = currentColor;
         });
     </script>
 </body>
