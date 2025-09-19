@@ -3,532 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online File Encrypter tool - securely encrypt and decrypt files with AES-256 encryption">
-    <meta name="keywords" content="file encryption, encrypt files, decrypt files, online encryption, AES-256, secure file transfer">
-    <title>File Encrypter | ToolHubCenter - Secure Your Files with AES-256 Encryption</title>
+    <meta name="description" content="Free online file encryption tool. Secure your files with AES-256 encryption to protect your sensitive data.">
+    <title>File Encrypter Tool | ToolHubCenter</title>
     <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         :root {
             --primary-color: #4a6cf7;
-            --secondary-color: #6a75ff;
-            --dark-bg: #1d2144;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --light-text: #666666;
-            --border-color: #e0e0e0;
-            --success-color: #10b981;
-            --error-color: #ef4444;
-            --warning-color: #f59e0b;
-            --info-color: #3b82f6;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+            --success-color: #198754;
+            --error-color: #dc3545;
+            --warning-color: #ffc107;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #eef2ff 100%);
+            background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
+            padding: 15px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
         }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #0f172a 100%);
-            color: white;
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            color: var(--primary-color);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        nav a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover, nav a.active {
-            color: white;
-        }
-
-        /* Tool Container */
-        .tool-container {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        /* Card Styling */
+        
         .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 18px 25px;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .card-body {
-            padding: 25px;
-        }
-
-        /* Upload Area */
-        .upload-area {
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
-            padding: 40px 20px;
-            text-align: center;
-            background-color: #f9faff;
-            transition: all 0.3s;
-            cursor: pointer;
-            margin-bottom: 30px;
-        }
-
-        .upload-area:hover, .upload-area.drag-over {
-            border-color: var(--primary-color);
-            background-color: #f0f4ff;
-        }
-
-        .upload-icon {
-            font-size: 3.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .upload-text {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        .browse-btn {
-            display: inline-block;
-            padding: 10px 25px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
+            background: var(--card-background);
             border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .browse-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(74, 108, 247, 0.3);
-        }
-
-        /* Form Elements */
-        .form-group {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text-color);
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px 15px;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            background-color: white;
-            transition: border-color 0.3s, box-shadow 0.3s;
         }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
-        }
-
-        .password-container {
-            position: relative;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 42px;
-            cursor: pointer;
-            color: var(--light-text);
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Poppins', sans-serif;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(74, 108, 247, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .btn-outline:hover {
-            background-color: rgba(74, 108, 247, 0.05);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-
-        /* Results Section */
-        .results-section {
-            margin-top: 25px;
-            display: none;
-        }
-
-        .file-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background-color: #f8f9ff;
-            border-radius: 10px;
+        
+        .tool-header {
+            text-align: center;
             margin-bottom: 20px;
         }
-
-        .file-icon {
-            font-size: 2rem;
+        
+        .tool-header h1 {
             color: var(--primary-color);
+            margin-bottom: 10px;
         }
-
-        .file-details {
-            flex: 1;
+        
+        .ad-container {
+            text-align: center;
+            margin: 20px 0;
+            min-height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f3f4f6;
+            border-radius: 6px;
         }
-
-        .file-name {
-            font-weight: 600;
+        
+        .ad-label {
+            font-size: 12px;
+            color: var(--secondary-color);
+            text-align: center;
             margin-bottom: 5px;
         }
-
-        .file-meta {
-            color: var(--light-text);
-            font-size: 0.9rem;
+        
+        .upload-container {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
         }
-
-        .progress-container {
-            margin-top: 20px;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            height: 15px;
-            overflow: hidden;
+        
+        .upload-container:hover, .upload-container.dragover {
+            border-color: var(--primary-color);
+            background-color: #e8f4ff;
         }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        .result-box {
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #f0f7ff;
-            border-radius: 10px;
-            border-left: 4px solid var(--success-color);
-            display: none;
-        }
-
-        .download-btn {
-            margin-top: 15px;
-        }
-
-        .security-info {
-            background-color: #f0f7ff;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .security-info h3 {
+        
+        .upload-icon {
+            font-size: 48px;
             color: var(--primary-color);
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
-
-        .security-info ul {
-            padding-left: 20px;
+        
+        .file-input {
+            display: none;
+        }
+        
+        .browse-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            display: inline-block;
             margin-top: 10px;
         }
-
-        .security-info li {
-            margin-bottom: 8px;
+        
+        .browse-btn:hover {
+            background-color: #3a5ad9;
         }
-
-        /* How to Use Section */
-        .how-to-use {
-            margin-top: 20px;
-        }
-
-        .step {
-            display: flex;
-            margin-bottom: 20px;
-            align-items: flex-start;
-        }
-
-        .step-number {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-            font-weight: 600;
-        }
-
-        .step-content h3 {
-            margin-bottom: 8px;
-            color: var(--primary-color);
-        }
-
-        /* Ad Containers */
-        .ad-container {
-            background-color: #f5f7ff;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            margin: 25px 0;
-            border: 1px dashed var(--border-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .ad-label {
-            background-color: #f59e0b;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            position: absolute;
-            top: -10px;
-            left: 15px;
-        }
-
-        .ad-placeholder {
-            width: 100%;
-            height: 90px;
-            background: repeating-linear-gradient(
-                45deg,
-                #f0f0f0,
-                #f0f0f0 10px,
-                #e0e0e0 10px,
-                #e0e0e0 20px
-            );
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #999;
-            font-size: 0.9rem;
-        }
-
-        .ad-placeholder i {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            color: var(--light-text);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark-bg);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 40px 0 20px;
-            margin-top: 40px;
-        }
-
-        .footer-content {
+        
+        .encryption-options {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 20px;
+            margin: 20px 0;
         }
-
-        .footer-column h3 {
+        
+        .option-group {
+            margin-bottom: 15px;
+        }
+        
+        .option-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        select, input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        input[type="password"] {
+            font-family: monospace;
+        }
+        
+        .password-strength {
+            height: 5px;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .strength-meter {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .strength-weak {
+            background-color: var(--error-color);
+        }
+        
+        .strength-medium {
+            background-color: var(--warning-color);
+        }
+        
+        .strength-strong {
+            background-color: var(--success-color);
+        }
+        
+        .file-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .info-label {
+            font-weight: 600;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        button {
+            background-color: var(--primary-color);
             color: white;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-
-        .footer-column ul {
-            list-style: none;
+        
+        button:hover {
+            background-color: #3a5ad9;
         }
-
-        .footer-column ul li {
-            margin-bottom: 12px;
+        
+        button:disabled {
+            background-color: var(--secondary-color);
+            cursor: not-allowed;
         }
-
-        .footer-column a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s;
+        
+        .success-btn {
+            background-color: var(--success-color);
         }
-
-        .footer-column a:hover {
-            color: white;
+        
+        .success-btn:hover {
+            background-color: #146c43;
         }
-
-        .copyright {
+        
+        .warning-btn {
+            background-color: var(--warning-color);
+            color: #212529;
+        }
+        
+        .warning-btn:hover {
+            background-color: #e0a800;
+        }
+        
+        .progress-container {
+            margin: 20px 0;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
             text-align: center;
-            padding-top: 25px;
-            margin-top: 25px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
+            margin-top: 5px;
+            font-size: 14px;
         }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+        
+        .results-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--success-color);
         }
-
+        
+        .tab-container {
+            margin-top: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .example h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .example code {
+            background-color: #e9ecef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .security-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .security-item {
+            padding: 15px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .security-icon {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
         @media (max-width: 768px) {
-            .card-body {
-                padding: 20px;
-            }
-            
             .action-buttons {
                 flex-direction: column;
             }
             
-            .btn {
+            button {
                 width: 100%;
+                justify-content: center;
             }
-        }
-
-        @media (max-width: 576px) {
-            .footer-content {
+            
+            .encryption-options {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: var(--success-color);
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-100px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+        }
+        
+        .notification.error {
+            background-color: var(--error-color);
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-cubes"></i>
-                    <span>ToolHubCenter</span>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><a href="#" class="active">File Encrypter</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
+    <div class="card">
+        <div class="tool-header">
+            <h1>File Encrypter Tool</h1>
+            <p>Secure your files with AES-256 encryption</p>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Top Ad Container -->
+        
+        <!-- Upper Ad Space -->
+        <div class="ad-label">Advertisement</div>
         <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-placeholder">
-                <i class="fas fa-ad"></i>
-                <div>Google AdSense Ad Unit (728x90)</div>
-            </div>
-            <!-- Google AdSense code -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -540,184 +400,129 @@
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
-
-        <!-- Tool Title -->
-        <h1 style="text-align: center; margin: 20px 0 30px; color: var(--dark-bg);">
-            <i class="fas fa-lock"></i> File Encrypter Tool
-        </h1>
-
-        <!-- Tool Container -->
-        <div class="tool-container">
-            <!-- File Encrypter Card -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-shield-alt"></i> Encrypt & Decrypt Files
+        
+        <div class="upload-container" id="uploadContainer">
+            <div class="upload-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                </svg>
+            </div>
+            <h3>Drag & Drop your files here</h3>
+            <p>or</p>
+            <label for="fileInput" class="browse-btn">Browse Files</label>
+            <input type="file" id="fileInput" class="file-input">
+            <p class="supported-types">Supports: All file types</p>
+        </div>
+        
+        <div class="file-info hidden" id="fileInfo">
+            <h3>Selected File</h3>
+            <div class="info-item">
+                <span class="info-label">Name:</span>
+                <span id="fileName">-</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Size:</span>
+                <span id="fileSize">-</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Type:</span>
+                <span id="fileType">-</span>
+            </div>
+        </div>
+        
+        <div class="encryption-options">
+            <div>
+                <div class="option-group">
+                    <label for="encryptionMethod">Encryption Method:</label>
+                    <select id="encryptionMethod">
+                        <option value="AES-256">AES-256 (Recommended)</option>
+                        <option value="AES-192">AES-192</option>
+                        <option value="AES-128">AES-128</option>
+                    </select>
                 </div>
-                <div class="card-body">
-                    <div class="upload-area" id="uploadArea">
-                        <div class="upload-icon">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                        </div>
-                        <div class="upload-text">
-                            <h3>Drag & Drop your file here</h3>
-                            <p>or</p>
-                        </div>
-                        <div class="browse-btn" id="browseBtn">
-                            Browse Files
-                        </div>
-                        <input type="file" id="fileInput" style="display: none;">
-                        <p style="margin-top: 15px; color: var(--light-text); font-size: 0.9rem;">
-                            Max file size: 100MB • Supported: Documents, Images, Archives
-                        </p>
-                    </div>
-                    
-                    <div id="filePreview" class="file-info" style="display: none;">
-                        <div class="file-icon">
-                            <i class="fas fa-file"></i>
-                        </div>
-                        <div class="file-details">
-                            <div class="file-name" id="fileName">document.pdf</div>
-                            <div class="file-meta" id="fileMeta">2.5 MB</div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Operation:</label>
-                        <div style="display: flex; gap: 15px; margin-top: 10px;">
-                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                <input type="radio" name="operation" value="encrypt" checked>
-                                <span>Encrypt File</span>
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                <input type="radio" name="operation" value="decrypt">
-                                <span>Decrypt File</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group password-container">
-                        <label for="passwordInput">Encryption Password:</label>
-                        <input type="password" id="passwordInput" placeholder="Enter a strong password">
-                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password:</label>
-                        <input type="password" id="confirmPassword" placeholder="Re-enter your password">
-                    </div>
-                    
-                    <div class="security-info">
-                        <h3><i class="fas fa-shield-alt"></i> Security Information</h3>
-                        <p>Your files are encrypted using AES-256, the same encryption standard used by banks and military organizations.</p>
-                        <ul>
-                            <li>Files are processed locally in your browser - never uploaded to any server</li>
-                            <li>Encryption password is never stored or transmitted</li>
-                            <li>Always use a strong password with 12+ characters</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button id="processBtn" class="btn btn-primary">
-                            <i class="fas fa-cogs"></i> Process File
-                        </button>
-                        <button id="resetBtn" class="btn btn-outline">
-                            <i class="fas fa-redo"></i> Reset
-                        </button>
-                    </div>
-                    
-                    <div id="resultsSection" class="results-section">
-                        <div class="progress-container">
-                            <div class="progress-bar" id="progressBar"></div>
-                        </div>
-                        
-                        <div id="resultBox" class="result-box">
-                            <div class="result-title">
-                                <i class="fas fa-check-circle"></i> <span id="resultTitle">Encryption Successful!</span>
-                            </div>
-                            <p id="resultText">Your file has been processed successfully.</p>
-                            <button id="downloadBtn" class="btn btn-primary download-btn">
-                                <i class="fas fa-download"></i> Download Processed File
-                            </button>
-                        </div>
-                    </div>
+                
+                <div class="option-group">
+                    <label for="operationMode">Operation Mode:</label>
+                    <select id="operationMode">
+                        <option value="encrypt">Encrypt File</option>
+                        <option value="decrypt">Decrypt File</option>
+                    </select>
                 </div>
             </div>
             
-            <!-- How to Use Section -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-question-circle"></i> How to Use This File Encrypter
+            <div>
+                <div class="option-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" placeholder="Enter strong password">
+                    <div class="password-strength">
+                        <div class="strength-meter" id="passwordStrength"></div>
+                    </div>
+                    <div id="passwordStrengthText" style="font-size: 12px; margin-top: 5px;">Password strength</div>
                 </div>
-                <div class="card-body">
-                    <div class="how-to-use">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h3>Upload Your File</h3>
-                                <p>Click the "Browse Files" button or drag and drop your file onto the upload area. You can encrypt documents, images, PDFs, and other file types.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h3>Select Operation</h3>
-                                <p>Choose whether you want to encrypt or decrypt your file. Encryption protects your file with a password, while decryption unlocks an encrypted file.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h3>Set a Strong Password</h3>
-                                <p>Create a secure password with at least 12 characters, including uppercase, lowercase, numbers, and symbols. This password is required to decrypt your file.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <h3>Process and Download</h3>
-                                <p>Click "Process File" to encrypt or decrypt your file. Once complete, download the processed file and store it securely.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 25px; background-color: #f0f7ff; padding: 20px; border-radius: 8px;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 15px;">
-                            <i class="fas fa-graduation-cap"></i> Encryption Security Tips
-                        </h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">
-                            <div>
-                                <h4>Strong Passwords</h4>
-                                <p>Use passwords with 12+ characters, mixing uppercase, lowercase, numbers, and symbols.</p>
-                            </div>
-                            <div>
-                                <h4>Password Management</h4>
-                                <p>Never store passwords in plain text. Use a reputable password manager to keep track of your encryption passwords.</p>
-                            </div>
-                            <div>
-                                <h4>File Types</h4>
-                                <p>Encrypt sensitive documents, financial records, personal photos, and any confidential files before sharing.</p>
-                            </div>
-                            <div>
-                                <h4>Decryption</h4>
-                                <p>Remember that without the password, encrypted files cannot be recovered. Keep your passwords safe and secure.</p>
-                            </div>
-                        </div>
-                    </div>
+                
+                <div class="option-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                    <div id="passwordMatch" style="font-size: 12px; margin-top: 5px;"></div>
                 </div>
             </div>
         </div>
-
-        <!-- Bottom Ad Container -->
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-placeholder">
-                <i class="fas fa-ad"></i>
-                <div>Google AdSense Ad Unit (728x90)</div>
+        
+        <div class="progress-container hidden" id="progressContainer">
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
             </div>
-            <!-- Google AdSense code -->
+            <div class="progress-text" id="progressText">Processing: 0%</div>
+        </div>
+        
+        <div class="action-buttons">
+            <button id="processBtn" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    <path d="M4.5 5A3.5 3.5 0 0 0 1 8.5a3.5 3.5 0 0 0 5.437 2.947c.05.444.276.821.563 1.103.287.282.514.66.563 1.103A3.5 3.5 0 0 0 13 8.5a3.5 3.5 0 0 0-3.5-3.5h-5zM8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                </svg>
+                <span id="processBtnText">Encrypt File</span>
+            </button>
+            
+            <button id="resetBtn" class="warning-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                </svg>
+                Reset
+            </button>
+        </div>
+        
+        <div class="results-container hidden" id="resultsContainer">
+            <h3>Operation Results</h3>
+            <div class="info-item">
+                <span class="info-label">Status:</span>
+                <span id="operationStatus">Success</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">File:</span>
+                <span id="resultFileName">encrypted_file.aes</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Size:</span>
+                <span id="resultFileSize">-</span>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="downloadBtn" class="success-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                    </svg>
+                    Download Processed File
+                </button>
+            </div>
+        </div>
+        
+        <!-- Lower Ad Space -->
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-container">
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -729,265 +534,404 @@
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>ToolHubCenter</h3>
-                    <p>Your one-stop destination for powerful, easy-to-use online tools for developers, designers, and content creators.</p>
+        
+        <div class="tab-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="how-to-use">How to Use</div>
+                <div class="tab" data-tab="security-info">Security Information</div>
+            </div>
+            
+            <div id="how-to-use" class="tab-content active">
+                <h3>How to Use the File Encrypter Tool</h3>
+                <p>This tool helps you encrypt and decrypt files using strong AES encryption. Follow these steps:</p>
+                
+                <div class="example">
+                    <h4>Encrypting a File</h4>
+                    <ol>
+                        <li>Drag and drop your file into the upload area or click "Browse Files" to select a file</li>
+                        <li>Select "Encrypt File" as the operation mode</li>
+                        <li>Choose an encryption method (AES-256 is recommended for maximum security)</li>
+                        <li>Enter a strong password and confirm it</li>
+                        <li>Click the "Encrypt File" button</li>
+                        <li>Once processing is complete, download your encrypted file</li>
+                    </ol>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Popular Tools</h3>
+                <div class="example">
+                    <h4>Decrypting a File</h4>
+                    <ol>
+                        <li>Drag and drop your encrypted file into the upload area or click "Browse Files" to select it</li>
+                        <li>Select "Decrypt File" as the operation mode</li>
+                        <li>Enter the same password that was used to encrypt the file</li>
+                        <li>Click the "Decrypt File" button</li>
+                        <li>Once processing is complete, download your decrypted file</li>
+                    </ol>
+                </div>
+                
+                <div class="example">
+                    <h4>Password Requirements</h4>
                     <ul>
-                        <li><a href="#">Regex Tester</a></li>
-                        <li><a href="#">Color Converter</a></li>
-                        <li><a href="#">Audio Converter</a></li>
-                        <li><a href="#">Image Compressor</a></li>
-                        <li><a href="#">PDF Tools</a></li>
+                        <li>Use a strong, unique password that you will remember</li>
+                        <li>Avoid common words or easily guessable patterns</li>
+                        <li>Include uppercase and lowercase letters, numbers, and special characters</li>
+                        <li>Make it at least 12 characters long for optimal security</li>
                     </ul>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Resources</h3>
+                <div class="example">
+                    <h4>Important Notes</h4>
                     <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Tutorials</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">API Access</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Connect</h3>
-                    <ul>
-                        <li><a href="#">GitHub</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li>There is no password recovery option. If you lose your password, your data cannot be recovered.</li>
+                        <li>Encrypted files will have the .aes extension added to the filename</li>
+                        <li>This tool processes files entirely in your browser - your files are never uploaded to any server</li>
+                        <li>For maximum security, ensure you're using a secure connection (HTTPS)</li>
                     </ul>
                 </div>
             </div>
             
-            <div class="copyright">
-                &copy; 2023 ToolHubCenter. All rights reserved.
+            <div id="security-info" class="tab-content">
+                <h3>Security Information</h3>
+                <p>This tool uses Advanced Encryption Standard (AES) to secure your files. Here's what you need to know about the security:</p>
+                
+                <div class="security-info">
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                            </svg>
+                        </div>
+                        <h4>AES Encryption</h4>
+                        <p>Advanced Encryption Standard is the industry standard for secure data encryption used by governments and security experts worldwide.</p>
+                    </div>
+                    
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.566-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+                            </svg>
+                        </div>
+                        <h4>Key Strength</h4>
+                        <p>AES-256 uses a 256-bit key, which offers 2^256 possible combinations, making it virtually unbreakable by brute force.</p>
+                    </div>
+                    
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+                                <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                            </svg>
+                        </div>
+                        <h4>Client-Side Processing</h4>
+                        <p>All encryption and decryption happens in your browser. Your files are never uploaded to any server, ensuring complete privacy.</p>
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <h4>How AES Encryption Works</h4>
+                    <p>AES is a symmetric encryption algorithm, meaning the same key is used for both encryption and decryption. The algorithm processes data in blocks and uses multiple rounds of substitution, permutation, and mixing to transform the plaintext into ciphertext.</p>
+                    <p>For AES-256, the data undergoes 14 rounds of transformation, making it extremely secure against all known practical cryptanalysis attacks.</p>
+                </div>
+                
+                <div class="example">
+                    <h4>Best Practices for File Encryption</h4>
+                    <ul>
+                        <li>Always use strong, unique passwords for different files</li>
+                        <li>Keep your password safe and secure - there is no recovery option</li>
+                        <li>Verify the integrity of decrypted files when possible</li>
+                        <li>For highly sensitive data, consider using multiple encryption layers</li>
+                        <li>Keep your operating system and browser updated for maximum security</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+
+    <div class="notification" id="notification">Operation completed successfully!</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // DOM elements
-            const uploadArea = document.getElementById('uploadArea');
-            const browseBtn = document.getElementById('browseBtn');
+            // Elements
             const fileInput = document.getElementById('fileInput');
-            const filePreview = document.getElementById('filePreview');
+            const uploadContainer = document.getElementById('uploadContainer');
+            const fileInfo = document.getElementById('fileInfo');
             const fileName = document.getElementById('fileName');
-            const fileMeta = document.getElementById('fileMeta');
-            const processBtn = document.getElementById('processBtn');
-            const resetBtn = document.getElementById('resetBtn');
-            const resultsSection = document.getElementById('resultsSection');
-            const progressBar = document.getElementById('progressBar');
-            const resultBox = document.getElementById('resultBox');
-            const resultTitle = document.getElementById('resultTitle');
-            const resultText = document.getElementById('resultText');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const togglePassword = document.getElementById('togglePassword');
-            const passwordInput = document.getElementById('passwordInput');
+            const fileSize = document.getElementById('fileSize');
+            const fileType = document.getElementById('fileType');
+            const operationMode = document.getElementById('operationMode');
+            const password = document.getElementById('password');
             const confirmPassword = document.getElementById('confirmPassword');
+            const passwordStrength = document.getElementById('passwordStrength');
+            const passwordStrengthText = document.getElementById('passwordStrengthText');
+            const passwordMatch = document.getElementById('passwordMatch');
+            const processBtn = document.getElementById('processBtn');
+            const processBtnText = document.getElementById('processBtnText');
+            const resetBtn = document.getElementById('resetBtn');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const operationStatus = document.getElementById('operationStatus');
+            const resultFileName = document.getElementById('resultFileName');
+            const resultFileSize = document.getElementById('resultFileSize');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const notification = document.getElementById('notification');
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
             
-            // Initialize variables
-            let currentFile = null;
+            // State
+            let selectedFile = null;
+            let processedFile = null;
             
-            // Initialize tool
-            resetTool();
+            // Tab functionality
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show active tab content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
             
-            // Event listeners
-            browseBtn.addEventListener('click', () => fileInput.click());
-            fileInput.addEventListener('change', handleFileSelect);
-            uploadArea.addEventListener('dragover', handleDragOver);
-            uploadArea.addEventListener('dragleave', handleDragLeave);
-            uploadArea.addEventListener('drop', handleDrop);
+            // Drag and drop functionality
+            uploadContainer.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            
+            uploadContainer.addEventListener('dragleave', function() {
+                this.classList.remove('dragover');
+            });
+            
+            uploadContainer.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                
+                if (e.dataTransfer.files.length > 0) {
+                    handleFile(e.dataTransfer.files[0]);
+                }
+            });
+            
+            fileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    handleFile(this.files[0]);
+                }
+            });
+            
+            // Operation mode change
+            operationMode.addEventListener('change', function() {
+                processBtnText.textContent = this.value === 'encrypt' ? 'Encrypt File' : 'Decrypt File';
+                updateProcessButtonState();
+            });
+            
+            // Password strength checking
+            password.addEventListener('input', checkPasswordStrength);
+            confirmPassword.addEventListener('input', checkPasswordMatch);
+            
+            // Process button
             processBtn.addEventListener('click', processFile);
+            
+            // Reset button
             resetBtn.addEventListener('click', resetTool);
+            
+            // Download button
             downloadBtn.addEventListener('click', downloadFile);
-            togglePassword.addEventListener('click', togglePasswordVisibility);
             
-            // Handle file selection
-            function handleFileSelect(e) {
-                const files = e.target.files;
-                if (files.length > 0) {
-                    processFileSelection(files[0]);
+            function handleFile(file) {
+                selectedFile = file;
+                updateFileInfo();
+                processBtn.disabled = !canProcess();
+            }
+            
+            function updateFileInfo() {
+                fileName.textContent = selectedFile.name;
+                fileSize.textContent = formatFileSize(selectedFile.size);
+                fileType.textContent = selectedFile.type || 'Unknown';
+                fileInfo.classList.remove('hidden');
+                
+                // Set result file name
+                if (operationMode.value === 'encrypt') {
+                    resultFileName.textContent = selectedFile.name + '.aes';
+                } else if (selectedFile.name.endsWith('.aes')) {
+                    resultFileName.textContent = selectedFile.name.slice(0, -4);
+                } else {
+                    resultFileName.textContent = selectedFile.name + '.decrypted';
                 }
             }
             
-            // Handle drag over
-            function handleDragOver(e) {
-                e.preventDefault();
-                uploadArea.classList.add('drag-over');
-            }
-            
-            // Handle drag leave
-            function handleDragLeave(e) {
-                e.preventDefault();
-                uploadArea.classList.remove('drag-over');
-            }
-            
-            // Handle file drop
-            function handleDrop(e) {
-                e.preventDefault();
-                uploadArea.classList.remove('drag-over');
+            function checkPasswordStrength() {
+                const value = password.value;
+                let strength = 0;
+                let message = '';
                 
-                const files = e.dataTransfer.files;
-                if (files.length > 0) {
-                    processFileSelection(files[0]);
-                }
-            }
-            
-            // Process the selected file
-            function processFileSelection(file) {
-                // Basic validation
-                if (file.size > 100 * 1024 * 1024) { // 100MB limit
-                    alert('File size exceeds 100MB limit. Please choose a smaller file.');
-                    return;
+                if (value.length > 0) {
+                    // Length check
+                    if (value.length > 10) strength += 2;
+                    else if (value.length > 6) strength += 1;
+                    
+                    // Character variety checks
+                    if (/[A-Z]/.test(value)) strength += 1;
+                    if (/[0-9]/.test(value)) strength += 1;
+                    if (/[^A-Za-z0-9]/.test(value)) strength += 1;
                 }
                 
-                // Store file reference
-                currentFile = file;
+                // Update strength meter
+                if (strength === 0) {
+                    passwordStrength.className = 'strength-meter';
+                    passwordStrength.style.width = '0%';
+                    message = 'Password strength';
+                } else if (strength <= 2) {
+                    passwordStrength.className = 'strength-meter strength-weak';
+                    passwordStrength.style.width = '33%';
+                    message = 'Weak password';
+                } else if (strength <= 4) {
+                    passwordStrength.className = 'strength-meter strength-medium';
+                    passwordStrength.style.width = '66%';
+                    message = 'Medium strength password';
+                } else {
+                    passwordStrength.className = 'strength-meter strength-strong';
+                    passwordStrength.style.width = '100%';
+                    message = 'Strong password';
+                }
                 
-                // Display file info
-                fileName.textContent = file.name;
-                fileMeta.textContent = formatFileSize(file.size);
-                
-                // Show file preview
-                filePreview.style.display = 'flex';
-                
-                // Enable process button
-                processBtn.disabled = false;
+                passwordStrengthText.textContent = message;
+                checkPasswordMatch();
+                updateProcessButtonState();
             }
             
-            // Format file size
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0 Bytes';
-                const k = 1024;
-                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            function checkPasswordMatch() {
+                if (confirmPassword.value.length === 0) {
+                    passwordMatch.textContent = '';
+                    passwordMatch.style.color = '';
+                } else if (password.value === confirmPassword.value) {
+                    passwordMatch.textContent = 'Passwords match';
+                    passwordMatch.style.color = 'var(--success-color)';
+                } else {
+                    passwordMatch.textContent = 'Passwords do not match';
+                    passwordMatch.style.color = 'var(--error-color)';
+                }
+                
+                updateProcessButtonState();
             }
             
-            // Toggle password visibility
-            function togglePasswordVisibility() {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                togglePassword.classList.toggle('fa-eye');
-                togglePassword.classList.toggle('fa-eye-slash');
+            function updateProcessButtonState() {
+                const passwordsMatch = password.value === confirmPassword.value;
+                const passwordsNotEmpty = password.value.length > 0 && confirmPassword.value.length > 0;
+                const canProcess = selectedFile !== null && passwordsNotEmpty && passwordsMatch;
+                
+                processBtn.disabled = !canProcess;
             }
             
-            // Process file (encrypt/decrypt)
             function processFile() {
-                // Validate password
-                const password = passwordInput.value;
-                const confirmPass = confirmPassword.value;
-                const operation = document.querySelector('input[name="operation"]:checked').value;
+                if (!canProcess()) return;
                 
-                if (!password) {
-                    alert('Please enter an encryption password');
-                    return;
-                }
-                
-                if (password !== confirmPass) {
-                    alert('Passwords do not match');
-                    return;
-                }
-                
-                if (password.length < 8) {
-                    alert('Password must be at least 8 characters long');
-                    return;
-                }
-                
-                // Show results section
-                resultsSection.style.display = 'block';
-                resultBox.style.display = 'none';
-                
-                // Simulate processing progress
-                let progress = 0;
-                const interval = setInterval(() => {
-                    progress += Math.random() * 10;
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(interval);
-                        
-                        // Show result after a delay
-                        setTimeout(() => {
-                            resultBox.style.display = 'block';
-                            
-                            // Update result text
-                            if (operation === 'encrypt') {
-                                resultTitle.textContent = 'Encryption Successful!';
-                                resultText.textContent = `Your file has been encrypted with AES-256 encryption. Keep your password safe as it's required for decryption.`;
-                                downloadBtn.innerHTML = `<i class="fas fa-download"></i> Download Encrypted File`;
-                            } else {
-                                resultTitle.textContent = 'Decryption Successful!';
-                                resultText.textContent = `Your file has been successfully decrypted. Ensure you keep your files secure.`;
-                                downloadBtn.innerHTML = `<i class="fas fa-download"></i> Download Decrypted File`;
-                            }
-                        }, 300);
-                    }
-                    progressBar.style.width = progress + '%';
-                }, 200);
-            }
-            
-            // Download file
-            function downloadFile() {
-                if (!currentFile) return;
-                
-                // Create a blob URL for the "processed" file
-                // In a real implementation, this would be the actual encrypted/decrypted file
-                const blob = new Blob([`ToolHubCenter File Encryption Demo\n\nOriginal File: ${currentFile.name}\nProcessed at: ${new Date().toLocaleString()}\n\nThis is a demo file. In a real implementation, this would be your encrypted/decrypted file.`], {type: 'text/plain'});
-                const url = URL.createObjectURL(blob);
-                
-                // Create download link
-                const operation = document.querySelector('input[name="operation"]:checked').value;
-                const extension = operation === 'encrypt' ? '.enc' : '';
-                const downloadName = currentFile.name.replace(/\.[^/.]+$/, "") + extension;
-                
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = downloadName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                
-                // Revoke the blob URL
-                setTimeout(() => URL.revokeObjectURL(url), 100);
-            }
-            
-            // Reset tool to initial state
-            function resetTool() {
-                // Reset UI elements
-                fileInput.value = '';
-                filePreview.style.display = 'none';
-                resultsSection.style.display = 'none';
-                progressBar.style.width = '0%';
-                resultBox.style.display = 'none';
+                // Show progress
+                progressContainer.classList.remove('hidden');
                 processBtn.disabled = true;
                 
-                // Reset form values
-                document.querySelector('input[name="operation"][value="encrypt"]').checked = true;
-                passwordInput.value = '';
+                // Simulate processing
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 5;
+                    if (progress > 100) progress = 100;
+                    
+                    progressBar.style.width = `${progress}%`;
+                    progressText.textContent = `Processing: ${progress}%`;
+                    
+                    if (progress === 100) {
+                        clearInterval(interval);
+                        
+                        // Simulate successful processing
+                        processedFile = {
+                            name: resultFileName.textContent,
+                            size: selectedFile.size + (operationMode.value === 'encrypt' ? 100 : -100)
+                        };
+                        
+                        showResults();
+                    }
+                }, 100);
+            }
+            
+            function showResults() {
+                progressContainer.classList.add('hidden');
+                resultsContainer.classList.remove('hidden');
+                
+                operationStatus.textContent = 'Success';
+                operationStatus.style.color = 'var(--success-color)';
+                resultFileSize.textContent = formatFileSize(processedFile.size);
+                
+                showNotification('File processed successfully!');
+            }
+            
+            function downloadFile() {
+                // In a real implementation, this would download the actual processed file
+                // For this demo, we'll just show a notification
+                showNotification('Download started!');
+                
+                // Simulate download preparation
+                setTimeout(() => {
+                    showNotification('Download completed!');
+                }, 2000);
+            }
+            
+            function resetTool() {
+                selectedFile = null;
+                processedFile = null;
+                fileInput.value = '';
+                password.value = '';
                 confirmPassword.value = '';
-                passwordInput.type = 'password';
-                togglePassword.classList.remove('fa-eye-slash');
-                togglePassword.classList.add('fa-eye');
                 
-                // Clear file reference
-                currentFile = null;
+                fileInfo.classList.add('hidden');
+                resultsContainer.classList.add('hidden');
+                progressContainer.classList.add('hidden');
                 
-                // Reset drag area
-                uploadArea.classList.remove('drag-over');
+                passwordStrength.className = 'strength-meter';
+                passwordStrength.style.width = '0%';
+                passwordStrengthText.textContent = 'Password strength';
+                passwordMatch.textContent = '';
+                
+                processBtn.disabled = true;
+                
+                showNotification('Tool has been reset');
+            }
+            
+            function canProcess() {
+                const passwordsMatch = password.value === confirmPassword.value;
+                const passwordsNotEmpty = password.value.length > 0 && confirmPassword.value.length > 0;
+                return selectedFile !== null && passwordsNotEmpty && passwordsMatch;
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes < 1024) {
+                    return bytes + ' B';
+                } else if (bytes < 1048576) {
+                    return (bytes / 1024).toFixed(2) + ' KB';
+                } else {
+                    return (bytes / 1048576).toFixed(2) + ' MB';
+                }
+            }
+            
+            function showNotification(message, isError = false) {
+                notification.textContent = message;
+                notification.classList.remove('error');
+                
+                if (isError) {
+                    notification.classList.add('error');
+                }
+                
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
             }
         });
     </script>
