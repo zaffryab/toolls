@@ -3,642 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online SSL Checker tool to verify SSL certificates. Check expiration dates, issuer details, and certificate validity for any website.">
-    <meta name="keywords" content="ssl checker, ssl certificate checker, ssl validator, ssl expiration, ssl test">
-    <title>SSL Checker - Verify SSL Certificates | ToolHubCenter</title>
-    
-    <!-- Favicon -->
+    <meta name="description" content="Free online SSL certificate checker tool. Verify your SSL certificate installation, check expiration dates, and ensure proper encryption.">
+    <meta name="keywords" content="SSL checker, SSL certificate, SSL verification, HTTPS checker, SSL expiration">
+    <title>SSL Checker Tool - Verify Your SSL Certificate Installation | ToolHubCenter</title>
     <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --light-bg: #f8f9fa;
+            --dark-bg: #212529;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-color: #4a6cf7;
-            --primary-dark: #3a5af5;
-            --secondary-color: #6c757d;
-            --light-bg: #f8f9fa;
-            --dark-bg: #212529;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-color: #dee2e6;
-            --success-color: #28a745;
-            --warning-color: #ffc107;
-            --error-color: #dc3545;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
             background-color: var(--light-bg);
-            color: var(--text-color);
+            color: #333;
             line-height: 1.6;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4ecfb 100%);
-            min-height: 100vh;
         }
         
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: var(--card-bg);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 3px solid var(--primary-color);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo img {
-            height: 40px;
-            width: 40px;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-            background: linear-gradient(90deg, var(--primary-color), #6c5ce7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* Main Content */
-        .main-content {
-            padding: 40px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            font-size: 42px;
-            font-weight: 800;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: var(--primary-color);
-            margin: 15px auto;
-            border-radius: 2px;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--secondary-color);
-            margin-bottom: 40px;
-            font-size: 18px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Ad Container */
-        .ad-container {
-            background-color: #f0f0f0;
-            padding: 15px;
-            text-align: center;
-            margin: 30px 0;
-            border-radius: 8px;
-            border: 1px dashed #ccc;
-            min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        /* Tool Card */
-        .tool-card {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .card-header {
-            background: linear-gradient(90deg, var(--primary-color), #6c5ce7);
-            color: white;
             padding: 20px;
-            font-weight: 600;
-            font-size: 22px;
+        }
+        
+        header {
             text-align: center;
+            margin-bottom: 30px;
         }
         
-        .card-body {
-            padding: 30px;
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
         
-        /* Form Elements */
-        .form-group {
-            margin-bottom: 25px;
+        header p {
+            color: var(--secondary-color);
+            font-size: 18px;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 12px;
-            font-weight: 500;
-            font-size: 17px;
-            color: var(--dark-bg);
-        }
-        
-        input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid var(--border-color);
+        .card {
+            background: #fff;
             border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
         }
         
-        input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+        .ssl-checker-form {
+            margin-bottom: 20px;
         }
         
         .input-group {
             display: flex;
-            gap: 10px;
+            margin-bottom: 15px;
         }
         
         .input-group input {
             flex: 1;
-        }
-        
-        .btn {
-            padding: 14px 28px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
             font-size: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
-        .btn-primary {
-            background: linear-gradient(90deg, var(--primary-color), #6c5ce7);
+        .input-group button {
+            background-color: var(--primary-color);
             color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
         
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 14px rgba(74, 108, 247, 0.3);
+        .input-group button:hover {
+            background-color: #3a5ad9;
         }
         
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            color: white;
+        .results {
+            display: none;
+            margin-top: 20px;
         }
         
-        .btn-secondary:hover {
-            background-color: #5a6268;
-            transform: translateY(-3px);
-            box-shadow: 0 7px 14px rgba(108, 117, 125, 0.3);
-        }
-        
-        .btn-success {
-            background: linear-gradient(90deg, var(--success-color), #20bf6b);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 14px rgba(40, 167, 69, 0.3);
-        }
-        
-        /* SSL Status */
-        .ssl-status {
-            text-align: center;
-            padding: 30px;
-            border-radius: 12px;
-            margin: 30px 0;
-            background: #f8f9fa;
-            border: 2px solid var(--border-color);
-        }
-        
-        .ssl-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-        }
-        
-        .ssl-icon.valid {
-            color: var(--success-color);
-        }
-        
-        .ssl-icon.warning {
-            color: var(--warning-color);
-        }
-        
-        .ssl-icon.invalid {
-            color: var(--error-color);
-        }
-        
-        .ssl-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .ssl-subtitle {
-            font-size: 18px;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-        
-        /* Certificate Details */
-        .certificate-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .detail-card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .detail-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .detail-value {
-            font-size: 17px;
-            font-weight: 500;
-            word-break: break-word;
-        }
-        
-        .progress-container {
-            margin: 25px 0;
-        }
-        
-        .progress-label {
+        .result-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
         }
         
-        .progress-bar {
-            height: 12px;
-            background: #e9ecef;
-            border-radius: 6px;
-            overflow: hidden;
+        .result-item:last-child {
+            border-bottom: none;
         }
         
-        .progress-fill {
-            height: 100%;
-            background: var(--success-color);
-            border-radius: 6px;
-            transition: width 1s ease;
+        .result-label {
+            font-weight: bold;
+            color: var(--secondary-color);
         }
         
-        /* How to Use Section */
+        .valid {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .invalid {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+        
+        .warning {
+            color: var(--warning-color);
+            font-weight: bold;
+        }
+        
+        .ad-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
         .how-to-use {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            padding: 35px;
-            margin-bottom: 40px;
-            border: 1px solid var(--border-color);
+            margin-top: 40px;
         }
         
         .how-to-use h2 {
             color: var(--primary-color);
-            margin-bottom: 25px;
-            font-size: 28px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .how-to-use h2::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--primary-color);
-            margin: 15px auto;
-            border-radius: 2px;
+            margin-bottom: 20px;
         }
         
         .steps {
-            display: grid;
-            gap: 30px;
+            list-style-type: none;
         }
         
-        .step {
-            display: flex;
-            gap: 20px;
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
-            transition: transform 0.3s ease;
-        }
-        
-        .step:hover {
-            transform: translateX(10px);
-        }
-        
-        .step-number {
-            background: linear-gradient(135deg, var(--primary-color), #6c5ce7);
-            color: white;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-weight: 700;
-            font-size: 20px;
-            box-shadow: 0 4px 8px rgba(74, 108, 247, 0.3);
-        }
-        
-        .step-content h3 {
-            margin-bottom: 12px;
-            font-size: 20px;
-            color: var(--dark-bg);
-        }
-        
-        .step-content p {
-            color: var(--secondary-color);
-            font-size: 16px;
-        }
-        
-        /* SSL Info Section */
-        .ssl-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .info-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: var(--shadow);
-            border-top: 4px solid var(--primary-color);
-            transition: transform 0.3s ease;
-        }
-        
-        .info-card:hover {
-            transform: translateY(-8px);
-        }
-        
-        .info-card h3 {
-            color: var(--primary-color);
+        .steps li {
             margin-bottom: 15px;
-            font-size: 20px;
+            padding-left: 30px;
+            position: relative;
         }
         
-        .info-card p {
-            color: var(--secondary-color);
-            line-height: 1.7;
-        }
-        
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, var(--dark-bg), #000000);
+        .steps li:before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary-color);
             color: white;
-            padding: 50px 0 30px;
-            margin-top: 60px;
-        }
-        
-        .footer-content {
+            border-radius: 50%;
             text-align: center;
+            line-height: 24px;
         }
         
-        .footer-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .footer-logo img {
-            height: 50px;
-            width: 50px;
-        }
-        
-        .footer-logo h2 {
-            font-size: 28px;
-            background: linear-gradient(90deg, #4a6cf7, #6c5ce7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: #e9ecef;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 17px;
-            font-weight: 500;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            color: #adb5bd;
-            font-size: 15px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .section-title {
-                font-size: 36px;
-            }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: var(--secondary-color);
+            font-size: 14px;
         }
         
         @media (max-width: 768px) {
-            .section-title {
-                font-size: 32px;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
             .input-group {
                 flex-direction: column;
             }
             
-            .step {
+            .input-group input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .input-group button {
+                border-radius: 4px;
+            }
+            
+            .result-item {
                 flex-direction: column;
-                gap: 15px;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .logo h1 {
-                font-size: 20px;
-            }
-            
-            .section-title {
-                font-size: 28px;
-            }
-            
-            .card-header {
-                font-size: 18px;
-            }
-            
-            .how-to-use h2 {
-                font-size: 24px;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-        
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-        
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 18px 30px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            box-shadow: var(--shadow);
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: var(--transition);
-            z-index: 1000;
-            font-size: 16px;
-        }
-        
-        .notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .notification.success {
-            background: linear-gradient(90deg, var(--success-color), #20bf6b);
-        }
-        
-        .notification.error {
-            background: linear-gradient(90deg, var(--error-color), #e74c3c);
-        }
-        
-        /* Pulse Animation */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 0.5s ease;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="fade-in">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234a6cf7' d='M12 0L0 12l12 12 12-12L12 0zm0 2.828l9.172 9.172L12 21.172 2.828 12 12 2.828zM8 11v2h8v-2H8z'/%3E%3C/svg%3E" alt="ToolHubCenter Logo">
-                    <h1>ToolHubCenter</h1>
-                </div>
-                <nav>
-                    <a href="#" class="btn btn-secondary">Home</a>
-                    <a href="#" class="btn btn-secondary">Tools</a>
-                    <a href="#" class="btn btn-secondary">Contact</a>
-                </nav>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Main Content -->
-    <div class="container main-content">
-        <h1 class="section-title fade-in">SSL Certificate Checker</h1>
-        <p class="section-subtitle fade-in">Verify SSL certificates, check expiration dates, and ensure your website security</p>
-        
-        <!-- Top Ad Container -->
-        <div class="ad-container fade-in">
+    <div class="container">
+        <!-- Ad Container - Top -->
+        <div class="ad-container">
             <!-- Google AdSense Ad Unit -->
             <script type="text/javascript">
                 atOptions = {
@@ -652,129 +215,51 @@
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
         
-        <!-- SSL Checker Tool Card -->
-        <div class="tool-card fade-in">
-            <div class="card-header">
-                Check SSL Certificate
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="domain-input">Enter Domain Name (e.g., example.com)</label>
-                    <div class="input-group">
-                        <input type="text" id="domain-input" placeholder="google.com" value="google.com">
-                        <button id="check-btn" class="btn btn-primary">
-                            <i class="fas fa-shield-alt"></i> Check SSL
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="ssl-status" id="ssl-status">
-                    <div class="ssl-icon valid">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h2 class="ssl-title">SSL Certificate Valid</h2>
-                    <p class="ssl-subtitle">Your connection to this website is secure</p>
-                    
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>Certificate Validity</span>
-                            <span id="validity-days">87 days remaining</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="validity-progress" style="width: 75%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="certificate-details">
-                    <div class="detail-card">
-                        <h3><i class="fas fa-calendar-check"></i> Valid From</h3>
-                        <div class="detail-value" id="valid-from">Jun 15, 2023</div>
-                    </div>
-                    
-                    <div class="detail-card">
-                        <h3><i class="fas fa-calendar-times"></i> Expiration Date</h3>
-                        <div class="detail-value" id="expiration-date">Sep 13, 2023</div>
-                    </div>
-                    
-                    <div class="detail-card">
-                        <h3><i class="fas fa-building"></i> Issued By</h3>
-                        <div class="detail-value" id="issuer">Google Trust Services LLC</div>
-                    </div>
-                    
-                    <div class="detail-card">
-                        <h3><i class="fas fa-key"></i> Certificate Type</h3>
-                        <div class="detail-value" id="cert-type">TLS RSA Certificate</div>
-                    </div>
-                    
-                    <div class="detail-card">
-                        <h3><i class="fas fa-fingerprint"></i> Signature Algorithm</h3>
-                        <div class="detail-value" id="signature-algo">SHA256-RSA</div>
-                    </div>
-                    
-                    <div class="detail-card">
-                        <h3><i class="fas fa-server"></i> Server Type</h3>
-                        <div class="detail-value" id="server-type">GWS (Google Web Server)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <header>
+            <h1>SSL Certificate Checker</h1>
+            <p>Verify your SSL certificate installation and expiration status</p>
+        </header>
         
-        <!-- SSL Information Section -->
-        <div class="ssl-info fade-in">
-            <div class="info-card">
-                <h3>What is SSL?</h3>
-                <p>SSL (Secure Sockets Layer) is a security protocol that creates an encrypted connection between a web server and a web browser. It ensures that all data passed between the server and browser remains private and secure.</p>
+        <div class="card">
+            <div class="ssl-checker-form">
+                <div class="input-group">
+                    <input type="text" id="domain-input" placeholder="Enter domain (e.g., example.com)" autocomplete="off">
+                    <button id="check-ssl-btn">Check SSL</button>
+                </div>
+                <p>Note: Do not include https:// or http:// - just enter the domain name</p>
             </div>
             
-            <div class="info-card">
-                <h3>Why SSL is Important</h3>
-                <p>SSL protects sensitive information such as login credentials, credit card numbers, and personal data. It helps prevent hackers from stealing information and builds trust with your website visitors.</p>
-            </div>
-            
-            <div class="info-card">
-                <h3>How Often to Check SSL</h3>
-                <p>It's recommended to check your SSL certificate at least once a month. Certificates typically expire after 1-2 years, and an expired certificate can cause security warnings for your visitors.</p>
-            </div>
-        </div>
-        
-        <!-- How to Use Section -->
-        <div class="how-to-use fade-in">
-            <h2>How to Use the SSL Checker</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Enter Domain Name</h3>
-                        <p>Type the domain name you want to check in the input field (e.g., google.com). You don't need to include "https://" or "www".</p>
-                    </div>
+            <div id="results" class="results">
+                <h2>SSL Certificate Details</h2>
+                <div class="result-item">
+                    <span class="result-label">Domain:</span>
+                    <span id="result-domain">-</span>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Click Check SSL</h3>
-                        <p>Press the "Check SSL" button to initiate the SSL certificate verification process.</p>
-                    </div>
+                <div class="result-item">
+                    <span class="result-label">SSL Status:</span>
+                    <span id="result-status">-</span>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Review Results</h3>
-                        <p>View the SSL status, validity period, issuer details, and other certificate information.</p>
-                    </div>
+                <div class="result-item">
+                    <span class="result-label">Valid From:</span>
+                    <span id="result-valid-from">-</span>
                 </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Take Action</h3>
-                        <p>If any issues are found, renew your certificate or contact your SSL provider for support.</p>
-                    </div>
+                <div class="result-item">
+                    <span class="result-label">Valid Until:</span>
+                    <span id="result-valid-until">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Days Remaining:</span>
+                    <span id="result-days-remaining">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Issuer:</span>
+                    <span id="result-issuer">-</span>
                 </div>
             </div>
         </div>
         
-        <!-- Bottom Ad Container -->
-        <div class="ad-container fade-in">
+        <!-- Ad Container - Bottom -->
+        <div class="ad-container">
             <!-- Google AdSense Ad Unit -->
             <script type="text/javascript">
                 atOptions = {
@@ -786,203 +271,165 @@
                 };
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <div class="card how-to-use">
+            <h2>How to Use the SSL Checker Tool</h2>
+            <ol class="steps">
+                <li data-step="1">Enter your domain name in the input field (without http:// or https://)</li>
+                <li data-step="2">Click the "Check SSL" button to verify your SSL certificate</li>
+                <li data-step="3">Review the results to ensure your SSL certificate is properly installed and not expired</li>
+                <li data-step="4">If any issues are detected, contact your SSL provider or web host for assistance</li>
+            </ol>
+            
+            <h3>Why Check Your SSL Certificate?</h3>
+            <p>SSL certificates are essential for website security and user trust. Regular checks help you:</p>
+            <ul>
+                <li>Ensure proper encryption of sensitive data</li>
+                <li>Maintain SEO rankings (Google favors HTTPS sites)</li>
+                <li>Prevent security warnings that deter visitors</li>
+                <li>Stay compliant with security standards</li>
+            </ul>
         </div>
     </div>
     
-    <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234a6cf7' d='M12 0L0 12l12 12 12-12L12 0zm0 2.828l9.172 9.172L12 21.172 2.828 12 12 2.828zM8 11v2h8v-2H8z'/%3E%3C/svg%3E" alt="ToolHubCenter Logo">
-                    <h2>ToolHubCenter</h2>
-                </div>
-                <div class="footer-links">
-                    <a href="#">Home</a>
-                    <a href="#">All Tools</a>
-                    <a href="#">About Us</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-                <p class="copyright">© 2023 ToolHubCenter. All rights reserved. The ultimate toolbox for developers and creators.</p>
-            </div>
-        </div>
+        <p>© 2023 ToolHubCenter - SSL Checker Tool. All rights reserved.</p>
     </footer>
-    
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const checkSslBtn = document.getElementById('check-ssl-btn');
             const domainInput = document.getElementById('domain-input');
-            const checkBtn = document.getElementById('check-btn');
-            const sslStatus = document.getElementById('ssl-status');
-            const sslIcon = sslStatus.querySelector('.ssl-icon');
-            const sslTitle = sslStatus.querySelector('.ssl-title');
-            const sslSubtitle = sslStatus.querySelector('.ssl-subtitle');
-            const validityDays = document.getElementById('validity-days');
-            const validityProgress = document.getElementById('validity-progress');
-            const validFrom = document.getElementById('valid-from');
-            const expirationDate = document.getElementById('expiration-date');
-            const issuer = document.getElementById('issuer');
-            const certType = document.getElementById('cert-type');
-            const signatureAlgo = document.getElementById('signature-algo');
-            const serverType = document.getElementById('server-type');
-            const notification = document.getElementById('notification');
+            const resultsDiv = document.getElementById('results');
             
-            // Sample SSL data for different domains
-            const sslData = {
-                'google.com': {
-                    status: 'valid',
-                    validFrom: 'Jun 15, 2023',
-                    expirationDate: 'Sep 13, 2023',
-                    issuer: 'Google Trust Services LLC',
-                    certType: 'TLS RSA Certificate',
-                    signatureAlgo: 'SHA256-RSA',
-                    serverType: 'GWS (Google Web Server)',
-                    daysRemaining: 87,
-                    validityPercent: 75
-                },
-                'amazon.com': {
-                    status: 'valid',
-                    validFrom: 'May 20, 2023',
-                    expirationDate: 'May 19, 2024',
-                    issuer: 'Amazon',
-                    certType: 'TLS ECC Certificate',
-                    signatureAlgo: 'ECDSA-SHA384',
-                    serverType: 'Amazon Web Server',
-                    daysRemaining: 320,
-                    validityPercent: 87
-                },
-                'expired.badssl.com': {
-                    status: 'invalid',
-                    validFrom: 'Apr 1, 2023',
-                    expirationDate: 'May 1, 2023',
-                    issuer: 'BadSSL',
-                    certType: 'TLS RSA Certificate',
-                    signatureAlgo: 'SHA256-RSA',
-                    serverType: 'Apache',
-                    daysRemaining: -42,
-                    validityPercent: 0
-                },
-                'facebook.com': {
-                    status: 'valid',
-                    validFrom: 'Jul 1, 2023',
-                    expirationDate: 'Sep 30, 2023',
-                    issuer: 'DigiCert Inc',
-                    certType: 'TLS RSA Certificate',
-                    signatureAlgo: 'SHA256-RSA',
-                    serverType: 'Facebook Custom Server',
-                    daysRemaining: 65,
-                    validityPercent: 70
-                }
-            };
+            // Result elements
+            const resultDomain = document.getElementById('result-domain');
+            const resultStatus = document.getElementById('result-status');
+            const resultValidFrom = document.getElementById('result-valid-from');
+            const resultValidUntil = document.getElementById('result-valid-until');
+            const resultDaysRemaining = document.getElementById('result-days-remaining');
+            const resultIssuer = document.getElementById('result-issuer');
             
-            // Update SSL status display
-            function updateSSLStatus(data) {
-                // Update status display
-                sslIcon.className = 'ssl-icon ' + data.status;
-                sslIcon.innerHTML = '<i class="fas ' + 
-                    (data.status === 'valid' ? 'fa-lock' : 
-                    data.status === 'warning' ? 'fa-exclamation-triangle' : 'fa-unlock') + '"></i>';
-                
-                sslTitle.textContent = data.status === 'valid' ? 'SSL Certificate Valid' : 
-                    data.status === 'warning' ? 'SSL Certificate Expiring Soon' : 'SSL Certificate Invalid';
-                
-                sslSubtitle.textContent = data.status === 'valid' ? 'Your connection to this website is secure' : 
-                    data.status === 'warning' ? 'Certificate will expire soon - renewal recommended' : 
-                    'Security risk: This certificate has expired or is invalid';
-                
-                // Update progress bar
-                validityDays.textContent = data.daysRemaining > 0 ? 
-                    data.daysRemaining + ' days remaining' : 'Expired ' + (-data.daysRemaining) + ' days ago';
-                
-                validityProgress.style.width = Math.max(0, Math.min(100, data.validityPercent)) + '%';
-                validityProgress.style.background = data.validityPercent > 50 ? 
-                    'var(--success-color)' : data.validityPercent > 25 ? 
-                    'var(--warning-color)' : 'var(--error-color)';
-                
-                // Update certificate details
-                validFrom.textContent = data.validFrom;
-                expirationDate.textContent = data.expirationDate;
-                issuer.textContent = data.issuer;
-                certType.textContent = data.certType;
-                signatureAlgo.textContent = data.signatureAlgo;
-                serverType.textContent = data.serverType;
-                
-                // Add pulse animation
-                sslStatus.classList.add('pulse');
-                setTimeout(() => {
-                    sslStatus.classList.remove('pulse');
-                }, 500);
-            }
-            
-            // Show notification
-            function showNotification(message, isSuccess) {
-                notification.textContent = message;
-                notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
-                notification.classList.add('show');
-                
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000);
-            }
-            
-            // Check SSL function
-            function checkSSL() {
-                const domain = domainInput.value.trim().toLowerCase().replace('https://', '').replace('http://', '').replace('www.', '');
+            checkSslBtn.addEventListener('click', function() {
+                const domain = domainInput.value.trim();
                 
                 if (!domain) {
-                    showNotification('Please enter a domain name!', false);
+                    alert('Please enter a domain name');
                     return;
                 }
                 
                 // Simple domain validation
-                if (!/^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(domain)) {
-                    showNotification('Please enter a valid domain name!', false);
+                const domainRegex = /^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z]{2,})+$/;
+                if (!domainRegex.test(domain)) {
+                    alert('Please enter a valid domain name');
                     return;
                 }
                 
-                // Find matching SSL data
-                let sslInfo = sslData[domain];
+                // Show loading state
+                checkSslBtn.textContent = 'Checking...';
+                checkSslBtn.disabled = true;
                 
-                // If no exact match, use default
-                if (!sslInfo) {
-                    // Create dynamic data for demonstration
-                    const days = Math.floor(Math.random() * 365);
-                    sslInfo = {
-                        status: days > 30 ? 'valid' : days > 0 ? 'warning' : 'invalid',
-                        validFrom: new Date(Date.now() - (365 - days) * 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-                        expirationDate: new Date(Date.now() + days * 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-                        issuer: 'Let\'s Encrypt',
-                        certType: 'TLS RSA Certificate',
-                        signatureAlgo: 'SHA256-RSA',
-                        serverType: 'Nginx',
-                        daysRemaining: days,
-                        validityPercent: Math.floor(days / 365 * 100)
-                    };
-                }
-                
-                // Update the display with SSL info
-                updateSSLStatus(sslInfo);
-                showNotification(`SSL information for ${domain} retrieved successfully!`, true);
-            }
-            
-            // Event listeners
-            checkBtn.addEventListener('click', checkSSL);
-            
-            // Also check when pressing Enter in the input field
-            domainInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    checkSSL();
-                }
+                // In a real implementation, you would make an API call to your backend
+                // For this demo, we'll simulate the API response after a short delay
+                setTimeout(() => {
+                    // Simulate API response based on the domain
+                    const simulatedResponse = simulateSslCheck(domain);
+                    
+                    // Display the results
+                    resultDomain.textContent = domain;
+                    
+                    if (simulatedResponse.valid) {
+                        resultStatus.innerHTML = '<span class="valid">Valid SSL Certificate</span>';
+                        resultValidFrom.textContent = simulatedResponse.validFrom;
+                        resultValidUntil.textContent = simulatedResponse.validUntil;
+                        
+                        const daysRemaining = simulatedResponse.daysRemaining;
+                        resultDaysRemaining.textContent = daysRemaining;
+                        
+                        if (daysRemaining < 30) {
+                            resultDaysRemaining.innerHTML = `<span class="warning">${daysRemaining} days (Expiring soon)</span>`;
+                        } else if (daysRemaining < 0) {
+                            resultDaysRemaining.innerHTML = `<span class="invalid">Expired</span>`;
+                        }
+                        
+                        resultIssuer.textContent = simulatedResponse.issuer;
+                    } else {
+                        resultStatus.innerHTML = '<span class="invalid">No SSL Certificate Found</span>';
+                        resultValidFrom.textContent = 'N/A';
+                        resultValidUntil.textContent = 'N/A';
+                        resultDaysRemaining.textContent = 'N/A';
+                        resultIssuer.textContent = 'N/A';
+                    }
+                    
+                    // Show results
+                    resultsDiv.style.display = 'block';
+                    
+                    // Reset button
+                    checkSslBtn.textContent = 'Check SSL';
+                    checkSslBtn.disabled = false;
+                }, 1500);
             });
             
-            // Initialize with google.com data
-            setTimeout(() => {
-                checkSSL();
-            }, 800);
+            // Function to simulate SSL check response
+            function simulateSslCheck(domain) {
+                // For demo purposes, return different responses based on the domain
+                const responses = {
+                    'example.com': {
+                        valid: true,
+                        validFrom: 'Jan 15, 2023',
+                        validUntil: 'Jan 15, 2024',
+                        daysRemaining: 120,
+                        issuer: 'Let\'s Encrypt'
+                    },
+                    'google.com': {
+                        valid: true,
+                        validFrom: 'Mar 01, 2023',
+                        validUntil: 'May 30, 2024',
+                        daysRemaining: 240,
+                        issuer: 'Google Trust Services'
+                    },
+                    'expired.example.com': {
+                        valid: true,
+                        validFrom: 'Jan 01, 2022',
+                        validUntil: 'Jan 01, 2023',
+                        daysRemaining: -15,
+                        issuer: 'Comodo'
+                    },
+                    'soon.expiring.com': {
+                        valid: true,
+                        validFrom: 'Jan 01, 2023',
+                        validUntil: 'Apr 01, 2023',
+                        daysRemaining: 12,
+                        issuer: 'DigiCert'
+                    }
+                };
+                
+                // Return a specific response if the domain matches our test cases
+                if (responses[domain]) {
+                    return responses[domain];
+                }
+                
+                // For other domains, randomly return valid or invalid responses
+                const randomValid = Math.random() > 0.3; // 70% chance of valid SSL
+                
+                if (randomValid) {
+                    const daysRemaining = Math.floor(Math.random() * 365);
+                    const issuers = ['Let\'s Encrypt', 'Comodo', 'DigiCert', 'GoDaddy', 'GlobalSign', 'Sectigo'];
+                    
+                    return {
+                        valid: true,
+                        validFrom: new Date(Date.now() - Math.floor(Math.random() * 200) * 86400000).toLocaleDateString(),
+                        validUntil: new Date(Date.now() + daysRemaining * 86400000).toLocaleDateString(),
+                        daysRemaining: daysRemaining,
+                        issuer: issuers[Math.floor(Math.random() * issuers.length)]
+                    };
+                } else {
+                    return {
+                        valid: false
+                    };
+                }
+            }
         });
     </script>
 </body>
