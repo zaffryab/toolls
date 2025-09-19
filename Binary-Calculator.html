@@ -3,509 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online binary calculator tool - perform binary arithmetic, convert between binary and decimal, and more.">
-    <meta name="keywords" content="binary calculator, binary arithmetic, binary converter, binary addition, binary subtraction, binary multiplication, binary division">
-    <title>Binary Calculator - Binary Arithmetic & Conversion | ToolHubCenter</title>
+    <meta name="description" content="Free online binary calculator tool. Perform binary arithmetic operations and conversions between binary and decimal numbers.">
+    <meta name="keywords" content="binary calculator, binary arithmetic, binary to decimal, decimal to binary, binary operations">
+    <title>Binary Calculator Tool - Perform Binary Arithmetic Operations | ToolHubCenter</title>
     <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --accent-color: #1abc9c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #333;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
+            --primary-color: #4a6cf7;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --light-bg: #f8f9fa;
+            --dark-bg: #212529;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
             line-height: 1.6;
-            color: var(--text-color);
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
         
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
         
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 15px 0;
-            box-shadow: var(--box-shadow);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo img {
-            width: 40px;
-            height: 40px;
-        }
-        
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-        
-        nav a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-        
-        .ad-banner {
-            background-color: white;
             text-align: center;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-        
-        .ad-label {
-            font-size: 0.8rem;
-            color: #777;
-            margin-bottom: 5px;
-        }
-        
-        .main-content {
-            flex: 1;
-            padding: 30px 0;
-        }
-        
-        .tool-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            overflow: hidden;
             margin-bottom: 30px;
         }
         
-        .card-header {
-            background: linear-gradient(135deg, var(--accent-color), #16a085);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .card-header h2 {
-            font-size: 1.8rem;
+        header h1 {
+            color: var(--primary-color);
             margin-bottom: 10px;
         }
         
-        .card-header p {
-            opacity: 0.9;
+        header p {
+            color: var(--secondary-color);
+            font-size: 18px;
         }
         
-        .card-body {
-            padding: 30px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
         }
         
-        .calculator-section {
-            flex: 1;
-            min-width: 300px;
+        .calculator {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
         
-        .section-title {
-            font-size: 1.4rem;
+        @media (min-width: 768px) {
+            .calculator {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .input-section, .conversion-section {
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--accent-color);
-            color: var(--dark-color);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
         }
         
         .input-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 15px;
         }
         
-        .form-control {
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .input-group input {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            outline: none;
-            transition: var(--transition);
-            font-family: monospace;
+            border-radius: 4px;
+            font-size: 16px;
         }
         
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-        
-        .binary-input {
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-        }
-        
-        .btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-        }
-        
-        .btn-accent {
-            background-color: var(--accent-color);
-        }
-        
-        .btn-accent:hover {
-            background-color: #16a085;
-        }
-        
-        .btn-block {
-            display: block;
-            width: 100%;
-            text-align: center;
-            margin-top: 15px;
-        }
-        
-        .btn-operation {
-            padding: 10px 15px;
-            min-width: 50px;
-            margin: 0 5px 10px 0;
-        }
-        
-        .operations-container {
-            display: flex;
-            flex-wrap: wrap;
+        .operation-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             margin-bottom: 20px;
         }
         
-        .results {
-            background-color: #f8f9fa;
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin-top: 25px;
-            display: none;
-            font-family: monospace;
+        .operation-buttons button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
         
-        .results.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
+        .operation-buttons button:hover {
+            background-color: #3a5ad9;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .calculate-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-bottom: 20px;
         }
         
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
+        .calculate-btn:hover {
+            background-color: #218838;
         }
         
-        .result-value {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--accent-color);
-        }
-        
-        .binary-display {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-align: center;
+        .result {
+            margin-top: 20px;
             padding: 15px;
-            margin: 20px 0;
-            background-color: #f1f1f1;
-            border-radius: var(--border-radius);
-            font-family: monospace;
+            background-color: var(--light-bg);
+            border-radius: 4px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .result h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .conversion-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .conversion-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .conversion-input button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .conversion-input button:hover {
+            background-color: #3a5ad9;
         }
         
         .conversion-result {
-            background-color: #e8f4f1;
-            border-left: 4px solid var(--accent-color);
-            padding: 15px;
-            border-radius: 4px;
             margin-top: 15px;
-            font-family: monospace;
-            font-weight: 700;
+            padding: 15px;
+            background-color: var(--light-bg);
+            border-radius: 4px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .conversion-result h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .ad-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 4px;
         }
         
         .how-to-use {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .how-to-use h2 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--dark-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-        }
-        
-        .steps {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .step {
-            flex: 1;
-            min-width: 250px;
-            background-color: #f8f9fa;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .step-number {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        .step h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .step pre {
-            background-color: #2c3e50;
-            color: white;
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 10px;
-            overflow-x: auto;
-        }
-        
-        .binary-info {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 30px;
-        }
-        
-        .binary-info h2 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--dark-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .info-card {
-            background-color: #f8f9fa;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            transition: var(--transition);
-        }
-        
-        .info-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        
-        .info-card ul {
-            padding-left: 20px;
-        }
-        
-        .info-card li {
-            margin-bottom: 8px;
-        }
-        
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 30px 0;
             margin-top: 40px;
         }
         
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            justify-content: space-between;
-        }
-        
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.3rem;
+        .how-to-use h2 {
+            color: var(--primary-color);
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
         }
         
-        .footer-section h3::after {
-            content: '';
+        .steps {
+            list-style-type: none;
+        }
+        
+        .steps li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .steps li:before {
+            content: attr(data-step);
             position: absolute;
             left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--accent-color);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: #ddd;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent-color);
-            padding-left: 5px;
-        }
-        
-        .copyright {
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
             text-align: center;
-            padding-top: 20px;
-            margin-top: 20px;
-            border-top: 1px solid #444;
-            color: #bbb;
-            font-size: 0.9rem;
+            line-height: 24px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: var(--secondary-color);
+            font-size: 14px;
         }
         
         @media (max-width: 768px) {
-            .header-content {
+            .operation-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .conversion-input {
                 flex-direction: column;
-                gap: 15px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .card-body {
-                flex-direction: column;
-            }
-            
-            .input-group {
-                flex-wrap: wrap;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQgMkg2YTIgMiAwIDAgMC0yIDJ2MTZhMiAyIDAgMCAwIDIgMmgxMmEyIDIgMCAwIDAgMi0yVjhsLTYtNnoiPjwvcGF0aD48cGF0aCBkPSJNMTQgMnY2aDYiPjwvcGF0aD48cGF0aCBkPSJNMTYgMTNINiI+PC9wYXRoPjxwYXRoIGQ9Ik0xNiAxN0g2Ij48L3BhdGg+PHBhdGggZD0iTTEwIDlINiI+PC9wYXRoPjwvc3ZnPg==" alt="ToolHubCenter Logo">
-                    <h1>ToolHubCenter</h1>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><a href="#">Calculators</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-
     <div class="container">
-        <!-- Top Ad Banner -->
-        <div class="ad-banner">
-            <div class="ad-label">Advertisement</div>
-            <!-- Google AdSense Code -->
+        <!-- Ad Container - Top -->
+        <div class="ad-container">
+            <!-- Google AdSense Ad Unit -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -517,175 +266,71 @@
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
-    </div>
-
-    <main class="main-content">
-        <div class="container">
-            <div class="tool-card">
-                <div class="card-header">
+        
+        <header>
+            <h1>Binary Calculator Tool</h1>
+            <p>Perform binary arithmetic operations and conversions</p>
+        </header>
+        
+        <div class="card">
+            <div class="calculator">
+                <div class="calculator-section">
                     <h2>Binary Calculator</h2>
-                    <p>Perform binary arithmetic and conversions</p>
-                </div>
-                <div class="card-body">
-                    <div class="calculator-section">
-                        <h3 class="section-title">Binary Arithmetic</h3>
-                        <div class="form-group">
+                    <div class="input-section">
+                        <div class="input-group">
                             <label for="binary1">First Binary Number</label>
-                            <input type="text" id="binary1" class="form-control binary-input" value="1010" placeholder="Enter binary number">
+                            <input type="text" id="binary1" placeholder="Enter binary number (e.g., 1010)" autocomplete="off">
                         </div>
-                        <div class="form-group">
+                        <div class="input-group">
                             <label for="binary2">Second Binary Number</label>
-                            <input type="text" id="binary2" class="form-control binary-input" value="110" placeholder="Enter binary number">
-                        </div>
-                        
-                        <div class="operations-container">
-                            <button class="btn btn-operation" data-operation="add">+ Add</button>
-                            <button class="btn btn-operation" data-operation="subtract">- Subtract</button>
-                            <button class="btn btn-operation" data-operation="multiply">× Multiply</button>
-                            <button class="btn btn-operation" data-operation="divide">÷ Divide</button>
-                        </div>
-                        
-                        <div class="binary-display" id="binaryResult">1010 + 110 = 10000</div>
-                        
-                        <div class="results" id="arithmeticResults">
-                            <div class="result-item">
-                                <span>Binary Result:</span>
-                                <span class="result-value" id="binaryResultValue">10000</span>
-                            </div>
-                            <div class="result-item">
-                                <span>Decimal Result:</span>
-                                <span class="result-value" id="decimalResultValue">16</span>
-                            </div>
+                            <input type="text" id="binary2" placeholder="Enter binary number (e.g., 1101)" autocomplete="off">
                         </div>
                     </div>
                     
-                    <div class="calculator-section">
-                        <h3 class="section-title">Binary Conversion</h3>
-                        <div class="form-group">
-                            <label for="conversionType">Conversion Type</label>
-                            <select id="conversionType" class="form-control">
-                                <option value="binaryToDecimal">Binary to Decimal</option>
-                                <option value="decimalToBinary">Decimal to Binary</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="inputValue">Input Value</label>
-                            <input type="text" id="inputValue" class="form-control" value="1010" placeholder="Enter value">
-                        </div>
-                        
-                        <button class="btn btn-accent btn-block" id="convertBtn">Convert</button>
-                        
-                        <div class="conversion-result" id="conversionResult">
-                            <div>Binary: 1010</div>
-                            <div>Decimal: 10</div>
-                        </div>
-                        
-                        <div class="form-group" style="margin-top: 30px;">
-                            <h3 class="section-title">Binary Reference</h3>
-                            <div class="binary-reference">
-                                <div class="result-item">
-                                    <span>Binary Digit (Bit)</span>
-                                    <span>0 or 1</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>Nibble</span>
-                                    <span>4 bits</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>Byte</span>
-                                    <span>8 bits</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>Binary Prefix</span>
-                                    <span>0b (e.g., 0b1010)</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="operation-buttons">
+                        <button data-operation="add">Addition (+)</button>
+                        <button data-operation="subtract">Subtraction (-)</button>
+                        <button data-operation="multiply">Multiplication (×)</button>
+                        <button data-operation="divide">Division (÷)</button>
+                    </div>
+                    
+                    <button id="calculate-btn" class="calculate-btn">Calculate</button>
+                    
+                    <div id="result" class="result">
+                        <h3>Result</h3>
+                        <p id="calculation-result">No calculation performed yet</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="how-to-use">
-                <h2>How to Use the Binary Calculator</h2>
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <h3>Binary Arithmetic</h3>
-                        <p>Enter two binary numbers and select an operation (addition, subtraction, multiplication, or division).</p>
-                        <pre>Example: 1010 + 110 = 10000</pre>
+                
+                <div class="conversion-section">
+                    <h2>Binary Conversion</h2>
+                    <div class="input-group">
+                        <label for="decimal-input">Decimal to Binary</label>
+                        <div class="conversion-input">
+                            <input type="number" id="decimal-input" placeholder="Enter decimal number" autocomplete="off">
+                            <button id="to-binary-btn">Convert</button>
+                        </div>
                     </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <h3>Binary Conversion</h3>
-                        <p>Convert between binary and decimal representations. Select conversion type and enter your value.</p>
-                        <pre>Binary to Decimal: 1010 → 10
-Decimal to Binary: 10 → 1010</pre>
+                    
+                    <div class="input-group">
+                        <label for="binary-input">Binary to Decimal</label>
+                        <div class="conversion-input">
+                            <input type="text" id="binary-input" placeholder="Enter binary number" autocomplete="off">
+                            <button id="to-decimal-btn">Convert</button>
+                        </div>
                     </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <h3>Binary Operations</h3>
-                        <p>All operations are performed according to binary arithmetic rules:</p>
-                        <pre>Addition: 1 + 1 = 10 (carry 1)
-Subtraction: 10 - 1 = 1 (borrow 1)</pre>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <h3>Input Validation</h3>
-                        <p>Calculator automatically validates inputs and shows errors for invalid binary numbers.</p>
-                        <pre>Valid: 101010
-Invalid: 1012 (contains non-binary digit)</pre>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="binary-info">
-                <h2>Understanding Binary Numbers</h2>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3>What is Binary?</h3>
-                        <p>Binary is a base-2 numeral system that uses only two digits: 0 and 1. It's the fundamental language of computers.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>Binary Arithmetic</h3>
-                        <p>Basic operations:</p>
-                        <ul>
-                            <li>0 + 0 = 0</li>
-                            <li>0 + 1 = 1</li>
-                            <li>1 + 1 = 10 (carry 1)</li>
-                            <li>1 - 1 = 0</li>
-                            <li>10 - 1 = 1 (borrow)</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h3>Binary Applications</h3>
-                        <ul>
-                            <li>Computer programming</li>
-                            <li>Digital electronics</li>
-                            <li>Data storage</li>
-                            <li>Networking protocols</li>
-                            <li>Cryptography</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h3>Binary Prefixes</h3>
-                        <ul>
-                            <li>Kibibyte (KiB) = 1024 bytes</li>
-                            <li>Mebibyte (MiB) = 1024 KiB</li>
-                            <li>Gibibyte (GiB) = 1024 MiB</li>
-                            <li>Tebibyte (TiB) = 1024 GiB</li>
-                        </ul>
+                    
+                    <div id="conversion-result" class="conversion-result">
+                        <h3>Conversion Result</h3>
+                        <p id="conversion-output">No conversion performed yet</p>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-
-    <div class="container">
-        <!-- Bottom Ad Banner -->
-        <div class="ad-banner">
-            <div class="ad-label">Advertisement</div>
-            <!-- Google AdSense Code -->
+        
+        <!-- Ad Container - Bottom -->
+        <div class="ad-container">
+            <!-- Google AdSense Ad Unit -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -697,181 +342,174 @@ Invalid: 1012 (contains non-binary digit)</pre>
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
-    </div>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>About ToolHubCenter</h3>
-                    <p>Your one-stop solution for all online tools. We provide free, easy-to-use utilities to simplify your digital tasks.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Programming Tools</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Hexadecimal Calculator</a></li>
-                        <li><a href="#">Base64 Encoder/Decoder</a></li>
-                        <li><a href="#">Regular Expression Tester</a></li>
-                        <li><a href="#">Code Minifier</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 ToolHubCenter. All rights reserved. This tool is for educational purposes only.</p>
-            </div>
+        
+        <div class="card how-to-use">
+            <h2>How to Use the Binary Calculator Tool</h2>
+            <ol class="steps">
+                <li data-step="1">For binary calculations, enter two binary numbers in the input fields</li>
+                <li data-step="2">Select the operation you want to perform (addition, subtraction, multiplication, or division)</li>
+                <li data-step="3">Click the "Calculate" button to see the result</li>
+                <li data-step="4">For conversions, enter a decimal number and click "Convert" to get its binary equivalent</li>
+                <li data-step="5">Enter a binary number and click "Convert" to get its decimal equivalent</li>
+            </ol>
+            
+            <h3>Understanding Binary Numbers</h3>
+            <p>Binary is a base-2 numeral system that uses only two digits: 0 and 1. It's the fundamental language of computers and digital systems.</p>
+            <ul>
+                <li>Each digit in a binary number is called a bit</li>
+                <li>Binary arithmetic follows similar rules to decimal arithmetic</li>
+                <li>Converting between binary and decimal is essential for understanding how computers process data</li>
+            </ul>
         </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 ToolHubCenter - Binary Calculator Tool. All rights reserved.</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // DOM elements
+            // Binary calculator elements
             const binary1Input = document.getElementById('binary1');
             const binary2Input = document.getElementById('binary2');
-            const operationButtons = document.querySelectorAll('.btn-operation');
-            const binaryResult = document.getElementById('binaryResult');
-            const binaryResultValue = document.getElementById('binaryResultValue');
-            const decimalResultValue = document.getElementById('decimalResultValue');
-            const arithmeticResults = document.getElementById('arithmeticResults');
-            const conversionType = document.getElementById('conversionType');
-            const inputValue = document.getElementById('inputValue');
-            const convertBtn = document.getElementById('convertBtn');
-            const conversionResult = document.getElementById('conversionResult');
+            const operationButtons = document.querySelectorAll('[data-operation]');
+            const calculateBtn = document.getElementById('calculate-btn');
+            const calculationResult = document.getElementById('calculation-result');
             
-            // Initialize with a calculation
-            calculateOperation('add');
+            // Conversion elements
+            const decimalInput = document.getElementById('decimal-input');
+            const binaryInput = document.getElementById('binary-input');
+            const toBinaryBtn = document.getElementById('to-binary-btn');
+            const toDecimalBtn = document.getElementById('to-decimal-btn');
+            const conversionOutput = document.getElementById('conversion-output');
             
-            // Operation button event listeners
+            let selectedOperation = 'add';
+            
+            // Set up operation buttons
             operationButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const operation = this.getAttribute('data-operation');
-                    calculateOperation(operation);
+                    // Remove active class from all buttons
+                    operationButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Set selected operation
+                    selectedOperation = this.getAttribute('data-operation');
                 });
             });
             
-            // Convert button event listener
-            convertBtn.addEventListener('click', performConversion);
-            
-            // Input validation
-            binary1Input.addEventListener('input', validateBinaryInput);
-            binary2Input.addEventListener('input', validateBinaryInput);
-            inputValue.addEventListener('input', function() {
-                if (conversionType.value === 'binaryToDecimal') {
-                    validateBinaryInput.call(this);
-                }
-            });
-            
-            // Validate binary input
-            function validateBinaryInput() {
-                const value = this.value;
-                const isValid = /^[01]*$/.test(value);
+            // Binary calculation
+            calculateBtn.addEventListener('click', function() {
+                const binary1 = binary1Input.value.trim();
+                const binary2 = binary2Input.value.trim();
                 
-                if (!isValid) {
-                    this.value = value.replace(/[^01]/g, '');
+                if (!binary1 || !binary2) {
+                    alert('Please enter both binary numbers');
+                    return;
                 }
                 
-                this.style.borderColor = /^[01]+$/.test(this.value) ? '#ddd' : '#e74c3c';
-            }
-            
-            // Calculate binary operation
-            function calculateOperation(operation) {
-                const binary1 = binary1Input.value;
-                const binary2 = binary2Input.value;
-                
-                // Validate inputs
-                if (!/^[01]+$/.test(binary1) || !/^[01]+$/.test(binary2)) {
+                // Validate binary inputs
+                if (!isValidBinary(binary1) || !isValidBinary(binary2)) {
                     alert('Please enter valid binary numbers (only 0s and 1s)');
                     return;
                 }
                 
-                // Convert to decimal
+                // Convert binary to decimal for calculation
                 const decimal1 = parseInt(binary1, 2);
                 const decimal2 = parseInt(binary2, 2);
                 
-                let resultDecimal;
-                let operatorSymbol;
+                let result;
+                let operationSymbol;
                 
-                // Perform operation
-                switch(operation) {
+                switch(selectedOperation) {
                     case 'add':
-                        resultDecimal = decimal1 + decimal2;
-                        operatorSymbol = '+';
+                        result = decimal1 + decimal2;
+                        operationSymbol = '+';
                         break;
                     case 'subtract':
-                        resultDecimal = decimal1 - decimal2;
-                        operatorSymbol = '-';
+                        result = decimal1 - decimal2;
+                        operationSymbol = '-';
                         break;
                     case 'multiply':
-                        resultDecimal = decimal1 * decimal2;
-                        operatorSymbol = '×';
+                        result = decimal1 * decimal2;
+                        operationSymbol = '×';
                         break;
                     case 'divide':
                         if (decimal2 === 0) {
-                            alert('Cannot divide by zero');
+                            alert('Division by zero is not allowed');
                             return;
                         }
-                        resultDecimal = Math.floor(decimal1 / decimal2);
-                        operatorSymbol = '÷';
+                        result = Math.floor(decimal1 / decimal2); // Integer division for binary
+                        operationSymbol = '÷';
                         break;
                     default:
-                        return;
+                        result = decimal1 + decimal2;
+                        operationSymbol = '+';
                 }
                 
-                // Convert back to binary
-                const resultBinary = resultDecimal.toString(2);
+                // Convert result back to binary
+                const binaryResult = result.toString(2);
                 
-                // Update UI
-                binaryResult.textContent = `${binary1} ${operatorSymbol} ${binary2} = ${resultBinary}`;
-                binaryResultValue.textContent = resultBinary;
-                decimalResultValue.textContent = resultDecimal;
-                arithmeticResults.classList.add('active');
+                // Display the result
+                calculationResult.innerHTML = `
+                    <strong>Binary:</strong> ${binary1} ${operationSymbol} ${binary2} = ${binaryResult}<br>
+                    <strong>Decimal:</strong> ${decimal1} ${operationSymbol} ${decimal2} = ${result}
+                `;
+            });
+            
+            // Decimal to binary conversion
+            toBinaryBtn.addEventListener('click', function() {
+                const decimal = decimalInput.value.trim();
                 
-                // Highlight the active operation button
-                operationButtons.forEach(btn => {
-                    if (btn.getAttribute('data-operation') === operation) {
-                        btn.classList.add('btn-accent');
-                    } else {
-                        btn.classList.remove('btn-accent');
-                    }
-                });
+                if (!decimal) {
+                    alert('Please enter a decimal number');
+                    return;
+                }
+                
+                if (!isValidDecimal(decimal)) {
+                    alert('Please enter a valid positive integer');
+                    return;
+                }
+                
+                const decimalNum = parseInt(decimal, 10);
+                const binary = decimalNum.toString(2);
+                
+                conversionOutput.innerHTML = `
+                    <strong>Decimal:</strong> ${decimalNum}<br>
+                    <strong>Binary:</strong> ${binary}
+                `;
+            });
+            
+            // Binary to decimal conversion
+            toDecimalBtn.addEventListener('click', function() {
+                const binary = binaryInput.value.trim();
+                
+                if (!binary) {
+                    alert('Please enter a binary number');
+                    return;
+                }
+                
+                if (!isValidBinary(binary)) {
+                    alert('Please enter a valid binary number (only 0s and 1s)');
+                    return;
+                }
+                
+                const decimal = parseInt(binary, 2);
+                
+                conversionOutput.innerHTML = `
+                    <strong>Binary:</strong> ${binary}<br>
+                    <strong>Decimal:</strong> ${decimal}
+                `;
+            });
+            
+            // Helper functions for validation
+            function isValidBinary(binary) {
+                return /^[01]+$/.test(binary);
             }
             
-            // Perform conversion
-            function performConversion() {
-                const value = inputValue.value;
-                let binary, decimal;
-                
-                if (conversionType.value === 'binaryToDecimal') {
-                    // Validate binary input
-                    if (!/^[01]+$/.test(value)) {
-                        alert('Please enter a valid binary number (only 0s and 1s)');
-                        return;
-                    }
-                    binary = value;
-                    decimal = parseInt(binary, 2);
-                } else {
-                    // Validate decimal input
-                    if (!/^\d+$/.test(value)) {
-                        alert('Please enter a valid decimal number');
-                        return;
-                    }
-                    decimal = parseInt(value);
-                    binary = decimal.toString(2);
-                }
-                
-                // Update conversion result
-                conversionResult.innerHTML = `
-                    <div>Binary: ${binary}</div>
-                    <div>Decimal: ${decimal}</div>
-                `;
+            function isValidDecimal(decimal) {
+                return /^\d+$/.test(decimal) && parseInt(decimal, 10) >= 0;
             }
         });
     </script>
