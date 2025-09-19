@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Text Comparer Tool - Compare two texts to find differences, duplicates, and similarities instantly">
-    <meta name="keywords" content="text comparison, diff tool, content comparison, plagiarism checker, text analyzer">
     <title>Text Comparer Tool | ToolHubCenter</title>
-    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <meta name="description" content="Compare two texts to find differences. Perfect for document comparison, code changes, and content analysis.">
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4895ef;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4cc9f0;
-            --danger: #e63946;
-            --warning: #ff9e00;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --primary-color: #4a6cf7;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --background-color: #f9f9f9;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         * {
@@ -31,806 +27,460 @@
         }
         
         body {
-            background-color: #f5f7ff;
-            color: var(--dark);
+            background-color: var(--background-color);
+            color: var(--dark-color);
             line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            padding: 20px;
         }
         
-        .container {
-            width: 100%;
+        .tool-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            flex: 1;
         }
         
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-icon {
+        .ad-container {
             background-color: white;
-            color: var(--primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .logo-text span {
-            color: var(--success);
-        }
-        
-        /* Main Card */
-        .main-card {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            margin: 2rem auto;
-            overflow: hidden;
-            max-width: 1200px;
-        }
-        
-        .card-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1.5rem;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
+            box-shadow: var(--card-shadow);
         }
         
-        .card-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+        .ad-label {
+            display: block;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
         }
         
-        .card-subtitle {
-            font-size: 1rem;
-            opacity: 0.9;
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            margin-bottom: 20px;
         }
         
-        .card-body {
-            padding: 2rem;
-        }
-        
-        /* Tool Section */
-        .comparer-container {
-            display: flex;
-            flex-wrap: wrap;
+        .text-tool {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-bottom: 2rem;
         }
         
-        .text-box {
-            flex: 1;
-            min-width: 300px;
+        @media (max-width: 768px) {
+            .text-tool {
+                grid-template-columns: 1fr;
+            }
         }
         
-        .text-box-header {
+        .input-section {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .text-box-title {
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .word-count {
-            font-size: 0.9rem;
-            color: var(--gray);
+            flex-direction: column;
         }
         
         textarea {
             width: 100%;
             min-height: 250px;
             padding: 15px;
-            border: 2px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-        
-        textarea:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-        
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 1.5rem 0;
-            justify-content: center;
-        }
-        
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--secondary);
-        }
-        
-        .btn-secondary {
-            background-color: var(--light-gray);
-            color: var(--dark);
-        }
-        
-        .btn-secondary:hover {
-            background-color: #d1d1d1;
-        }
-        
-        /* Results Section */
-        .results-container {
-            border: 1px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            background-color: #f8f9fa;
-            margin-top: 2rem;
-        }
-        
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .results-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--secondary);
-        }
-        
-        .copy-btn {
-            background-color: var(--light-gray);
-            color: var(--gray);
-            border: none;
-            border-radius: var(--border-radius);
-            padding: 8px 15px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .copy-btn:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .diff-output {
-            background-color: white;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            min-height: 200px;
-            line-height: 1.8;
-            white-space: pre-wrap;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             font-family: monospace;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        
+        .comparison-result {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            min-height: 250px;
             overflow: auto;
-            max-height: 400px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-compare {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-clear {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        
+        .how-to-use {
+            margin-top: 30px;
+        }
+        
+        .how-to-use h2 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .instructions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .instruction-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .instruction-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .instruction-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
         
         .diff-added {
-            background-color: rgba(76, 201, 240, 0.2);
+            background-color: #d4edda;
             text-decoration: underline;
         }
         
         .diff-removed {
-            background-color: rgba(230, 57, 70, 0.2);
+            background-color: #f8d7da;
             text-decoration: line-through;
         }
         
-        .stats-container {
+        .tool-title {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
         }
         
-        .stat-card {
-            flex: 1;
-            min-width: 200px;
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 1.2rem;
-            text-align: center;
-            box-shadow: var(--box-shadow);
+        .tool-title img {
+            width: 32px;
+            height: 32px;
         }
         
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 10px 0;
-        }
-        
-        .stat-title {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .similarity-bar {
-            height: 10px;
-            background-color: var(--light-gray);
-            border-radius: 5px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-        
-        .similarity-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
-            border-radius: 5px;
-        }
-        
-        /* How to Use Section */
-        .how-to-use {
-            background-color: var(--light);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .section-title {
+        .tool-title h2 {
             font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
         }
         
-        .steps {
+        .options {
             display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
         }
         
-        .step-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            flex: 1;
-            min-width: 250px;
-            max-width: 300px;
-            box-shadow: var(--box-shadow);
-            text-align: center;
-        }
-        
-        .step-number {
-            background-color: var(--primary);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .option-group {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin: 0 auto 1rem;
+            gap: 5px;
         }
         
-        .step-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            color: var(--secondary);
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
         }
         
-        /* Ad Containers */
-        .ad-container {
-            background-color: var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 15px;
-            text-align: center;
-            margin: 2rem 0;
-            min-height: 100px;
+        .stats {
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .ad-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-        
-        .ad-placeholder {
-            background: #e9ecef;
-            padding: 20px;
-            border-radius: 4px;
-            color: #6c757d;
-            width: 100%;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
+            gap: 15px;
+            margin-top: 15px;
             flex-wrap: wrap;
-            gap: 30px;
         }
         
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-title {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--success);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-links a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--success);
-        }
-        
-        .copyright {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #444;
-            color: #aaa;
+        .stat-item {
+            background-color: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 20px;
             font-size: 0.9rem;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-            }
-            
-            .steps {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .step-card {
-                max-width: 100%;
-            }
-            
-            .stat-card {
-                min-width: 100%;
-            }
-        }
-        
-        /* Loading Animation */
-        .loader {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .loader-spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: var(--primary);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Tool Tips */
-        .tool-tips {
-            background-color: #e8f4fd;
-            border-left: 4px solid var(--accent);
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-            padding: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        .tool-tips h3 {
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .tool-tips ul {
-            padding-left: 1.5rem;
-        }
-        
-        .tool-tips li {
-            margin-bottom: 0.5rem;
         }
     </style>
 </head>
 <body>
-    <!-- Header with Logo -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">T</div>
-                    <div class="logo-text">Tool<span>Hub</span>Center</div>
-                </div>
-                <nav>
-                    <button class="copy-btn">Home</button>
-                    <button class="copy-btn">Tools</button>
-                    <button class="copy-btn">About</button>
-                    <button class="copy-btn">Contact</button>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <div class="container">
+    <div class="tool-container">
         <!-- Top Ad Unit -->
         <div class="ad-container">
+            <span class="ad-label">Advertisement</span>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <div class="card">
+            <div class="tool-title">
+                <img src="favicon-16x16.png" alt="ToolHubCenter Logo">
+                <h2>Text Comparer Tool</h2>
+            </div>
+            <p>Compare two texts to find differences, perfect for document comparison and code changes.</p>
+            
+            <div class="options">
+                <div class="option-group">
+                    <input type="checkbox" id="ignoreCase" checked>
+                    <label for="ignoreCase">Ignore case</label>
+                </div>
+                <div class="option-group">
+                    <input type="checkbox" id="ignoreWhitespace">
+                    <label for="ignoreWhitespace">Ignore whitespace</label>
+                </div>
+            </div>
+            
+            <div class="text-tool">
+                <div class="input-section">
+                    <label for="text1">Original Text:</label>
+                    <textarea id="text1" placeholder="Paste your original text here...">The quick brown fox jumps over the lazy dog.
+This is the first text to compare.
+Hello world!</textarea>
+                </div>
+                
+                <div class="input-section">
+                    <label for="text2">Modified Text:</label>
+                    <textarea id="text2" placeholder="Paste your modified text here...">The quick brown fox jumps over the lazy dog.
+This is the second text to compare.
+Goodbye world!</textarea>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn-compare" onclick="compareTexts()">Compare Texts</button>
+                <button class="btn-clear" onclick="clearAll()">Clear All</button>
+            </div>
+            
             <div>
-                <div class="ad-label">Advertisement</div>
-                <!-- Google AdSense code -->
-                <div class="ad-placeholder">
-                    Google AdSense 728x90 Ad
+                <label>Comparison Result:</label>
+                <div id="comparisonResult" class="comparison-result"></div>
+                <div id="statusMessage" class="status"></div>
+                
+                <div class="stats">
+                    <div class="stat-item" id="addedCount">Added: 0</div>
+                    <div class="stat-item" id="removedCount">Removed: 0</div>
+                    <div class="stat-item" id="similarityScore">Similarity: 0%</div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Tool Card -->
-        <div class="main-card">
-            <div class="card-header">
-                <h1 class="card-title">Text Comparer Tool</h1>
-                <p class="card-subtitle">Compare two texts to find differences, duplicates, and similarities</p>
-            </div>
-            
-            <div class="card-body">
-                <div class="comparer-container">
-                    <div class="text-box">
-                        <div class="text-box-header">
-                            <h3 class="text-box-title">Text 1</h3>
-                            <div class="word-count">Words: <span id="count1">0</span></div>
-                        </div>
-                        <textarea id="text1" placeholder="Enter your first text here...">The Text Comparer tool is an essential utility for writers, editors, and content creators. It allows you to compare two different versions of a document to identify changes, additions, and deletions. This tool is particularly useful for tracking revisions, spotting plagiarism, and ensuring content consistency across multiple documents.</textarea>
-                    </div>
-                    
-                    <div class="text-box">
-                        <div class="text-box-header">
-                            <h3 class="text-box-title">Text 2</h3>
-                            <div class="word-count">Words: <span id="count2">0</span></div>
-                        </div>
-                        <textarea id="text2" placeholder="Enter your second text here...">The Text Comparison tool is an essential utility for authors, editors, and content managers. It enables you to compare two versions of a document to identify modifications, additions, and removals. This application is especially helpful for monitoring revisions, detecting plagiarism, and maintaining content uniformity across various documents.</textarea>
-                    </div>
-                </div>
-                
-                <div class="controls">
-                    <button id="compare-btn" class="btn btn-primary">Compare Texts</button>
-                    <button id="clear-btn" class="btn btn-secondary">Clear All</button>
-                    <button id="swap-btn" class="btn btn-secondary">Swap Texts</button>
-                </div>
-                
-                <!-- Tool Tips -->
-                <div class="tool-tips">
-                    <h3>Tips for Effective Text Comparison:</h3>
-                    <ul>
-                        <li>Use for comparing document revisions or versions</li>
-                        <li>Check for plagiarism by comparing your content with source material</li>
-                        <li>Compare translations to ensure meaning is preserved</li>
-                        <li>Identify changes between two similar pieces of text</li>
-                    </ul>
-                </div>
-                
-                <!-- Results Container -->
-                <div class="results-container" id="results-container" style="display: none;">
-                    <div class="results-header">
-                        <h2 class="results-title">Comparison Results</h2>
-                        <button class="copy-btn" id="copy-btn">Copy Results</button>
-                    </div>
-                    
-                    <div class="diff-output" id="diff-output">
-                        <!-- Comparison results will appear here -->
-                    </div>
-                    
-                    <div class="stats-container">
-                        <div class="stat-card">
-                            <div class="stat-value" id="similarity-percent">0%</div>
-                            <div class="stat-title">Similarity</div>
-                            <div class="similarity-bar">
-                                <div class="similarity-progress" id="similarity-bar" style="width: 0%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-value" id="diff-count">0</div>
-                            <div class="stat-title">Differences Found</div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-value" id="common-words">0</div>
-                            <div class="stat-title">Common Words</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- How to Use Section -->
-        <div class="how-to-use">
-            <h2 class="section-title">How to Use This Tool</h2>
-            <div class="steps">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Enter Your Texts</h3>
-                    <p>Paste or type your content into the two text boxes. You can compare any two pieces of text.</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Compare Content</h3>
-                    <p>Click the "Compare Texts" button to analyze the differences between your two texts.</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Review Results</h3>
-                    <p>Examine the highlighted differences and similarity statistics to understand the variations.</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">Take Action</h3>
-                    <p>Copy the results, make edits, or use the insights for your content strategy.</p>
-                </div>
-            </div>
-        </div>
-        
         <!-- Bottom Ad Unit -->
         <div class="ad-container">
-            <div>
-                <div class="ad-label">Advertisement</div>
-                <!-- Google AdSense code -->
-                <div class="ad-placeholder">
-                    Google AdSense 728x90 Ad
+            <span class="ad-label">Advertisement</span>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+
+        <div class="how-to-use card">
+            <h2>How to Use the Text Comparer Tool</h2>
+            <div class="instructions">
+                <div class="instruction-card">
+                    <h3>1. Enter Texts</h3>
+                    <p>Paste your original text in the first box and the modified text in the second box.</p>
+                </div>
+                <div class="instruction-card">
+                    <h3>2. Set Options</h3>
+                    <p>Choose whether to ignore case differences or whitespace variations between the texts.</p>
+                </div>
+                <div class="instruction-card">
+                    <h3>3. Compare</h3>
+                    <p>Click the "Compare Texts" button to analyze the differences between your texts.</p>
+                </div>
+                <div class="instruction-card">
+                    <h3>4. Review Results</h3>
+                    <p>See added text highlighted in green, removed text in red, and view similarity statistics.</p>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 class="footer-title">ToolHubCenter</h3>
-                    <p>Your all-in-one platform for digital marketing tools and resources. Enhance your online presence with our free tools.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">All Tools</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3 class="footer-title">Popular Tools</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Keyword Generator</a></li>
-                        <li><a href="#">Meta Description Tool</a></li>
-                        <li><a href="#">Plagiarism Checker</a></li>
-                        <li><a href="#">Grammar Checker</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                &copy; 2023 ToolHubCenter. All rights reserved.
-            </div>
-        </div>
-    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const text1 = document.getElementById('text1');
-            const text2 = document.getElementById('text2');
-            const compareBtn = document.getElementById('compare-btn');
-            const clearBtn = document.getElementById('clear-btn');
-            const swapBtn = document.getElementById('swap-btn');
-            const resultsContainer = document.getElementById('results-container');
-            const diffOutput = document.getElementById('diff-output');
-            const copyBtn = document.getElementById('copy-btn');
-            const count1 = document.getElementById('count1');
-            const count2 = document.getElementById('count2');
-            const similarityPercent = document.getElementById('similarity-percent');
-            const similarityBar = document.getElementById('similarity-bar');
-            const diffCount = document.getElementById('diff-count');
-            const commonWords = document.getElementById('common-words');
+        function compareTexts() {
+            const text1 = document.getElementById('text1').value;
+            const text2 = document.getElementById('text2').value;
+            const result = document.getElementById('comparisonResult');
+            const status = document.getElementById('statusMessage');
+            const ignoreCase = document.getElementById('ignoreCase').checked;
+            const ignoreWhitespace = document.getElementById('ignoreWhitespace').checked;
             
-            // Initialize word counts
-            updateWordCount(text1, count1);
-            updateWordCount(text2, count2);
-            
-            // Update word counts on input
-            text1.addEventListener('input', () => updateWordCount(text1, count1));
-            text2.addEventListener('input', () => updateWordCount(text2, count2));
-            
-            // Compare texts
-            compareBtn.addEventListener('click', compareTexts);
-            
-            // Clear texts
-            clearBtn.addEventListener('click', function() {
-                text1.value = '';
-                text2.value = '';
-                updateWordCount(text1, count1);
-                updateWordCount(text2, count2);
-                resultsContainer.style.display = 'none';
-            });
-            
-            // Swap texts
-            swapBtn.addEventListener('click', function() {
-                const temp = text1.value;
-                text1.value = text2.value;
-                text2.value = temp;
-                updateWordCount(text1, count1);
-                updateWordCount(text2, count2);
-                if (resultsContainer.style.display === 'block') {
-                    compareTexts();
-                }
-            });
-            
-            // Copy results
-            copyBtn.addEventListener('click', function() {
-                const textToCopy = diffOutput.textContent;
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    copyBtn.textContent = 'Copied!';
-                    setTimeout(() => {
-                        copyBtn.textContent = 'Copy Results';
-                    }, 2000);
-                });
-            });
-            
-            // Update word count
-            function updateWordCount(textarea, counter) {
-                const text = textarea.value.trim();
-                const words = text ? text.split(/\s+/).length : 0;
-                counter.textContent = words;
-            }
-            
-            // Compare texts function
-            function compareTexts() {
-                const text1Value = text1.value;
-                const text2Value = text2.value;
-                
-                if (!text1Value.trim() || !text2Value.trim()) {
-                    alert('Please enter text in both boxes');
-                    return;
+            try {
+                if (!text1.trim() || !text2.trim()) {
+                    throw new Error('Please enter text in both boxes');
                 }
                 
-                // Show results container
-                resultsContainer.style.display = 'block';
+                // Prepare texts based on options
+                let preparedText1 = text1;
+                let preparedText2 = text2;
                 
-                // Perform text comparison
-                const diff = generateDiff(text1Value, text2Value);
-                diffOutput.innerHTML = diff.html;
+                if (ignoreCase) {
+                    preparedText1 = preparedText1.toLowerCase();
+                    preparedText2 = preparedText2.toLowerCase();
+                }
                 
-                // Update statistics
-                similarityPercent.textContent = diff.similarity + '%';
-                similarityBar.style.width = diff.similarity + '%';
-                diffCount.textContent = diff.differences;
-                commonWords.textContent = diff.commonWords;
-            }
-            
-            // Text diff algorithm
-            function generateDiff(text1, text2) {
-                const words1 = text1.split(/\s+/);
-                const words2 = text2.split(/\s+/);
-                const maxLen = Math.max(words1.length, words2.length);
+                if (ignoreWhitespace) {
+                    preparedText1 = preparedText1.replace(/\s+/g, ' ');
+                    preparedText2 = preparedText2.replace(/\s+/g, ' ');
+                }
                 
-                let html = '';
-                let differences = 0;
-                let common = 0;
+                // Split into lines for comparison
+                const lines1 = preparedText1.split('\n');
+                const lines2 = preparedText2.split('\n');
                 
-                for (let i = 0; i < maxLen; i++) {
-                    const word1 = words1[i] || '';
-                    const word2 = words2[i] || '';
+                // Split into words for more granular comparison
+                const words1 = preparedText1.split(/\s+/);
+                const words2 = preparedText2.split(/\s+/);
+                
+                // Calculate similarity percentage
+                const similarity = calculateSimilarity(words1, words2);
+                document.getElementById('similarityScore').textContent = `Similarity: ${similarity}%`;
+                
+                // Compare line by line
+                let addedCount = 0;
+                let removedCount = 0;
+                let output = '';
+                
+                const maxLines = Math.max(lines1.length, lines2.length);
+                
+                for (let i = 0; i < maxLines; i++) {
+                    const line1 = i < lines1.length ? lines1[i] : '';
+                    const line2 = i < lines2.length ? lines2[i] : '';
                     
-                    if (word1 === word2 && word1 !== '') {
-                        html += word1 + ' ';
-                        common++;
+                    if (line1 !== line2) {
+                        // Find word differences
+                        const line1Words = line1.split(/\s+/);
+                        const line2Words = line2.split(/\s+/);
+                        
+                        output += `Line ${i+1}:\n`;
+                        
+                        // Compare words in this line
+                        const maxWords = Math.max(line1Words.length, line2Words.length);
+                        let lineOutput = '';
+                        
+                        for (let j = 0; j < maxWords; j++) {
+                            const word1 = j < line1Words.length ? line1Words[j] : '';
+                            const word2 = j < line2Words.length ? line2Words[j] : '';
+                            
+                            if (word1 !== word2) {
+                                if (word1 && !word2) {
+                                    lineOutput += `<span class="diff-removed">${word1}</span> `;
+                                    removedCount++;
+                                } else if (!word1 && word2) {
+                                    lineOutput += `<span class="diff-added">${word2}</span> `;
+                                    addedCount++;
+                                } else {
+                                    lineOutput += `<span class="diff-removed">${word1}</span> `;
+                                    lineOutput += `<span class="diff-added">${word2}</span> `;
+                                    removedCount++;
+                                    addedCount++;
+                                }
+                            } else {
+                                lineOutput += word1 + ' ';
+                            }
+                        }
+                        
+                        output += lineOutput + '\n\n';
                     } else {
-                        if (word1 !== '') {
-                            html += `<span class="diff-removed">${word1}</span> `;
-                        }
-                        if (word2 !== '') {
-                            html += `<span class="diff-added">${word2}</span> `;
-                        }
-                        differences++;
+                        output += `Line ${i+1}: (no changes)\n${line1}\n\n`;
                     }
                 }
                 
-                // Calculate similarity percentage
-                const totalWords = words1.length + words2.length;
-                const similarity = totalWords > 0 ? Math.round((common * 200) / totalWords) : 100;
+                // Update counts
+                document.getElementById('addedCount').textContent = `Added: ${addedCount}`;
+                document.getElementById('removedCount').textContent = `Removed: ${removedCount}`;
                 
-                return {
-                    html: html,
-                    differences: differences,
-                    commonWords: common,
-                    similarity: similarity
-                };
+                result.innerHTML = output || 'No differences found. The texts are identical.';
+                status.className = 'status success';
+                status.textContent = '✅ Comparison completed successfully!';
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = '❌ Error: ' + error.message;
+                result.textContent = '';
             }
+        }
+        
+        function calculateSimilarity(words1, words2) {
+            // Simple similarity calculation based on common words
+            const set1 = new Set(words1);
+            const set2 = new Set(words2);
             
-            // Initialize with sample comparison
+            const intersection = new Set([...set1].filter(x => set2.has(x)));
+            const union = new Set([...set1, ...set2]);
+            
+            return Math.round((intersection.size / union.size) * 100);
+        }
+        
+        function clearAll() {
+            document.getElementById('text1').value = '';
+            document.getElementById('text2').value = '';
+            document.getElementById('comparisonResult').textContent = '';
+            document.getElementById('statusMessage').className = 'status';
+            document.getElementById('statusMessage').textContent = '';
+            document.getElementById('addedCount').textContent = 'Added: 0';
+            document.getElementById('removedCount').textContent = 'Removed: 0';
+            document.getElementById('similarityScore').textContent = 'Similarity: 0%';
+        }
+        
+        // Auto-compare when the page loads with example texts
+        window.onload = function() {
             compareTexts();
-        });
+        };
     </script>
 </body>
 </html>
