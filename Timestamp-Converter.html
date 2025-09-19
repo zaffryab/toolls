@@ -3,641 +3,563 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online Timestamp Converter tool. Easily convert between Unix timestamps and human-readable dates. Supports milliseconds and time zones.">
-    <meta name="keywords" content="timestamp converter, unix time converter, epoch converter, time conversion, ToolHubCenter">
-    <title>Timestamp Converter | ToolHubCenter</title>
-    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <meta name="description" content="Free online timestamp converter tool. Convert between Unix timestamps and human-readable dates with ease.">
+    <title>Timestamp Converter Tool | ToolHubCenter</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
     <style>
         :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3f37c9;
-            --accent-color: #4895ef;
+            --primary-color: #4a6cf7;
+            --secondary-color: #6c757d;
             --background-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-color: #e0e0e0;
-            --success-color: #4caf50;
-            --error-color: #f44336;
+            --card-background: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+            --success-color: #198754;
+            --error-color: #dc3545;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
-        }
-
-        .container {
+            padding: 15px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
         }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: white;
+        
+        .card {
+            background: var(--card-background);
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-color);
-            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
         }
-
-        nav ul {
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .tool-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .ad-container {
+            text-align: center;
+            margin: 20px 0;
+            min-height: 90px;
             display: flex;
-            list-style: none;
+            justify-content: center;
+            align-items: center;
+            background-color: #f3f4f6;
+            border-radius: 6px;
+        }
+        
+        .ad-label {
+            font-size: 12px;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .converter-container {
+            display: flex;
+            flex-direction: column;
             gap: 20px;
         }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .ad-container {
-            margin: 20px auto;
-            text-align: center;
-            background-color: white;
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .ad-placeholder {
-            background: linear-gradient(45deg, #f5f7fa, #c3cfe2);
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 30px;
-            margin: 30px 0;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        .tool-title {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .converter-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-
-        @media (min-width: 768px) {
-            .converter-container {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
+        
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-
-        label {
+        
+        .input-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--secondary-color);
+            margin-bottom: 5px;
+            font-weight: 600;
         }
-
-        input, select {
+        
+        input[type="text"], input[type="datetime-local"], select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            border-radius: 4px;
+            font-size: 16px;
         }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        
+        .conversion-direction {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
         }
-
-        .btn {
+        
+        .direction-btn {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
+            padding: 8px 16px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: background 0.3s, transform 0.2s;
-            display: inline-flex;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            display: flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
         }
-
-        .btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
+        
+        .direction-btn:hover {
+            background-color: #3a5ad9;
         }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .result-container {
-            background-color: #f8f9ff;
-            border-left: 4px solid var(--accent-color);
-            padding: 15px;
-            border-radius: 0 6px 6px 0;
-            margin-top: 10px;
-            min-height: 60px;
-        }
-
-        .result-title {
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 5px;
-        }
-
-        .result-value {
-            font-size: 1.2rem;
-            font-weight: 500;
-            word-break: break-all;
-        }
-
-        .how-to-use {
-            margin-top: 40px;
-        }
-
-        .section-title {
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .instructions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .instruction-card {
-            background-color: #f0f4ff;
-            border-radius: 8px;
-            padding: 20px;
-            transition: transform 0.3s;
-        }
-
-        .instruction-card:hover {
-            transform: scale(1.02);
-        }
-
-        .instruction-step {
+        
+        button {
             background-color: var(--primary-color);
             color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 15px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
         }
-
-        .instruction-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
+        
+        button:hover {
+            background-color: #3a5ad9;
         }
-
-        footer {
-            background: linear-gradient(135deg, var(--secondary-color), #2a1e8a);
-            color: white;
-            padding: 30px 0;
-            margin-top: 50px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-links h3 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-
-        .footer-links a {
-            color: #e0e0ff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
+        
+        .result-container {
             margin-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border-left: 4px solid var(--primary-color);
         }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
+        
+        .result-item {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .result-label {
+            font-weight: 600;
+            min-width: 120px;
+        }
+        
+        .current-time {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-radius: 4px;
+            border-left: 4px solid var(--success-color);
+            text-align: center;
+        }
+        
+        .tab-container {
+            margin-top: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .example h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .example code {
+            background-color: #e9ecef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        @media (min-width: 768px) {
+            .converter-container {
+                flex-direction: row;
             }
             
-            nav ul {
-                justify-content: center;
+            .converter-panel {
+                flex: 1;
             }
-            
-            .btn-group {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
+        }
+        
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">THC</div>
-                    <span>ToolHubCenter</span>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><a href="#how-to-use">How to Use</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
+    <div class="card">
+        <div class="tool-header">
+            <h1>Timestamp Converter Tool</h1>
+            <p>Convert between Unix timestamps and human-readable dates</p>
         </div>
-    </header>
-
-    <main class="container">
-        <!-- Top Ad Unit -->
+        
+        <!-- Upper Ad Space -->
+        <div class="ad-label">Advertisement</div>
         <div class="ad-container">
-            <div class="ad-placeholder">
-                Advertisement Space (728x90)
-                <!-- Google AdSense code would be inserted here -->
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
-                        'format' : 'iframe',
-                        'height' : 90,
-                        'width' : 728,
-                        'params' : {}
-                    };
-                </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
+        </div>
+        
+        <div class="current-time">
+            <p>Current Unix Timestamp: <strong id="currentTimestamp"></strong></p>
+            <p>Current UTC Time: <strong id="currentUTCTime"></strong></p>
+            <p>Current Local Time: <strong id="currentLocalTime"></strong></p>
+        </div>
+        
+        <div class="converter-container">
+            <div class="converter-panel">
+                <div class="input-group">
+                    <label for="timestampInput">Unix Timestamp (seconds):</label>
+                    <input type="text" id="timestampInput" placeholder="Enter Unix timestamp" />
+                </div>
+                
+                <div class="input-group">
+                    <label for="millisecondsInput">Unix Timestamp (milliseconds):</label>
+                    <input type="text" id="millisecondsInput" placeholder="Enter milliseconds timestamp" />
+                </div>
+                
+                <button id="convertToDate">Convert to Date</button>
+            </div>
+            
+            <div class="conversion-direction">
+                <button class="direction-btn" id="switchDirection">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                    Switch Conversion Direction
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="converter-panel">
+                <div class="input-group">
+                    <label for="dateInput">Date and Time:</label>
+                    <input type="datetime-local" id="dateInput" />
+                </div>
+                
+                <div class="input-group">
+                    <label for="timezone">Timezone:</label>
+                    <select id="timezone">
+                        <option value="local">Local Time</option>
+                        <option value="utc">UTC</option>
+                    </select>
+                </div>
+                
+                <button id="convertToTimestamp">Convert to Timestamp</button>
             </div>
         </div>
-
-        <!-- Converter Tool -->
-        <div class="card">
-            <h1 class="tool-title">Timestamp Converter</h1>
-            <div class="converter-container">
-                <div class="converter-section">
-                    <div class="input-group">
-                        <label for="unix-timestamp">Unix Timestamp (seconds)</label>
-                        <input type="number" id="unix-timestamp" placeholder="Enter Unix timestamp">
-                    </div>
-                    <button class="btn" id="convert-to-date">
-                        <span>Convert to Date</span>
-                    </button>
-                    <button class="btn" id="current-timestamp">
-                        <span>Current Timestamp</span>
-                    </button>
-                    
-                    <div class="input-group">
-                        <label>Result (Local Time)</label>
-                        <div class="result-container">
-                            <div class="result-value" id="date-result">-</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="converter-section">
-                    <div class="input-group">
-                        <label for="date-input">Date and Time</label>
-                        <input type="datetime-local" id="date-input">
-                    </div>
-                    <div class="input-group">
-                        <label for="timezone">Timezone</label>
-                        <select id="timezone">
-                            <option value="local">Local Time</option>
-                            <option value="utc">UTC</option>
-                        </select>
-                    </div>
-                    <button class="btn" id="convert-to-timestamp">
-                        <span>Convert to Timestamp</span>
-                    </button>
-                    <button class="btn" id="current-date">
-                        <span>Current Date</span>
-                    </button>
-                    
-                    <div class="input-group">
-                        <label>Result (Unix Timestamp)</label>
-                        <div class="result-container">
-                            <div class="result-title">Seconds:</div>
-                            <div class="result-value" id="timestamp-result">-</div>
-                            <div class="result-title" style="margin-top: 10px;">Milliseconds:</div>
-                            <div class="result-value" id="timestamp-ms-result">-</div>
-                        </div>
-                    </div>
-                </div>
+        
+        <div class="result-container">
+            <h3>Conversion Results</h3>
+            <div class="result-item">
+                <span class="result-label">Unix Timestamp:</span>
+                <span id="resultTimestamp">-</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">UTC Time:</span>
+                <span id="resultUTC">-</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Local Time:</span>
+                <span id="resultLocal">-</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">ISO Format:</span>
+                <span id="resultISO">-</span>
             </div>
         </div>
-
-        <!-- How to Use Section -->
-        <div class="how-to-use" id="how-to-use">
-            <h2 class="section-title">How to Use the Timestamp Converter</h2>
-            <div class="instructions">
-                <div class="instruction-card">
-                    <div class="instruction-step">1</div>
-                    <h3 class="instruction-title">Convert Timestamp to Date</h3>
-                    <p>Enter a Unix timestamp (in seconds) in the first input field and click "Convert to Date". The tool will display the corresponding date and time in your local timezone.</p>
-                </div>
-                
-                <div class="instruction-card">
-                    <div class="instruction-step">2</div>
-                    <h3 class="instruction-title">Convert Date to Timestamp</h3>
-                    <p>Select a date and time using the datetime picker. Choose your timezone (Local or UTC) and click "Convert to Timestamp". The tool will display the Unix timestamp in seconds and milliseconds.</p>
-                </div>
-                
-                <div class="instruction-card">
-                    <div class="instruction-step">3</div>
-                    <h3 class="instruction-title">Use Current Values</h3>
-                    <p>Click "Current Timestamp" to insert the current Unix timestamp. Click "Current Date" to set the datetime picker to the current date and time.</p>
-                </div>
-                
-                <div class="instruction-card">
-                    <div class="instruction-step">4</div>
-                    <h3 class="instruction-title">Understanding Results</h3>
-                    <p>Unix timestamps represent the number of seconds that have elapsed since January 1, 1970 (UTC). Milliseconds are also provided for more precise time measurements.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bottom Ad Unit -->
+        
+        <!-- Lower Ad Space -->
+        <div class="ad-label">Advertisement</div>
         <div class="ad-container">
-            <div class="ad-placeholder">
-                Advertisement Space (728x90)
-                <!-- Google AdSense code would be inserted here -->
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : '0d49ce870daff252fd6f617ee1e9481d',
-                        'format' : 'iframe',
-                        'height' : 90,
-                        'width' : 728,
-                        'params' : {}
-                    };
-                </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
-            </div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0d49ce870daff252fd6f617ee1e9481d',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-links">
-                    <div class="footer-logo">
-                        <div class="logo-icon">THC</div>
-                        ToolHubCenter
-                    </div>
-                    <p>Your all-in-one solution for online tools and utilities. Free, fast, and reliable tools for developers and everyday users.</p>
+        
+        <div class="tab-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="how-to-use">How to Use</div>
+                <div class="tab" data-tab="timestamp-info">About Timestamps</div>
+            </div>
+            
+            <div id="how-to-use" class="tab-content active">
+                <h3>How to Use the Timestamp Converter Tool</h3>
+                <p>This tool allows you to convert between Unix timestamps and human-readable date formats.</p>
+                
+                <div class="example">
+                    <h4>Convert Timestamp to Date</h4>
+                    <ol>
+                        <li>Enter a Unix timestamp in seconds in the "Unix Timestamp" field</li>
+                        <li>Or enter a timestamp in milliseconds in the "Unix Timestamp (milliseconds)" field</li>
+                        <li>Click the "Convert to Date" button</li>
+                        <li>View the results in the Conversion Results section</li>
+                    </ol>
                 </div>
                 
-                <div class="footer-links">
-                    <h3>Popular Tools</h3>
-                    <ul>
-                        <li><a href="#">Timestamp Converter</a></li>
-                        <li><a href="#">JSON Formatter</a></li>
-                        <li><a href="#">Base64 Encoder</a></li>
-                        <li><a href="#">Password Generator</a></li>
-                        <li><a href="#">Color Picker</a></li>
-                    </ul>
+                <div class="example">
+                    <h4>Convert Date to Timestamp</h4>
+                    <ol>
+                        <li>Select a date and time using the date picker</li>
+                        <li>Choose whether it's in your local time or UTC</li>
+                        <li>Click the "Convert to Timestamp" button</li>
+                        <li>View the resulting timestamp in the Conversion Results section</li>
+                    </ol>
                 </div>
                 
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">All Tools</a></li>
-                        <li><a href="#how-to-use">How to Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
+                <div class="example">
+                    <h4>Switch Conversion Direction</h4>
+                    <p>Use the "Switch Conversion Direction" button to quickly focus on the opposite conversion type.</p>
                 </div>
             </div>
             
-            <div class="copyright">
-                <p>&copy; 2023 ToolHubCenter. All rights reserved.</p>
+            <div id="timestamp-info" class="tab-content">
+                <h3>About Unix Timestamps</h3>
+                <p>A Unix timestamp is a way to track time as a running total of seconds. This count starts at the Unix Epoch on January 1st, 1970 at UTC.</p>
+                
+                <div class="example">
+                    <h4>Key Points</h4>
+                    <ul>
+                        <li>Unix time is measured in seconds since January 1, 1970 00:00:00 UTC</li>
+                        <li>It's also known as POSIX time or Epoch time</li>
+                        <li>Timestamps can be represented in seconds or milliseconds</li>
+                        <li>The maximum value for a 32-bit signed integer timestamp is 2,147,483,647, which corresponds to January 19, 2038 (the "Year 2038 problem")</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4>Common Uses</h4>
+                    <ul>
+                        <li>Database systems often store dates as timestamps</li>
+                        <li>Programming languages use timestamps for date arithmetic</li>
+                        <li>APIs frequently return dates as timestamps</li>
+                        <li>Log files use timestamps to record event times</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4>Examples</h4>
+                    <ul>
+                        <li><code>0</code> = January 1, 1970 00:00:00 UTC</li>
+                        <li><code>1640995200</code> = January 1, 2022 00:00:00 UTC</li>
+                        <li><code>1654041600</code> = June 1, 2022 00:00:00 UTC</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Elements
-            const unixInput = document.getElementById('unix-timestamp');
-            const dateInput = document.getElementById('date-input');
+            const timestampInput = document.getElementById('timestampInput');
+            const millisecondsInput = document.getElementById('millisecondsInput');
+            const dateInput = document.getElementById('dateInput');
             const timezoneSelect = document.getElementById('timezone');
-            const convertToDateBtn = document.getElementById('convert-to-date');
-            const convertToTimestampBtn = document.getElementById('convert-to-timestamp');
-            const currentTimestampBtn = document.getElementById('current-timestamp');
-            const currentDateBtn = document.getElementById('current-date');
-            const dateResult = document.getElementById('date-result');
-            const timestampResult = document.getElementById('timestamp-result');
-            const timestampMsResult = document.getElementById('timestamp-ms-result');
+            const convertToDateBtn = document.getElementById('convertToDate');
+            const convertToTimestampBtn = document.getElementById('convertToTimestamp');
+            const switchDirectionBtn = document.getElementById('switchDirection');
+            const resultTimestamp = document.getElementById('resultTimestamp');
+            const resultUTC = document.getElementById('resultUTC');
+            const resultLocal = document.getElementById('resultLocal');
+            const resultISO = document.getElementById('resultISO');
+            const currentTimestampEl = document.getElementById('currentTimestamp');
+            const currentUTCTimeEl = document.getElementById('currentUTCTime');
+            const currentLocalTimeEl = document.getElementById('currentLocalTime');
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
             
-            // Set current date as default
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            dateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+            // Update current time
+            function updateCurrentTime() {
+                const now = new Date();
+                currentTimestampEl.textContent = Math.floor(now.getTime() / 1000);
+                currentUTCTimeEl.textContent = now.toUTCString();
+                currentLocalTimeEl.textContent = now.toString();
+            }
             
-            // Convert Unix timestamp to date
-            convertToDateBtn.addEventListener('click', function() {
-                const timestamp = parseInt(unixInput.value);
+            // Update current time immediately and then every second
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 1000);
+            
+            // Tab functionality
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show active tab content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Switch direction functionality
+            switchDirectionBtn.addEventListener('click', function() {
+                if (timestampInput.value || millisecondsInput.value) {
+                    // If we have timestamp values, focus on date input
+                    dateInput.focus();
+                } else {
+                    // Otherwise focus on timestamp input
+                    timestampInput.focus();
+                }
+            });
+            
+            // Convert timestamp to date
+            convertToDateBtn.addEventListener('click', convertTimestampToDate);
+            
+            // Also convert when timestamp input changes
+            timestampInput.addEventListener('input', convertTimestampToDate);
+            millisecondsInput.addEventListener('input', convertTimestampToDate);
+            
+            // Convert date to timestamp
+            convertToTimestampBtn.addEventListener('click', convertDateToTimestamp);
+            
+            function convertTimestampToDate() {
+                let timestampValue = timestampInput.value;
+                let millisecondsValue = millisecondsInput.value;
+                
+                let timestamp;
+                
+                if (timestampValue) {
+                    timestamp = parseInt(timestampValue) * 1000;
+                    millisecondsInput.value = timestamp;
+                } else if (millisecondsValue) {
+                    timestamp = parseInt(millisecondsValue);
+                    timestampInput.value = Math.floor(timestamp / 1000);
+                } else {
+                    // If no input, use current time
+                    timestamp = Date.now();
+                    timestampInput.value = Math.floor(timestamp / 1000);
+                    millisecondsInput.value = timestamp;
+                }
                 
                 if (isNaN(timestamp)) {
-                    dateResult.textContent = 'Please enter a valid timestamp';
-                    dateResult.style.color = 'var(--error-color)';
+                    alert("Please enter a valid numeric timestamp");
                     return;
                 }
                 
-                const date = new Date(timestamp * 1000);
-                dateResult.textContent = formatDate(date);
-                dateResult.style.color = 'var(--text-color)';
-            });
+                const date = new Date(timestamp);
+                
+                if (isNaN(date.getTime())) {
+                    alert("The timestamp results in an invalid date");
+                    return;
+                }
+                
+                // Update results
+                resultTimestamp.textContent = Math.floor(timestamp / 1000);
+                resultUTC.textContent = date.toUTCString();
+                resultLocal.textContent = date.toString();
+                resultISO.textContent = date.toISOString();
+                
+                // Update date input to match
+                const localDateStr = date.toISOString().slice(0, 16);
+                dateInput.value = localDateStr;
+            }
             
-            // Convert date to Unix timestamp
-            convertToTimestampBtn.addEventListener('click', function() {
+            function convertDateToTimestamp() {
                 const dateString = dateInput.value;
+                const timezone = timezoneSelect.value;
                 
                 if (!dateString) {
-                    timestampResult.textContent = 'Please select a date and time';
-                    timestampResult.style.color = 'var(--error-color)';
+                    alert("Please select a date and time");
                     return;
                 }
                 
                 let date;
-                if (timezoneSelect.value === 'utc') {
-                    // Create date in UTC
+                
+                if (timezone === 'utc') {
                     date = new Date(dateString + 'Z');
                 } else {
-                    // Create date in local time
                     date = new Date(dateString);
                 }
                 
-                const timestampSeconds = Math.floor(date.getTime() / 1000);
-                const timestampMs = date.getTime();
+                if (isNaN(date.getTime())) {
+                    alert("The selected date is invalid");
+                    return;
+                }
                 
-                timestampResult.textContent = timestampSeconds;
-                timestampResult.style.color = 'var(--text-color)';
-                timestampMsResult.textContent = timestampMs;
-                timestampMsResult.style.color = 'var(--text-color)';
-            });
-            
-            // Set current timestamp
-            currentTimestampBtn.addEventListener('click', function() {
-                const timestamp = Math.floor(Date.now() / 1000);
-                unixInput.value = timestamp;
+                const timestamp = date.getTime();
+                const timestampSeconds = Math.floor(timestamp / 1000);
                 
-                // Also update the date result
-                dateResult.textContent = formatDate(new Date());
-                dateResult.style.color = 'var(--text-color)';
-            });
-            
-            // Set current date
-            currentDateBtn.addEventListener('click', function() {
-                const now = new Date();
-                const year = now.getFullYear();
-                const month = String(now.getMonth() + 1).padStart(2, '0');
-                const day = String(now.getDate()).padStart(2, '0');
-                const hours = String(now.getHours()).padStart(2, '0');
-                const minutes = String(now.getMinutes()).padStart(2, '0');
-                dateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+                // Update inputs
+                timestampInput.value = timestampSeconds;
+                millisecondsInput.value = timestamp;
                 
-                // Also update the timestamp result
-                const timestampSeconds = Math.floor(now.getTime() / 1000);
-                const timestampMs = now.getTime();
-                
-                timestampResult.textContent = timestampSeconds;
-                timestampResult.style.color = 'var(--text-color)';
-                timestampMsResult.textContent = timestampMs;
-                timestampMsResult.style.color = 'var(--text-color)';
-            });
-            
-            // Helper function to format date
-            function formatDate(date) {
-                const options = { 
-                    year: 'numeric', 
-                    month: 'short', 
-                    day: 'numeric',
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit',
-                    hour12: false
-                };
-                return date.toLocaleString(undefined, options);
+                // Update results
+                resultTimestamp.textContent = timestampSeconds;
+                resultUTC.textContent = date.toUTCString();
+                resultLocal.textContent = date.toString();
+                resultISO.textContent = date.toISOString();
             }
             
-            // Initialize with current values
-            currentTimestampBtn.click();
+            // Initialize with current time
+            convertTimestampToDate();
         });
     </script>
 </body>
