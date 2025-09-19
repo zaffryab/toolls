@@ -3,26 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online XML Formatter tool to beautify and validate XML code. Make your XML readable with proper indentation and syntax highlighting.">
-    <meta name="keywords" content="xml formatter, xml beautifier, xml validator, xml tool, web tool">
-    <meta name="author" content="ToolHubCenter">
-    <title>XML Formatter | Beautify & Validate XML Code Online - ToolHubCenter</title>
-    <link rel="icon" href="favicon-16x16.png" type="image/png">
-    
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-    
+    <meta name="description" content="Free online XML Formatter tool to beautify and format your XML code. Make your XML documents readable and organized.">
+    <meta name="keywords" content="xml formatter, xml beautifier, code formatter, xml prettifier, web development tools">
+    <title>XML Formatter Tool - Beautify Your XML Code | ToolHubCenter</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4895ef;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4cc9f0;
-            --card-bg: #ffffff;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --border: #dee2e6;
+            --primary-color: #4a6cf7;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
         }
         
         * {
@@ -33,411 +25,197 @@
         }
         
         body {
-            background-color: #f5f7fb;
-            color: var(--dark);
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         
-        /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 4px 6px var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            text-align: center;
+            padding: 20px 0;
         }
         
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background-color: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Tool Card */
-        .tool-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px var(--shadow);
-            overflow: hidden;
-            margin: 2rem 0;
-        }
-        
-        .card-header {
-            background: linear-gradient(135deg, var(--accent), var(--primary));
-            color: white;
-            padding: 1.5rem;
-        }
-        
-        .card-header h2 {
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .card-header p {
-            opacity: 0.9;
+        header p {
+            color: var(--secondary-color);
             font-size: 1.1rem;
         }
         
-        .card-body {
-            padding: 1.5rem;
+        .ad-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            min-height: 90px;
+            background-color: #f1f3f5;
+            border-radius: 8px;
+            overflow: hidden;
         }
         
-        /* Tool Layout */
-        .tool-layout {
+        .card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-container {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
         
-        @media (min-width: 768px) {
-            .tool-layout {
-                grid-template-columns: 1fr 1fr;
+        @media (max-width: 768px) {
+            .tool-container {
+                grid-template-columns: 1fr;
             }
         }
         
         .input-section, .output-section {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
         }
         
-        .input-section textarea, .output-section pre {
+        textarea {
             width: 100%;
             min-height: 300px;
-            padding: 1rem;
-            border: 1px solid var(--border);
+            padding: 15px;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            background-color: #f8f9fa;
-            font-family: monospace;
-            font-size: 14px;
             resize: vertical;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.5;
         }
         
-        .output-section pre {
-            overflow: auto;
-            white-space: pre-wrap;
-        }
-        
-        .controls {
+        .button-group {
             display: flex;
+            gap: 10px;
+            margin: 15px 0;
             flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border);
         }
         
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
+        button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
             color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
         }
         
-        .btn-primary:hover {
-            background-color: var(--secondary);
+        button:hover {
+            background-color: #3a5ad9;
         }
         
-        .btn-secondary {
-            background-color: var(--light);
-            color: var(--dark);
-            border: 1px solid var(--border);
+        button.secondary {
+            background-color: var(--secondary-color);
         }
         
-        .btn-secondary:hover {
-            background-color: #e9ecef;
+        button.secondary:hover {
+            background-color: #5a6268;
         }
         
-        .form-group {
+        .section-title {
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        select {
-            padding: 0.5rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            background-color: white;
-        }
-        
-        /* Ad Containers */
-        .ad-container {
-            background-color: #f0f4f8;
-            border: 1px dashed #ccc;
-            border-radius: 8px;
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            min-height: 90px;
-            margin: 1.5rem 0;
-            padding: 1rem;
-            text-align: center;
-            color: #6c757d;
+            margin-bottom: 10px;
         }
         
-        .ad-container.top-ad {
-            margin-top: 2rem;
+        .section-title h2 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
         }
         
-        /* How to Use Section */
+        .option-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        label {
+            font-size: 0.9rem;
+        }
+        
+        select, input[type="number"] {
+            padding: 5px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+        
         .how-to-use {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px var(--shadow);
-            padding: 2rem;
-            margin: 2rem 0;
+            margin-top: 30px;
         }
         
         .how-to-use h2 {
-            font-size: 1.75rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent);
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
         
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+        .how-to-use ol {
+            padding-left: 20px;
         }
         
-        .step-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px var(--shadow);
-            transition: transform 0.3s ease;
+        .how-to-use li {
+            margin-bottom: 10px;
         }
         
-        .step-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .step-number {
-            display: inline-block;
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--accent), var(--primary));
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 36px;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        
-        .step-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: var(--dark);
-        }
-        
-        /* Features Section */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .feature-card {
-            background: linear-gradient(135deg, var(--card-bg), #f0f4ff);
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px var(--shadow);
-            border: 1px solid rgba(67, 97, 238, 0.1);
-        }
-        
-        .feature-card i {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: var(--dark);
-        }
-        
-        /* Footer */
         footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.25rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-        
-        .footer-links a {
-            color: #adb5bd;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-        }
-        
-        .copyright {
             text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid #495057;
-            color: #adb5bd;
+            margin-top: 40px;
+            padding: 20px 0;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
         }
         
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            nav ul {
-                gap: 0.75rem;
-            }
-            
-            .card-header h2 {
-                font-size: 1.5rem;
-            }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
         }
         
-        @media (max-width: 480px) {
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .btn {
-                width: 100%;
-            }
+        .notification.show {
+            opacity: 1;
         }
-        
-        /* XML Syntax Highlighting */
-        .xml-tag { color: #e06c75; }
-        .xml-attr { color: #d19a66; }
-        .xml-value { color: #98c379; }
-        .xml-comment { color: #5c6370; font-style: italic; }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">THC</div>
-                    <h1>ToolHubCenter</h1>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><a href="#">Categories</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-    
     <div class="container">
-        <!-- Top Ad -->
-        <div class="ad-container top-ad">
-            <!-- Google AdSense Ad Unit -->
+        <header>
+            <h1>XML Formatter Tool</h1>
+            <p>Beautify and format your XML code for better readability</p>
+        </header>
+        
+        <!-- Top Ad Container -->
+        <div class="ad-container">
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -450,45 +228,43 @@
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
         
-        <!-- Tool Card -->
-        <div class="tool-card">
-            <div class="card-header">
-                <h2>XML Formatter & Validator</h2>
-                <p>Beautify and validate your XML code with our free online tool</p>
-            </div>
-            
-            <div class="card-body">
-                <div class="controls">
-                    <button class="btn btn-primary" id="formatBtn">Format XML</button>
-                    <button class="btn btn-secondary" id="clearBtn">Clear</button>
-                    <div class="form-group">
-                        <label for="indent">Indentation:</label>
-                        <select id="indent">
-                            <option value="2">2 Spaces</option>
-                            <option value="4" selected>4 Spaces</option>
-                            <option value="tab">Tab</option>
+        <div class="card">
+            <div class="tool-container">
+                <div class="input-section">
+                    <div class="section-title">
+                        <h2>Input XML</h2>
+                    </div>
+                    <textarea id="inputXML" placeholder="Paste your XML code here..."></textarea>
+                    
+                    <div class="option-group">
+                        <label for="indentSize">Indent:</label>
+                        <input type="number" id="indentSize" min="1" max="8" value="2">
+                        <label for="indentType">Indent with:</label>
+                        <select id="indentType">
+                            <option value="spaces">Spaces</option>
+                            <option value="tabs">Tabs</option>
                         </select>
                     </div>
-                    <button class="btn btn-secondary" id="exampleBtn">Load Example</button>
                 </div>
                 
-                <div class="tool-layout">
-                    <div class="input-section">
-                        <h3>Input XML</h3>
-                        <textarea id="xmlInput" placeholder="Paste your XML code here..."></textarea>
+                <div class="output-section">
+                    <div class="section-title">
+                        <h2>Formatted XML</h2>
                     </div>
-                    
-                    <div class="output-section">
-                        <h3>Formatted XML</h3>
-                        <pre id="xmlOutput">Your formatted XML will appear here...</pre>
-                    </div>
+                    <textarea id="outputXML" readonly placeholder="Formatted XML will appear here..."></textarea>
                 </div>
+            </div>
+            
+            <div class="button-group">
+                <button id="formatBtn">Format XML</button>
+                <button id="copyBtn" class="secondary">Copy to Clipboard</button>
+                <button id="clearBtn" class="secondary">Clear</button>
+                <button id="validateBtn" class="secondary">Validate XML</button>
             </div>
         </div>
         
-        <!-- Bottom Ad -->
+        <!-- Bottom Ad Container -->
         <div class="ad-container">
-            <!-- Google AdSense Ad Unit -->
             <script type="text/javascript">
                 atOptions = {
                     'key' : '0d49ce870daff252fd6f617ee1e9481d',
@@ -501,259 +277,186 @@
             <script type="text/javascript" src="//www.highperformanceformat.com/0d49ce870daff252fd6f617ee1e9481d/invoke.js"></script>
         </div>
         
-        <!-- How to Use Section -->
-        <div class="how-to-use">
-            <h2>How to Use the XML Formatter</h2>
-            <p>Our XML Formatter tool helps you to beautify and validate your XML code. Follow these simple steps to format your XML:</p>
+        <div class="card how-to-use">
+            <h2>How to Use the XML Formatter Tool</h2>
+            <ol>
+                <li>Paste your minified or unformatted XML code into the input textarea</li>
+                <li>Adjust formatting options if needed (indent size and type)</li>
+                <li>Click the "Format XML" button to beautify your code</li>
+                <li>Use the "Validate XML" button to check for syntax errors</li>
+                <li>Use the "Copy to Clipboard" button to copy the formatted XML</li>
+                <li>Use the "Clear" button to reset both input and output fields</li>
+            </ol>
             
-            <div class="steps">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3>Paste XML Code</h3>
-                    <p>Copy your XML code and paste it into the "Input XML" text area on the left side.</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3>Select Formatting Options</h3>
-                    <p>Choose your preferred indentation style (spaces or tabs) using the dropdown menu.</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3>Format XML</h3>
-                    <p>Click the "Format XML" button to process your code. The formatted XML will appear in the output area.</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3>Copy or Download</h3>
-                    <p>Copy the formatted XML directly from the output area or download it for later use.</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Features Section -->
-        <div class="features">
-            <div class="feature-card">
-                <i>✓</i>
-                <h3>Syntax Highlighting</h3>
-                <p>Color-coded XML elements, attributes, and values for better readability.</p>
-            </div>
-            
-            <div class="feature-card">
-                <i>✓</i>
-                <h3>Error Detection</h3>
-                <p>Identify and highlight XML syntax errors with detailed messages.</p>
-            </div>
-            
-            <div class="feature-card">
-                <i>✓</i>
-                <h3>Custom Indentation</h3>
-                <p>Choose between spaces or tabs with adjustable indentation levels.</p>
-            </div>
-            
-            <div class="feature-card">
-                <i>✓</i>
-                <h3>Fast Processing</h3>
-                <p>Format large XML files quickly with our optimized processing engine.</p>
-            </div>
+            <h2 style="margin-top: 20px;">What is XML Formatting?</h2>
+            <p>XML formatting involves organizing XML code with proper indentation and line breaks to make it more readable. Well-formatted XML is easier to debug, maintain, and understand.</p>
         </div>
     </div>
     
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>ToolHubCenter</h3>
-                    <p>Your one-stop destination for all online tools. We provide free, fast, and reliable tools for developers, designers, and content creators.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Popular Tools</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">JSON Formatter</a></li>
-                        <li><a href="#">Base64 Encoder</a></li>
-                        <li><a href="#">HTML Minifier</a></li>
-                        <li><a href="#">CSS Validator</a></li>
-                        <li><a href="#">Password Generator</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Sitemap</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 ToolHubCenter. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <div id="notification" class="notification">Copied to clipboard!</div>
     
+    <footer>
+        <p>&copy; 2023 ToolHubCenter - XML Formatter Tool. All rights reserved.</p>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const xmlInput = document.getElementById('xmlInput');
-            const xmlOutput = document.getElementById('xmlOutput');
+            const inputXML = document.getElementById('inputXML');
+            const outputXML = document.getElementById('outputXML');
             const formatBtn = document.getElementById('formatBtn');
+            const copyBtn = document.getElementById('copyBtn');
             const clearBtn = document.getElementById('clearBtn');
-            const exampleBtn = document.getElementById('exampleBtn');
-            const indentSelect = document.getElementById('indent');
-            
-            // Example XML
-            const exampleXML = `<catalog>
-    <book id="bk101">
-        <author>Gambardella, Matthew</author>
-        <title>XML Developer's Guide</title>
-        <genre>Computer</genre>
-        <price>44.95</price>
-        <publish_date>2000-10-01</publish_date>
-        <description>An in-depth look at creating applications with XML.</description>
-    </book>
-    <book id="bk102">
-        <author>Ralls, Kim</author>
-        <title>Midnight Rain</title>
-        <genre>Fantasy</genre>
-        <price>5.95</price>
-        <publish_date>2000-12-16</publish_date>
-        <description>A former architect battles corporate zombies.</description>
-    </book>
-</catalog>`;
+            const validateBtn = document.getElementById('validateBtn');
+            const indentSize = document.getElementById('indentSize');
+            const indentType = document.getElementById('indentType');
+            const notification = document.getElementById('notification');
             
             // Format XML function
-            function formatXML(xml, indent = '  ') {
+            function formatXML(xml, indentSizeValue, useTabs) {
                 let formatted = '';
-                let indentLevel = 0;
-                let inTag = false;
-                let inAttribute = false;
-                let currentLine = '';
-                let inComment = false;
+                let indent = 0;
+                const tab = useTabs ? '\t' : ' '.repeat(indentSizeValue);
                 
-                for (let i = 0; i < xml.length; i++) {
-                    const char = xml[i];
+                // Remove all existing whitespace and line breaks
+                xml = xml.trim().replace(/\s+/g, ' ').replace(/>\s+</g, '><');
+                
+                // Split tags and content
+                const tokens = xml.split(/(<[^>]+>)/g);
+                
+                for (let i = 0; i < tokens.length; i++) {
+                    const token = tokens[i];
                     
-                    // Handle comments
-                    if (xml.substr(i, 4) === '<!--') {
-                        inComment = true;
-                    }
+                    if (token.length === 0) continue;
                     
-                    if (inComment) {
-                        currentLine += char;
-                        if (xml.substr(i, 3) === '-->') {
-                            inComment = false;
-                            formatted += currentLine + '\n';
-                            currentLine = indent.repeat(indentLevel);
-                            i += 2; // Skip the next two characters
-                            continue;
-                        }
-                        continue;
-                    }
-                    
-                    // Handle tags
-                    if (char === '<') {
-                        if (xml[i+1] === '/') {
-                            // Closing tag
-                            if (currentLine.trim() !== '') {
-                                formatted += currentLine + '\n';
+                    if (token.startsWith('<')) {
+                        // Handle opening tags
+                        if (!token.startsWith('</')) {
+                            formatted += '\n' + tab.repeat(indent) + token;
+                            // Check if it's a self-closing tag
+                            if (!token.endsWith('/>')) {
+                                indent++;
                             }
-                            indentLevel = Math.max(0, indentLevel - 1);
-                            currentLine = indent.repeat(indentLevel) + char;
-                        } else {
-                            // Opening tag
-                            if (currentLine.trim() !== '') {
-                                formatted += currentLine + '\n';
-                            }
-                            currentLine = indent.repeat(indentLevel) + char;
-                            indentLevel++;
+                        } 
+                        // Handle closing tags
+                        else {
+                            indent--;
+                            formatted += '\n' + tab.repeat(indent) + token;
                         }
-                        inTag = true;
-                    } else if (char === '>') {
-                        currentLine += char;
-                        formatted += currentLine + '\n';
-                        currentLine = indent.repeat(inTag ? indentLevel : Math.max(0, indentLevel - 1));
-                        inTag = false;
-                        inAttribute = false;
-                    } else if (char === '"') {
-                        inAttribute = !inAttribute;
-                        currentLine += char;
-                    } else if (char === '\n' || char === '\t') {
-                        // Skip whitespace when not in attribute
-                        if (!inAttribute && currentLine.trim() === '') {
-                            continue;
-                        }
-                    } else {
-                        currentLine += char;
+                    } 
+                    // Handle text content
+                    else {
+                        formatted += '\n' + tab.repeat(indent) + token.trim();
                     }
                 }
                 
-                if (currentLine.trim() !== '') {
-                    formatted += currentLine;
-                }
-                
-                return formatted;
+                return formatted.trim();
             }
             
-            // Syntax highlighting
-            function highlightXML(xml) {
-                // Highlight comments
-                xml = xml.replace(/&lt;!--[\s\S]*?--&gt;/g, '<span class="xml-comment">$&</span>');
+            // Validate XML function
+            function validateXML(xml) {
+                try {
+                    // Check for basic XML structure
+                    if (!xml.trim().startsWith('<')) {
+                        return "Error: XML must start with a tag";
+                    }
+                    
+                    // Check tag balance with a simple parser
+                    const tagStack = [];
+                    const tagRegex = /<(\/?)([^\s>]+)([^>]*)>/g;
+                    let match;
+                    
+                    while ((match = tagRegex.exec(xml)) !== null) {
+                        const isClosing = match[1] === '/';
+                        const tagName = match[2];
+                        
+                        if (!isClosing && !match[0].endsWith('/>')) {
+                            tagStack.push(tagName);
+                        } else if (isClosing) {
+                            if (tagStack.length === 0) {
+                                return `Error: Unexpected closing tag </${tagName}>`;
+                            }
+                            
+                            const lastTag = tagStack.pop();
+                            if (lastTag !== tagName) {
+                                return `Error: Mismatched tags <${lastTag}> and </${tagName}>`;
+                            }
+                        }
+                    }
+                    
+                    if (tagStack.length > 0) {
+                        return `Error: Unclosed tag <${tagStack[0]}>`;
+                    }
+                    
+                    return "XML is valid";
+                } catch (error) {
+                    return "Error: " + error.message;
+                }
+            }
+            
+            // Show notification function
+            function showNotification(message) {
+                notification.textContent = message;
+                notification.classList.add('show');
                 
-                // Highlight tags
-                xml = xml.replace(/&lt;(\/?[\w:-]+)/g, '&lt;<span class="xml-tag">$1</span>');
-                
-                // Highlight attributes
-                xml = xml.replace(/(\s[\w:-]+)=/g, '<span class="xml-attr">$1</span>=');
-                
-                // Highlight attribute values
-                xml = xml.replace(/="([^"]*)"/g, '="<span class="xml-value">$1</span>"');
-                
-                return xml;
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
             }
             
             // Event listeners
             formatBtn.addEventListener('click', function() {
-                const input = xmlInput.value.trim();
-                if (input === '') {
-                    xmlOutput.textContent = 'Please enter XML to format.';
+                const xmlCode = inputXML.value.trim();
+                if (!xmlCode) {
+                    outputXML.value = '';
                     return;
                 }
                 
+                const size = parseInt(indentSize.value);
+                const useTabs = indentType.value === 'tabs';
+                
                 try {
-                    const indentType = indentSelect.value === 'tab' ? '\t' : ' '.repeat(parseInt(indentSelect.value));
-                    const formatted = formatXML(input, indentType);
-                    
-                    // Highlight syntax
-                    const highlighted = highlightXML(formatted
-                        .replace(/</g, '&lt;')
-                        .replace(/>/g, '&gt;')
-                    );
-                    
-                    xmlOutput.innerHTML = highlighted;
+                    const formattedXML = formatXML(xmlCode, size, useTabs);
+                    outputXML.value = formattedXML;
                 } catch (error) {
-                    xmlOutput.textContent = 'Error formatting XML: ' + error.message;
+                    outputXML.value = 'Error formatting XML: ' + error.message;
+                }
+            });
+            
+            validateBtn.addEventListener('click', function() {
+                const xmlCode = inputXML.value.trim();
+                if (!xmlCode) {
+                    showNotification('Please enter XML to validate');
+                    return;
+                }
+                
+                const validationResult = validateXML(xmlCode);
+                showNotification(validationResult);
+            });
+            
+            copyBtn.addEventListener('click', function() {
+                if (outputXML.value) {
+                    outputXML.select();
+                    document.execCommand('copy');
+                    showNotification('Formatted XML copied to clipboard!');
                 }
             });
             
             clearBtn.addEventListener('click', function() {
-                xmlInput.value = '';
-                xmlOutput.textContent = 'Your formatted XML will appear here...';
+                inputXML.value = '';
+                outputXML.value = '';
             });
             
-            exampleBtn.addEventListener('click', function() {
-                xmlInput.value = exampleXML;
+            // Allow Tab key in textareas
+            inputXML.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    const start = this.selectionStart;
+                    const end = this.selectionEnd;
+                    
+                    this.value = this.value.substring(0, start) + '  ' + this.value.substring(end);
+                    this.selectionStart = this.selectionEnd = start + 2;
+                }
             });
-            
-            // Initialize with example
-            exampleBtn.click();
-            formatBtn.click();
         });
     </script>
 </body>
